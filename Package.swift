@@ -1,11 +1,19 @@
+// swift-tools-version:4.0
+
 import PackageDescription
 
 let package = Package(
     name: "GdkPixbuf",
-    dependencies: [
-        .Package(url: "https://github.com/rhx/CGdkPixbuf.git", majorVersion: 1),
-        .Package(url: "https://github.com/rhx/SwiftGIO.git", majorVersion: 2),
-        .Package(url: "https://github.com/rhx/SwiftGModule.git", majorVersion: 2)
+    products: [
+        .library(name: "GdkPixbuf", targets: ["GdkPixbuf"]),
     ],
-    swiftLanguageVersions: [3, 4]
+    dependencies: [
+        .package(url: "https://github.com/rhx/CGdkPixbuf.git", .branch("master")),
+        .package(url: "https://github.com/rhx/SwiftGIO.git", .branch("master")),
+        .package(url: "https://github.com/rhx/SwiftGModule.git", .branch("master")),
+    ],
+    targets: [
+        .target(name: "GdkPixbuf", dependencies: ["GIO", "GModule"]),
+        .testTarget(name: "GdkPixbufTests", dependencies: ["GdkPixbuf"]),
+    ]
 )
