@@ -7,25 +7,27 @@ A Swift wrapper around GdkPixbuf-2.x that is largely auto-generated from gobject
 
 ### Swift
 
-To build, you need Swift 3.1 (download from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well).  Test that your compiler works using `swift --version`, which should give you something like
+To build, you need at least Swift 4 (Swift 4.2.x should work fine), download from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-	Apple Swift version 3.1 (swiftlang-802.0.51 clang-802.0.41)
-	Target: x86_64-apple-macosx10.9
+	Apple Swift version 4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)
+	Target: x86_64-apple-darwin18.2.0
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 3.1 (swift-3.1-RELEASE)
+	Swift version 4.2.1 (swift-4.2.1-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### GLib 2.46 or higher
 
-These Swift wrappers have been tested with glib-2.46, 2.48, and 2.52.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+These Swift wrappers have been tested with glib-2.46, 2.48, 2.52, 2.56, and 2.58.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
-On Ubuntu 16.04, you can use the gdkpixbuf that comes with the distribution.  Just install with the `apt` package manager:
+##### Ubuntu
+
+On Ubuntu 18.04 and 16.04 you can use the gdkpixbuf that comes with the distribution.  Just install with the `apt` package manager:
 
 	sudo apt update
 	sudo apt install libgdk-pixbuf2.0-dev gir1.2-gdkpixbuf-2.0 gobject-introspection libgirepository1.0-dev libxml2-dev
@@ -36,6 +38,12 @@ If you prefer a newer version of gtk, you can also install it from the GNOME 3 S
 	sudo apt update
 	sudo apt dist-upgrade
 	sudo apt install libgdk-pixbuf2.0-dev gir1.2-gdkpixbuf-2.0 gobject-introspection libgirepository1.0-dev libxml2-dev
+
+##### Fedora
+
+On Fedora 29, you can use the gtk that comes with the distribution.  Just install with the `dnf` package manager:
+
+	sudo dnf install gdk-pixbuf2-devel glib2-devel gobject-introspection-devel libxml2-devel
 
 #### macOS
 
