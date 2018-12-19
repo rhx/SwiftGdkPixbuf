@@ -18,3 +18,5 @@ s/: \([A-Za-z.]*Function[,)]\)/: @escaping \1/g
 s/: \([A-Za-z.]*Mapping[,)]\)/: @escaping \1/g
 s/\(public.* init.inline data_length:\)/@available(*, deprecated) \1/
 s/\(public static func newFrom.inline data_length:\)/@available(*, deprecated) \1/
+s/\(    \)\(init.inline data_length:\)/\1@available(*, deprecated) \2/
+s/\(    \)\(static func newFrom.inline data_length:\)/\1@available(*, deprecated) \2/
