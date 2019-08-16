@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:4.2
 
 import PackageDescription
 
@@ -8,12 +8,16 @@ let package = Package(
         .library(name: "GdkPixbuf", targets: ["GdkPixbuf"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/rhx/CGdkPixbuf.git", .branch("master")),
         .package(url: "https://github.com/rhx/SwiftGIO.git", .branch("master")),
         .package(url: "https://github.com/rhx/SwiftGModule.git", .branch("master")),
     ],
     targets: [
-        .target(name: "GdkPixbuf", dependencies: ["GIO", "GModule"]),
+	.systemLibrary(name: "CGdkPixbuf", pkgConfig: "cairo glib-2.0 gio-unix-2.0",
+	    providers: [
+		.brew(["gdk-pixbuf", "glib", "glib-networking", "gobject-introspection"]),
+		.apt(["libgdk-pixbuf2.0-dev", "libglib2.0-dev", "glib-networking", "gobject-introspection", "libgirepository1.0-dev"])
+	    ]),
+        .target(name: "GdkPixbuf", dependencies: ["CGdkPixbuf", "GIO", "GModule"]),
         .testTarget(name: "GdkPixbufTests", dependencies: ["GdkPixbuf"]),
     ]
 )
