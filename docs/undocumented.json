@@ -1,0 +1,243 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1028,
+      "symbol": "PixbufPropertyName",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1032,
+      "symbol": "PixbufPropertyName.colorspace",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1033,
+      "symbol": "PixbufPropertyName.hasAlpha",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1034,
+      "symbol": "PixbufPropertyName.height",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1038,
+      "symbol": "PixbufPropertyName.pixelBytes",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1039,
+      "symbol": "PixbufPropertyName.pixels",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1044,
+      "symbol": "PixbufPropertyName.width",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1083,
+      "symbol": "PixbufSignalName",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1113,
+      "symbol": "PixbufSignalName.notifyColorspace",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1114,
+      "symbol": "PixbufSignalName.notifyHasAlpha",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1115,
+      "symbol": "PixbufSignalName.notifyHeight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1119,
+      "symbol": "PixbufSignalName.notifyPixelBytes",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1120,
+      "symbol": "PixbufSignalName.notifyPixels",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1125,
+      "symbol": "PixbufSignalName.notifyWidth",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1583,
+      "symbol": "PixbufProtocol.colorspace",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1600,
+      "symbol": "PixbufProtocol.height",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1634,
+      "symbol": "PixbufProtocol.pixels",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift",
+      "line": 1654,
+      "symbol": "PixbufProtocol.width",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift",
+      "line": 342,
+      "symbol": "PixbufAnimationSignalName",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift",
+      "line": 129,
+      "symbol": "PixbufAnimationIterSignalName",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift",
+      "line": 309,
+      "symbol": "PixbufLoaderSignalName",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufSimpleAnim.swift",
+      "line": 134,
+      "symbol": "PixbufSimpleAnimPropertyName",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufSimpleAnim.swift",
+      "line": 175,
+      "symbol": "PixbufSimpleAnimSignalName",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufSimpleAnimIter.swift",
+      "line": 126,
+      "symbol": "PixbufSimpleAnimIterSignalName",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-constants.swift",
+      "line": 8,
+      "symbol": "PIXBUF_FEATURES_H",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/GdkPixbuf-2.0-functions.swift",
+      "line": 8,
+      "symbol": "pixbufErrorQuark()",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/SwiftGdkPixbuf.swift",
+      "line": 6,
+      "symbol": "GdkPixbuf.PixbufDestroyNotify",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/SwiftGdkPixbuf.swift",
+      "line": 7,
+      "symbol": "GdkPixbuf.PixbufSaveFunc",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/SwiftGdkPixbuf.swift",
+      "line": 8,
+      "symbol": "GdkPixbuf.Colorspace",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/SwiftGdkPixbuf.swift",
+      "line": 9,
+      "symbol": "GdkPixbuf.InterpType",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/SwiftGdkPixbuf.swift",
+      "line": 10,
+      "symbol": "GdkPixbuf.PixbufAlphaMode",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/SwiftGdkPixbuf.swift",
+      "line": 11,
+      "symbol": "GdkPixbuf.PixbufError",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/SwiftGdkPixbuf.swift",
+      "line": 12,
+      "symbol": "GdkPixbuf.PixbufRotation",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf/Sources/GdkPixbuf/SwiftGdkPixbuf.swift",
+      "line": 13,
+      "symbol": "GdkPixbuf.GdkPixbufSimpleAnimIter",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/rh/Dropbox/Developer/src/swift/rh/gtk/SwiftGdkPixbuf"
+}
