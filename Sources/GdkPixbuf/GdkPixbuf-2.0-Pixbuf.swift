@@ -90,7 +90,7 @@ public extension PixbufRef {
 
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
     /// Currently only RGB images with 8 bits per sample are supported.
-    /// This is the `GBytes` variant of gdk_pixbuf_new_from_data().
+    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
     init(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) {
         let rv = gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride)
         self.init(cast(rv))
@@ -105,7 +105,7 @@ public extension PixbufRef {
     /// finalized, your destroy notification function will be called, and
     /// it is its responsibility to free the pixel array.
     /// 
-    /// See also gdk_pixbuf_new_from_bytes().
+    /// See also `gdk_pixbuf_new_from_bytes()`.
     init(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) {
         let rv = gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data))
         self.init(cast(rv))
@@ -153,7 +153,7 @@ public extension PixbufRef {
     /// the image's aspect ratio. Note that the returned pixbuf may be smaller
     /// than `width` x `height`, if the aspect ratio requires it. To load
     /// and image at the requested size, regardless of aspect ratio, use
-    /// gdk_pixbuf_new_from_file_at_scale().
+    /// `gdk_pixbuf_new_from_file_at_scale()`.
     init(fileAtSize String_: UnsafePointer<CChar>, width: CInt, height: CInt) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_file_at_size(String_, width, height, &error)
@@ -177,7 +177,6 @@ public extension PixbufRef {
     ///  gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
     /// ```
     /// 
-    /// 
     /// For the typical case where the inline pixbuf is read-only static data,
     /// you don't need to copy the pixel data unless you intend to write to
     /// it, so you can pass `false` for `copy_pixels`.  (If you pass `--rle` to
@@ -190,7 +189,6 @@ public extension PixbufRef {
     /// ```
     /// pixbuf = gdk_pixbuf_new_from_inline (-1, myimage_inline, FALSE, NULL);
     /// ```
-    /// 
     /// 
     /// For non-const inline data, you could get out of memory. For untrusted
     /// inline data located at runtime, you could have corrupt inline data in
@@ -291,7 +289,7 @@ public extension PixbufRef {
     }
 
     /// Finishes an asynchronous pixbuf creation operation started with
-    /// gdk_pixbuf_new_from_stream_async().
+    /// `gdk_pixbuf_new_from_stream_async()`.
     init(streamFinish async_result: AsyncResultProtocol) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error)
@@ -309,7 +307,7 @@ public extension PixbufRef {
     }
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
     /// Currently only RGB images with 8 bits per sample are supported.
-    /// This is the `GBytes` variant of gdk_pixbuf_new_from_data().
+    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
     static func newFrom(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) -> PixbufRef! {
         let rv = gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride)
         return rv.map { PixbufRef(cast($0)) }
@@ -324,7 +322,7 @@ public extension PixbufRef {
     /// finalized, your destroy notification function will be called, and
     /// it is its responsibility to free the pixel array.
     /// 
-    /// See also gdk_pixbuf_new_from_bytes().
+    /// See also `gdk_pixbuf_new_from_bytes()`.
     static func newFrom(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) -> PixbufRef! {
         let rv = gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data))
         return rv.map { PixbufRef(cast($0)) }
@@ -372,7 +370,7 @@ public extension PixbufRef {
     /// the image's aspect ratio. Note that the returned pixbuf may be smaller
     /// than `width` x `height`, if the aspect ratio requires it. To load
     /// and image at the requested size, regardless of aspect ratio, use
-    /// gdk_pixbuf_new_from_file_at_scale().
+    /// `gdk_pixbuf_new_from_file_at_scale()`.
     static func newFrom(fileAtSize String_: UnsafePointer<CChar>, width: CInt, height: CInt) throws -> PixbufRef! {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_file_at_size(String_, width, height, &error)
@@ -396,7 +394,6 @@ public extension PixbufRef {
     ///  gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
     /// ```
     /// 
-    /// 
     /// For the typical case where the inline pixbuf is read-only static data,
     /// you don't need to copy the pixel data unless you intend to write to
     /// it, so you can pass `false` for `copy_pixels`.  (If you pass `--rle` to
@@ -409,7 +406,6 @@ public extension PixbufRef {
     /// ```
     /// pixbuf = gdk_pixbuf_new_from_inline (-1, myimage_inline, FALSE, NULL);
     /// ```
-    /// 
     /// 
     /// For non-const inline data, you could get out of memory. For untrusted
     /// inline data located at runtime, you could have corrupt inline data in
@@ -510,7 +506,7 @@ public extension PixbufRef {
     }
 
     /// Finishes an asynchronous pixbuf creation operation started with
-    /// gdk_pixbuf_new_from_stream_async().
+    /// `gdk_pixbuf_new_from_stream_async()`.
     static func newFrom(streamFinish async_result: AsyncResultProtocol) throws -> PixbufRef! {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error)
@@ -585,7 +581,7 @@ open class Pixbuf: Object, PixbufProtocol {
 
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
     /// Currently only RGB images with 8 bits per sample are supported.
-    /// This is the `GBytes` variant of gdk_pixbuf_new_from_data().
+    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
     public convenience init(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) {
         let rv = gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride)
         self.init(cast(rv))
@@ -600,7 +596,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// finalized, your destroy notification function will be called, and
     /// it is its responsibility to free the pixel array.
     /// 
-    /// See also gdk_pixbuf_new_from_bytes().
+    /// See also `gdk_pixbuf_new_from_bytes()`.
     public convenience init(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) {
         let rv = gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data))
         self.init(cast(rv))
@@ -648,7 +644,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// the image's aspect ratio. Note that the returned pixbuf may be smaller
     /// than `width` x `height`, if the aspect ratio requires it. To load
     /// and image at the requested size, regardless of aspect ratio, use
-    /// gdk_pixbuf_new_from_file_at_scale().
+    /// `gdk_pixbuf_new_from_file_at_scale()`.
     public convenience init(fileAtSize String_: UnsafePointer<CChar>, width: CInt, height: CInt) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_file_at_size(String_, width, height, &error)
@@ -672,7 +668,6 @@ open class Pixbuf: Object, PixbufProtocol {
     ///  gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
     /// ```
     /// 
-    /// 
     /// For the typical case where the inline pixbuf is read-only static data,
     /// you don't need to copy the pixel data unless you intend to write to
     /// it, so you can pass `false` for `copy_pixels`.  (If you pass `--rle` to
@@ -685,7 +680,6 @@ open class Pixbuf: Object, PixbufProtocol {
     /// ```
     /// pixbuf = gdk_pixbuf_new_from_inline (-1, myimage_inline, FALSE, NULL);
     /// ```
-    /// 
     /// 
     /// For non-const inline data, you could get out of memory. For untrusted
     /// inline data located at runtime, you could have corrupt inline data in
@@ -786,7 +780,7 @@ open class Pixbuf: Object, PixbufProtocol {
     }
 
     /// Finishes an asynchronous pixbuf creation operation started with
-    /// gdk_pixbuf_new_from_stream_async().
+    /// `gdk_pixbuf_new_from_stream_async()`.
     public convenience init(streamFinish async_result: AsyncResultProtocol) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error)
@@ -805,7 +799,7 @@ open class Pixbuf: Object, PixbufProtocol {
 
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
     /// Currently only RGB images with 8 bits per sample are supported.
-    /// This is the `GBytes` variant of gdk_pixbuf_new_from_data().
+    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
     public static func newFrom(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) -> Pixbuf! {
         let rv = gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride)
         return rv.map { Pixbuf(cast($0)) }
@@ -820,7 +814,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// finalized, your destroy notification function will be called, and
     /// it is its responsibility to free the pixel array.
     /// 
-    /// See also gdk_pixbuf_new_from_bytes().
+    /// See also `gdk_pixbuf_new_from_bytes()`.
     public static func newFrom(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) -> Pixbuf! {
         let rv = gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data))
         return rv.map { Pixbuf(cast($0)) }
@@ -868,7 +862,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// the image's aspect ratio. Note that the returned pixbuf may be smaller
     /// than `width` x `height`, if the aspect ratio requires it. To load
     /// and image at the requested size, regardless of aspect ratio, use
-    /// gdk_pixbuf_new_from_file_at_scale().
+    /// `gdk_pixbuf_new_from_file_at_scale()`.
     public static func newFrom(fileAtSize String_: UnsafePointer<CChar>, width: CInt, height: CInt) throws -> Pixbuf! {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_file_at_size(String_, width, height, &error)
@@ -892,7 +886,6 @@ open class Pixbuf: Object, PixbufProtocol {
     ///  gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
     /// ```
     /// 
-    /// 
     /// For the typical case where the inline pixbuf is read-only static data,
     /// you don't need to copy the pixel data unless you intend to write to
     /// it, so you can pass `false` for `copy_pixels`.  (If you pass `--rle` to
@@ -905,7 +898,6 @@ open class Pixbuf: Object, PixbufProtocol {
     /// ```
     /// pixbuf = gdk_pixbuf_new_from_inline (-1, myimage_inline, FALSE, NULL);
     /// ```
-    /// 
     /// 
     /// For non-const inline data, you could get out of memory. For untrusted
     /// inline data located at runtime, you could have corrupt inline data in
@@ -1006,7 +998,7 @@ open class Pixbuf: Object, PixbufProtocol {
     }
 
     /// Finishes an asynchronous pixbuf creation operation started with
-    /// gdk_pixbuf_new_from_stream_async().
+    /// `gdk_pixbuf_new_from_stream_async()`.
     public static func newFrom(streamFinish async_result: AsyncResultProtocol) throws -> Pixbuf! {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error)
@@ -1082,27 +1074,26 @@ public extension PixbufProtocol {
 
 public enum PixbufSignalName: String, SignalNameProtocol {
     /// The notify signal is emitted on an object when one of its properties has
-    /// its value set through g_object_set_property(), g_object_set(), et al.
+    /// its value set through `g_object_set_property()`, `g_object_set()`, et al.
     /// 
     /// Note that getting this signal doesn’t itself guarantee that the value of
     /// the property has actually changed. When it is emitted is determined by the
     /// derived GObject class. If the implementor did not create the property with
-    /// `G_PARAM_EXPLICIT_NOTIFY`, then any call to g_object_set_property() results
-    /// in ::notify being emitted, even if the new value is the same as the old.
+    /// `G_PARAM_EXPLICIT_NOTIFY`, then any call to `g_object_set_property()` results
+    /// in `notify` being emitted, even if the new value is the same as the old.
     /// If they did pass `G_PARAM_EXPLICIT_NOTIFY`, then this signal is emitted only
-    /// when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
+    /// when they explicitly call `g_object_notify()` or `g_object_notify_by_pspec()`,
     /// and common practice is to do that only when the value has actually changed.
     /// 
     /// This signal is typically used to obtain change notification for a
     /// single property, by specifying the property name as a detail in the
-    /// g_signal_connect() call, like this:
+    /// `g_signal_connect()` call, like this:
     /// (C Language Example):
     /// ```C
     /// g_signal_connect (text_view->buffer, "notify::paste-target-list",
     ///                   G_CALLBACK (gtk_text_view_target_list_notify),
     ///                   text_view)
     /// ```
-    /// 
     /// It is important to note that you must use
     /// [canonical parameter names][canonical-parameter-names] as
     /// detail strings for the notify signal.
@@ -1210,7 +1201,7 @@ public extension PixbufProtocol {
     /// If the source image has no alpha channel, and `overall_alpha` is 255, a fast
     /// path is used which omits the alpha blending and just performs the scaling.
     /// 
-    /// See gdk_pixbuf_composite_color_simple() for a simpler variant of this
+    /// See `gdk_pixbuf_composite_color_simple()` for a simpler variant of this
     /// function suitable for many tasks.
     func compositeColor(dest: PixbufProtocol, destX dest_x: CInt, destY dest_y: CInt, destWidth dest_width: CInt, destHeight dest_height: CInt, offsetX offset_x: gdouble, offsetY offset_y: gdouble, scaleX scale_x: gdouble, scaleY scale_y: gdouble, interpType interp_type: InterpType, overallAlpha overall_alpha: CInt, checkX check_x: CInt, checkY check_y: CInt, checkSize check_size: CInt, color1: UInt32, color2: UInt32) {
         gdk_pixbuf_composite_color(cast(pixbuf_ptr), cast(dest.ptr), dest_x, dest_y, dest_width, dest_height, offset_x, offset_y, scale_x, scale_y, interp_type, overall_alpha, check_x, check_y, check_size, guint32(color1), guint32(color2))
@@ -1227,7 +1218,7 @@ public extension PixbufProtocol {
 
     /// Creates a new `GdkPixbuf` with a copy of the information in the specified
     /// `pixbuf`. Note that this does not copy the options set on the original `GdkPixbuf`,
-    /// use gdk_pixbuf_copy_options() for this.
+    /// use `gdk_pixbuf_copy_options()` for this.
     func copy() -> UnsafeMutablePointer<GdkPixbuf>! {
         let rv = gdk_pixbuf_copy(cast(pixbuf_ptr))
         return cast(rv)
@@ -1306,7 +1297,7 @@ public extension PixbufProtocol {
 
     /// Looks up `key` in the list of options that may have been attached to the
     /// `pixbuf` when it was loaded, or that may have been attached by another
-    /// function using gdk_pixbuf_set_option().
+    /// function using `gdk_pixbuf_set_option()`.
     /// 
     /// For instance, the ANI loader provides "Title" and "Artist" options.
     /// The ICO, XBM, and XPM loaders provide "x_hot" and "y_hot" hot-spot
@@ -1326,9 +1317,9 @@ public extension PixbufProtocol {
 
     /// Returns a `GHashTable` with a list of all the options that may have been
     /// attached to the `pixbuf` when it was loaded, or that may have been
-    /// attached by another function using gdk_pixbuf_set_option().
+    /// attached by another function using `gdk_pixbuf_set_option()`.
     /// 
-    /// See gdk_pixbuf_get_option() for more details.
+    /// See `gdk_pixbuf_get_option()` for more details.
     func getOptions() -> UnsafeMutablePointer<GHashTable>! {
         let rv = gdk_pixbuf_get_options(cast(pixbuf_ptr))
         return cast(rv)
@@ -1374,7 +1365,7 @@ public extension PixbufProtocol {
 
     /// Provides a `GBytes` buffer containing the raw pixel data; the data
     /// must not be modified.  This function allows skipping the implicit
-    /// copy that must be made if gdk_pixbuf_get_pixels() is called on a
+    /// copy that must be made if `gdk_pixbuf_get_pixels()` is called on a
     /// read-only pixbuf.
     func readPixelBytes() -> UnsafeMutablePointer<GBytes>! {
         let rv = gdk_pixbuf_read_pixel_bytes(cast(pixbuf_ptr))
@@ -1383,7 +1374,7 @@ public extension PixbufProtocol {
 
     /// Provides a read-only pointer to the raw pixel data; must not be
     /// modified.  This function allows skipping the implicit copy that
-    /// must be made if gdk_pixbuf_get_pixels() is called on a read-only
+    /// must be made if `gdk_pixbuf_get_pixels()` is called on a read-only
     /// pixbuf.
     func readPixels() -> UnsafePointer<UInt8>! {
         let rv = gdk_pixbuf_read_pixels(cast(pixbuf_ptr))
@@ -1436,7 +1427,7 @@ public extension PixbufProtocol {
 
 
     /// Saves pixbuf to a new buffer in format `type`, which is currently "jpeg",
-    /// "tiff", "png", "ico" or "bmp".  See gdk_pixbuf_save_to_buffer()
+    /// "tiff", "png", "ico" or "bmp".  See `gdk_pixbuf_save_to_buffer()`
     /// for more details.
     func saveToBufferv(buffer: UnsafeMutablePointer<UnsafeMutablePointer<gchar>>, bufferSize buffer_size: UnsafeMutablePointer<Int>, type: UnsafePointer<CChar>, optionKeys option_keys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>, optionValues option_values: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>) throws -> Bool {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
@@ -1474,7 +1465,7 @@ public extension PixbufProtocol {
     /// Saves `pixbuf` to an output stream.
     /// 
     /// Supported file formats are currently "jpeg", "tiff", "png", "ico" or
-    /// "bmp". See gdk_pixbuf_save_to_stream() for more details.
+    /// "bmp". See `gdk_pixbuf_save_to_stream()` for more details.
     func saveToStreamv(stream: OutputStreamProtocol, type: UnsafePointer<CChar>, optionKeys option_keys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>, optionValues option_values: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>, cancellable: CancellableProtocol) throws -> Bool {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_save_to_streamv(cast(pixbuf_ptr), cast(stream.ptr), type, cast(option_keys), cast(option_values), cast(cancellable.ptr), &error)
@@ -1486,11 +1477,11 @@ public extension PixbufProtocol {
 
     /// Saves `pixbuf` to an output stream asynchronously.
     /// 
-    /// For more details see gdk_pixbuf_save_to_streamv(), which is the synchronous
+    /// For more details see `gdk_pixbuf_save_to_streamv()`, which is the synchronous
     /// version of this function.
     /// 
     /// When the operation is finished, `callback` will be called in the main thread.
-    /// You can then call gdk_pixbuf_save_to_stream_finish() to get the result of the operation.
+    /// You can then call `gdk_pixbuf_save_to_stream_finish()` to get the result of the operation.
     func saveToStreamvAsync(stream: OutputStreamProtocol, type: UnsafePointer<gchar>, optionKeys option_keys: UnsafeMutablePointer<UnsafeMutablePointer<gchar>>, optionValues option_values: UnsafeMutablePointer<UnsafeMutablePointer<gchar>>, cancellable: CancellableProtocol, callback: @escaping Gio.AsyncReadyCallback, userData user_data: UnsafeMutableRawPointer) {
         gdk_pixbuf_save_to_streamv_async(cast(pixbuf_ptr), cast(stream.ptr), type, cast(option_keys), cast(option_values), cast(cancellable.ptr), callback, cast(user_data))
     
@@ -1514,9 +1505,9 @@ public extension PixbufProtocol {
     /// `dest_height`) of the resulting image onto the destination image
     /// replacing the previous contents.
     /// 
-    /// Try to use gdk_pixbuf_scale_simple() first, this function is
+    /// Try to use `gdk_pixbuf_scale_simple()` first, this function is
     /// the industrial-strength power tool you can fall back to if
-    /// gdk_pixbuf_scale_simple() isn't powerful enough.
+    /// `gdk_pixbuf_scale_simple()` isn't powerful enough.
     /// 
     /// If the source rectangle overlaps the destination rectangle on the
     /// same pixbuf, it will be overwritten during the scaling which
@@ -1534,13 +1525,13 @@ public extension PixbufProtocol {
     /// reasonable quality and speed.
     /// 
     /// You can scale a sub-portion of `src` by creating a sub-pixbuf
-    /// pointing into `src`; see gdk_pixbuf_new_subpixbuf().
+    /// pointing into `src`; see `gdk_pixbuf_new_subpixbuf()`.
     /// 
     /// If `dest_width` and `dest_height` are equal to the `src` width and height, a
     /// copy of `src` is returned, avoiding any scaling.
     /// 
-    /// For more complicated scaling/alpha blending see gdk_pixbuf_scale()
-    /// and gdk_pixbuf_composite().
+    /// For more complicated scaling/alpha blending see `gdk_pixbuf_scale()`
+    /// and `gdk_pixbuf_composite()`.
     func scaleSimple(destWidth dest_width: CInt, destHeight dest_height: CInt, interpType interp_type: InterpType) -> UnsafeMutablePointer<GdkPixbuf>! {
         let rv = gdk_pixbuf_scale_simple(cast(pixbuf_ptr), dest_width, dest_height, interp_type)
         return cast(rv)
@@ -1616,15 +1607,15 @@ public extension PixbufProtocol {
 
     /// Returns a `GHashTable` with a list of all the options that may have been
     /// attached to the `pixbuf` when it was loaded, or that may have been
-    /// attached by another function using gdk_pixbuf_set_option().
+    /// attached by another function using `gdk_pixbuf_set_option()`.
     /// 
-    /// See gdk_pixbuf_get_option() for more details.
+    /// See `gdk_pixbuf_get_option()` for more details.
     var options: UnsafeMutablePointer<GHashTable>! {
         /// Returns a `GHashTable` with a list of all the options that may have been
         /// attached to the `pixbuf` when it was loaded, or that may have been
-        /// attached by another function using gdk_pixbuf_set_option().
+        /// attached by another function using `gdk_pixbuf_set_option()`.
         /// 
-        /// See gdk_pixbuf_get_option() for more details.
+        /// See `gdk_pixbuf_get_option()` for more details.
         get {
             let rv = gdk_pixbuf_get_options(cast(pixbuf_ptr))
             return cast(rv)

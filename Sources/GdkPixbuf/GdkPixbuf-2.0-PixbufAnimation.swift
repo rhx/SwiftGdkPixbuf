@@ -117,7 +117,7 @@ public extension PixbufAnimationRef {
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
-    /// gdk_pixbuf_animation_new_from_stream_async().
+    /// `gdk_pixbuf_animation_new_from_stream_async()`.
     init(streamFinish async_result: AsyncResultProtocol) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_animation_new_from_stream_finish(cast(async_result.ptr), &error)
@@ -171,7 +171,7 @@ public extension PixbufAnimationRef {
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
-    /// gdk_pixbuf_animation_new_from_stream_async().
+    /// `gdk_pixbuf_animation_new_from_stream_async()`.
     static func newFrom(streamFinish async_result: AsyncResultProtocol) throws -> PixbufAnimationRef! {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_animation_new_from_stream_finish(cast(async_result.ptr), &error)
@@ -270,7 +270,7 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
-    /// gdk_pixbuf_animation_new_from_stream_async().
+    /// `gdk_pixbuf_animation_new_from_stream_async()`.
     public convenience init(streamFinish async_result: AsyncResultProtocol) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_animation_new_from_stream_finish(cast(async_result.ptr), &error)
@@ -325,7 +325,7 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
-    /// gdk_pixbuf_animation_new_from_stream_async().
+    /// `gdk_pixbuf_animation_new_from_stream_async()`.
     public static func newFrom(streamFinish async_result: AsyncResultProtocol) throws -> PixbufAnimation! {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_animation_new_from_stream_finish(cast(async_result.ptr), &error)
@@ -341,27 +341,26 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
 
 public enum PixbufAnimationSignalName: String, SignalNameProtocol {
     /// The notify signal is emitted on an object when one of its properties has
-    /// its value set through g_object_set_property(), g_object_set(), et al.
+    /// its value set through `g_object_set_property()`, `g_object_set()`, et al.
     /// 
     /// Note that getting this signal doesn’t itself guarantee that the value of
     /// the property has actually changed. When it is emitted is determined by the
     /// derived GObject class. If the implementor did not create the property with
-    /// `G_PARAM_EXPLICIT_NOTIFY`, then any call to g_object_set_property() results
-    /// in ::notify being emitted, even if the new value is the same as the old.
+    /// `G_PARAM_EXPLICIT_NOTIFY`, then any call to `g_object_set_property()` results
+    /// in `notify` being emitted, even if the new value is the same as the old.
     /// If they did pass `G_PARAM_EXPLICIT_NOTIFY`, then this signal is emitted only
-    /// when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
+    /// when they explicitly call `g_object_notify()` or `g_object_notify_by_pspec()`,
     /// and common practice is to do that only when the value has actually changed.
     /// 
     /// This signal is typically used to obtain change notification for a
     /// single property, by specifying the property name as a detail in the
-    /// g_signal_connect() call, like this:
+    /// `g_signal_connect()` call, like this:
     /// (C Language Example):
     /// ```C
     /// g_signal_connect (text_view->buffer, "notify::paste-target-list",
     ///                   G_CALLBACK (gtk_text_view_target_list_notify),
     ///                   text_view)
     /// ```
-    /// 
     /// It is important to note that you must use
     /// [canonical parameter names][canonical-parameter-names] as
     /// detail strings for the notify signal.
@@ -409,29 +408,29 @@ public extension PixbufAnimationProtocol {
 
     /// Get an iterator for displaying an animation. The iterator provides
     /// the frames that should be displayed at a given time. It should be
-    /// freed after use with g_object_unref().
+    /// freed after use with `g_object_unref()`.
     /// 
-    /// `start_time` would normally come from g_get_current_time(), and marks
+    /// `start_time` would normally come from `g_get_current_time()`, and marks
     /// the beginning of animation playback. After creating an iterator, you
     /// should immediately display the pixbuf returned by
-    /// gdk_pixbuf_animation_iter_get_pixbuf(). Then, you should install
-    /// a timeout (with g_timeout_add()) or by some other mechanism ensure
+    /// `gdk_pixbuf_animation_iter_get_pixbuf()`. Then, you should install
+    /// a timeout (with `g_timeout_add()`) or by some other mechanism ensure
     /// that you'll update the image after
-    /// gdk_pixbuf_animation_iter_get_delay_time() milliseconds. Each time
+    /// `gdk_pixbuf_animation_iter_get_delay_time()` milliseconds. Each time
     /// the image is updated, you should reinstall the timeout with the new,
     /// possibly-changed delay time.
     /// 
     /// As a shortcut, if `start_time` is `nil`, the result of
-    /// g_get_current_time() will be used automatically.
+    /// `g_get_current_time()` will be used automatically.
     /// 
     /// To update the image (i.e. possibly change the result of
-    /// gdk_pixbuf_animation_iter_get_pixbuf() to a new frame of the animation),
-    /// call gdk_pixbuf_animation_iter_advance().
+    /// `gdk_pixbuf_animation_iter_get_pixbuf()` to a new frame of the animation),
+    /// call `gdk_pixbuf_animation_iter_advance()`.
     /// 
     /// If you're using `GdkPixbufLoader`, in addition to updating the image
     /// after the delay time, you should also update it whenever you
     /// receive the area_updated signal and
-    /// gdk_pixbuf_animation_iter_on_currently_loading_frame() returns
+    /// `gdk_pixbuf_animation_iter_on_currently_loading_frame()` returns
     /// `true`. In this case, the frame currently being fed into the loader
     /// has received new data, so needs to be refreshed. The delay time for
     /// a frame may also be modified after an area_updated signal, for
@@ -488,14 +487,14 @@ public extension PixbufAnimationProtocol {
         }
     }
 
-    /// If you load a file with gdk_pixbuf_animation_new_from_file() and it
+    /// If you load a file with `gdk_pixbuf_animation_new_from_file()` and it
     /// turns out to be a plain, unanimated image, then this function will
-    /// return `true`. Use gdk_pixbuf_animation_get_static_image() to retrieve
+    /// return `true`. Use `gdk_pixbuf_animation_get_static_image()` to retrieve
     /// the image.
     var isStaticImage: Bool {
-        /// If you load a file with gdk_pixbuf_animation_new_from_file() and it
+        /// If you load a file with `gdk_pixbuf_animation_new_from_file()` and it
         /// turns out to be a plain, unanimated image, then this function will
-        /// return `true`. Use gdk_pixbuf_animation_get_static_image() to retrieve
+        /// return `true`. Use `gdk_pixbuf_animation_get_static_image()` to retrieve
         /// the image.
         get {
             let rv = gdk_pixbuf_animation_is_static_image(cast(pixbuf_animation_ptr))

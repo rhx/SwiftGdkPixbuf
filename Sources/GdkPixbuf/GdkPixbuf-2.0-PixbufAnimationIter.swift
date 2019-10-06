@@ -128,27 +128,26 @@ open class PixbufAnimationIter: Object, PixbufAnimationIterProtocol {
 
 public enum PixbufAnimationIterSignalName: String, SignalNameProtocol {
     /// The notify signal is emitted on an object when one of its properties has
-    /// its value set through g_object_set_property(), g_object_set(), et al.
+    /// its value set through `g_object_set_property()`, `g_object_set()`, et al.
     /// 
     /// Note that getting this signal doesn’t itself guarantee that the value of
     /// the property has actually changed. When it is emitted is determined by the
     /// derived GObject class. If the implementor did not create the property with
-    /// `G_PARAM_EXPLICIT_NOTIFY`, then any call to g_object_set_property() results
-    /// in ::notify being emitted, even if the new value is the same as the old.
+    /// `G_PARAM_EXPLICIT_NOTIFY`, then any call to `g_object_set_property()` results
+    /// in `notify` being emitted, even if the new value is the same as the old.
     /// If they did pass `G_PARAM_EXPLICIT_NOTIFY`, then this signal is emitted only
-    /// when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
+    /// when they explicitly call `g_object_notify()` or `g_object_notify_by_pspec()`,
     /// and common practice is to do that only when the value has actually changed.
     /// 
     /// This signal is typically used to obtain change notification for a
     /// single property, by specifying the property name as a detail in the
-    /// g_signal_connect() call, like this:
+    /// `g_signal_connect()` call, like this:
     /// (C Language Example):
     /// ```C
     /// g_signal_connect (text_view->buffer, "notify::paste-target-list",
     ///                   G_CALLBACK (gtk_text_view_target_list_notify),
     ///                   text_view)
     /// ```
-    /// 
     /// It is important to note that you must use
     /// [canonical parameter names][canonical-parameter-names] as
     /// detail strings for the notify signal.
@@ -189,23 +188,23 @@ public extension PixbufAnimationIterProtocol {
     var pixbuf_animation_iter_ptr: UnsafeMutablePointer<GdkPixbufAnimationIter> { return ptr.assumingMemoryBound(to: GdkPixbufAnimationIter.self) }
 
     /// Possibly advances an animation to a new frame. Chooses the frame based
-    /// on the start time passed to gdk_pixbuf_animation_get_iter().
+    /// on the start time passed to `gdk_pixbuf_animation_get_iter()`.
     /// 
-    /// `current_time` would normally come from g_get_current_time(), and
+    /// `current_time` would normally come from `g_get_current_time()`, and
     /// must be greater than or equal to the time passed to
-    /// gdk_pixbuf_animation_get_iter(), and must increase or remain
-    /// unchanged each time gdk_pixbuf_animation_iter_get_pixbuf() is
+    /// `gdk_pixbuf_animation_get_iter()`, and must increase or remain
+    /// unchanged each time `gdk_pixbuf_animation_iter_get_pixbuf()` is
     /// called. That is, you can't go backward in time; animations only
     /// play forward.
     /// 
-    /// As a shortcut, pass `nil` for the current time and g_get_current_time()
+    /// As a shortcut, pass `nil` for the current time and `g_get_current_time()`
     /// will be invoked on your behalf. So you only need to explicitly pass
     /// `current_time` if you're doing something odd like playing the animation
     /// at double speed.
     /// 
     /// If this function returns `false`, there's no need to update the animation
     /// display, assuming the display had been rendered prior to advancing;
-    /// if `true`, you need to call gdk_pixbuf_animation_iter_get_pixbuf()
+    /// if `true`, you need to call `gdk_pixbuf_animation_iter_get_pixbuf()`
     /// and update the display with the new pixbuf.
     func advance(currentTime current_time: TimeValProtocol) -> Bool {
         let rv = gdk_pixbuf_animation_iter_advance(cast(pixbuf_animation_iter_ptr), cast(current_time.ptr))
@@ -213,7 +212,7 @@ public extension PixbufAnimationIterProtocol {
     }
 
     /// Gets the number of milliseconds the current pixbuf should be displayed,
-    /// or -1 if the current pixbuf should be displayed forever. g_timeout_add()
+    /// or -1 if the current pixbuf should be displayed forever. `g_timeout_add()`
     /// conveniently takes a timeout in milliseconds, so you can use a timeout
     /// to schedule the next update.
     /// 
@@ -227,13 +226,13 @@ public extension PixbufAnimationIterProtocol {
 
     /// Gets the current pixbuf which should be displayed; the pixbuf might not
     /// be the same size as the animation itself
-    /// (gdk_pixbuf_animation_get_width(), gdk_pixbuf_animation_get_height()).
+    /// (`gdk_pixbuf_animation_get_width()`, `gdk_pixbuf_animation_get_height()`).
     /// This pixbuf should be displayed for
-    /// gdk_pixbuf_animation_iter_get_delay_time() milliseconds. The caller
+    /// `gdk_pixbuf_animation_iter_get_delay_time()` milliseconds. The caller
     /// of this function does not own a reference to the returned pixbuf;
     /// the returned pixbuf will become invalid when the iterator advances
     /// to the next frame, which may happen anytime you call
-    /// gdk_pixbuf_animation_iter_advance(). Copy the pixbuf to keep it
+    /// `gdk_pixbuf_animation_iter_advance()`. Copy the pixbuf to keep it
     /// (don't just add a reference), as it may get recycled as you advance
     /// the iterator.
     func getPixbuf() -> UnsafeMutablePointer<GdkPixbuf>! {
@@ -251,7 +250,7 @@ public extension PixbufAnimationIterProtocol {
         return Bool(rv != 0)
     }
     /// Gets the number of milliseconds the current pixbuf should be displayed,
-    /// or -1 if the current pixbuf should be displayed forever. g_timeout_add()
+    /// or -1 if the current pixbuf should be displayed forever. `g_timeout_add()`
     /// conveniently takes a timeout in milliseconds, so you can use a timeout
     /// to schedule the next update.
     /// 
@@ -260,7 +259,7 @@ public extension PixbufAnimationIterProtocol {
     /// for GIF images is currently 20 milliseconds.
     var delayTime: CInt {
         /// Gets the number of milliseconds the current pixbuf should be displayed,
-        /// or -1 if the current pixbuf should be displayed forever. g_timeout_add()
+        /// or -1 if the current pixbuf should be displayed forever. `g_timeout_add()`
         /// conveniently takes a timeout in milliseconds, so you can use a timeout
         /// to schedule the next update.
         /// 
@@ -275,25 +274,25 @@ public extension PixbufAnimationIterProtocol {
 
     /// Gets the current pixbuf which should be displayed; the pixbuf might not
     /// be the same size as the animation itself
-    /// (gdk_pixbuf_animation_get_width(), gdk_pixbuf_animation_get_height()).
+    /// (`gdk_pixbuf_animation_get_width()`, `gdk_pixbuf_animation_get_height()`).
     /// This pixbuf should be displayed for
-    /// gdk_pixbuf_animation_iter_get_delay_time() milliseconds. The caller
+    /// `gdk_pixbuf_animation_iter_get_delay_time()` milliseconds. The caller
     /// of this function does not own a reference to the returned pixbuf;
     /// the returned pixbuf will become invalid when the iterator advances
     /// to the next frame, which may happen anytime you call
-    /// gdk_pixbuf_animation_iter_advance(). Copy the pixbuf to keep it
+    /// `gdk_pixbuf_animation_iter_advance()`. Copy the pixbuf to keep it
     /// (don't just add a reference), as it may get recycled as you advance
     /// the iterator.
     var pixbuf: UnsafeMutablePointer<GdkPixbuf>! {
         /// Gets the current pixbuf which should be displayed; the pixbuf might not
         /// be the same size as the animation itself
-        /// (gdk_pixbuf_animation_get_width(), gdk_pixbuf_animation_get_height()).
+        /// (`gdk_pixbuf_animation_get_width()`, `gdk_pixbuf_animation_get_height()`).
         /// This pixbuf should be displayed for
-        /// gdk_pixbuf_animation_iter_get_delay_time() milliseconds. The caller
+        /// `gdk_pixbuf_animation_iter_get_delay_time()` milliseconds. The caller
         /// of this function does not own a reference to the returned pixbuf;
         /// the returned pixbuf will become invalid when the iterator advances
         /// to the next frame, which may happen anytime you call
-        /// gdk_pixbuf_animation_iter_advance(). Copy the pixbuf to keep it
+        /// `gdk_pixbuf_animation_iter_advance()`. Copy the pixbuf to keep it
         /// (don't just add a reference), as it may get recycled as you advance
         /// the iterator.
         get {

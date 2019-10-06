@@ -91,8 +91,8 @@ public extension PixbufLoaderRef {
     /// are installed, but typically "image/png", "image/jpeg", "image/gif",
     /// "image/tiff" and "image/x-xpixmap" are among the supported mime types.
     /// To obtain the full list of supported mime types, call
-    /// gdk_pixbuf_format_get_mime_types() on each of the `GdkPixbufFormat`
-    /// structs returned by gdk_pixbuf_get_formats().
+    /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
+    /// structs returned by `gdk_pixbuf_get_formats()`.
     init(mimeType mime_type: UnsafePointer<CChar>) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
@@ -112,8 +112,8 @@ public extension PixbufLoaderRef {
     /// The list of supported image formats depends on what image loaders
     /// are installed, but typically "png", "jpeg", "gif", "tiff" and
     /// "xpm" are among the supported formats. To obtain the full list of
-    /// supported image formats, call gdk_pixbuf_format_get_name() on each
-    /// of the `GdkPixbufFormat` structs returned by gdk_pixbuf_get_formats().
+    /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
+    /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
     init(type image_type: UnsafePointer<CChar>) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
@@ -133,8 +133,8 @@ public extension PixbufLoaderRef {
     /// are installed, but typically "image/png", "image/jpeg", "image/gif",
     /// "image/tiff" and "image/x-xpixmap" are among the supported mime types.
     /// To obtain the full list of supported mime types, call
-    /// gdk_pixbuf_format_get_mime_types() on each of the `GdkPixbufFormat`
-    /// structs returned by gdk_pixbuf_get_formats().
+    /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
+    /// structs returned by `gdk_pixbuf_get_formats()`.
     static func newWith(mimeType mime_type: UnsafePointer<CChar>) throws -> PixbufLoaderRef! {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
@@ -154,8 +154,8 @@ public extension PixbufLoaderRef {
     /// The list of supported image formats depends on what image loaders
     /// are installed, but typically "png", "jpeg", "gif", "tiff" and
     /// "xpm" are among the supported formats. To obtain the full list of
-    /// supported image formats, call gdk_pixbuf_format_get_name() on each
-    /// of the `GdkPixbufFormat` structs returned by gdk_pixbuf_get_formats().
+    /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
+    /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
     static func newWith(type image_type: UnsafePointer<CChar>) throws -> PixbufLoaderRef! {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
@@ -227,8 +227,8 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// are installed, but typically "image/png", "image/jpeg", "image/gif",
     /// "image/tiff" and "image/x-xpixmap" are among the supported mime types.
     /// To obtain the full list of supported mime types, call
-    /// gdk_pixbuf_format_get_mime_types() on each of the `GdkPixbufFormat`
-    /// structs returned by gdk_pixbuf_get_formats().
+    /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
+    /// structs returned by `gdk_pixbuf_get_formats()`.
     public convenience init(mimeType mime_type: UnsafePointer<CChar>) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
@@ -248,8 +248,8 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// The list of supported image formats depends on what image loaders
     /// are installed, but typically "png", "jpeg", "gif", "tiff" and
     /// "xpm" are among the supported formats. To obtain the full list of
-    /// supported image formats, call gdk_pixbuf_format_get_name() on each
-    /// of the `GdkPixbufFormat` structs returned by gdk_pixbuf_get_formats().
+    /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
+    /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
     public convenience init(type image_type: UnsafePointer<CChar>) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
@@ -270,8 +270,8 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// are installed, but typically "image/png", "image/jpeg", "image/gif",
     /// "image/tiff" and "image/x-xpixmap" are among the supported mime types.
     /// To obtain the full list of supported mime types, call
-    /// gdk_pixbuf_format_get_mime_types() on each of the `GdkPixbufFormat`
-    /// structs returned by gdk_pixbuf_get_formats().
+    /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
+    /// structs returned by `gdk_pixbuf_get_formats()`.
     public static func newWith(mimeType mime_type: UnsafePointer<CChar>) throws -> PixbufLoader! {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
@@ -291,8 +291,8 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// The list of supported image formats depends on what image loaders
     /// are installed, but typically "png", "jpeg", "gif", "tiff" and
     /// "xpm" are among the supported formats. To obtain the full list of
-    /// supported image formats, call gdk_pixbuf_format_get_name() on each
-    /// of the `GdkPixbufFormat` structs returned by gdk_pixbuf_get_formats().
+    /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
+    /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
     public static func newWith(type image_type: UnsafePointer<CChar>) throws -> PixbufLoader! {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
@@ -309,7 +309,7 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
 public enum PixbufLoaderSignalName: String, SignalNameProtocol {
     /// This signal is emitted when the pixbuf loader has allocated the
     /// pixbuf in the desired size.  After this signal is emitted,
-    /// applications can call gdk_pixbuf_loader_get_pixbuf() to fetch
+    /// applications can call `gdk_pixbuf_loader_get_pixbuf()` to fetch
     /// the partially-loaded pixbuf.
     case areaPrepared = "area-prepared"
     /// This signal is emitted when a significant area of the image being
@@ -318,33 +318,32 @@ public enum PixbufLoaderSignalName: String, SignalNameProtocol {
     /// well.  Applications can use this signal to know when to repaint
     /// areas of an image that is being loaded.
     case areaUpdated = "area-updated"
-    /// This signal is emitted when gdk_pixbuf_loader_close() is called.
+    /// This signal is emitted when `gdk_pixbuf_loader_close()` is called.
     /// It can be used by different parts of an application to receive
     /// notification when an image loader is closed by the code that
     /// drives it.
     case closed = "closed"
     /// The notify signal is emitted on an object when one of its properties has
-    /// its value set through g_object_set_property(), g_object_set(), et al.
+    /// its value set through `g_object_set_property()`, `g_object_set()`, et al.
     /// 
     /// Note that getting this signal doesn’t itself guarantee that the value of
     /// the property has actually changed. When it is emitted is determined by the
     /// derived GObject class. If the implementor did not create the property with
-    /// `G_PARAM_EXPLICIT_NOTIFY`, then any call to g_object_set_property() results
-    /// in ::notify being emitted, even if the new value is the same as the old.
+    /// `G_PARAM_EXPLICIT_NOTIFY`, then any call to `g_object_set_property()` results
+    /// in `notify` being emitted, even if the new value is the same as the old.
     /// If they did pass `G_PARAM_EXPLICIT_NOTIFY`, then this signal is emitted only
-    /// when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
+    /// when they explicitly call `g_object_notify()` or `g_object_notify_by_pspec()`,
     /// and common practice is to do that only when the value has actually changed.
     /// 
     /// This signal is typically used to obtain change notification for a
     /// single property, by specifying the property name as a detail in the
-    /// g_signal_connect() call, like this:
+    /// `g_signal_connect()` call, like this:
     /// (C Language Example):
     /// ```C
     /// g_signal_connect (text_view->buffer, "notify::paste-target-list",
     ///                   G_CALLBACK (gtk_text_view_target_list_notify),
     ///                   text_view)
     /// ```
-    /// 
     /// It is important to note that you must use
     /// [canonical parameter names][canonical-parameter-names] as
     /// detail strings for the notify signal.
@@ -352,7 +351,7 @@ public enum PixbufLoaderSignalName: String, SignalNameProtocol {
     /// This signal is emitted when the pixbuf loader has been fed the
     /// initial amount of data that is required to figure out the size
     /// of the image that it will create.  Applications can call
-    /// gdk_pixbuf_loader_set_size() in response to this signal to set
+    /// `gdk_pixbuf_loader_set_size()` in response to this signal to set
     /// the desired size to which the image should be scaled.
     case sizePrepared = "size-prepared"
 
@@ -391,7 +390,7 @@ public extension PixbufLoaderProtocol {
     var pixbuf_loader_ptr: UnsafeMutablePointer<GdkPixbufLoader> { return ptr.assumingMemoryBound(to: GdkPixbufLoader.self) }
 
     /// Informs a pixbuf loader that no further writes with
-    /// gdk_pixbuf_loader_write() will occur, so that it can free its
+    /// `gdk_pixbuf_loader_write()` will occur, so that it can free its
     /// internal loading structures. Also, tries to parse any data that
     /// hasn't yet been parsed; if the remaining data is partial or
     /// corrupt, an error will be returned.  If `false` is returned, `error`
@@ -401,7 +400,7 @@ public extension PixbufLoaderProtocol {
     /// reasonable.
     /// 
     /// Remember that this does not unref the loader, so if you plan not to
-    /// use it anymore, please g_object_unref() it.
+    /// use it anymore, please `g_object_unref()` it.
     func close() throws -> Bool {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_close(cast(pixbuf_loader_ptr), &error)
@@ -433,12 +432,12 @@ public extension PixbufLoaderProtocol {
     /// "area-prepared" signal has been emitted by the loader; this means
     /// that enough data has been read to know the size of the image that
     /// will be allocated.  If the loader has not received enough data via
-    /// gdk_pixbuf_loader_write(), then this function returns `nil`.  The
+    /// `gdk_pixbuf_loader_write()`, then this function returns `nil`.  The
     /// returned pixbuf will be the same in all future calls to the loader,
-    /// so simply calling g_object_ref() should be sufficient to continue
+    /// so simply calling `g_object_ref()` should be sufficient to continue
     /// using it.  Additionally, if the loader is an animation, it will
     /// return the "static image" of the animation
-    /// (see gdk_pixbuf_animation_get_static_image()).
+    /// (see `gdk_pixbuf_animation_get_static_image()`).
     func getPixbuf() -> UnsafeMutablePointer<GdkPixbuf>! {
         let rv = gdk_pixbuf_loader_get_pixbuf(cast(pixbuf_loader_ptr))
         return cast(rv)
@@ -446,11 +445,11 @@ public extension PixbufLoaderProtocol {
 
     /// Causes the image to be scaled while it is loaded. The desired
     /// image size can be determined relative to the original size of
-    /// the image by calling gdk_pixbuf_loader_set_size() from a
-    /// signal handler for the ::size-prepared signal.
+    /// the image by calling `gdk_pixbuf_loader_set_size()` from a
+    /// signal handler for the `size`-prepared signal.
     /// 
     /// Attempts to set the desired image size  are ignored after the
-    /// emission of the ::size-prepared signal.
+    /// emission of the `size`-prepared signal.
     func setSize(width: CInt, height: CInt) {
         gdk_pixbuf_loader_set_size(cast(pixbuf_loader_ptr), width, height)
     
@@ -478,7 +477,7 @@ public extension PixbufLoaderProtocol {
     /// returned, `error` will be set to an error from the `GDK_PIXBUF_ERROR`
     /// or `G_FILE_ERROR` domains.
     /// 
-    /// See also: gdk_pixbuf_loader_write()
+    /// See also: `gdk_pixbuf_loader_write()`
     func writeBytes(buffer: BytesProtocol) throws -> Bool {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_write_bytes(cast(pixbuf_loader_ptr), cast(buffer.ptr), &error)
@@ -520,24 +519,24 @@ public extension PixbufLoaderProtocol {
     /// "area-prepared" signal has been emitted by the loader; this means
     /// that enough data has been read to know the size of the image that
     /// will be allocated.  If the loader has not received enough data via
-    /// gdk_pixbuf_loader_write(), then this function returns `nil`.  The
+    /// `gdk_pixbuf_loader_write()`, then this function returns `nil`.  The
     /// returned pixbuf will be the same in all future calls to the loader,
-    /// so simply calling g_object_ref() should be sufficient to continue
+    /// so simply calling `g_object_ref()` should be sufficient to continue
     /// using it.  Additionally, if the loader is an animation, it will
     /// return the "static image" of the animation
-    /// (see gdk_pixbuf_animation_get_static_image()).
+    /// (see `gdk_pixbuf_animation_get_static_image()`).
     var pixbuf: UnsafeMutablePointer<GdkPixbuf>! {
         /// Queries the `GdkPixbuf` that a pixbuf loader is currently creating.
         /// In general it only makes sense to call this function after the
         /// "area-prepared" signal has been emitted by the loader; this means
         /// that enough data has been read to know the size of the image that
         /// will be allocated.  If the loader has not received enough data via
-        /// gdk_pixbuf_loader_write(), then this function returns `nil`.  The
+        /// `gdk_pixbuf_loader_write()`, then this function returns `nil`.  The
         /// returned pixbuf will be the same in all future calls to the loader,
-        /// so simply calling g_object_ref() should be sufficient to continue
+        /// so simply calling `g_object_ref()` should be sufficient to continue
         /// using it.  Additionally, if the loader is an animation, it will
         /// return the "static image" of the animation
-        /// (see gdk_pixbuf_animation_get_static_image()).
+        /// (see `gdk_pixbuf_animation_get_static_image()`).
         get {
             let rv = gdk_pixbuf_loader_get_pixbuf(cast(pixbuf_loader_ptr))
             return cast(rv)

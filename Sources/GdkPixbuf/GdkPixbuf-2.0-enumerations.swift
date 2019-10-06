@@ -53,7 +53,7 @@ public extension InterpType {
 }
 
 /// These values can be passed to
-/// gdk_pixbuf_xlib_render_to_drawable_alpha() to control how the alpha
+/// `gdk_pixbuf_xlib_render_to_drawable_alpha()` to control how the alpha
 /// channel of an image should be handled.  This function can create a
 /// bilevel clipping mask (black and white) and use it while painting
 /// the image.  In the future, when the X Window System gets an alpha
@@ -96,7 +96,7 @@ public extension PixbufError {
     static let incomplete_animation = GDK_PIXBUF_ERROR_INCOMPLETE_ANIMATION /* 6 */
 }
 
-/// The possible rotations which can be passed to gdk_pixbuf_rotate_simple().
+/// The possible rotations which can be passed to `gdk_pixbuf_rotate_simple()`.
 /// To make them easier to use, their numerical values are the actual degrees.
 public typealias PixbufRotation = GdkPixbufRotation
 

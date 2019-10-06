@@ -146,7 +146,7 @@ public extension PixbufFormatProtocol {
     }
 
     /// Frees the resources allocated when copying a `GdkPixbufFormat`
-    /// using gdk_pixbuf_format_copy()
+    /// using `gdk_pixbuf_format_copy()`
     func free() {
         gdk_pixbuf_format_free(cast(pixbuf_format_ptr))
     
@@ -168,7 +168,7 @@ public extension PixbufFormatProtocol {
     /// Returns information about the license of the image loader for the format. The
     /// returned string should be a shorthand for a wellknown license, e.g. "LGPL",
     /// "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.  This
-    /// string should be freed with g_free() when it's no longer needed.
+    /// string should be freed with `g_free()` when it's no longer needed.
     func getLicense() -> String! {
         let rv = gdk_pixbuf_format_get_license(cast(pixbuf_format_ptr))
         return rv.map { String(cString: UnsafePointer<CChar>($0)) }
@@ -188,7 +188,7 @@ public extension PixbufFormatProtocol {
 
     /// Returns `true` if the save option specified by `option_key` is supported when
     /// saving a pixbuf using the module implementing `format`.
-    /// See gdk_pixbuf_save() for more information about option keys.
+    /// See `gdk_pixbuf_save()` for more information about option keys.
     func isSaveOptionSupported(optionKey option_key: UnsafePointer<gchar>) -> Bool {
         let rv = gdk_pixbuf_format_is_save_option_supported(cast(pixbuf_format_ptr), option_key)
         return Bool(rv != 0)
@@ -197,7 +197,7 @@ public extension PixbufFormatProtocol {
     /// Disables or enables an image format. If a format is disabled,
     /// gdk-pixbuf won't use the image loader for this format to load
     /// images. Applications can use this to avoid using image loaders
-    /// with an inappropriate license, see gdk_pixbuf_format_get_license().
+    /// with an inappropriate license, see `gdk_pixbuf_format_get_license()`.
     func set(disabled: Bool) {
         gdk_pixbuf_format_set_disabled(cast(pixbuf_format_ptr), gboolean(disabled ? 1 : 0))
     
@@ -223,10 +223,10 @@ public extension PixbufFormatProtocol {
     }
 
     /// Returns whether this image format is disabled. See
-    /// gdk_pixbuf_format_set_disabled().
+    /// `gdk_pixbuf_format_set_disabled()`.
     var isDisabled: Bool {
         /// Returns whether this image format is disabled. See
-        /// gdk_pixbuf_format_set_disabled().
+        /// `gdk_pixbuf_format_set_disabled()`.
         get {
             let rv = gdk_pixbuf_format_is_disabled(cast(pixbuf_format_ptr))
             return Bool(rv != 0)
@@ -260,12 +260,12 @@ public extension PixbufFormatProtocol {
     /// Returns information about the license of the image loader for the format. The
     /// returned string should be a shorthand for a wellknown license, e.g. "LGPL",
     /// "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.  This
-    /// string should be freed with g_free() when it's no longer needed.
+    /// string should be freed with `g_free()` when it's no longer needed.
     var license: String! {
         /// Returns information about the license of the image loader for the format. The
         /// returned string should be a shorthand for a wellknown license, e.g. "LGPL",
         /// "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.  This
-        /// string should be freed with g_free() when it's no longer needed.
+        /// string should be freed with `g_free()` when it's no longer needed.
         get {
             let rv = gdk_pixbuf_format_get_license(cast(pixbuf_format_ptr))
             return rv.map { String(cString: UnsafePointer<CChar>($0)) }
