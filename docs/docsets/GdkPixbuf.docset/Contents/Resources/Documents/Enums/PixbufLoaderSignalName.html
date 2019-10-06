@@ -298,7 +298,7 @@
                       <div class="abstract">
                         <p>This signal is emitted when the pixbuf loader has allocated the
 pixbuf in the desired size.  After this signal is emitted,
-applications can call gdk_pixbuf_loader_get_pixbuf() to fetch
+applications can call <code>gdk_pixbuf_loader_get_pixbuf()</code> to fetch
 the partially-loaded pixbuf.</p>
 
                       </div>
@@ -363,7 +363,7 @@ areas of an image that is being loaded.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This signal is emitted when gdk_pixbuf_loader_close() is called.
+                        <p>This signal is emitted when <code>gdk_pixbuf_loader_close()</code> is called.
 It can be used by different parts of an application to receive
 notification when an image loader is closed by the code that
 drives it.</p>
@@ -397,20 +397,20 @@ drives it.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>The notify signal is emitted on an object when one of its properties has
-its value set through g_object_set_property(), g_object_set(), et al.</p>
+its value set through <code>g_object_set_property()</code>, <code>g_object_set()</code>, et al.</p>
 
 <p>Note that getting this signal doesn’t itself guarantee that the value of
 the property has actually changed. When it is emitted is determined by the
 derived GObject class. If the implementor did not create the property with
-<code>G_PARAM_EXPLICIT_NOTIFY</code>, then any call to g_object_set_property() results
-in ::notify being emitted, even if the new value is the same as the old.
+<code>G_PARAM_EXPLICIT_NOTIFY</code>, then any call to <code>g_object_set_property()</code> results
+in <code>notify</code> being emitted, even if the new value is the same as the old.
 If they did pass <code>G_PARAM_EXPLICIT_NOTIFY</code>, then this signal is emitted only
-when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
+when they explicitly call <code>g_object_notify()</code> or <code>g_object_notify_by_pspec()</code>,
 and common practice is to do that only when the value has actually changed.</p>
 
 <p>This signal is typically used to obtain change notification for a
 single property, by specifying the property name as a detail in the
-g_signal_connect() call, like this:
+<code>g_signal_connect()</code> call, like this:
 (C Language Example):</p>
 <pre class="highlight plaintext"><code>g_signal_connect (text_view-&gt;buffer, "notify::paste-target-list",
                   G_CALLBACK (gtk_text_view_target_list_notify),
@@ -431,7 +431,7 @@ detail strings for the notify signal.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L351">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L350">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -452,7 +452,7 @@ detail strings for the notify signal.</p>
                         <p>This signal is emitted when the pixbuf loader has been fed the
 initial amount of data that is required to figure out the size
 of the image that it will create.  Applications can call
-gdk_pixbuf_loader_set_size() in response to this signal to set
+<code>gdk_pixbuf_loader_set_size()</code> in response to this signal to set
 the desired size to which the image should be scaled.</p>
 
                       </div>
@@ -465,7 +465,7 @@ the desired size to which the image should be scaled.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L357">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L356">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -478,7 +478,7 @@ the desired size to which the image should be scaled.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2019-10-05)</p>
+      <p>&copy; 2019 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2019-10-06)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

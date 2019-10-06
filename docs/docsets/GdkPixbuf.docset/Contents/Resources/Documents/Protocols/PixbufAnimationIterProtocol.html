@@ -444,7 +444,7 @@ certain position in an animation.</p>
                         <p>positive handler ID, or a value less than or equal to <code>0</code> in case of an error</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L165-L184">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L164-L183">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -477,23 +477,23 @@ certain position in an animation.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Possibly advances an animation to a new frame. Chooses the frame based
-on the start time passed to gdk_pixbuf_animation_get_iter().</p>
+on the start time passed to <code>gdk_pixbuf_animation_get_iter()</code>.</p>
 
-<p><code>current_time</code> would normally come from g_get_current_time(), and
+<p><code>current_time</code> would normally come from <code>g_get_current_time()</code>, and
 must be greater than or equal to the time passed to
-gdk_pixbuf_animation_get_iter(), and must increase or remain
-unchanged each time gdk_pixbuf_animation_iter_get_pixbuf() is
+<code>gdk_pixbuf_animation_get_iter()</code>, and must increase or remain
+unchanged each time <code>gdk_pixbuf_animation_iter_get_pixbuf()</code> is
 called. That is, you can&rsquo;t go backward in time; animations only
 play forward.</p>
 
-<p>As a shortcut, pass <code>nil</code> for the current time and g_get_current_time()
+<p>As a shortcut, pass <code>nil</code> for the current time and <code>g_get_current_time()</code>
 will be invoked on your behalf. So you only need to explicitly pass
 <code>current_time</code> if you&rsquo;re doing something odd like playing the animation
 at double speed.</p>
 
 <p>If this function returns <code>false</code>, there&rsquo;s no need to update the animation
 display, assuming the display had been rendered prior to advancing;
-if <code>true</code>, you need to call gdk_pixbuf_animation_iter_get_pixbuf()
+if <code>true</code>, you need to call <code>gdk_pixbuf_animation_iter_get_pixbuf()</code>
 and update the display with the new pixbuf.</p>
 
                       </div>
@@ -506,7 +506,7 @@ and update the display with the new pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L210-L213">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L209-L212">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -528,7 +528,7 @@ and update the display with the new pixbuf.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Gets the number of milliseconds the current pixbuf should be displayed,
-or -1 if the current pixbuf should be displayed forever. g_timeout_add()
+or -1 if the current pixbuf should be displayed forever. <code>g_timeout_add()</code>
 conveniently takes a timeout in milliseconds, so you can use a timeout
 to schedule the next update.</p>
 
@@ -546,7 +546,7 @@ for GIF images is currently 20 milliseconds.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L223-L226">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L222-L225">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -569,13 +569,13 @@ for GIF images is currently 20 milliseconds.</p>
                       <div class="abstract">
                         <p>Gets the current pixbuf which should be displayed; the pixbuf might not
 be the same size as the animation itself
-(gdk_pixbuf_animation_get_width(), gdk_pixbuf_animation_get_height()).
+(<code>gdk_pixbuf_animation_get_width()</code>, <code>gdk_pixbuf_animation_get_height()</code>).
 This pixbuf should be displayed for
-gdk_pixbuf_animation_iter_get_delay_time() milliseconds. The caller
+<code>gdk_pixbuf_animation_iter_get_delay_time()</code> milliseconds. The caller
 of this function does not own a reference to the returned pixbuf;
 the returned pixbuf will become invalid when the iterator advances
 to the next frame, which may happen anytime you call
-gdk_pixbuf_animation_iter_advance(). Copy the pixbuf to keep it
+<code>gdk_pixbuf_animation_iter_advance()</code>. Copy the pixbuf to keep it
 (don&rsquo;t just add a reference), as it may get recycled as you advance
 the iterator.</p>
 
@@ -589,7 +589,7 @@ the iterator.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L239-L242">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L238-L241">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -626,7 +626,7 @@ the updated area.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L249-L252">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L248-L251">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -648,7 +648,7 @@ the updated area.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Gets the number of milliseconds the current pixbuf should be displayed,
-or -1 if the current pixbuf should be displayed forever. g_timeout_add()
+or -1 if the current pixbuf should be displayed forever. <code>g_timeout_add()</code>
 conveniently takes a timeout in milliseconds, so you can use a timeout
 to schedule the next update.</p>
 
@@ -666,7 +666,7 @@ for GIF images is currently 20 milliseconds.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L261-L274">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L260-L273">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -689,13 +689,13 @@ for GIF images is currently 20 milliseconds.</p>
                       <div class="abstract">
                         <p>Gets the current pixbuf which should be displayed; the pixbuf might not
 be the same size as the animation itself
-(gdk_pixbuf_animation_get_width(), gdk_pixbuf_animation_get_height()).
+(<code>gdk_pixbuf_animation_get_width()</code>, <code>gdk_pixbuf_animation_get_height()</code>).
 This pixbuf should be displayed for
-gdk_pixbuf_animation_iter_get_delay_time() milliseconds. The caller
+<code>gdk_pixbuf_animation_iter_get_delay_time()</code> milliseconds. The caller
 of this function does not own a reference to the returned pixbuf;
 the returned pixbuf will become invalid when the iterator advances
 to the next frame, which may happen anytime you call
-gdk_pixbuf_animation_iter_advance(). Copy the pixbuf to keep it
+<code>gdk_pixbuf_animation_iter_advance()</code>. Copy the pixbuf to keep it
 (don&rsquo;t just add a reference), as it may get recycled as you advance
 the iterator.</p>
 
@@ -709,7 +709,7 @@ the iterator.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L287-L303">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L286-L302">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -722,7 +722,7 @@ the iterator.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2019-10-05)</p>
+      <p>&copy; 2019 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2019-10-06)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

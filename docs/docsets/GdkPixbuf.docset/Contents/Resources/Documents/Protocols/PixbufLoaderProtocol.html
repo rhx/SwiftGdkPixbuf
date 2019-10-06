@@ -444,7 +444,7 @@ fields.</p>
                         <p>positive handler ID, or a value less than or equal to <code>0</code> in case of an error</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L367-L386">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L366-L385">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -477,7 +477,7 @@ fields.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Informs a pixbuf loader that no further writes with
-gdk_pixbuf_loader_write() will occur, so that it can free its
+<code>gdk_pixbuf_loader_write()</code> will occur, so that it can free its
 internal loading structures. Also, tries to parse any data that
 hasn&rsquo;t yet been parsed; if the remaining data is partial or
 corrupt, an error will be returned.  If <code>false</code> is returned, <code>error</code>
@@ -487,7 +487,7 @@ to be finished, passing <code>nil</code> for <code>error</code> to ignore it is
 reasonable.</p>
 
 <p>Remember that this does not unref the loader, so if you plan not to
-use it anymore, please g_object_unref() it.</p>
+use it anymore, please <code>g_object_unref()</code> it.</p>
 
                       </div>
                       <div class="declaration">
@@ -499,7 +499,7 @@ use it anymore, please g_object_unref() it.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L405-L412">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L404-L411">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -536,7 +536,7 @@ return <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L419-L422">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L418-L421">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -570,7 +570,7 @@ currently loading image file.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L426-L429">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L425-L428">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -596,12 +596,12 @@ In general it only makes sense to call this function after the
 <q>area-prepared</q> signal has been emitted by the loader; this means
 that enough data has been read to know the size of the image that
 will be allocated.  If the loader has not received enough data via
-gdk_pixbuf_loader_write(), then this function returns <code>nil</code>.  The
+<code>gdk_pixbuf_loader_write()</code>, then this function returns <code>nil</code>.  The
 returned pixbuf will be the same in all future calls to the loader,
-so simply calling g_object_ref() should be sufficient to continue
+so simply calling <code>g_object_ref()</code> should be sufficient to continue
 using it.  Additionally, if the loader is an animation, it will
 return the <q>static image</q> of the animation
-(see gdk_pixbuf_animation_get_static_image()).</p>
+(see <code>gdk_pixbuf_animation_get_static_image()</code>).</p>
 
                       </div>
                       <div class="declaration">
@@ -613,7 +613,7 @@ return the <q>static image</q> of the animation
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L442-L445">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L441-L444">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -636,11 +636,11 @@ return the <q>static image</q> of the animation
                       <div class="abstract">
                         <p>Causes the image to be scaled while it is loaded. The desired
 image size can be determined relative to the original size of
-the image by calling gdk_pixbuf_loader_set_size() from a
-signal handler for the ::size-prepared signal.</p>
+the image by calling <code>gdk_pixbuf_loader_set_size()</code> from a
+signal handler for the <code>size</code>-prepared signal.</p>
 
 <p>Attempts to set the desired image size  are ignored after the
-emission of the ::size-prepared signal.</p>
+emission of the <code>size</code>-prepared signal.</p>
 
                       </div>
                       <div class="declaration">
@@ -652,7 +652,7 @@ emission of the ::size-prepared signal.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L454-L457">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L453-L456">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -690,7 +690,7 @@ or <code>G_FILE_ERROR</code> domains.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L465-L472">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L464-L471">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -718,7 +718,7 @@ will be closed, and will not accept further writes. If <code>false</code> is
 returned, <code>error</code> will be set to an error from the <code>GDK_PIXBUF_ERROR</code>
 or <code>G_FILE_ERROR</code> domains.</p>
 
-<p>See also: gdk_pixbuf_loader_write()</p>
+<p>See also: <code>gdk_pixbuf_loader_write()</code></p>
 
                       </div>
                       <div class="declaration">
@@ -730,7 +730,7 @@ or <code>G_FILE_ERROR</code> domains.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L482-L489">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L481-L488">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -767,7 +767,7 @@ return <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L495-L505">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L494-L504">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -801,7 +801,7 @@ currently loading image file.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L509-L516">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L508-L515">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -827,12 +827,12 @@ In general it only makes sense to call this function after the
 <q>area-prepared</q> signal has been emitted by the loader; this means
 that enough data has been read to know the size of the image that
 will be allocated.  If the loader has not received enough data via
-gdk_pixbuf_loader_write(), then this function returns <code>nil</code>.  The
+<code>gdk_pixbuf_loader_write()</code>, then this function returns <code>nil</code>.  The
 returned pixbuf will be the same in all future calls to the loader,
-so simply calling g_object_ref() should be sufficient to continue
+so simply calling <code>g_object_ref()</code> should be sufficient to continue
 using it.  Additionally, if the loader is an animation, it will
 return the <q>static image</q> of the animation
-(see gdk_pixbuf_animation_get_static_image()).</p>
+(see <code>gdk_pixbuf_animation_get_static_image()</code>).</p>
 
                       </div>
                       <div class="declaration">
@@ -844,7 +844,7 @@ return the <q>static image</q> of the animation
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L529-L545">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufLoader.swift#L528-L544">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -857,7 +857,7 @@ return the <q>static image</q> of the animation
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2019-10-05)</p>
+      <p>&copy; 2019 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2019-10-06)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
