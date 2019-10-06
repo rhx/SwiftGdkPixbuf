@@ -168,7 +168,7 @@ public extension PixbufRef {
     /// ship a program with images, but don't want to depend on any
     /// external files.
     /// 
-    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource][gdk-pixbuf-csource],
+    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource](#gdk-pixbuf-csource),
     /// which allows for conversion of `GdkPixbufs` into such a inline representation.
     /// In almost all cases, you should pass the `--raw` option to
     /// `gdk-pixbuf-csource`. A sample invocation would be:
@@ -385,7 +385,7 @@ public extension PixbufRef {
     /// ship a program with images, but don't want to depend on any
     /// external files.
     /// 
-    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource][gdk-pixbuf-csource],
+    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource](#gdk-pixbuf-csource),
     /// which allows for conversion of `GdkPixbufs` into such a inline representation.
     /// In almost all cases, you should pass the `--raw` option to
     /// `gdk-pixbuf-csource`. A sample invocation would be:
@@ -659,7 +659,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// ship a program with images, but don't want to depend on any
     /// external files.
     /// 
-    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource][gdk-pixbuf-csource],
+    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource](#gdk-pixbuf-csource),
     /// which allows for conversion of `GdkPixbufs` into such a inline representation.
     /// In almost all cases, you should pass the `--raw` option to
     /// `gdk-pixbuf-csource`. A sample invocation would be:
@@ -877,7 +877,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// ship a program with images, but don't want to depend on any
     /// external files.
     /// 
-    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource][gdk-pixbuf-csource],
+    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource](#gdk-pixbuf-csource),
     /// which allows for conversion of `GdkPixbufs` into such a inline representation.
     /// In almost all cases, you should pass the `--raw` option to
     /// `gdk-pixbuf-csource`. A sample invocation would be:
@@ -1095,7 +1095,7 @@ public enum PixbufSignalName: String, SignalNameProtocol {
     ///                   text_view)
     /// ```
     /// It is important to note that you must use
-    /// [canonical parameter names][canonical-parameter-names] as
+    /// [canonical parameter names](#canonical-parameter-names) as
     /// detail strings for the notify signal.
     case notify = "notify"
     /// The number of bits per sample.

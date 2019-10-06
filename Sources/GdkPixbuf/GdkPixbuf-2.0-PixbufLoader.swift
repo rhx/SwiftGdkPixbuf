@@ -345,7 +345,7 @@ public enum PixbufLoaderSignalName: String, SignalNameProtocol {
     ///                   text_view)
     /// ```
     /// It is important to note that you must use
-    /// [canonical parameter names][canonical-parameter-names] as
+    /// [canonical parameter names](#canonical-parameter-names) as
     /// detail strings for the notify signal.
     case notify = "notify"
     /// This signal is emitted when the pixbuf loader has been fed the
