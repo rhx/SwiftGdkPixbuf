@@ -13,11 +13,11 @@ public let PIXBUF_MAJOR = GDK_PIXBUF_MAJOR /* gint 2 */
 
 /// Micro version of gdk-pixbuf library, that is the "2" in
 /// "0.8.2" for example.
-public let PIXBUF_MICRO = GDK_PIXBUF_MICRO /* gint 2 */
+public let PIXBUF_MICRO = GDK_PIXBUF_MICRO /* gint 0 */
 
 /// Minor version of gdk-pixbuf library, that is the "8" in
 /// "0.8.2" for example.
-public let PIXBUF_MINOR = GDK_PIXBUF_MINOR /* gint 38 */
+public let PIXBUF_MINOR = GDK_PIXBUF_MINOR /* gint 40 */
 
 /// Contains the full version of the gdk-pixbuf header as a string.
 /// This is the version being compiled against; contrast with
