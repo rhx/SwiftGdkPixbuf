@@ -4,7 +4,7 @@
 # the compiler and linker flags to use.
 #
 VER=2.0
-JAZZY_VER=2.38.2
+JAZZY_VER=2.40.0
 Mod=GdkPixbuf
 Module=${Mod}-$VER
 module=gdk-pixbuf-$VER
