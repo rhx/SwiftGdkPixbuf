@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           GdkPixbuf 2.40.0 Docs
         </a>
-         (92% documented)
+         (93% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -266,7 +266,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>PixbufAnimationProtocol</h1>
               <div class="declaration">
                 <div class="language">
@@ -362,9 +362,11 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
               <div class="task-name-container">
                 <a name="/no%20PixbufAnimation%20properties"></a>
                 <a name="//apple_ref/swift/Section/no PixbufAnimation properties" class="dashAnchor"></a>
-                <a href="#/no%20PixbufAnimation%20properties">
-                  <h3 class="section-name">no PixbufAnimation properties</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/no%20PixbufAnimation%20properties"></a>
+                  <h3 class="section-name"><p>no PixbufAnimation properties</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -443,22 +445,11 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                         <p>positive handler ID, or a value less than or equal to <code>0</code> in case of an error</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L377-L396">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L418-L437">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/no%20PixbufAnimation%20properties2"></a>
-                <a name="//apple_ref/swift/Section/no PixbufAnimation properties" class="dashAnchor"></a>
-                <a href="#/no%20PixbufAnimation%20properties2">
-                  <h3 class="section-name">no PixbufAnimation properties</h3>
-                </a>
-              </div>
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -487,7 +478,7 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L404-L407">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L445-L448">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -540,7 +531,7 @@ example if the delay time for a frame is encoded in the data after
 the frame itself. So your timeout should be reinstalled after any
 area_updated signal.</p>
 
-<p>A delay time of -1 is possible, indicating <q>infinite.</q></p>
+<p>A delay time of -1 is possible, indicating &ldquo;infinite.&rdquo;</p>
 
                       </div>
                       <div class="declaration">
@@ -552,7 +543,7 @@ area_updated signal.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L442-L445">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L483-L486">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -590,7 +581,7 @@ function will return <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L453-L456">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L494-L497">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -623,7 +614,7 @@ function will return <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L459-L462">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L500-L503">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -654,13 +645,13 @@ Use g_object_ref().</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">)</span>
 <span class="kd">func</span> <span class="nf">ref</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbufAnimation</span><span class="o">&gt;!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L468-L471">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L509-L512">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -691,13 +682,13 @@ Use g_object_unref().</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">)</span>
 <span class="kd">func</span> <span class="nf">unref</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L477-L480">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L518-L521">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -730,7 +721,7 @@ Use g_object_unref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L482-L488">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L523-L529">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -766,7 +757,7 @@ the image.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L494-L503">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L535-L544">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -804,7 +795,7 @@ function will return <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L511-L522">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L552-L563">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -837,7 +828,7 @@ function will return <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L525-L531">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L566-L572">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -850,8 +841,8 @@ function will return <code>nil</code>.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2019-10-10)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-03-29)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
