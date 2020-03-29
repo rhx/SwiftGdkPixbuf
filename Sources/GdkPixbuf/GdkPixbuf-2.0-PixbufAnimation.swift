@@ -82,7 +82,7 @@ public extension PixbufAnimationRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf animation by loading an image from an resource.
@@ -95,7 +95,7 @@ public extension PixbufAnimationRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new animation by loading it from an input stream.
@@ -113,7 +113,7 @@ public extension PixbufAnimationRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
@@ -124,7 +124,7 @@ public extension PixbufAnimationRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
     /// Creates a new animation by loading it from a file. The file format is
     /// detected automatically. If the file's format does not support multi-frame
@@ -189,66 +189,107 @@ public extension PixbufAnimationRef {
 /// An opaque struct representing an animation.
 open class PixbufAnimation: Object, PixbufAnimationProtocol {
     /// Designated initialiser from the underlying `C` data type.
-    /// Ownership is transferred to the `PixbufAnimation` instance.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimation` instance.
+    /// - Parameter op: pointer to the underlying object
     public init(_ op: UnsafeMutablePointer<GdkPixbufAnimation>) {
         super.init(cast(op))
     }
 
-    /// Reference convenience intialiser for a related type that implements `PixbufAnimationProtocol`
+    /// Designated initialiser from the underlying `C` data type.
     /// Will retain `GdkPixbufAnimation`.
-    public convenience init<T: PixbufAnimationProtocol>(_ other: T) {
-        self.init(cast(other.pixbuf_animation_ptr))
-        g_object_ref(cast(pixbuf_animation_ptr))
+    /// i.e., ownership is transferred to the `PixbufAnimation` instance.
+    /// - Parameter op: pointer to the underlying object
+    public init(retaining op: UnsafeMutablePointer<GdkPixbufAnimation>) {
+        super.init(retaining: cast(op))
+    }
+
+    /// Reference intialiser for a related type that implements `PixbufAnimationProtocol`
+    /// Will retain `GdkPixbufAnimation`.
+    /// - Parameter other: an instance of a related type that implements `PixbufAnimationProtocol`
+    public init<T: PixbufAnimationProtocol>(pixbufAnimation other: T) {
+        super.init(retaining: cast(other.pixbuf_animation_ptr))
     }
 
     /// Unsafe typed initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    public convenience init<T>(cPointer: UnsafeMutablePointer<T>) {
-        self.init(cPointer.withMemoryRebound(to: GdkPixbufAnimation.self, capacity: 1) { $0 })
+    /// - Parameter cPointer: pointer to the underlying object
+    override public init<T>(cPointer p: UnsafeMutablePointer<T>) {
+        super.init(cPointer: p)
+    }
+
+    /// Unsafe typed, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
+    /// - Parameter cPointer: pointer to the underlying object
+    override public init<T>(retainingCPointer cPointer: UnsafeMutablePointer<T>) {
+        super.init(retainingCPointer: cPointer)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    public convenience init(raw: UnsafeRawPointer) {
-        self.init(UnsafeMutableRawPointer(mutating: raw).assumingMemoryBound(to: GdkPixbufAnimation.self))
+    /// - Parameter p: raw pointer to the underlying object
+    override public init(raw p: UnsafeRawPointer) {
+        super.init(raw: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
+    override public init(retainingRaw raw: UnsafeRawPointer) {
+        super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    public convenience init(raw: UnsafeMutableRawPointer) {
-        self.init(raw.assumingMemoryBound(to: GdkPixbufAnimation.self))
+    /// - Parameter p: mutable raw pointer to the underlying object
+    override public init(raw p: UnsafeMutableRawPointer) {
+        super.init(raw: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
+    /// - Parameter raw: mutable raw pointer to the underlying object
+    override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+        super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    public convenience init(opaquePointer: OpaquePointer) {
-        self.init(UnsafeMutablePointer<GdkPixbufAnimation>(opaquePointer))
+    /// - Parameter p: opaque pointer to the underlying object
+    override public init(opaquePointer p: OpaquePointer) {
+        super.init(opaquePointer: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
+    /// - Parameter p: opaque pointer to the underlying object
+    override public init(retainingOpaquePointer p: OpaquePointer) {
+        super.init(retainingOpaquePointer: p)
     }
 
     /// Creates a new animation by loading it from a file. The file format is
     /// detected automatically. If the file's format does not support multi-frame
     /// images, then an animation with a single frame will be created. Possible errors
     /// are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
-    public convenience init(file String_: UnsafePointer<CChar>) throws {
+    public init(file String_: UnsafePointer<CChar>) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_animation_new_from_file(String_, &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf animation by loading an image from an resource.
     /// 
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
-    public convenience init(resource resource_path: UnsafePointer<CChar>) throws {
+    public init(resource resource_path: UnsafePointer<CChar>) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_animation_new_from_resource(resource_path, &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new animation by loading it from an input stream.
@@ -260,24 +301,24 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
-    public convenience init(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws {
+    public init(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_animation_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
     /// `gdk_pixbuf_animation_new_from_stream_async()`.
-    public convenience init(streamFinish async_result: AsyncResultProtocol) throws {
+    public init(streamFinish async_result: AsyncResultProtocol) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_animation_new_from_stream_finish(cast(async_result.ptr), &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new animation by loading it from a file. The file format is

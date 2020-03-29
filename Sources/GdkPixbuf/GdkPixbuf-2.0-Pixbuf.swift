@@ -85,7 +85,7 @@ public extension PixbufRef {
     /// you will have to fill it completely yourself.
     init( colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt) {
         let rv = gdk_pixbuf_new(colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height)
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
@@ -93,7 +93,7 @@ public extension PixbufRef {
     /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
     init(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) {
         let rv = gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride)
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new `GdkPixbuf` out of in-memory image data.  Currently only RGB
@@ -108,7 +108,7 @@ public extension PixbufRef {
     /// See also `gdk_pixbuf_new_from_bytes()`.
     init(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) {
         let rv = gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data))
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from a file.  The file format is
@@ -120,7 +120,7 @@ public extension PixbufRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from a file.  The file format is
@@ -141,7 +141,7 @@ public extension PixbufRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from a file.
@@ -160,7 +160,7 @@ public extension PixbufRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Create a `GdkPixbuf` from a flat representation that is suitable for
@@ -202,7 +202,7 @@ public extension PixbufRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from an resource.
@@ -215,7 +215,7 @@ public extension PixbufRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from an resource.
@@ -237,7 +237,7 @@ public extension PixbufRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from an input stream.
@@ -255,7 +255,7 @@ public extension PixbufRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from an input stream.
@@ -285,7 +285,7 @@ public extension PixbufRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Finishes an asynchronous pixbuf creation operation started with
@@ -296,14 +296,14 @@ public extension PixbufRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf by parsing XPM data in memory.  This data is commonly
     /// the result of including an XPM file into a program's C source.
     init(xpmData data: UnsafePointer<UnsafePointer<CChar>>) {
         let rv = gdk_pixbuf_new_from_xpm_data(cast(data))
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
     /// Currently only RGB images with 8 bits per sample are supported.
@@ -535,56 +535,97 @@ public extension PixbufRef {
 /// one row and the start of the next).
 open class Pixbuf: Object, PixbufProtocol {
     /// Designated initialiser from the underlying `C` data type.
-    /// Ownership is transferred to the `Pixbuf` instance.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `Pixbuf` instance.
+    /// - Parameter op: pointer to the underlying object
     public init(_ op: UnsafeMutablePointer<GdkPixbuf>) {
         super.init(cast(op))
     }
 
-    /// Reference convenience intialiser for a related type that implements `PixbufProtocol`
+    /// Designated initialiser from the underlying `C` data type.
     /// Will retain `GdkPixbuf`.
-    public convenience init<T: PixbufProtocol>(_ other: T) {
-        self.init(cast(other.pixbuf_ptr))
-        g_object_ref(cast(pixbuf_ptr))
+    /// i.e., ownership is transferred to the `Pixbuf` instance.
+    /// - Parameter op: pointer to the underlying object
+    public init(retaining op: UnsafeMutablePointer<GdkPixbuf>) {
+        super.init(retaining: cast(op))
+    }
+
+    /// Reference intialiser for a related type that implements `PixbufProtocol`
+    /// Will retain `GdkPixbuf`.
+    /// - Parameter other: an instance of a related type that implements `PixbufProtocol`
+    public init<T: PixbufProtocol>(pixbuf other: T) {
+        super.init(retaining: cast(other.pixbuf_ptr))
     }
 
     /// Unsafe typed initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufProtocol`.**
-    public convenience init<T>(cPointer: UnsafeMutablePointer<T>) {
-        self.init(cPointer.withMemoryRebound(to: GdkPixbuf.self, capacity: 1) { $0 })
+    /// - Parameter cPointer: pointer to the underlying object
+    override public init<T>(cPointer p: UnsafeMutablePointer<T>) {
+        super.init(cPointer: p)
+    }
+
+    /// Unsafe typed, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufProtocol`.**
+    /// - Parameter cPointer: pointer to the underlying object
+    override public init<T>(retainingCPointer cPointer: UnsafeMutablePointer<T>) {
+        super.init(retainingCPointer: cPointer)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufProtocol`.**
-    public convenience init(raw: UnsafeRawPointer) {
-        self.init(UnsafeMutableRawPointer(mutating: raw).assumingMemoryBound(to: GdkPixbuf.self))
+    /// - Parameter p: raw pointer to the underlying object
+    override public init(raw p: UnsafeRawPointer) {
+        super.init(raw: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufProtocol`.**
+    override public init(retainingRaw raw: UnsafeRawPointer) {
+        super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufProtocol`.**
-    public convenience init(raw: UnsafeMutableRawPointer) {
-        self.init(raw.assumingMemoryBound(to: GdkPixbuf.self))
+    /// - Parameter p: mutable raw pointer to the underlying object
+    override public init(raw p: UnsafeMutableRawPointer) {
+        super.init(raw: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufProtocol`.**
+    /// - Parameter raw: mutable raw pointer to the underlying object
+    override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+        super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufProtocol`.**
-    public convenience init(opaquePointer: OpaquePointer) {
-        self.init(UnsafeMutablePointer<GdkPixbuf>(opaquePointer))
+    /// - Parameter p: opaque pointer to the underlying object
+    override public init(opaquePointer p: OpaquePointer) {
+        super.init(opaquePointer: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufProtocol`.**
+    /// - Parameter p: opaque pointer to the underlying object
+    override public init(retainingOpaquePointer p: OpaquePointer) {
+        super.init(retainingOpaquePointer: p)
     }
 
     /// Creates a new `GdkPixbuf` structure and allocates a buffer for it.  The
     /// buffer has an optimal rowstride.  Note that the buffer is not cleared;
     /// you will have to fill it completely yourself.
-    public convenience init( colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt) {
+    public init( colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt) {
         let rv = gdk_pixbuf_new(colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height)
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
     /// Currently only RGB images with 8 bits per sample are supported.
     /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
-    public convenience init(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) {
+    public init(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) {
         let rv = gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride)
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new `GdkPixbuf` out of in-memory image data.  Currently only RGB
@@ -597,21 +638,21 @@ open class Pixbuf: Object, PixbufProtocol {
     /// it is its responsibility to free the pixel array.
     /// 
     /// See also `gdk_pixbuf_new_from_bytes()`.
-    public convenience init(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) {
+    public init(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) {
         let rv = gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data))
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from a file.  The file format is
     /// detected automatically. If `nil` is returned, then `error` will be set.
     /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
-    public convenience init(file String_: UnsafePointer<CChar>) throws {
+    public init(file String_: UnsafePointer<CChar>) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_file(String_, &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from a file.  The file format is
@@ -626,13 +667,13 @@ open class Pixbuf: Object, PixbufProtocol {
     /// aspect ratio, a `width` or `height` of -1 means to not scale the image
     /// at all in that dimension. Negative values for `width` and `height` are
     /// allowed since 2.8.
-    public convenience init(fileAtScale String_: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws {
+    public init(fileAtScale String_: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_file_at_scale(String_, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from a file.
@@ -645,13 +686,13 @@ open class Pixbuf: Object, PixbufProtocol {
     /// than `width` x `height`, if the aspect ratio requires it. To load
     /// and image at the requested size, regardless of aspect ratio, use
     /// `gdk_pixbuf_new_from_file_at_scale()`.
-    public convenience init(fileAtSize String_: UnsafePointer<CChar>, width: CInt, height: CInt) throws {
+    public init(fileAtSize String_: UnsafePointer<CChar>, width: CInt, height: CInt) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_file_at_size(String_, width, height, &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Create a `GdkPixbuf` from a flat representation that is suitable for
@@ -687,26 +728,26 @@ open class Pixbuf: Object, PixbufProtocol {
     ///
     /// **new_from_inline is deprecated:**
     /// Use #GResource instead.
-    @available(*, deprecated) @available(*, deprecated) public convenience init(inline data_length: CInt, data: UnsafePointer<UInt8>, copyPixels copy_pixels: Bool) throws {
+    @available(*, deprecated) @available(*, deprecated) public init(inline data_length: CInt, data: UnsafePointer<UInt8>, copyPixels copy_pixels: Bool) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_inline(gint(data_length), cast(data), gboolean(copy_pixels ? 1 : 0), &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from an resource.
     /// 
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
-    public convenience init(resource resource_path: UnsafePointer<CChar>) throws {
+    public init(resource resource_path: UnsafePointer<CChar>) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_resource(resource_path, &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from an resource.
@@ -722,13 +763,13 @@ open class Pixbuf: Object, PixbufProtocol {
     /// `height` of -1 means to not scale the image at all in that dimension.
     /// 
     /// The stream is not closed.
-    public convenience init(resourceAtScale resource_path: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws {
+    public init(resourceAtScale resource_path: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_resource_at_scale(resource_path, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from an input stream.
@@ -740,13 +781,13 @@ open class Pixbuf: Object, PixbufProtocol {
     /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
-    public convenience init(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws {
+    public init(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf by loading an image from an input stream.
@@ -770,31 +811,31 @@ open class Pixbuf: Object, PixbufProtocol {
     /// scale the image at all in that dimension.
     /// 
     /// The stream is not closed.
-    public convenience init(streamAtScale stream: InputStreamProtocol, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool, cancellable: CancellableProtocol) throws {
+    public init(streamAtScale stream: InputStreamProtocol, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool, cancellable: CancellableProtocol) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_stream_at_scale(cast(stream.ptr), gint(width), gint(height), gboolean(preserve_aspect_ratio ? 1 : 0), cast(cancellable.ptr), &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Finishes an asynchronous pixbuf creation operation started with
     /// `gdk_pixbuf_new_from_stream_async()`.
-    public convenience init(streamFinish async_result: AsyncResultProtocol) throws {
+    public init(streamFinish async_result: AsyncResultProtocol) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf by parsing XPM data in memory.  This data is commonly
     /// the result of including an XPM file into a program's C source.
-    public convenience init(xpmData data: UnsafePointer<UnsafePointer<CChar>>) {
+    public init(xpmData data: UnsafePointer<UnsafePointer<CChar>>) {
         let rv = gdk_pixbuf_new_from_xpm_data(cast(data))
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.

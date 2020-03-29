@@ -75,7 +75,7 @@ public extension PixbufSimpleAnimRef {
         /// Creates a new, empty animation.
     init( width: CInt, height: CInt, rate: gfloat) {
         let rv = gdk_pixbuf_simple_anim_new(gint(width), gint(height), rate)
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 }
 
@@ -86,46 +86,87 @@ public extension PixbufSimpleAnimRef {
 /// An opaque struct representing a simple animation.
 open class PixbufSimpleAnim: PixbufAnimation, PixbufSimpleAnimProtocol {
     /// Designated initialiser from the underlying `C` data type.
-    /// Ownership is transferred to the `PixbufSimpleAnim` instance.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufSimpleAnim` instance.
+    /// - Parameter op: pointer to the underlying object
     public init(_ op: UnsafeMutablePointer<GdkPixbufSimpleAnim>) {
         super.init(cast(op))
     }
 
-    /// Reference convenience intialiser for a related type that implements `PixbufSimpleAnimProtocol`
+    /// Designated initialiser from the underlying `C` data type.
     /// Will retain `GdkPixbufSimpleAnim`.
-    public convenience init<T: PixbufSimpleAnimProtocol>(_ other: T) {
-        self.init(cast(other.pixbuf_simple_anim_ptr))
-        g_object_ref(cast(pixbuf_simple_anim_ptr))
+    /// i.e., ownership is transferred to the `PixbufSimpleAnim` instance.
+    /// - Parameter op: pointer to the underlying object
+    public init(retaining op: UnsafeMutablePointer<GdkPixbufSimpleAnim>) {
+        super.init(retaining: cast(op))
+    }
+
+    /// Reference intialiser for a related type that implements `PixbufSimpleAnimProtocol`
+    /// Will retain `GdkPixbufSimpleAnim`.
+    /// - Parameter other: an instance of a related type that implements `PixbufSimpleAnimProtocol`
+    public init<T: PixbufSimpleAnimProtocol>(pixbufSimpleAnim other: T) {
+        super.init(retaining: cast(other.pixbuf_simple_anim_ptr))
     }
 
     /// Unsafe typed initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimProtocol`.**
-    public convenience init<T>(cPointer: UnsafeMutablePointer<T>) {
-        self.init(cPointer.withMemoryRebound(to: GdkPixbufSimpleAnim.self, capacity: 1) { $0 })
+    /// - Parameter cPointer: pointer to the underlying object
+    override public init<T>(cPointer p: UnsafeMutablePointer<T>) {
+        super.init(cPointer: p)
+    }
+
+    /// Unsafe typed, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimProtocol`.**
+    /// - Parameter cPointer: pointer to the underlying object
+    override public init<T>(retainingCPointer cPointer: UnsafeMutablePointer<T>) {
+        super.init(retainingCPointer: cPointer)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimProtocol`.**
-    public convenience init(raw: UnsafeRawPointer) {
-        self.init(UnsafeMutableRawPointer(mutating: raw).assumingMemoryBound(to: GdkPixbufSimpleAnim.self))
+    /// - Parameter p: raw pointer to the underlying object
+    override public init(raw p: UnsafeRawPointer) {
+        super.init(raw: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimProtocol`.**
+    override public init(retainingRaw raw: UnsafeRawPointer) {
+        super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimProtocol`.**
-    public convenience init(raw: UnsafeMutableRawPointer) {
-        self.init(raw.assumingMemoryBound(to: GdkPixbufSimpleAnim.self))
+    /// - Parameter p: mutable raw pointer to the underlying object
+    override public init(raw p: UnsafeMutableRawPointer) {
+        super.init(raw: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimProtocol`.**
+    /// - Parameter raw: mutable raw pointer to the underlying object
+    override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+        super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimProtocol`.**
-    public convenience init(opaquePointer: OpaquePointer) {
-        self.init(UnsafeMutablePointer<GdkPixbufSimpleAnim>(opaquePointer))
+    /// - Parameter p: opaque pointer to the underlying object
+    override public init(opaquePointer p: OpaquePointer) {
+        super.init(opaquePointer: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimProtocol`.**
+    /// - Parameter p: opaque pointer to the underlying object
+    override public init(retainingOpaquePointer p: OpaquePointer) {
+        super.init(retainingOpaquePointer: p)
     }
 
     /// Creates a new, empty animation.
-    public convenience init( width: CInt, height: CInt, rate: gfloat) {
+    public init( width: CInt, height: CInt, rate: gfloat) {
         let rv = gdk_pixbuf_simple_anim_new(gint(width), gint(height), rate)
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
 

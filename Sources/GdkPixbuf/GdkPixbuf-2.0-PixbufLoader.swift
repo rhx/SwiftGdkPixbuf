@@ -77,7 +77,7 @@ public extension PixbufLoaderRef {
         /// Creates a new pixbuf loader object.
     init() {
         let rv = gdk_pixbuf_loader_new()
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf loader object that always attempts to parse
@@ -99,7 +99,7 @@ public extension PixbufLoaderRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf loader object that always attempts to parse
@@ -120,7 +120,7 @@ public extension PixbufLoaderRef {
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        ptr = UnsafeMutableRawPointer(cast(rv))
     }
     /// Creates a new pixbuf loader object that always attempts to parse
     /// image data as if it were an image of mime type `mime_type`, instead of
@@ -174,46 +174,87 @@ public extension PixbufLoaderRef {
 /// fields.
 open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// Designated initialiser from the underlying `C` data type.
-    /// Ownership is transferred to the `PixbufLoader` instance.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufLoader` instance.
+    /// - Parameter op: pointer to the underlying object
     public init(_ op: UnsafeMutablePointer<GdkPixbufLoader>) {
         super.init(cast(op))
     }
 
-    /// Reference convenience intialiser for a related type that implements `PixbufLoaderProtocol`
+    /// Designated initialiser from the underlying `C` data type.
     /// Will retain `GdkPixbufLoader`.
-    public convenience init<T: PixbufLoaderProtocol>(_ other: T) {
-        self.init(cast(other.pixbuf_loader_ptr))
-        g_object_ref(cast(pixbuf_loader_ptr))
+    /// i.e., ownership is transferred to the `PixbufLoader` instance.
+    /// - Parameter op: pointer to the underlying object
+    public init(retaining op: UnsafeMutablePointer<GdkPixbufLoader>) {
+        super.init(retaining: cast(op))
+    }
+
+    /// Reference intialiser for a related type that implements `PixbufLoaderProtocol`
+    /// Will retain `GdkPixbufLoader`.
+    /// - Parameter other: an instance of a related type that implements `PixbufLoaderProtocol`
+    public init<T: PixbufLoaderProtocol>(pixbufLoader other: T) {
+        super.init(retaining: cast(other.pixbuf_loader_ptr))
     }
 
     /// Unsafe typed initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
-    public convenience init<T>(cPointer: UnsafeMutablePointer<T>) {
-        self.init(cPointer.withMemoryRebound(to: GdkPixbufLoader.self, capacity: 1) { $0 })
+    /// - Parameter cPointer: pointer to the underlying object
+    override public init<T>(cPointer p: UnsafeMutablePointer<T>) {
+        super.init(cPointer: p)
+    }
+
+    /// Unsafe typed, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
+    /// - Parameter cPointer: pointer to the underlying object
+    override public init<T>(retainingCPointer cPointer: UnsafeMutablePointer<T>) {
+        super.init(retainingCPointer: cPointer)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
-    public convenience init(raw: UnsafeRawPointer) {
-        self.init(UnsafeMutableRawPointer(mutating: raw).assumingMemoryBound(to: GdkPixbufLoader.self))
+    /// - Parameter p: raw pointer to the underlying object
+    override public init(raw p: UnsafeRawPointer) {
+        super.init(raw: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
+    override public init(retainingRaw raw: UnsafeRawPointer) {
+        super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
-    public convenience init(raw: UnsafeMutableRawPointer) {
-        self.init(raw.assumingMemoryBound(to: GdkPixbufLoader.self))
+    /// - Parameter p: mutable raw pointer to the underlying object
+    override public init(raw p: UnsafeMutableRawPointer) {
+        super.init(raw: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
+    /// - Parameter raw: mutable raw pointer to the underlying object
+    override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+        super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
-    public convenience init(opaquePointer: OpaquePointer) {
-        self.init(UnsafeMutablePointer<GdkPixbufLoader>(opaquePointer))
+    /// - Parameter p: opaque pointer to the underlying object
+    override public init(opaquePointer p: OpaquePointer) {
+        super.init(opaquePointer: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
+    /// - Parameter p: opaque pointer to the underlying object
+    override public init(retainingOpaquePointer p: OpaquePointer) {
+        super.init(retainingOpaquePointer: p)
     }
 
     /// Creates a new pixbuf loader object.
-    public convenience init() {
+    public init() {
         let rv = gdk_pixbuf_loader_new()
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf loader object that always attempts to parse
@@ -229,13 +270,13 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// To obtain the full list of supported mime types, call
     /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
     /// structs returned by `gdk_pixbuf_get_formats()`.
-    public convenience init(mimeType mime_type: UnsafePointer<CChar>) throws {
+    public init(mimeType mime_type: UnsafePointer<CChar>) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf loader object that always attempts to parse
@@ -250,13 +291,13 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// "xpm" are among the supported formats. To obtain the full list of
     /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
     /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
-    public convenience init(type image_type: UnsafePointer<CChar>) throws {
+    public init(type image_type: UnsafePointer<CChar>) throws {
         var error: Optional<UnsafeMutablePointer<GError>> = nil
         let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
         if let error = error {
                 throw ErrorType(error)
         }
-        self.init(cast(rv))
+        super.init(cast(rv))
     }
 
     /// Creates a new pixbuf loader object that always attempts to parse
