@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           GdkPixbuf 2.40.0 Docs
         </a>
-         (92% documented)
+         (93% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -266,7 +266,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>PixbufProtocol</h1>
               <div class="declaration">
                 <div class="language">
@@ -366,9 +366,11 @@ one row and the start of the next).</p>
               <div class="task-name-container">
                 <a name="/Pixbuf%20Class"></a>
                 <a name="//apple_ref/swift/Section/Pixbuf Class" class="dashAnchor"></a>
-                <a href="#/Pixbuf%20Class">
-                  <h3 class="section-name">Pixbuf Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Pixbuf%20Class"></a>
+                  <h3 class="section-name"><p>Pixbuf Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -395,7 +397,7 @@ one row and the start of the next).</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">func</span> <span class="n">bind</span><span class="o">&lt;</span><span class="kt">Q</span><span class="p">:</span> <span class="kt">PropertyNameProtocol</span><span class="p">,</span> <span class="kt">T</span><span class="p">:</span> <span class="kt">ObjectProtocol</span><span class="o">&gt;</span><span class="p">(</span><span class="n">property</span> <span class="nv">source_property</span><span class="p">:</span> <span class="kt"><a href="../Enums/PixbufPropertyName.html">PixbufPropertyName</a></span><span class="p">,</span> <span class="n">to</span> <span class="nv">target</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="n">_</span> <span class="nv">target_property</span><span class="p">:</span> <span class="kt">Q</span><span class="p">,</span> <span class="n">flags</span> <span class="nv">f</span><span class="p">:</span> <span class="kt">BindingFlags</span> <span class="o">=</span> <span class="o">.</span><span class="n">default_</span><span class="p">,</span> <span class="n">transformFrom</span> <span class="nv">transform_from</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">GLibObject</span><span class="o">.</span><span class="kt">ValueTransformer</span> <span class="o">=</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="nf">transform</span><span class="p">(</span><span class="nv">destValue</span><span class="p">:</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">},</span> <span class="n">transformTo</span> <span class="nv">transform_to</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">GLibObject</span><span class="o">.</span><span class="kt">ValueTransformer</span> <span class="o">=</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="nf">transform</span><span class="p">(</span><span class="nv">destValue</span><span class="p">:</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">})</span> <span class="o">-&gt;</span> <span class="kt">BindingRef</span><span class="o">!</span></code></pre>
+<span class="kd">func</span> <span class="n">bind</span><span class="o">&lt;</span><span class="kt">Q</span><span class="p">,</span> <span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">property</span> <span class="nv">source_property</span><span class="p">:</span> <span class="kt"><a href="../Enums/PixbufPropertyName.html">PixbufPropertyName</a></span><span class="p">,</span> <span class="n">to</span> <span class="nv">target</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="n">_</span> <span class="nv">target_property</span><span class="p">:</span> <span class="kt">Q</span><span class="p">,</span> <span class="n">flags</span> <span class="nv">f</span><span class="p">:</span> <span class="kt">BindingFlags</span> <span class="o">=</span> <span class="o">.</span><span class="n">default_</span><span class="p">,</span> <span class="n">transformFrom</span> <span class="nv">transform_from</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">GLibObject</span><span class="o">.</span><span class="kt">ValueTransformer</span> <span class="o">=</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="nf">transform</span><span class="p">(</span><span class="nv">destValue</span><span class="p">:</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">},</span> <span class="n">transformTo</span> <span class="nv">transform_to</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">GLibObject</span><span class="o">.</span><span class="kt">ValueTransformer</span> <span class="o">=</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="nf">transform</span><span class="p">(</span><span class="nv">destValue</span><span class="p">:</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">})</span> <span class="o">-&gt;</span> <span class="kt">BindingRef</span><span class="o">!</span> <span class="k">where</span> <span class="kt">Q</span> <span class="p">:</span> <span class="kt">PropertyNameProtocol</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">ObjectProtocol</span></code></pre>
 
                         </div>
                       </div>
@@ -483,22 +485,11 @@ one row and the start of the next).</p>
                         <p>binding reference or <code>nil</code> in case of an error</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1048-L1072">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1089-L1113">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Pixbuf%20Class2"></a>
-                <a name="//apple_ref/swift/Section/Pixbuf Class" class="dashAnchor"></a>
-                <a href="#/Pixbuf%20Class2">
-                  <h3 class="section-name">Pixbuf Class</h3>
-                </a>
-              </div>
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -575,22 +566,11 @@ one row and the start of the next).</p>
                         <p>positive handler ID, or a value less than or equal to <code>0</code> in case of an error</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1125-L1144">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1166-L1185">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Pixbuf%20Class3"></a>
-                <a name="//apple_ref/swift/Section/Pixbuf Class" class="dashAnchor"></a>
-                <a href="#/Pixbuf%20Class3">
-                  <h3 class="section-name">Pixbuf Class</h3>
-                </a>
-              </div>
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -626,7 +606,7 @@ substitute color, all white pixels will become fully transparent.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1159-L1162">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1200-L1203">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -648,7 +628,7 @@ substitute color, all white pixels will become fully transparent.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Takes an existing pixbuf and checks for the presence of an
-associated <q>orientation</q> option, which may be provided by the
+associated &ldquo;orientation&rdquo; option, which may be provided by the
 jpeg loader (which reads the exif orientation tag) or the
 tiff loader (which reads the tiff orientation tag, and
 compensates it for the partial transforms performed by
@@ -666,7 +646,7 @@ is oriented correctly.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1172-L1175">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1213-L1216">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -710,7 +690,7 @@ to infinity.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1189-L1192">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1230-L1233">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -754,7 +734,7 @@ function suitable for many tasks.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1206-L1209">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1247-L1250">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -789,7 +769,7 @@ function suitable for many tasks.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1214-L1217">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1255-L1258">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -824,7 +804,7 @@ use <code>gdk_pixbuf_copy_options()</code> for this.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1222-L1225">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1263-L1266">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -862,7 +842,7 @@ Therefore, you can not use this function to scroll a pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1233-L1236">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1274-L1277">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -886,7 +866,7 @@ Therefore, you can not use this function to scroll a pixbuf.</p>
                         <p>Copy the key/value pair options attached to a <code>GdkPixbuf</code> to another.
 This is useful to keep original metadata after having manipulated
 a file. However be careful to remove metadata which you&rsquo;ve already
-applied, such as the <q>orientation</q> option after rotating the image.</p>
+applied, such as the &ldquo;orientation&rdquo; option after rotating the image.</p>
 
                       </div>
                       <div class="declaration">
@@ -898,7 +878,7 @@ applied, such as the <q>orientation</q> option after rotating the image.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1242-L1245">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1283-L1286">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -933,7 +913,7 @@ doesn&rsquo;t have an alpha channel.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1250-L1253">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1291-L1294">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -967,7 +947,7 @@ result in a new pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1257-L1260">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1298-L1301">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1000,7 +980,7 @@ result in a new pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1263-L1266">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1304-L1307">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1033,7 +1013,7 @@ result in a new pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1269-L1272">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1310-L1313">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1066,7 +1046,7 @@ result in a new pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1275-L1278">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1316-L1319">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1099,7 +1079,7 @@ result in a new pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1281-L1284">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1322-L1325">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1132,7 +1112,7 @@ result in a new pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1287-L1290">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1328-L1331">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1165,7 +1145,7 @@ result in a new pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1293-L1296">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1334-L1337">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1190,16 +1170,16 @@ result in a new pixbuf.</p>
 <code>pixbuf</code> when it was loaded, or that may have been attached by another
 function using <code>gdk_pixbuf_set_option()</code>.</p>
 
-<p>For instance, the ANI loader provides <q>Title</q> and <q>Artist</q> options.
-The ICO, XBM, and XPM loaders provide <q>x_hot</q> and <q>y_hot</q> hot-spot
+<p>For instance, the ANI loader provides &ldquo;Title&rdquo; and &ldquo;Artist&rdquo; options.
+The ICO, XBM, and XPM loaders provide &ldquo;x_hot&rdquo; and &ldquo;y_hot&rdquo; hot-spot
 options for cursor definitions. The PNG loader provides the tEXt ancillary
 chunk key/value pairs as options. Since 2.12, the TIFF and JPEG loaders
-return an <q>orientation</q> option string that corresponds to the embedded
+return an &ldquo;orientation&rdquo; option string that corresponds to the embedded
 TIFF/Exif orientation tag (if present). Since 2.32, the TIFF loader sets
-the <q>multipage</q> option string to <q>yes</q> when a multi-page TIFF is loaded.
-Since 2.32 the JPEG and PNG loaders set <q>x-dpi</q> and <q>y-dpi</q> if the file
+the &ldquo;multipage&rdquo; option string to &ldquo;yes&rdquo; when a multi-page TIFF is loaded.
+Since 2.32 the JPEG and PNG loaders set &ldquo;x-dpi&rdquo; and &ldquo;y-dpi&rdquo; if the file
 contains image density information in dots per inch.
-Since 2.36.6, the JPEG loader sets the <q>comment</q> option with the comment
+Since 2.36.6, the JPEG loader sets the &ldquo;comment&rdquo; option with the comment
 EXIF tag.</p>
 
                       </div>
@@ -1212,7 +1192,7 @@ EXIF tag.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1313-L1316">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1354-L1357">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1249,7 +1229,7 @@ attached by another function using <code>gdk_pixbuf_set_option()</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1323-L1326">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1364-L1367">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1282,7 +1262,7 @@ attached by another function using <code>gdk_pixbuf_set_option()</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1329-L1332">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1370-L1373">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1315,7 +1295,7 @@ attached by another function using <code>gdk_pixbuf_set_option()</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1335-L1338">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1376-L1379">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1349,7 +1329,7 @@ the start of a row and the start of the next row.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1342-L1345">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1383-L1386">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1382,7 +1362,7 @@ the start of a row and the start of the next row.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1348-L1351">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1389-L1392">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1422,7 +1402,7 @@ to be mutable.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1361-L1364">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1402-L1405">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1458,7 +1438,7 @@ read-only pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1370-L1373">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1411-L1414">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1494,7 +1474,7 @@ pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1379-L1382">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1420-L1423">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1525,13 +1505,13 @@ Use g_object_ref().</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">)</span>
 <span class="kd">func</span> <span class="nf">ref</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbuf</span><span class="o">&gt;!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1388-L1391">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1429-L1432">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1564,7 +1544,7 @@ Use g_object_ref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1394-L1397">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1435-L1438">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1600,7 +1580,7 @@ result in a new pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1403-L1406">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1444-L1447">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1640,7 +1620,7 @@ rowstride.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1416-L1419">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1457-L1460">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1661,8 +1641,8 @@ rowstride.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Saves pixbuf to a new buffer in format <code>type</code>, which is currently <q>jpeg</q>,
-<q>tiff</q>, <q>png</q>, <q>ico</q> or <q>bmp</q>.  See <code>gdk_pixbuf_save_to_buffer()</code>
+                        <p>Saves pixbuf to a new buffer in format <code>type</code>, which is currently &ldquo;jpeg&rdquo;,
+&ldquo;tiff&rdquo;, &ldquo;png&rdquo;, &ldquo;ico&rdquo; or &ldquo;bmp&rdquo;.  See <code>gdk_pixbuf_save_to_buffer()</code>
 for more details.</p>
 
                       </div>
@@ -1675,7 +1655,7 @@ for more details.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1432-L1439">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1473-L1480">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1696,8 +1676,8 @@ for more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Saves pixbuf to a callback in format <code>type</code>, which is currently <q>jpeg</q>,
-<q>png</q>, <q>tiff</q>, <q>ico</q> or <q>bmp</q>.  If <code>error</code> is set, <code>false</code> will be returned. See
+                        <p>Saves pixbuf to a callback in format <code>type</code>, which is currently &ldquo;jpeg&rdquo;,
+&ldquo;png&rdquo;, &ldquo;tiff&rdquo;, &ldquo;ico&rdquo; or &ldquo;bmp&rdquo;.  If <code>error</code> is set, <code>false</code> will be returned. See
 gdk_pixbuf_save_to_callback () for more details.</p>
 
                       </div>
@@ -1710,7 +1690,7 @@ gdk_pixbuf_save_to_callback () for more details.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1448-L1455">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1489-L1496">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1733,8 +1713,8 @@ gdk_pixbuf_save_to_callback () for more details.</p>
                       <div class="abstract">
                         <p>Saves <code>pixbuf</code> to an output stream.</p>
 
-<p>Supported file formats are currently <q>jpeg</q>, <q>tiff</q>, <q>png</q>, <q>ico</q> or
-<q>bmp</q>. See <code>gdk_pixbuf_save_to_stream()</code> for more details.</p>
+<p>Supported file formats are currently &ldquo;jpeg&rdquo;, &ldquo;tiff&rdquo;, &ldquo;png&rdquo;, &ldquo;ico&rdquo; or
+&ldquo;bmp&rdquo;. See <code>gdk_pixbuf_save_to_stream()</code> for more details.</p>
 
                       </div>
                       <div class="declaration">
@@ -1746,7 +1726,7 @@ gdk_pixbuf_save_to_callback () for more details.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1469-L1476">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1510-L1517">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1785,7 +1765,7 @@ You can then call <code>gdk_pixbuf_save_to_stream_finish()</code> to get the res
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1485-L1488">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1526-L1529">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1806,7 +1786,7 @@ You can then call <code>gdk_pixbuf_save_to_stream_finish()</code> to get the res
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Saves pixbuf to a file in <code>type</code>, which is currently <q>jpeg</q>, <q>png</q>, <q>tiff</q>, <q>ico</q> or <q>bmp</q>.
+                        <p>Saves pixbuf to a file in <code>type</code>, which is currently &ldquo;jpeg&rdquo;, &ldquo;png&rdquo;, &ldquo;tiff&rdquo;, &ldquo;ico&rdquo; or &ldquo;bmp&rdquo;.
 If <code>error</code> is set, <code>false</code> will be returned.
 See gdk_pixbuf_save () for more details.</p>
 
@@ -1820,7 +1800,7 @@ See gdk_pixbuf_save () for more details.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1493-L1500">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1534-L1541">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1865,7 +1845,7 @@ results in rendering artifacts.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1515-L1518">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1556-L1559">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1912,7 +1892,7 @@ and <code>gdk_pixbuf_composite()</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1535-L1538">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1576-L1579">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1947,7 +1927,7 @@ ignored and <code>false</code> is returned.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1543-L1546">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1584-L1587">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1978,13 +1958,13 @@ Use g_object_unref().</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">)</span>
 <span class="kd">func</span> <span class="nf">unref</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1552-L1555">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1593-L1596">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2017,7 +1997,7 @@ Use g_object_unref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1557-L1563">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1598-L1604">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2050,7 +2030,7 @@ Use g_object_unref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1566-L1572">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1607-L1613">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2083,7 +2063,7 @@ Use g_object_unref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1574-L1580">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1615-L1621">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2116,7 +2096,7 @@ Use g_object_unref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1583-L1589">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1624-L1630">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2149,7 +2129,7 @@ Use g_object_unref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1591-L1597">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1632-L1638">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2182,7 +2162,7 @@ Use g_object_unref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1600-L1606">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1641-L1647">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2219,7 +2199,7 @@ attached by another function using <code>gdk_pixbuf_set_option()</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1613-L1623">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1654-L1664">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2252,7 +2232,7 @@ attached by another function using <code>gdk_pixbuf_set_option()</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1625-L1631">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1666-L1672">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2287,7 +2267,7 @@ be at least as large as the width of the pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1636-L1643">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1677-L1684">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2320,7 +2300,7 @@ be at least as large as the width of the pixbuf.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1645-L1651">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L1686-L1692">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -2333,8 +2313,8 @@ be at least as large as the width of the pixbuf.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2019-10-10)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-03-29)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
