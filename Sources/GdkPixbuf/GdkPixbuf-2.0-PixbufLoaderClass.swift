@@ -14,7 +14,7 @@ import GLibObject
 ///
 
 public protocol PixbufLoaderClassProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufLoaderClass` instance.
+        /// Untyped pointer to the underlying `GdkPixbufLoaderClass` instance.
     var ptr: UnsafeMutableRawPointer { get }
 
     /// Typed pointer to the underlying `GdkPixbufLoaderClass` instance.
@@ -27,7 +27,7 @@ public protocol PixbufLoaderClassProtocol {
 ///
 
 public struct PixbufLoaderClassRef: PixbufLoaderClassProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufLoaderClass` instance.
+        /// Untyped pointer to the underlying `GdkPixbufLoaderClass` instance.
     /// For type-safe access, use the generated, typed pointer `_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 }
@@ -80,7 +80,7 @@ public extension PixbufLoaderClassRef {
 ///
 
 open class PixbufLoaderClass: PixbufLoaderClassProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufLoaderClass` instance.
+        /// Untyped pointer to the underlying `GdkPixbufLoaderClass` instance.
     /// For type-safe access, use the generated, typed pointer `_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 
@@ -109,7 +109,7 @@ open class PixbufLoaderClass: PixbufLoaderClassProtocol {
         // no reference counting for GdkPixbufLoaderClass, cannot ref(cast(_ptr))
     }
 
-    /// Do-nothing destructor for`GdkPixbufLoaderClass`.
+    /// Do-nothing destructor for `GdkPixbufLoaderClass`.
     deinit {
         // no reference counting for GdkPixbufLoaderClass, cannot unref(cast(_ptr))
     }
@@ -177,14 +177,31 @@ open class PixbufLoaderClass: PixbufLoaderClassProtocol {
 
 }
 
-// MARK: - no PixbufLoaderClass properties
+// MARK: no PixbufLoaderClass properties
 
-// MARK: - no signals
+// MARK: no PixbufLoaderClass signals
 
 
+// MARK: PixbufLoaderClass Record: PixbufLoaderClassProtocol extension (methods and fields)
 public extension PixbufLoaderClassProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufLoaderClass` instance.
     var _ptr: UnsafeMutablePointer<GdkPixbufLoaderClass> { return ptr.assumingMemoryBound(to: GdkPixbufLoaderClass.self) }
+
+
+    var parentClass: GObjectClass {
+        get {
+            let rv: GObjectClass = cast(_ptr.pointee.parent_class)
+            return rv
+        }
+    }
+
+    // var sizePrepared is unavailable because size_prepared is void
+
+    // var areaPrepared is unavailable because area_prepared is void
+
+    // var areaUpdated is unavailable because area_updated is void
+
+    // var closed is unavailable because closed is void
 
 }
 

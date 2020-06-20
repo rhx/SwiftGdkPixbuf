@@ -18,7 +18,7 @@ import GLibObject
 /// height, and the rowstride (the number of bytes between the start of
 /// one row and the start of the next).
 public protocol PixbufProtocol: ObjectProtocol, Gio.IconProtocol, Gio.LoadableIconProtocol {
-    /// Untyped pointer to the underlying `GdkPixbuf` instance.
+        /// Untyped pointer to the underlying `GdkPixbuf` instance.
     var ptr: UnsafeMutableRawPointer { get }
 
     /// Typed pointer to the underlying `GdkPixbuf` instance.
@@ -35,7 +35,7 @@ public protocol PixbufProtocol: ObjectProtocol, Gio.IconProtocol, Gio.LoadableIc
 /// height, and the rowstride (the number of bytes between the start of
 /// one row and the start of the next).
 public struct PixbufRef: PixbufProtocol {
-    /// Untyped pointer to the underlying `GdkPixbuf` instance.
+        /// Untyped pointer to the underlying `GdkPixbuf` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 }
@@ -84,7 +84,7 @@ public extension PixbufRef {
     /// buffer has an optimal rowstride.  Note that the buffer is not cleared;
     /// you will have to fill it completely yourself.
     init( colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt) {
-        let rv = gdk_pixbuf_new(colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height)
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new(colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height))
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -92,7 +92,7 @@ public extension PixbufRef {
     /// Currently only RGB images with 8 bits per sample are supported.
     /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
     init(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) {
-        let rv = gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride)
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride))
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -107,7 +107,7 @@ public extension PixbufRef {
     /// 
     /// See also `gdk_pixbuf_new_from_bytes()`.
     init(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) {
-        let rv = gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data)))
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -115,11 +115,9 @@ public extension PixbufRef {
     /// detected automatically. If `nil` is returned, then `error` will be set.
     /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
     init(file String_: UnsafePointer<CChar>) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file(String_, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file(String_, &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -136,11 +134,9 @@ public extension PixbufRef {
     /// at all in that dimension. Negative values for `width` and `height` are
     /// allowed since 2.8.
     init(fileAtScale String_: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file_at_scale(String_, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file_at_scale(String_, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -155,11 +151,9 @@ public extension PixbufRef {
     /// and image at the requested size, regardless of aspect ratio, use
     /// `gdk_pixbuf_new_from_file_at_scale()`.
     init(fileAtSize String_: UnsafePointer<CChar>, width: CInt, height: CInt) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file_at_size(String_, width, height, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file_at_size(String_, width, height, &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -197,11 +191,9 @@ public extension PixbufRef {
     /// **new_from_inline is deprecated:**
     /// Use #GResource instead.
     @available(*, deprecated) init(inline data_length: CInt, data: UnsafePointer<UInt8>, copyPixels copy_pixels: Bool) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_inline(gint(data_length), cast(data), gboolean(copy_pixels ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_inline(gint(data_length), cast(data), gboolean(copy_pixels ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -210,11 +202,9 @@ public extension PixbufRef {
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
     init(resource resource_path: UnsafePointer<CChar>) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_resource(resource_path, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_resource(resource_path, &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -232,11 +222,9 @@ public extension PixbufRef {
     /// 
     /// The stream is not closed.
     init(resourceAtScale resource_path: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_resource_at_scale(resource_path, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_resource_at_scale(resource_path, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -250,11 +238,9 @@ public extension PixbufRef {
     /// 
     /// The stream is not closed.
     init(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -280,36 +266,32 @@ public extension PixbufRef {
     /// 
     /// The stream is not closed.
     init(streamAtScale stream: InputStreamProtocol, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool, cancellable: CancellableProtocol) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream_at_scale(cast(stream.ptr), gint(width), gint(height), gboolean(preserve_aspect_ratio ? 1 : 0), cast(cancellable.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream_at_scale(cast(stream.ptr), gint(width), gint(height), gboolean(preserve_aspect_ratio ? 1 : 0), cast(cancellable.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Finishes an asynchronous pixbuf creation operation started with
     /// `gdk_pixbuf_new_from_stream_async()`.
     init(streamFinish async_result: AsyncResultProtocol) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
     /// Creates a new pixbuf by parsing XPM data in memory.  This data is commonly
     /// the result of including an XPM file into a program's C source.
     init(xpmData data: UnsafePointer<UnsafePointer<CChar>>) {
-        let rv = gdk_pixbuf_new_from_xpm_data(cast(data))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_xpm_data(cast(data)))
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
     /// Currently only RGB images with 8 bits per sample are supported.
     /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
     static func newFrom(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) -> PixbufRef! {
-        let rv = gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride)
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride))
         return rv.map { PixbufRef(cast($0)) }
     }
 
@@ -324,7 +306,7 @@ public extension PixbufRef {
     /// 
     /// See also `gdk_pixbuf_new_from_bytes()`.
     static func newFrom(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) -> PixbufRef! {
-        let rv = gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data)))
         return rv.map { PixbufRef(cast($0)) }
     }
 
@@ -332,11 +314,9 @@ public extension PixbufRef {
     /// detected automatically. If `nil` is returned, then `error` will be set.
     /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
     static func newFrom(file String_: UnsafePointer<CChar>) throws -> PixbufRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file(String_, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file(String_, &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufRef(cast($0)) }
     }
 
@@ -353,11 +333,9 @@ public extension PixbufRef {
     /// at all in that dimension. Negative values for `width` and `height` are
     /// allowed since 2.8.
     static func newFrom(fileAtScale String_: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws -> PixbufRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file_at_scale(String_, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file_at_scale(String_, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufRef(cast($0)) }
     }
 
@@ -372,11 +350,9 @@ public extension PixbufRef {
     /// and image at the requested size, regardless of aspect ratio, use
     /// `gdk_pixbuf_new_from_file_at_scale()`.
     static func newFrom(fileAtSize String_: UnsafePointer<CChar>, width: CInt, height: CInt) throws -> PixbufRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file_at_size(String_, width, height, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file_at_size(String_, width, height, &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufRef(cast($0)) }
     }
 
@@ -414,11 +390,9 @@ public extension PixbufRef {
     /// **new_from_inline is deprecated:**
     /// Use #GResource instead.
     @available(*, deprecated) static func newFrom(inline data_length: CInt, data: UnsafePointer<UInt8>, copyPixels copy_pixels: Bool) throws -> PixbufRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_inline(gint(data_length), cast(data), gboolean(copy_pixels ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_inline(gint(data_length), cast(data), gboolean(copy_pixels ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufRef(cast($0)) }
     }
 
@@ -427,11 +401,9 @@ public extension PixbufRef {
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
     static func newFrom(resource resource_path: UnsafePointer<CChar>) throws -> PixbufRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_resource(resource_path, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_resource(resource_path, &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufRef(cast($0)) }
     }
 
@@ -449,11 +421,9 @@ public extension PixbufRef {
     /// 
     /// The stream is not closed.
     static func newFrom(resourceAtScale resource_path: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws -> PixbufRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_resource_at_scale(resource_path, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_resource_at_scale(resource_path, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufRef(cast($0)) }
     }
 
@@ -467,11 +437,9 @@ public extension PixbufRef {
     /// 
     /// The stream is not closed.
     static func newFrom(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws -> PixbufRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufRef(cast($0)) }
     }
 
@@ -497,29 +465,25 @@ public extension PixbufRef {
     /// 
     /// The stream is not closed.
     static func newFrom(streamAtScale stream: InputStreamProtocol, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool, cancellable: CancellableProtocol) throws -> PixbufRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream_at_scale(cast(stream.ptr), gint(width), gint(height), gboolean(preserve_aspect_ratio ? 1 : 0), cast(cancellable.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream_at_scale(cast(stream.ptr), gint(width), gint(height), gboolean(preserve_aspect_ratio ? 1 : 0), cast(cancellable.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufRef(cast($0)) }
     }
 
     /// Finishes an asynchronous pixbuf creation operation started with
     /// `gdk_pixbuf_new_from_stream_async()`.
     static func newFrom(streamFinish async_result: AsyncResultProtocol) throws -> PixbufRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufRef(cast($0)) }
     }
 
     /// Creates a new pixbuf by parsing XPM data in memory.  This data is commonly
     /// the result of including an XPM file into a program's C source.
     static func newFromXpm(xpmData data: UnsafePointer<UnsafePointer<CChar>>) -> PixbufRef! {
-        let rv = gdk_pixbuf_new_from_xpm_data(cast(data))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_xpm_data(cast(data)))
         return rv.map { PixbufRef(cast($0)) }
     }
 }
@@ -534,7 +498,7 @@ public extension PixbufRef {
 /// height, and the rowstride (the number of bytes between the start of
 /// one row and the start of the next).
 open class Pixbuf: Object, PixbufProtocol {
-    /// Designated initialiser from the underlying `C` data type.
+        /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
     /// i.e., ownership is transferred to the `Pixbuf` instance.
     /// - Parameter op: pointer to the underlying object
@@ -616,7 +580,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// buffer has an optimal rowstride.  Note that the buffer is not cleared;
     /// you will have to fill it completely yourself.
     public init( colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt) {
-        let rv = gdk_pixbuf_new(colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height)
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new(colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height))
         super.init(cast(rv))
     }
 
@@ -624,7 +588,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// Currently only RGB images with 8 bits per sample are supported.
     /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
     public init(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) {
-        let rv = gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride)
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride))
         super.init(cast(rv))
     }
 
@@ -639,7 +603,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// 
     /// See also `gdk_pixbuf_new_from_bytes()`.
     public init(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) {
-        let rv = gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data)))
         super.init(cast(rv))
     }
 
@@ -647,11 +611,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// detected automatically. If `nil` is returned, then `error` will be set.
     /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
     public init(file String_: UnsafePointer<CChar>) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file(String_, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file(String_, &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
@@ -668,11 +630,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// at all in that dimension. Negative values for `width` and `height` are
     /// allowed since 2.8.
     public init(fileAtScale String_: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file_at_scale(String_, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file_at_scale(String_, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
@@ -687,11 +647,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// and image at the requested size, regardless of aspect ratio, use
     /// `gdk_pixbuf_new_from_file_at_scale()`.
     public init(fileAtSize String_: UnsafePointer<CChar>, width: CInt, height: CInt) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file_at_size(String_, width, height, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file_at_size(String_, width, height, &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
@@ -729,11 +687,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// **new_from_inline is deprecated:**
     /// Use #GResource instead.
     @available(*, deprecated) @available(*, deprecated) public init(inline data_length: CInt, data: UnsafePointer<UInt8>, copyPixels copy_pixels: Bool) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_inline(gint(data_length), cast(data), gboolean(copy_pixels ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_inline(gint(data_length), cast(data), gboolean(copy_pixels ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
@@ -742,11 +698,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
     public init(resource resource_path: UnsafePointer<CChar>) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_resource(resource_path, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_resource(resource_path, &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
@@ -764,11 +718,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// 
     /// The stream is not closed.
     public init(resourceAtScale resource_path: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_resource_at_scale(resource_path, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_resource_at_scale(resource_path, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
@@ -782,11 +734,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// 
     /// The stream is not closed.
     public init(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
@@ -812,29 +762,25 @@ open class Pixbuf: Object, PixbufProtocol {
     /// 
     /// The stream is not closed.
     public init(streamAtScale stream: InputStreamProtocol, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool, cancellable: CancellableProtocol) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream_at_scale(cast(stream.ptr), gint(width), gint(height), gboolean(preserve_aspect_ratio ? 1 : 0), cast(cancellable.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream_at_scale(cast(stream.ptr), gint(width), gint(height), gboolean(preserve_aspect_ratio ? 1 : 0), cast(cancellable.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
     /// Finishes an asynchronous pixbuf creation operation started with
     /// `gdk_pixbuf_new_from_stream_async()`.
     public init(streamFinish async_result: AsyncResultProtocol) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
     /// Creates a new pixbuf by parsing XPM data in memory.  This data is commonly
     /// the result of including an XPM file into a program's C source.
     public init(xpmData data: UnsafePointer<UnsafePointer<CChar>>) {
-        let rv = gdk_pixbuf_new_from_xpm_data(cast(data))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_xpm_data(cast(data)))
         super.init(cast(rv))
     }
 
@@ -842,7 +788,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// Currently only RGB images with 8 bits per sample are supported.
     /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
     public static func newFrom(bytes data: BytesProtocol, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt) -> Pixbuf! {
-        let rv = gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride)
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_bytes(cast(data.ptr), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride))
         return rv.map { Pixbuf(cast($0)) }
     }
 
@@ -857,7 +803,7 @@ open class Pixbuf: Object, PixbufProtocol {
     /// 
     /// See also `gdk_pixbuf_new_from_bytes()`.
     public static func newFrom(data: UnsafePointer<guchar>, colorspace: Colorspace, hasAlpha has_alpha: Bool, bitsPerSample bits_per_sample: CInt, width: CInt, height: CInt, rowstride: CInt, destroyFn destroy_fn: @escaping PixbufDestroyNotify, destroyFnData destroy_fn_data: UnsafeMutableRawPointer) -> Pixbuf! {
-        let rv = gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_data(cast(data), colorspace, gboolean(has_alpha ? 1 : 0), bits_per_sample, width, height, rowstride, destroy_fn, cast(destroy_fn_data)))
         return rv.map { Pixbuf(cast($0)) }
     }
 
@@ -865,11 +811,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// detected automatically. If `nil` is returned, then `error` will be set.
     /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
     public static func newFrom(file String_: UnsafePointer<CChar>) throws -> Pixbuf! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file(String_, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file(String_, &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { Pixbuf(cast($0)) }
     }
 
@@ -886,11 +830,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// at all in that dimension. Negative values for `width` and `height` are
     /// allowed since 2.8.
     public static func newFrom(fileAtScale String_: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws -> Pixbuf! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file_at_scale(String_, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file_at_scale(String_, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { Pixbuf(cast($0)) }
     }
 
@@ -905,11 +847,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// and image at the requested size, regardless of aspect ratio, use
     /// `gdk_pixbuf_new_from_file_at_scale()`.
     public static func newFrom(fileAtSize String_: UnsafePointer<CChar>, width: CInt, height: CInt) throws -> Pixbuf! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_file_at_size(String_, width, height, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_file_at_size(String_, width, height, &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { Pixbuf(cast($0)) }
     }
 
@@ -947,11 +887,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// **new_from_inline is deprecated:**
     /// Use #GResource instead.
     @available(*, deprecated) @available(*, deprecated) public static func newFrom(inline data_length: CInt, data: UnsafePointer<UInt8>, copyPixels copy_pixels: Bool) throws -> Pixbuf! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_inline(gint(data_length), cast(data), gboolean(copy_pixels ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_inline(gint(data_length), cast(data), gboolean(copy_pixels ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { Pixbuf(cast($0)) }
     }
 
@@ -960,11 +898,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
     public static func newFrom(resource resource_path: UnsafePointer<CChar>) throws -> Pixbuf! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_resource(resource_path, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_resource(resource_path, &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { Pixbuf(cast($0)) }
     }
 
@@ -982,11 +918,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// 
     /// The stream is not closed.
     public static func newFrom(resourceAtScale resource_path: UnsafePointer<CChar>, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool) throws -> Pixbuf! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_resource_at_scale(resource_path, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_resource_at_scale(resource_path, width, height, gboolean(preserve_aspect_ratio ? 1 : 0), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { Pixbuf(cast($0)) }
     }
 
@@ -1000,11 +934,9 @@ open class Pixbuf: Object, PixbufProtocol {
     /// 
     /// The stream is not closed.
     public static func newFrom(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws -> Pixbuf! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { Pixbuf(cast($0)) }
     }
 
@@ -1030,29 +962,25 @@ open class Pixbuf: Object, PixbufProtocol {
     /// 
     /// The stream is not closed.
     public static func newFrom(streamAtScale stream: InputStreamProtocol, width: CInt, height: CInt, preserveAspectRatio preserve_aspect_ratio: Bool, cancellable: CancellableProtocol) throws -> Pixbuf! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream_at_scale(cast(stream.ptr), gint(width), gint(height), gboolean(preserve_aspect_ratio ? 1 : 0), cast(cancellable.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream_at_scale(cast(stream.ptr), gint(width), gint(height), gboolean(preserve_aspect_ratio ? 1 : 0), cast(cancellable.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { Pixbuf(cast($0)) }
     }
 
     /// Finishes an asynchronous pixbuf creation operation started with
     /// `gdk_pixbuf_new_from_stream_async()`.
     public static func newFrom(streamFinish async_result: AsyncResultProtocol) throws -> Pixbuf! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_stream_finish(cast(async_result.ptr), &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { Pixbuf(cast($0)) }
     }
 
     /// Creates a new pixbuf by parsing XPM data in memory.  This data is commonly
     /// the result of including an XPM file into a program's C source.
     public static func newFromXpm(xpmData data: UnsafePointer<UnsafePointer<CChar>>) -> Pixbuf! {
-        let rv = gdk_pixbuf_new_from_xpm_data(cast(data))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_from_xpm_data(cast(data)))
         return rv.map { Pixbuf(cast($0)) }
     }
 
@@ -1086,8 +1014,8 @@ public extension PixbufProtocol {
     /// - Parameter transform_from: `ValueTransformer` to use for forward transformation
     /// - Parameter transform_to: `ValueTransformer` to use for backwards transformation
     /// - Returns: binding reference or `nil` in case of an error
-    @discardableResult func bind<Q: PropertyNameProtocol, T: ObjectProtocol>(property source_property: PixbufPropertyName, to target: T, _ target_property: Q, flags f: BindingFlags = .default_, transformFrom transform_from: @escaping GLibObject.ValueTransformer = { $0.transform(destValue: $1) }, transformTo transform_to: @escaping GLibObject.ValueTransformer = { $0.transform(destValue: $1) }) -> BindingRef! {
-        func _bind(_ source: UnsafePointer<gchar>, to t: T, _ target_property: UnsafePointer<gchar>, flags f: BindingFlags = .default_, holder: BindingClosureHolder, transformFrom transform_from: @convention(c) @escaping (gpointer, gpointer, gpointer, gpointer) -> gboolean, transformTo transform_to: @convention(c) @escaping (gpointer, gpointer, gpointer, gpointer) -> gboolean) -> BindingRef! {
+    @discardableResult func bind<Q: PropertyNameProtocol, T: ObjectProtocol>(property source_property: PixbufPropertyName, to target: T, _ target_property: Q, flags f: BindingFlags = .default, transformFrom transform_from: @escaping GLibObject.ValueTransformer = { $0.transform(destValue: $1) }, transformTo transform_to: @escaping GLibObject.ValueTransformer = { $0.transform(destValue: $1) }) -> BindingRef! {
+        func _bind(_ source: UnsafePointer<gchar>, to t: T, _ target_property: UnsafePointer<gchar>, flags f: BindingFlags = .default, holder: BindingClosureHolder, transformFrom transform_from: @convention(c) @escaping (gpointer, gpointer, gpointer, gpointer) -> gboolean, transformTo transform_to: @convention(c) @escaping (gpointer, gpointer, gpointer, gpointer) -> gboolean) -> BindingRef! {
             let holder = UnsafeMutableRawPointer(Unmanaged.passRetained(holder).toOpaque())
             let from = unsafeBitCast(transform_from, to: BindingTransformFunc.self)
             let to   = unsafeBitCast(transform_to,   to: BindingTransformFunc.self)
@@ -1110,6 +1038,23 @@ public extension PixbufProtocol {
             return holder.transform_to(GLibObject.ValueRef(raw: $1), GLibObject.ValueRef(raw: $2)) ? 1 : 0
         }
         return rv
+    }
+
+    /// Get the value of a Pixbuf property
+    /// - Parameter property: the property to get the value for
+    /// - Returns: the value of the named property
+    func get(property: PixbufPropertyName) -> GLibObject.Value {
+        let v = GLibObject.Value()
+        g_object_get_property(ptr.assumingMemoryBound(to: GObject.self), property.rawValue, v.value_ptr)
+        return v
+    }
+
+    /// Set the value of a Pixbuf property.
+    /// *Note* that this will only have an effect on properties that are writable and not construct-only!
+    /// - Parameter property: the property to get the value for
+    /// - Returns: the value of the named property
+    func set(property: PixbufPropertyName, value v: GLibObject.Value) {
+        g_object_set_property(ptr.assumingMemoryBound(to: GObject.self), property.rawValue, v.value_ptr)
     }
 }
 
@@ -1163,8 +1108,8 @@ public extension PixbufProtocol {
     /// - Parameter flags: signal connection flags
     /// - Parameter handler: signal handler to use
     /// - Returns: positive handler ID, or a value less than or equal to `0` in case of an error
-    @discardableResult func connect(signal kind: PixbufSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> CUnsignedLong {
-        func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> CUnsignedLong {
+    @discardableResult func connect(signal kind: PixbufSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> Int {
+        func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> Int {
             let holder = UnsafeMutableRawPointer(Unmanaged.passRetained(data).toOpaque())
             let callback = unsafeBitCast(handler, to: GLibObject.Callback.self)
             let rv = GLibObject.ObjectRef(cast(pixbuf_ptr)).signalConnectData(detailedSignal: name, cHandler: callback, data: holder, destroyData: {
@@ -1185,6 +1130,7 @@ public extension PixbufProtocol {
     }
 }
 
+// MARK: Pixbuf Class: PixbufProtocol extension (methods and fields)
 public extension PixbufProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbuf` instance.
     var pixbuf_ptr: UnsafeMutablePointer<GdkPixbuf> { return ptr.assumingMemoryBound(to: GdkPixbuf.self) }
@@ -1198,7 +1144,7 @@ public extension PixbufProtocol {
     /// assigned zero opacity. That is, if you pass (255, 255, 255) for the
     /// substitute color, all white pixels will become fully transparent.
     func addAlpha(substituteColor substitute_color: Bool, r: UInt8, g: UInt8, b: UInt8) -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = gdk_pixbuf_add_alpha(cast(pixbuf_ptr), gboolean(substitute_color ? 1 : 0), r, g, b)
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_add_alpha(cast(pixbuf_ptr), gboolean(substitute_color ? 1 : 0), r, g, b))
         return cast(rv)
     }
 
@@ -1211,7 +1157,7 @@ public extension PixbufProtocol {
     /// appropriate transform will be performed so that the pixbuf
     /// is oriented correctly.
     func applyEmbeddedOrientation() -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = gdk_pixbuf_apply_embedded_orientation(cast(pixbuf_ptr))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_apply_embedded_orientation(cast(pixbuf_ptr)))
         return cast(rv)
     }
 
@@ -1253,7 +1199,7 @@ public extension PixbufProtocol {
     /// `dest_height` and alpha blending the result with a checkboard of colors
     /// `color1` and `color2`.
     func compositeColorSimple(destWidth dest_width: CInt, destHeight dest_height: CInt, interpType interp_type: InterpType, overallAlpha overall_alpha: CInt, checkSize check_size: CInt, color1: UInt32, color2: UInt32) -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = gdk_pixbuf_composite_color_simple(cast(pixbuf_ptr), dest_width, dest_height, interp_type, overall_alpha, check_size, guint32(color1), guint32(color2))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_composite_color_simple(cast(pixbuf_ptr), dest_width, dest_height, interp_type, overall_alpha, check_size, guint32(color1), guint32(color2)))
         return cast(rv)
     }
 
@@ -1261,7 +1207,7 @@ public extension PixbufProtocol {
     /// `pixbuf`. Note that this does not copy the options set on the original `GdkPixbuf`,
     /// use `gdk_pixbuf_copy_options()` for this.
     func copy() -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = gdk_pixbuf_copy(cast(pixbuf_ptr))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_copy(cast(pixbuf_ptr)))
         return cast(rv)
     }
 
@@ -1296,14 +1242,14 @@ public extension PixbufProtocol {
     /// Flips a pixbuf horizontally or vertically and returns the
     /// result in a new pixbuf.
     func flip(horizontal: Bool) -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = gdk_pixbuf_flip(cast(pixbuf_ptr), gboolean(horizontal ? 1 : 0))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_flip(cast(pixbuf_ptr), gboolean(horizontal ? 1 : 0)))
         return cast(rv)
     }
 
     /// Queries the number of bits per color sample in a pixbuf.
-    func getBitsPerSample() -> CInt {
-        let rv = gdk_pixbuf_get_bits_per_sample(cast(pixbuf_ptr))
-        return rv
+    func getBitsPerSample() -> Int {
+        let rv: Int = cast(gdk_pixbuf_get_bits_per_sample(cast(pixbuf_ptr)))
+        return cast(rv)
     }
 
     /// Returns the length of the pixel data, in bytes.
@@ -1315,7 +1261,7 @@ public extension PixbufProtocol {
     /// Queries the color space of a pixbuf.
     func getColorspace() -> GdkColorspace {
         let rv = gdk_pixbuf_get_colorspace(cast(pixbuf_ptr))
-        return rv
+        return cast(rv)
     }
 
     /// Queries whether a pixbuf has an alpha channel (opacity information).
@@ -1325,15 +1271,15 @@ public extension PixbufProtocol {
     }
 
     /// Queries the height of a pixbuf.
-    func getHeight() -> CInt {
-        let rv = gdk_pixbuf_get_height(cast(pixbuf_ptr))
-        return rv
+    func getHeight() -> Int {
+        let rv: Int = cast(gdk_pixbuf_get_height(cast(pixbuf_ptr)))
+        return cast(rv)
     }
 
     /// Queries the number of channels of a pixbuf.
-    func getNChannels() -> CInt {
-        let rv = gdk_pixbuf_get_n_channels(cast(pixbuf_ptr))
-        return rv
+    func getNChannels() -> Int {
+        let rv: Int = cast(gdk_pixbuf_get_n_channels(cast(pixbuf_ptr)))
+        return cast(rv)
     }
 
     /// Looks up `key` in the list of options that may have been attached to the
@@ -1352,8 +1298,8 @@ public extension PixbufProtocol {
     /// Since 2.36.6, the JPEG loader sets the "comment" option with the comment
     /// EXIF tag.
     func getOption(key: UnsafePointer<gchar>) -> String! {
-        let rv = gdk_pixbuf_get_option(cast(pixbuf_ptr), key)
-        return rv.map { String(cString: UnsafePointer<CChar>($0)) }
+        let rv: String! = cast(gdk_pixbuf_get_option(cast(pixbuf_ptr), key))
+        return cast(rv)
     }
 
     /// Returns a `GHashTable` with a list of all the options that may have been
@@ -1362,33 +1308,33 @@ public extension PixbufProtocol {
     /// 
     /// See `gdk_pixbuf_get_option()` for more details.
     func getOptions() -> UnsafeMutablePointer<GHashTable>! {
-        let rv = gdk_pixbuf_get_options(cast(pixbuf_ptr))
+        let rv: UnsafeMutablePointer<GHashTable>! = cast(gdk_pixbuf_get_options(cast(pixbuf_ptr)))
         return cast(rv)
     }
 
     /// Queries a pointer to the pixel data of a pixbuf.
     func getPixels() -> UnsafeMutablePointer<guchar>! {
-        let rv = gdk_pixbuf_get_pixels(cast(pixbuf_ptr))
+        let rv: UnsafeMutablePointer<guchar>! = cast(gdk_pixbuf_get_pixels(cast(pixbuf_ptr)))
         return cast(rv)
     }
 
     /// Queries a pointer to the pixel data of a pixbuf.
     func getPixelsWith(length: UnsafeMutablePointer<CUnsignedInt>) -> UnsafeMutablePointer<guchar>! {
-        let rv = gdk_pixbuf_get_pixels_with_length(cast(pixbuf_ptr), cast(length))
+        let rv: UnsafeMutablePointer<guchar>! = cast(gdk_pixbuf_get_pixels_with_length(cast(pixbuf_ptr), cast(length)))
         return cast(rv)
     }
 
     /// Queries the rowstride of a pixbuf, which is the number of bytes between
     /// the start of a row and the start of the next row.
-    func getRowstride() -> CInt {
-        let rv = gdk_pixbuf_get_rowstride(cast(pixbuf_ptr))
-        return rv
+    func getRowstride() -> Int {
+        let rv: Int = cast(gdk_pixbuf_get_rowstride(cast(pixbuf_ptr)))
+        return cast(rv)
     }
 
     /// Queries the width of a pixbuf.
-    func getWidth() -> CInt {
-        let rv = gdk_pixbuf_get_width(cast(pixbuf_ptr))
-        return rv
+    func getWidth() -> Int {
+        let rv: Int = cast(gdk_pixbuf_get_width(cast(pixbuf_ptr)))
+        return cast(rv)
     }
 
     /// Creates a new pixbuf which represents a sub-region of `src_pixbuf`.
@@ -1400,7 +1346,7 @@ public extension PixbufProtocol {
     /// Note that if `src_pixbuf` is read-only, this function will force it
     /// to be mutable.
     func newSubpixbuf(srcX src_x: CInt, srcY src_y: CInt, width: CInt, height: CInt) -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = gdk_pixbuf_new_subpixbuf(cast(pixbuf_ptr), src_x, src_y, width, height)
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_new_subpixbuf(cast(pixbuf_ptr), src_x, src_y, width, height))
         return cast(rv)
     }
 
@@ -1409,7 +1355,7 @@ public extension PixbufProtocol {
     /// copy that must be made if `gdk_pixbuf_get_pixels()` is called on a
     /// read-only pixbuf.
     func readPixelBytes() -> UnsafeMutablePointer<GBytes>! {
-        let rv = gdk_pixbuf_read_pixel_bytes(cast(pixbuf_ptr))
+        let rv: UnsafeMutablePointer<GBytes>! = cast(gdk_pixbuf_read_pixel_bytes(cast(pixbuf_ptr)))
         return cast(rv)
     }
 
@@ -1418,7 +1364,7 @@ public extension PixbufProtocol {
     /// must be made if `gdk_pixbuf_get_pixels()` is called on a read-only
     /// pixbuf.
     func readPixels() -> UnsafePointer<UInt8>! {
-        let rv = gdk_pixbuf_read_pixels(cast(pixbuf_ptr))
+        let rv: UnsafePointer<UInt8>! = cast(gdk_pixbuf_read_pixels(cast(pixbuf_ptr)))
         return cast(rv)
     }
 
@@ -1427,7 +1373,7 @@ public extension PixbufProtocol {
     /// **ref is deprecated:**
     /// Use g_object_ref().
     @available(*, deprecated) func ref() -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = g_object_ref(cast(pixbuf_ptr))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(g_object_ref(cast(pixbuf_ptr)))
         return cast(rv)
     }
 
@@ -1442,7 +1388,7 @@ public extension PixbufProtocol {
     /// 
     /// If `angle` is 0, a copy of `src` is returned, avoiding any rotation.
     func rotateSimple(angle: PixbufRotation) -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = gdk_pixbuf_rotate_simple(cast(pixbuf_ptr), angle)
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_rotate_simple(cast(pixbuf_ptr), angle))
         return cast(rv)
     }
 
@@ -1471,11 +1417,9 @@ public extension PixbufProtocol {
     /// "tiff", "png", "ico" or "bmp".  See `gdk_pixbuf_save_to_buffer()`
     /// for more details.
     func saveToBufferv(buffer: UnsafeMutablePointer<UnsafeMutablePointer<gchar>>, bufferSize buffer_size: UnsafeMutablePointer<Int>, type: UnsafePointer<CChar>, optionKeys option_keys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>, optionValues option_values: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>) throws -> Bool {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
+        var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_save_to_bufferv(cast(pixbuf_ptr), cast(buffer), cast(buffer_size), type, cast(option_keys), cast(option_values), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        if let error = error { throw ErrorType(error) }
         return Bool(rv != 0)
     }
 
@@ -1487,11 +1431,9 @@ public extension PixbufProtocol {
     /// "png", "tiff", "ico" or "bmp".  If `error` is set, `false` will be returned. See
     /// gdk_pixbuf_save_to_callback () for more details.
     func saveToCallbackv(saveFunc save_func: @escaping PixbufSaveFunc, userData user_data: UnsafeMutableRawPointer, type: UnsafePointer<CChar>, optionKeys option_keys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>, optionValues option_values: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>) throws -> Bool {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
+        var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_save_to_callbackv(cast(pixbuf_ptr), save_func, cast(user_data), type, cast(option_keys), cast(option_values), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        if let error = error { throw ErrorType(error) }
         return Bool(rv != 0)
     }
 
@@ -1508,11 +1450,9 @@ public extension PixbufProtocol {
     /// Supported file formats are currently "jpeg", "tiff", "png", "ico" or
     /// "bmp". See `gdk_pixbuf_save_to_stream()` for more details.
     func saveToStreamv(stream: OutputStreamProtocol, type: UnsafePointer<CChar>, optionKeys option_keys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>, optionValues option_values: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>, cancellable: CancellableProtocol) throws -> Bool {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
+        var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_save_to_streamv(cast(pixbuf_ptr), cast(stream.ptr), type, cast(option_keys), cast(option_values), cast(cancellable.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        if let error = error { throw ErrorType(error) }
         return Bool(rv != 0)
     }
 
@@ -1532,11 +1472,9 @@ public extension PixbufProtocol {
     /// If `error` is set, `false` will be returned.
     /// See gdk_pixbuf_save () for more details.
     func savev(String_: UnsafePointer<CChar>, type: UnsafePointer<CChar>, optionKeys option_keys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>, optionValues option_values: UnsafeMutablePointer<UnsafeMutablePointer<CChar>>) throws -> Bool {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
+        var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_savev(cast(pixbuf_ptr), String_, type, cast(option_keys), cast(option_values), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        if let error = error { throw ErrorType(error) }
         return Bool(rv != 0)
     }
 
@@ -1574,7 +1512,7 @@ public extension PixbufProtocol {
     /// For more complicated scaling/alpha blending see `gdk_pixbuf_scale()`
     /// and `gdk_pixbuf_composite()`.
     func scaleSimple(destWidth dest_width: CInt, destHeight dest_height: CInt, interpType interp_type: InterpType) -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = gdk_pixbuf_scale_simple(cast(pixbuf_ptr), dest_width, dest_height, interp_type)
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_scale_simple(cast(pixbuf_ptr), dest_width, dest_height, interp_type))
         return cast(rv)
     }
 
@@ -1595,11 +1533,11 @@ public extension PixbufProtocol {
     
     }
     /// Queries the number of bits per color sample in a pixbuf.
-    var bitsPerSample: CInt {
+    var bitsPerSample: Int {
         /// Queries the number of bits per color sample in a pixbuf.
         get {
-            let rv = gdk_pixbuf_get_bits_per_sample(cast(pixbuf_ptr))
-            return rv
+            let rv: Int = cast(gdk_pixbuf_get_bits_per_sample(cast(pixbuf_ptr)))
+            return cast(rv)
         }
     }
 
@@ -1616,7 +1554,7 @@ public extension PixbufProtocol {
         /// Queries the color space of a pixbuf.
         get {
             let rv = gdk_pixbuf_get_colorspace(cast(pixbuf_ptr))
-            return rv
+            return cast(rv)
         }
     }
 
@@ -1629,20 +1567,20 @@ public extension PixbufProtocol {
         }
     }
 
-    var height: CInt {
+    var height: Int {
         /// Queries the height of a pixbuf.
         get {
-            let rv = gdk_pixbuf_get_height(cast(pixbuf_ptr))
-            return rv
+            let rv: Int = cast(gdk_pixbuf_get_height(cast(pixbuf_ptr)))
+            return cast(rv)
         }
     }
 
     /// Queries the number of channels of a pixbuf.
-    var nChannels: CInt {
+    var nChannels: Int {
         /// Queries the number of channels of a pixbuf.
         get {
-            let rv = gdk_pixbuf_get_n_channels(cast(pixbuf_ptr))
-            return rv
+            let rv: Int = cast(gdk_pixbuf_get_n_channels(cast(pixbuf_ptr)))
+            return cast(rv)
         }
     }
 
@@ -1658,7 +1596,7 @@ public extension PixbufProtocol {
         /// 
         /// See `gdk_pixbuf_get_option()` for more details.
         get {
-            let rv = gdk_pixbuf_get_options(cast(pixbuf_ptr))
+            let rv: UnsafeMutablePointer<GHashTable>! = cast(gdk_pixbuf_get_options(cast(pixbuf_ptr)))
             return cast(rv)
         }
     }
@@ -1666,7 +1604,7 @@ public extension PixbufProtocol {
     var pixels: UnsafeMutablePointer<guchar>! {
         /// Queries a pointer to the pixel data of a pixbuf.
         get {
-            let rv = gdk_pixbuf_get_pixels(cast(pixbuf_ptr))
+            let rv: UnsafeMutablePointer<guchar>! = cast(gdk_pixbuf_get_pixels(cast(pixbuf_ptr)))
             return cast(rv)
         }
     }
@@ -1674,22 +1612,24 @@ public extension PixbufProtocol {
     /// The number of bytes between the start of a row and
     /// the start of the next row. This number must (obviously)
     /// be at least as large as the width of the pixbuf.
-    var rowstride: CInt {
+    var rowstride: Int {
         /// Queries the rowstride of a pixbuf, which is the number of bytes between
         /// the start of a row and the start of the next row.
         get {
-            let rv = gdk_pixbuf_get_rowstride(cast(pixbuf_ptr))
-            return rv
+            let rv: Int = cast(gdk_pixbuf_get_rowstride(cast(pixbuf_ptr)))
+            return cast(rv)
         }
     }
 
-    var width: CInt {
+    var width: Int {
         /// Queries the width of a pixbuf.
         get {
-            let rv = gdk_pixbuf_get_width(cast(pixbuf_ptr))
-            return rv
+            let rv: Int = cast(gdk_pixbuf_get_width(cast(pixbuf_ptr)))
+            return cast(rv)
         }
     }
+
+
 }
 
 

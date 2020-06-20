@@ -14,7 +14,7 @@ import GLibObject
 ///
 
 public protocol PixbufFormatProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufFormat` instance.
+        /// Untyped pointer to the underlying `GdkPixbufFormat` instance.
     var ptr: UnsafeMutableRawPointer { get }
 
     /// Typed pointer to the underlying `GdkPixbufFormat` instance.
@@ -27,7 +27,7 @@ public protocol PixbufFormatProtocol {
 ///
 
 public struct PixbufFormatRef: PixbufFormatProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufFormat` instance.
+        /// Untyped pointer to the underlying `GdkPixbufFormat` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_format_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 }
@@ -80,7 +80,7 @@ public extension PixbufFormatRef {
 ///
 
 open class PixbufFormat: PixbufFormatProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufFormat` instance.
+        /// Untyped pointer to the underlying `GdkPixbufFormat` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_format_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 
@@ -109,7 +109,7 @@ open class PixbufFormat: PixbufFormatProtocol {
         // no reference counting for GdkPixbufFormat, cannot ref(cast(pixbuf_format_ptr))
     }
 
-    /// Do-nothing destructor for`GdkPixbufFormat`.
+    /// Do-nothing destructor for `GdkPixbufFormat`.
     deinit {
         // no reference counting for GdkPixbufFormat, cannot unref(cast(pixbuf_format_ptr))
     }
@@ -177,18 +177,19 @@ open class PixbufFormat: PixbufFormatProtocol {
 
 }
 
-// MARK: - no PixbufFormat properties
+// MARK: no PixbufFormat properties
 
-// MARK: - no signals
+// MARK: no PixbufFormat signals
 
 
+// MARK: PixbufFormat Record: PixbufFormatProtocol extension (methods and fields)
 public extension PixbufFormatProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufFormat` instance.
     var pixbuf_format_ptr: UnsafeMutablePointer<GdkPixbufFormat> { return ptr.assumingMemoryBound(to: GdkPixbufFormat.self) }
 
     /// Creates a copy of `format`
     func copy() -> UnsafeMutablePointer<GdkPixbufFormat>! {
-        let rv = gdk_pixbuf_format_copy(cast(pixbuf_format_ptr))
+        let rv: UnsafeMutablePointer<GdkPixbufFormat>! = cast(gdk_pixbuf_format_copy(cast(pixbuf_format_ptr)))
         return cast(rv)
     }
 
@@ -201,14 +202,14 @@ public extension PixbufFormatProtocol {
 
     /// Returns a description of the format.
     func getDescription() -> String! {
-        let rv = gdk_pixbuf_format_get_description(cast(pixbuf_format_ptr))
-        return rv.map { String(cString: UnsafePointer<CChar>($0)) }
+        let rv: String! = cast(gdk_pixbuf_format_get_description(cast(pixbuf_format_ptr)))
+        return cast(rv)
     }
 
     /// Returns the filename extensions typically used for files in the
     /// given format.
     func getExtensions() -> UnsafeMutablePointer<UnsafeMutablePointer<gchar>>! {
-        let rv = gdk_pixbuf_format_get_extensions(cast(pixbuf_format_ptr))
+        let rv: UnsafeMutablePointer<UnsafeMutablePointer<gchar>>! = cast(gdk_pixbuf_format_get_extensions(cast(pixbuf_format_ptr)))
         return cast(rv)
     }
 
@@ -217,20 +218,20 @@ public extension PixbufFormatProtocol {
     /// "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.  This
     /// string should be freed with `g_free()` when it's no longer needed.
     func getLicense() -> String! {
-        let rv = gdk_pixbuf_format_get_license(cast(pixbuf_format_ptr))
-        return rv.map { String(cString: UnsafePointer<CChar>($0)) }
+        let rv: String! = cast(gdk_pixbuf_format_get_license(cast(pixbuf_format_ptr)))
+        return cast(rv)
     }
 
     /// Returns the mime types supported by the format.
     func getMimeTypes() -> UnsafeMutablePointer<UnsafeMutablePointer<gchar>>! {
-        let rv = gdk_pixbuf_format_get_mime_types(cast(pixbuf_format_ptr))
+        let rv: UnsafeMutablePointer<UnsafeMutablePointer<gchar>>! = cast(gdk_pixbuf_format_get_mime_types(cast(pixbuf_format_ptr)))
         return cast(rv)
     }
 
     /// Returns the name of the format.
     func getName() -> String! {
-        let rv = gdk_pixbuf_format_get_name(cast(pixbuf_format_ptr))
-        return rv.map { String(cString: UnsafePointer<CChar>($0)) }
+        let rv: String! = cast(gdk_pixbuf_format_get_name(cast(pixbuf_format_ptr)))
+        return cast(rv)
     }
 
     /// Returns `true` if the save option specified by `option_key` is supported when
@@ -253,8 +254,8 @@ public extension PixbufFormatProtocol {
     var description: String! {
         /// Returns a description of the format.
         get {
-            let rv = gdk_pixbuf_format_get_description(cast(pixbuf_format_ptr))
-            return rv.map { String(cString: UnsafePointer<CChar>($0)) }
+            let rv: String! = cast(gdk_pixbuf_format_get_description(cast(pixbuf_format_ptr)))
+            return cast(rv)
         }
     }
 
@@ -264,7 +265,7 @@ public extension PixbufFormatProtocol {
         /// Returns the filename extensions typically used for files in the
         /// given format.
         get {
-            let rv = gdk_pixbuf_format_get_extensions(cast(pixbuf_format_ptr))
+            let rv: UnsafeMutablePointer<UnsafeMutablePointer<gchar>>! = cast(gdk_pixbuf_format_get_extensions(cast(pixbuf_format_ptr)))
             return cast(rv)
         }
     }
@@ -314,8 +315,8 @@ public extension PixbufFormatProtocol {
         /// "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.  This
         /// string should be freed with `g_free()` when it's no longer needed.
         get {
-            let rv = gdk_pixbuf_format_get_license(cast(pixbuf_format_ptr))
-            return rv.map { String(cString: UnsafePointer<CChar>($0)) }
+            let rv: String! = cast(gdk_pixbuf_format_get_license(cast(pixbuf_format_ptr)))
+            return cast(rv)
         }
     }
 
@@ -323,7 +324,7 @@ public extension PixbufFormatProtocol {
     var mimeTypes: UnsafeMutablePointer<UnsafeMutablePointer<gchar>>! {
         /// Returns the mime types supported by the format.
         get {
-            let rv = gdk_pixbuf_format_get_mime_types(cast(pixbuf_format_ptr))
+            let rv: UnsafeMutablePointer<UnsafeMutablePointer<gchar>>! = cast(gdk_pixbuf_format_get_mime_types(cast(pixbuf_format_ptr)))
             return cast(rv)
         }
     }
@@ -332,10 +333,12 @@ public extension PixbufFormatProtocol {
     var name: String! {
         /// Returns the name of the format.
         get {
-            let rv = gdk_pixbuf_format_get_name(cast(pixbuf_format_ptr))
-            return rv.map { String(cString: UnsafePointer<CChar>($0)) }
+            let rv: String! = cast(gdk_pixbuf_format_get_name(cast(pixbuf_format_ptr)))
+            return cast(rv)
         }
     }
+
+
 }
 
 

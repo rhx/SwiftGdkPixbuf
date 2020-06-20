@@ -15,7 +15,7 @@ import GLibObject
 /// An opaque struct representing an iterator which points to a
 /// certain position in an animation.
 public protocol PixbufAnimationIterProtocol: ObjectProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufAnimationIter` instance.
+        /// Untyped pointer to the underlying `GdkPixbufAnimationIter` instance.
     var ptr: UnsafeMutableRawPointer { get }
 
     /// Typed pointer to the underlying `GdkPixbufAnimationIter` instance.
@@ -29,7 +29,7 @@ public protocol PixbufAnimationIterProtocol: ObjectProtocol {
 /// An opaque struct representing an iterator which points to a
 /// certain position in an animation.
 public struct PixbufAnimationIterRef: PixbufAnimationIterProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufAnimationIter` instance.
+        /// Untyped pointer to the underlying `GdkPixbufAnimationIter` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_animation_iter_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 }
@@ -83,7 +83,7 @@ public extension PixbufAnimationIterRef {
 /// An opaque struct representing an iterator which points to a
 /// certain position in an animation.
 open class PixbufAnimationIter: Object, PixbufAnimationIterProtocol {
-    /// Designated initialiser from the underlying `C` data type.
+        /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
     /// i.e., ownership is transferred to the `PixbufAnimationIter` instance.
     /// - Parameter op: pointer to the underlying object
@@ -165,7 +165,7 @@ open class PixbufAnimationIter: Object, PixbufAnimationIterProtocol {
 
 }
 
-// MARK: - no PixbufAnimationIter properties
+// MARK: no PixbufAnimationIter properties
 
 public enum PixbufAnimationIterSignalName: String, SignalNameProtocol {
     /// The notify signal is emitted on an object when one of its properties has
@@ -202,8 +202,8 @@ public extension PixbufAnimationIterProtocol {
     /// - Parameter flags: signal connection flags
     /// - Parameter handler: signal handler to use
     /// - Returns: positive handler ID, or a value less than or equal to `0` in case of an error
-    @discardableResult func connect(signal kind: PixbufAnimationIterSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> CUnsignedLong {
-        func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> CUnsignedLong {
+    @discardableResult func connect(signal kind: PixbufAnimationIterSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> Int {
+        func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> Int {
             let holder = UnsafeMutableRawPointer(Unmanaged.passRetained(data).toOpaque())
             let callback = unsafeBitCast(handler, to: GLibObject.Callback.self)
             let rv = GLibObject.ObjectRef(cast(pixbuf_animation_iter_ptr)).signalConnectData(detailedSignal: name, cHandler: callback, data: holder, destroyData: {
@@ -224,6 +224,7 @@ public extension PixbufAnimationIterProtocol {
     }
 }
 
+// MARK: PixbufAnimationIter Class: PixbufAnimationIterProtocol extension (methods and fields)
 public extension PixbufAnimationIterProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufAnimationIter` instance.
     var pixbuf_animation_iter_ptr: UnsafeMutablePointer<GdkPixbufAnimationIter> { return ptr.assumingMemoryBound(to: GdkPixbufAnimationIter.self) }
@@ -260,9 +261,9 @@ public extension PixbufAnimationIterProtocol {
     /// Note that some formats, like GIF, might clamp the timeout values in the
     /// image file to avoid updates that are just too quick. The minimum timeout
     /// for GIF images is currently 20 milliseconds.
-    func getDelayTime() -> CInt {
-        let rv = gdk_pixbuf_animation_iter_get_delay_time(cast(pixbuf_animation_iter_ptr))
-        return rv
+    func getDelayTime() -> Int {
+        let rv: Int = cast(gdk_pixbuf_animation_iter_get_delay_time(cast(pixbuf_animation_iter_ptr)))
+        return cast(rv)
     }
 
     /// Gets the current pixbuf which should be displayed; the pixbuf might not
@@ -277,7 +278,7 @@ public extension PixbufAnimationIterProtocol {
     /// (don't just add a reference), as it may get recycled as you advance
     /// the iterator.
     func getPixbuf() -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = gdk_pixbuf_animation_iter_get_pixbuf(cast(pixbuf_animation_iter_ptr))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_animation_iter_get_pixbuf(cast(pixbuf_animation_iter_ptr)))
         return cast(rv)
     }
 
@@ -298,7 +299,7 @@ public extension PixbufAnimationIterProtocol {
     /// Note that some formats, like GIF, might clamp the timeout values in the
     /// image file to avoid updates that are just too quick. The minimum timeout
     /// for GIF images is currently 20 milliseconds.
-    var delayTime: CInt {
+    var delayTime: Int {
         /// Gets the number of milliseconds the current pixbuf should be displayed,
         /// or -1 if the current pixbuf should be displayed forever. `g_timeout_add()`
         /// conveniently takes a timeout in milliseconds, so you can use a timeout
@@ -308,8 +309,8 @@ public extension PixbufAnimationIterProtocol {
         /// image file to avoid updates that are just too quick. The minimum timeout
         /// for GIF images is currently 20 milliseconds.
         get {
-            let rv = gdk_pixbuf_animation_iter_get_delay_time(cast(pixbuf_animation_iter_ptr))
-            return rv
+            let rv: Int = cast(gdk_pixbuf_animation_iter_get_delay_time(cast(pixbuf_animation_iter_ptr)))
+            return cast(rv)
         }
     }
 
@@ -337,10 +338,12 @@ public extension PixbufAnimationIterProtocol {
         /// (don't just add a reference), as it may get recycled as you advance
         /// the iterator.
         get {
-            let rv = gdk_pixbuf_animation_iter_get_pixbuf(cast(pixbuf_animation_iter_ptr))
+            let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_animation_iter_get_pixbuf(cast(pixbuf_animation_iter_ptr)))
             return cast(rv)
         }
     }
+
+
 }
 
 

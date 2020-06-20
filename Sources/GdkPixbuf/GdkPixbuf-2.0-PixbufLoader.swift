@@ -15,7 +15,7 @@ import GLibObject
 /// The GdkPixbufLoader struct contains only private
 /// fields.
 public protocol PixbufLoaderProtocol: ObjectProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufLoader` instance.
+        /// Untyped pointer to the underlying `GdkPixbufLoader` instance.
     var ptr: UnsafeMutableRawPointer { get }
 
     /// Typed pointer to the underlying `GdkPixbufLoader` instance.
@@ -29,7 +29,7 @@ public protocol PixbufLoaderProtocol: ObjectProtocol {
 /// The GdkPixbufLoader struct contains only private
 /// fields.
 public struct PixbufLoaderRef: PixbufLoaderProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufLoader` instance.
+        /// Untyped pointer to the underlying `GdkPixbufLoader` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_loader_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 }
@@ -76,7 +76,7 @@ public extension PixbufLoaderRef {
 
         /// Creates a new pixbuf loader object.
     init() {
-        let rv = gdk_pixbuf_loader_new()
+        let rv: UnsafeMutablePointer<GdkPixbufLoader>! = cast(gdk_pixbuf_loader_new())
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -94,11 +94,9 @@ public extension PixbufLoaderRef {
     /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
     /// structs returned by `gdk_pixbuf_get_formats()`.
     init(mimeType mime_type: UnsafePointer<CChar>) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbufLoader>! = cast(gdk_pixbuf_loader_new_with_mime_type(mime_type, &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 
@@ -115,11 +113,9 @@ public extension PixbufLoaderRef {
     /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
     /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
     init(type image_type: UnsafePointer<CChar>) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbufLoader>! = cast(gdk_pixbuf_loader_new_with_type(image_type, &error))
+        if let error = error { throw ErrorType(error) }
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
     /// Creates a new pixbuf loader object that always attempts to parse
@@ -136,11 +132,9 @@ public extension PixbufLoaderRef {
     /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
     /// structs returned by `gdk_pixbuf_get_formats()`.
     static func newWith(mimeType mime_type: UnsafePointer<CChar>) throws -> PixbufLoaderRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbufLoader>! = cast(gdk_pixbuf_loader_new_with_mime_type(mime_type, &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufLoaderRef(cast($0)) }
     }
 
@@ -157,11 +151,9 @@ public extension PixbufLoaderRef {
     /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
     /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
     static func newWith(type image_type: UnsafePointer<CChar>) throws -> PixbufLoaderRef! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbufLoader>! = cast(gdk_pixbuf_loader_new_with_type(image_type, &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufLoaderRef(cast($0)) }
     }
 }
@@ -173,7 +165,7 @@ public extension PixbufLoaderRef {
 /// The GdkPixbufLoader struct contains only private
 /// fields.
 open class PixbufLoader: Object, PixbufLoaderProtocol {
-    /// Designated initialiser from the underlying `C` data type.
+        /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
     /// i.e., ownership is transferred to the `PixbufLoader` instance.
     /// - Parameter op: pointer to the underlying object
@@ -253,7 +245,7 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
 
     /// Creates a new pixbuf loader object.
     public init() {
-        let rv = gdk_pixbuf_loader_new()
+        let rv: UnsafeMutablePointer<GdkPixbufLoader>! = cast(gdk_pixbuf_loader_new())
         super.init(cast(rv))
     }
 
@@ -271,11 +263,9 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
     /// structs returned by `gdk_pixbuf_get_formats()`.
     public init(mimeType mime_type: UnsafePointer<CChar>) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbufLoader>! = cast(gdk_pixbuf_loader_new_with_mime_type(mime_type, &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
@@ -292,11 +282,9 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
     /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
     public init(type image_type: UnsafePointer<CChar>) throws {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbufLoader>! = cast(gdk_pixbuf_loader_new_with_type(image_type, &error))
+        if let error = error { throw ErrorType(error) }
         super.init(cast(rv))
     }
 
@@ -314,11 +302,9 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
     /// structs returned by `gdk_pixbuf_get_formats()`.
     public static func newWith(mimeType mime_type: UnsafePointer<CChar>) throws -> PixbufLoader! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbufLoader>! = cast(gdk_pixbuf_loader_new_with_mime_type(mime_type, &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufLoader(cast($0)) }
     }
 
@@ -335,17 +321,15 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
     /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
     public static func newWith(type image_type: UnsafePointer<CChar>) throws -> PixbufLoader! {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
-        let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        var error: UnsafeMutablePointer<GError>?
+        let rv: UnsafeMutablePointer<GdkPixbufLoader>! = cast(gdk_pixbuf_loader_new_with_type(image_type, &error))
+        if let error = error { throw ErrorType(error) }
         return rv.map { PixbufLoader(cast($0)) }
     }
 
 }
 
-// MARK: - no PixbufLoader properties
+// MARK: no PixbufLoader properties
 
 public enum PixbufLoaderSignalName: String, SignalNameProtocol {
     /// This signal is emitted when the pixbuf loader has allocated the
@@ -404,8 +388,8 @@ public extension PixbufLoaderProtocol {
     /// - Parameter flags: signal connection flags
     /// - Parameter handler: signal handler to use
     /// - Returns: positive handler ID, or a value less than or equal to `0` in case of an error
-    @discardableResult func connect(signal kind: PixbufLoaderSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> CUnsignedLong {
-        func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> CUnsignedLong {
+    @discardableResult func connect(signal kind: PixbufLoaderSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> Int {
+        func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> Int {
             let holder = UnsafeMutableRawPointer(Unmanaged.passRetained(data).toOpaque())
             let callback = unsafeBitCast(handler, to: GLibObject.Callback.self)
             let rv = GLibObject.ObjectRef(cast(pixbuf_loader_ptr)).signalConnectData(detailedSignal: name, cHandler: callback, data: holder, destroyData: {
@@ -426,6 +410,7 @@ public extension PixbufLoaderProtocol {
     }
 }
 
+// MARK: PixbufLoader Class: PixbufLoaderProtocol extension (methods and fields)
 public extension PixbufLoaderProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufLoader` instance.
     var pixbuf_loader_ptr: UnsafeMutablePointer<GdkPixbufLoader> { return ptr.assumingMemoryBound(to: GdkPixbufLoader.self) }
@@ -443,11 +428,9 @@ public extension PixbufLoaderProtocol {
     /// Remember that this does not unref the loader, so if you plan not to
     /// use it anymore, please `g_object_unref()` it.
     func close() throws -> Bool {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
+        var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_loader_close(cast(pixbuf_loader_ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        if let error = error { throw ErrorType(error) }
         return Bool(rv != 0)
     }
 
@@ -457,14 +440,14 @@ public extension PixbufLoaderProtocol {
     /// bytes yet (hasn't emitted the "area-prepared" signal) this function will
     /// return `nil`.
     func getAnimation() -> UnsafeMutablePointer<GdkPixbufAnimation>! {
-        let rv = gdk_pixbuf_loader_get_animation(cast(pixbuf_loader_ptr))
+        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_loader_get_animation(cast(pixbuf_loader_ptr)))
         return cast(rv)
     }
 
     /// Obtains the available information about the format of the
     /// currently loading image file.
     func getFormat() -> UnsafeMutablePointer<GdkPixbufFormat>! {
-        let rv = gdk_pixbuf_loader_get_format(cast(pixbuf_loader_ptr))
+        let rv: UnsafeMutablePointer<GdkPixbufFormat>! = cast(gdk_pixbuf_loader_get_format(cast(pixbuf_loader_ptr)))
         return cast(rv)
     }
 
@@ -480,7 +463,7 @@ public extension PixbufLoaderProtocol {
     /// return the "static image" of the animation
     /// (see `gdk_pixbuf_animation_get_static_image()`).
     func getPixbuf() -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv = gdk_pixbuf_loader_get_pixbuf(cast(pixbuf_loader_ptr))
+        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_loader_get_pixbuf(cast(pixbuf_loader_ptr)))
         return cast(rv)
     }
 
@@ -503,11 +486,9 @@ public extension PixbufLoaderProtocol {
     /// returned, `error` will be set to an error from the `GDK_PIXBUF_ERROR`
     /// or `G_FILE_ERROR` domains.
     func write(buf: UnsafePointer<guchar>, count: Int) throws -> Bool {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
+        var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_loader_write(cast(pixbuf_loader_ptr), cast(buf), gsize(count), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        if let error = error { throw ErrorType(error) }
         return Bool(rv != 0)
     }
 
@@ -520,11 +501,9 @@ public extension PixbufLoaderProtocol {
     /// 
     /// See also: `gdk_pixbuf_loader_write()`
     func writeBytes(buffer: BytesProtocol) throws -> Bool {
-        var error: Optional<UnsafeMutablePointer<GError>> = nil
+        var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_loader_write_bytes(cast(pixbuf_loader_ptr), cast(buffer.ptr), &error)
-        if let error = error {
-                throw ErrorType(error)
-        }
+        if let error = error { throw ErrorType(error) }
         return Bool(rv != 0)
     }
     /// Queries the `GdkPixbufAnimation` that a pixbuf loader is currently creating.
@@ -539,7 +518,7 @@ public extension PixbufLoaderProtocol {
         /// bytes yet (hasn't emitted the "area-prepared" signal) this function will
         /// return `nil`.
         get {
-            let rv = gdk_pixbuf_loader_get_animation(cast(pixbuf_loader_ptr))
+            let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_loader_get_animation(cast(pixbuf_loader_ptr)))
             return cast(rv)
         }
     }
@@ -550,7 +529,7 @@ public extension PixbufLoaderProtocol {
         /// Obtains the available information about the format of the
         /// currently loading image file.
         get {
-            let rv = gdk_pixbuf_loader_get_format(cast(pixbuf_loader_ptr))
+            let rv: UnsafeMutablePointer<GdkPixbufFormat>! = cast(gdk_pixbuf_loader_get_format(cast(pixbuf_loader_ptr)))
             return cast(rv)
         }
     }
@@ -579,10 +558,20 @@ public extension PixbufLoaderProtocol {
         /// return the "static image" of the animation
         /// (see `gdk_pixbuf_animation_get_static_image()`).
         get {
-            let rv = gdk_pixbuf_loader_get_pixbuf(cast(pixbuf_loader_ptr))
+            let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_loader_get_pixbuf(cast(pixbuf_loader_ptr)))
             return cast(rv)
         }
     }
+
+    var parentInstance: GObject {
+        get {
+            let rv: GObject = cast(pixbuf_loader_ptr.pointee.parent_instance)
+            return rv
+        }
+    }
+
+    // var priv is unavailable because priv is private
+
 }
 
 

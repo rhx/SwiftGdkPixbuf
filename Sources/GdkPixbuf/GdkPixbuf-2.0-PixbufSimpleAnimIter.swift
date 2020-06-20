@@ -14,7 +14,7 @@ import GLibObject
 ///
 
 public protocol PixbufSimpleAnimIterProtocol: PixbufAnimationIterProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufSimpleAnimIter` instance.
+        /// Untyped pointer to the underlying `GdkPixbufSimpleAnimIter` instance.
     var ptr: UnsafeMutableRawPointer { get }
 
     /// Typed pointer to the underlying `GdkPixbufSimpleAnimIter` instance.
@@ -27,7 +27,7 @@ public protocol PixbufSimpleAnimIterProtocol: PixbufAnimationIterProtocol {
 ///
 
 public struct PixbufSimpleAnimIterRef: PixbufSimpleAnimIterProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufSimpleAnimIter` instance.
+        /// Untyped pointer to the underlying `GdkPixbufSimpleAnimIter` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_simple_anim_iter_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 }
@@ -80,7 +80,7 @@ public extension PixbufSimpleAnimIterRef {
 ///
 
 open class PixbufSimpleAnimIter: PixbufAnimationIter, PixbufSimpleAnimIterProtocol {
-    /// Designated initialiser from the underlying `C` data type.
+        /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
     /// i.e., ownership is transferred to the `PixbufSimpleAnimIter` instance.
     /// - Parameter op: pointer to the underlying object
@@ -162,7 +162,7 @@ open class PixbufSimpleAnimIter: PixbufAnimationIter, PixbufSimpleAnimIterProtoc
 
 }
 
-// MARK: - no PixbufSimpleAnimIter properties
+// MARK: no PixbufSimpleAnimIter properties
 
 public enum PixbufSimpleAnimIterSignalName: String, SignalNameProtocol {
     /// The notify signal is emitted on an object when one of its properties has
@@ -199,8 +199,8 @@ public extension PixbufSimpleAnimIterProtocol {
     /// - Parameter flags: signal connection flags
     /// - Parameter handler: signal handler to use
     /// - Returns: positive handler ID, or a value less than or equal to `0` in case of an error
-    @discardableResult func connect(signal kind: PixbufSimpleAnimIterSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> CUnsignedLong {
-        func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> CUnsignedLong {
+    @discardableResult func connect(signal kind: PixbufSimpleAnimIterSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> Int {
+        func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> Int {
             let holder = UnsafeMutableRawPointer(Unmanaged.passRetained(data).toOpaque())
             let callback = unsafeBitCast(handler, to: GLibObject.Callback.self)
             let rv = GLibObject.ObjectRef(cast(pixbuf_simple_anim_iter_ptr)).signalConnectData(detailedSignal: name, cHandler: callback, data: holder, destroyData: {
@@ -221,9 +221,12 @@ public extension PixbufSimpleAnimIterProtocol {
     }
 }
 
+// MARK: PixbufSimpleAnimIter Class: PixbufSimpleAnimIterProtocol extension (methods and fields)
 public extension PixbufSimpleAnimIterProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufSimpleAnimIter` instance.
     var pixbuf_simple_anim_iter_ptr: UnsafeMutablePointer<GdkPixbufSimpleAnimIter> { return ptr.assumingMemoryBound(to: GdkPixbufSimpleAnimIter.self) }
+
+
 
 }
 

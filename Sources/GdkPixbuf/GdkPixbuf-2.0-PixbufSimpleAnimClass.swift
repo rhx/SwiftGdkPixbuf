@@ -14,7 +14,7 @@ import GLibObject
 ///
 
 public protocol PixbufSimpleAnimClassProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufSimpleAnimClass` instance.
+        /// Untyped pointer to the underlying `GdkPixbufSimpleAnimClass` instance.
     var ptr: UnsafeMutableRawPointer { get }
 
     /// Typed pointer to the underlying `GdkPixbufSimpleAnimClass` instance.
@@ -27,7 +27,7 @@ public protocol PixbufSimpleAnimClassProtocol {
 ///
 
 public struct PixbufSimpleAnimClassRef: PixbufSimpleAnimClassProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufSimpleAnimClass` instance.
+        /// Untyped pointer to the underlying `GdkPixbufSimpleAnimClass` instance.
     /// For type-safe access, use the generated, typed pointer `_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 }
@@ -80,7 +80,7 @@ public extension PixbufSimpleAnimClassRef {
 ///
 
 open class PixbufSimpleAnimClass: PixbufSimpleAnimClassProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufSimpleAnimClass` instance.
+        /// Untyped pointer to the underlying `GdkPixbufSimpleAnimClass` instance.
     /// For type-safe access, use the generated, typed pointer `_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 
@@ -109,7 +109,7 @@ open class PixbufSimpleAnimClass: PixbufSimpleAnimClassProtocol {
         // no reference counting for GdkPixbufSimpleAnimClass, cannot ref(cast(_ptr))
     }
 
-    /// Do-nothing destructor for`GdkPixbufSimpleAnimClass`.
+    /// Do-nothing destructor for `GdkPixbufSimpleAnimClass`.
     deinit {
         // no reference counting for GdkPixbufSimpleAnimClass, cannot unref(cast(_ptr))
     }
@@ -177,14 +177,17 @@ open class PixbufSimpleAnimClass: PixbufSimpleAnimClassProtocol {
 
 }
 
-// MARK: - no PixbufSimpleAnimClass properties
+// MARK: no PixbufSimpleAnimClass properties
 
-// MARK: - no signals
+// MARK: no PixbufSimpleAnimClass signals
 
 
+// MARK: PixbufSimpleAnimClass Record: PixbufSimpleAnimClassProtocol extension (methods and fields)
 public extension PixbufSimpleAnimClassProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufSimpleAnimClass` instance.
     var _ptr: UnsafeMutablePointer<GdkPixbufSimpleAnimClass> { return ptr.assumingMemoryBound(to: GdkPixbufSimpleAnimClass.self) }
+
+
 
 }
 

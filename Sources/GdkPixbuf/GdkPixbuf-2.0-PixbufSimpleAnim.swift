@@ -14,7 +14,7 @@ import GLibObject
 ///
 /// An opaque struct representing a simple animation.
 public protocol PixbufSimpleAnimProtocol: PixbufAnimationProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufSimpleAnim` instance.
+        /// Untyped pointer to the underlying `GdkPixbufSimpleAnim` instance.
     var ptr: UnsafeMutableRawPointer { get }
 
     /// Typed pointer to the underlying `GdkPixbufSimpleAnim` instance.
@@ -27,7 +27,7 @@ public protocol PixbufSimpleAnimProtocol: PixbufAnimationProtocol {
 ///
 /// An opaque struct representing a simple animation.
 public struct PixbufSimpleAnimRef: PixbufSimpleAnimProtocol {
-    /// Untyped pointer to the underlying `GdkPixbufSimpleAnim` instance.
+        /// Untyped pointer to the underlying `GdkPixbufSimpleAnim` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_simple_anim_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 }
@@ -74,7 +74,7 @@ public extension PixbufSimpleAnimRef {
 
         /// Creates a new, empty animation.
     init( width: CInt, height: CInt, rate: gfloat) {
-        let rv = gdk_pixbuf_simple_anim_new(gint(width), gint(height), rate)
+        let rv: UnsafeMutablePointer<GdkPixbufSimpleAnim>! = cast(gdk_pixbuf_simple_anim_new(gint(width), gint(height), rate))
         ptr = UnsafeMutableRawPointer(cast(rv))
     }
 }
@@ -85,7 +85,7 @@ public extension PixbufSimpleAnimRef {
 ///
 /// An opaque struct representing a simple animation.
 open class PixbufSimpleAnim: PixbufAnimation, PixbufSimpleAnimProtocol {
-    /// Designated initialiser from the underlying `C` data type.
+        /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
     /// i.e., ownership is transferred to the `PixbufSimpleAnim` instance.
     /// - Parameter op: pointer to the underlying object
@@ -165,7 +165,7 @@ open class PixbufSimpleAnim: PixbufAnimation, PixbufSimpleAnimProtocol {
 
     /// Creates a new, empty animation.
     public init( width: CInt, height: CInt, rate: gfloat) {
-        let rv = gdk_pixbuf_simple_anim_new(gint(width), gint(height), rate)
+        let rv: UnsafeMutablePointer<GdkPixbufSimpleAnim>! = cast(gdk_pixbuf_simple_anim_new(gint(width), gint(height), rate))
         super.init(cast(rv))
     }
 
@@ -186,8 +186,8 @@ public extension PixbufSimpleAnimProtocol {
     /// - Parameter transform_from: `ValueTransformer` to use for forward transformation
     /// - Parameter transform_to: `ValueTransformer` to use for backwards transformation
     /// - Returns: binding reference or `nil` in case of an error
-    @discardableResult func bind<Q: PropertyNameProtocol, T: ObjectProtocol>(property source_property: PixbufSimpleAnimPropertyName, to target: T, _ target_property: Q, flags f: BindingFlags = .default_, transformFrom transform_from: @escaping GLibObject.ValueTransformer = { $0.transform(destValue: $1) }, transformTo transform_to: @escaping GLibObject.ValueTransformer = { $0.transform(destValue: $1) }) -> BindingRef! {
-        func _bind(_ source: UnsafePointer<gchar>, to t: T, _ target_property: UnsafePointer<gchar>, flags f: BindingFlags = .default_, holder: BindingClosureHolder, transformFrom transform_from: @convention(c) @escaping (gpointer, gpointer, gpointer, gpointer) -> gboolean, transformTo transform_to: @convention(c) @escaping (gpointer, gpointer, gpointer, gpointer) -> gboolean) -> BindingRef! {
+    @discardableResult func bind<Q: PropertyNameProtocol, T: ObjectProtocol>(property source_property: PixbufSimpleAnimPropertyName, to target: T, _ target_property: Q, flags f: BindingFlags = .default, transformFrom transform_from: @escaping GLibObject.ValueTransformer = { $0.transform(destValue: $1) }, transformTo transform_to: @escaping GLibObject.ValueTransformer = { $0.transform(destValue: $1) }) -> BindingRef! {
+        func _bind(_ source: UnsafePointer<gchar>, to t: T, _ target_property: UnsafePointer<gchar>, flags f: BindingFlags = .default, holder: BindingClosureHolder, transformFrom transform_from: @convention(c) @escaping (gpointer, gpointer, gpointer, gpointer) -> gboolean, transformTo transform_to: @convention(c) @escaping (gpointer, gpointer, gpointer, gpointer) -> gboolean) -> BindingRef! {
             let holder = UnsafeMutableRawPointer(Unmanaged.passRetained(holder).toOpaque())
             let from = unsafeBitCast(transform_from, to: BindingTransformFunc.self)
             let to   = unsafeBitCast(transform_to,   to: BindingTransformFunc.self)
@@ -210,6 +210,23 @@ public extension PixbufSimpleAnimProtocol {
             return holder.transform_to(GLibObject.ValueRef(raw: $1), GLibObject.ValueRef(raw: $2)) ? 1 : 0
         }
         return rv
+    }
+
+    /// Get the value of a PixbufSimpleAnim property
+    /// - Parameter property: the property to get the value for
+    /// - Returns: the value of the named property
+    func get(property: PixbufSimpleAnimPropertyName) -> GLibObject.Value {
+        let v = GLibObject.Value()
+        g_object_get_property(ptr.assumingMemoryBound(to: GObject.self), property.rawValue, v.value_ptr)
+        return v
+    }
+
+    /// Set the value of a PixbufSimpleAnim property.
+    /// *Note* that this will only have an effect on properties that are writable and not construct-only!
+    /// - Parameter property: the property to get the value for
+    /// - Returns: the value of the named property
+    func set(property: PixbufSimpleAnimPropertyName, value v: GLibObject.Value) {
+        g_object_set_property(ptr.assumingMemoryBound(to: GObject.self), property.rawValue, v.value_ptr)
     }
 }
 
@@ -249,8 +266,8 @@ public extension PixbufSimpleAnimProtocol {
     /// - Parameter flags: signal connection flags
     /// - Parameter handler: signal handler to use
     /// - Returns: positive handler ID, or a value less than or equal to `0` in case of an error
-    @discardableResult func connect(signal kind: PixbufSimpleAnimSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> CUnsignedLong {
-        func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> CUnsignedLong {
+    @discardableResult func connect(signal kind: PixbufSimpleAnimSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> Int {
+        func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> Int {
             let holder = UnsafeMutableRawPointer(Unmanaged.passRetained(data).toOpaque())
             let callback = unsafeBitCast(handler, to: GLibObject.Callback.self)
             let rv = GLibObject.ObjectRef(cast(pixbuf_simple_anim_ptr)).signalConnectData(detailedSignal: name, cHandler: callback, data: holder, destroyData: {
@@ -271,6 +288,7 @@ public extension PixbufSimpleAnimProtocol {
     }
 }
 
+// MARK: PixbufSimpleAnim Class: PixbufSimpleAnimProtocol extension (methods and fields)
 public extension PixbufSimpleAnimProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufSimpleAnim` instance.
     var pixbuf_simple_anim_ptr: UnsafeMutablePointer<GdkPixbufSimpleAnim> { return ptr.assumingMemoryBound(to: GdkPixbufSimpleAnim.self) }
@@ -306,6 +324,8 @@ public extension PixbufSimpleAnimProtocol {
             gdk_pixbuf_simple_anim_set_loop(cast(pixbuf_simple_anim_ptr), gboolean(newValue ? 1 : 0))
         }
     }
+
+
 }
 
 
