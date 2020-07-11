@@ -11,11 +11,11 @@ class GdkPixbufTests: XCTestCase {
         let pixbuf = Pixbuf(colorspace: .rgb, hasAlpha: false, bitsPerSample: b, width: w, height: h)
         XCTAssert(pixbuf.colorspace == .rgb)
         XCTAssertFalse(pixbuf.hasAlpha)
-        XCTAssertEqual(pixbuf.bitsPerSample, b)
-        XCTAssertEqual(pixbuf.width, w)
-        XCTAssertEqual(pixbuf.height, h)
+        XCTAssertEqual(pixbuf.bitsPerSample, Int(b))
+        XCTAssertEqual(pixbuf.width, Int(w))
+        XCTAssertEqual(pixbuf.height, Int(h))
         XCTAssertEqual(pixbuf.byteLength, Int(w*h*3))
-        XCTAssertEqual(pixbuf.rowstride, w*3)
+        XCTAssertEqual(pixbuf.rowstride, Int(w*3))
     }
 
 }
