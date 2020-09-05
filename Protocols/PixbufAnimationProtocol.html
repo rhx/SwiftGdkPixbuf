@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           GdkPixbuf 2.40.0 Docs
         </a>
-         (93% documented)
+         (94% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -291,9 +291,9 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B17AnimationProtocolP3ptrSvvp"></a>
+                    <a name="/s:9GdkPixbuf0B17AnimationProtocolP3ptrSvSgvp"></a>
                     <a name="//apple_ref/swift/Property/ptr" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolP3ptrSvvp">ptr</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolP3ptrSvSgvp">ptr</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -308,7 +308,7 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ptr</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ptr</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -321,9 +321,9 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B17AnimationProtocolP20pixbuf_animation_ptrSpySo01_abC0VGvp"></a>
+                    <a name="/s:9GdkPixbuf0B17AnimationProtocolP20pixbuf_animation_ptrSpySo01_abC0VGSgvp"></a>
                     <a name="//apple_ref/swift/Property/pixbuf_animation_ptr" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolP20pixbuf_animation_ptrSpySo01_abC0VGvp">pixbuf_animation_ptr</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolP20pixbuf_animation_ptrSpySo01_abC0VGSgvp">pixbuf_animation_ptr</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -346,7 +346,7 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">pixbuf_animation_ptr</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbufAnimation</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">pixbuf_animation_ptr</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbufAnimation</span><span class="o">&gt;!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -393,6 +393,7 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">@inlinable</span>
 <span class="kd">func</span> <span class="nf">connect</span><span class="p">(</span><span class="n">signal</span> <span class="nv">kind</span><span class="p">:</span> <span class="kt"><a href="../Enums/PixbufAnimationSignalName.html">PixbufAnimationSignalName</a></span><span class="p">,</span> <span class="n">flags</span> <span class="nv">f</span><span class="p">:</span> <span class="kt">ConnectFlags</span> <span class="o">=</span> <span class="kt">ConnectFlags</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">to</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">GLibObject</span><span class="o">.</span><span class="kt">SignalHandler</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
@@ -445,7 +446,7 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                         <p>positive handler ID, or a value less than or equal to <code>0</code> in case of an error</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L386-L405">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L471-L490">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -486,12 +487,13 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getHeight</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">func</span> <span class="nf">getHeight</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L414-L417">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L499-L502">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -499,9 +501,9 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B17AnimationProtocolPAAE7getIter9startTimeSpySo01_abcF0VGSg4GLib0h3ValD0_p_tF"></a>
+                    <a name="/s:9GdkPixbuf0B17AnimationProtocolPAAE7getIter9startTimeAA0bcF3RefVSgqd__Sg_t4GLib0h3ValD0Rd__lF"></a>
                     <a name="//apple_ref/swift/Method/getIter(startTime:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolPAAE7getIter9startTimeSpySo01_abcF0VGSg4GLib0h3ValD0_p_tF">getIter(startTime:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolPAAE7getIter9startTimeAA0bcF3RefVSgqd__Sg_t4GLib0h3ValD0Rd__lF">getIter(startTime:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -551,12 +553,13 @@ area_updated signal.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getIter</span><span class="p">(</span><span class="n">startTime</span> <span class="nv">start_time</span><span class="p">:</span> <span class="kt">TimeValProtocol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbufAnimationIter</span><span class="o">&gt;!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">func</span> <span class="n">getIter</span><span class="o">&lt;</span><span class="kt">TimeValT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">startTime</span> <span class="nv">start_time</span><span class="p">:</span> <span class="kt">TimeValT</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PixbufAnimationIterRef.html">PixbufAnimationIterRef</a></span><span class="o">!</span> <span class="k">where</span> <span class="kt">TimeValT</span> <span class="p">:</span> <span class="kt">TimeValProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L452-L455">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L537-L540">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -564,9 +567,9 @@ area_updated signal.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B17AnimationProtocolPAAE14getStaticImageSpySo01_aB0VGSgyF"></a>
+                    <a name="/s:9GdkPixbuf0B17AnimationProtocolPAAE14getStaticImageAA0B3RefVSgyF"></a>
                     <a name="//apple_ref/swift/Method/getStaticImage()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolPAAE14getStaticImageSpySo01_aB0VGSgyF">getStaticImage()</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolPAAE14getStaticImageAA0B3RefVSgyF">getStaticImage()</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -589,12 +592,13 @@ function will return <code>nil</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getStaticImage</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbuf</span><span class="o">&gt;!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">func</span> <span class="nf">getStaticImage</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PixbufRef.html">PixbufRef</a></span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L463-L466">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L548-L551">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -622,12 +626,13 @@ function will return <code>nil</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getWidth</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">func</span> <span class="nf">getWidth</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L469-L472">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L554-L557">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -635,9 +640,9 @@ function will return <code>nil</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B17AnimationProtocolPAAE3refSpySo01_abC0VGSgyF"></a>
+                    <a name="/s:9GdkPixbuf0B17AnimationProtocolPAAE3refAA0bC3RefVSgyF"></a>
                     <a name="//apple_ref/swift/Method/ref()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolPAAE3refSpySo01_abC0VGSgyF">ref()</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolPAAE3refAA0bC3RefVSgyF">ref()</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -659,12 +664,14 @@ Use g_object_ref().</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">)</span>
-<span class="kd">func</span> <span class="nf">ref</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbufAnimation</span><span class="o">&gt;!</span></code></pre>
+<span class="kd">@discardableResult</span>
+<span class="kd">@inlinable</span>
+<span class="kd">func</span> <span class="nf">ref</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PixbufAnimationRef.html">PixbufAnimationRef</a></span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L478-L481">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L563-L566">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -696,12 +703,13 @@ Use g_object_unref().</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">)</span>
+<span class="kd">@inlinable</span>
 <span class="kd">func</span> <span class="nf">unref</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L487-L490">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L572-L575">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -729,12 +737,13 @@ Use g_object_unref().</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="k">var</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L492-L498">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L577-L583">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -765,12 +774,13 @@ the image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isStaticImage</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="k">var</span> <span class="nv">isStaticImage</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L504-L513">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L589-L598">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -778,9 +788,9 @@ the image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B17AnimationProtocolPAAE11staticImageSpySo01_aB0VGSgvp"></a>
+                    <a name="/s:9GdkPixbuf0B17AnimationProtocolPAAE11staticImageAA0B3RefVSgvp"></a>
                     <a name="//apple_ref/swift/Property/staticImage" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolPAAE11staticImageSpySo01_aB0VGSgvp">staticImage</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolPAAE11staticImageAA0B3RefVSgvp">staticImage</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -803,12 +813,13 @@ function will return <code>nil</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">staticImage</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbuf</span><span class="o">&gt;!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="k">var</span> <span class="nv">staticImage</span><span class="p">:</span> <span class="kt"><a href="../Structs/PixbufRef.html">PixbufRef</a></span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L521-L532">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L606-L617">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -836,12 +847,13 @@ function will return <code>nil</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="k">var</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L535-L541">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L620-L626">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -854,7 +866,7 @@ function will return <code>nil</code>.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-06-21)</p>
+      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-06)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
