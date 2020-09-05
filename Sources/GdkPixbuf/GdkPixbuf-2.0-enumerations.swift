@@ -10,12 +10,17 @@ import GLibObject
 public typealias Colorspace = GdkColorspace
 
 public extension Colorspace {
+    /// Cast constructor, converting any binary integer to a
+    /// `Colorspace`.
+    /// - Parameter raw: The raw integer value to initialise the enum from
+    @inlinable init!<I: BinaryInteger>(_ raw: I) {
+        func castToColorspaceInt<I: BinaryInteger, J: BinaryInteger>(_ param: I) -> J { J(param) }
+        self.init(rawValue: castToColorspaceInt(raw))
+    }
     /// Indicates a red/green/blue additive color space.
-    static let rgb = GDK_COLORSPACE_RGB /* 0 */
-
+    static let rgb = GDK_COLORSPACE_RGB // 0
 }
-func cast<I: BinaryInteger>(_ param: I) -> Colorspace { Colorspace(rawValue: cast(param)) }
-func cast(_ param: Colorspace) -> UInt32 { cast(param.rawValue) }
+
 
 
 /// This enumeration describes the different interpolation modes that
@@ -29,22 +34,29 @@ func cast(_ param: Colorspace) -> UInt32 { cast(param.rawValue) }
 public typealias InterpType = GdkInterpType
 
 public extension InterpType {
+    /// Cast constructor, converting any binary integer to a
+    /// `InterpType`.
+    /// - Parameter raw: The raw integer value to initialise the enum from
+    @inlinable init!<I: BinaryInteger>(_ raw: I) {
+        func castToInterpTypeInt<I: BinaryInteger, J: BinaryInteger>(_ param: I) -> J { J(param) }
+        self.init(rawValue: castToInterpTypeInt(raw))
+    }
     /// Nearest neighbor sampling; this is the fastest
     ///  and lowest quality mode. Quality is normally unacceptable when scaling
     ///  down, but may be OK when scaling up.
-    static let nearest = GDK_INTERP_NEAREST /* 0 */
+    static let nearest = GDK_INTERP_NEAREST // 0
     /// This is an accurate simulation of the PostScript
     ///  image operator without any interpolation enabled.  Each pixel is
     ///  rendered as a tiny parallelogram of solid color, the edges of which
     ///  are implemented with antialiasing.  It resembles nearest neighbor for
     ///  enlargement, and bilinear for reduction.
-    static let tiles = GDK_INTERP_TILES /* 1 */
+    static let tiles = GDK_INTERP_TILES // 1
     /// Best quality/speed balance; use this mode by
     ///  default. Bilinear interpolation.  For enlargement, it is
     ///  equivalent to point-sampling the ideal bilinear-interpolated image.
     ///  For reduction, it is equivalent to laying down small tiles and
     ///  integrating over the coverage area.
-    static let bilinear = GDK_INTERP_BILINEAR /* 2 */
+    static let bilinear = GDK_INTERP_BILINEAR // 2
     /// This is the slowest and highest quality
     ///  reconstruction function. It is derived from the hyperbolic filters in
     ///  Wolberg's "Digital Image Warping", and is formally defined as the
@@ -53,11 +65,9 @@ public extension InterpType {
     ///  **Deprecated**: this interpolation filter is deprecated, as in reality
     ///  it has a lower quality than the `GDK_INTERP_BILINEAR` filter
     ///  (Since: 2.38)
-    static let hyper = GDK_INTERP_HYPER /* 3 */
-
+    static let hyper = GDK_INTERP_HYPER // 3
 }
-func cast<I: BinaryInteger>(_ param: I) -> InterpType { InterpType(rawValue: cast(param)) }
-func cast(_ param: InterpType) -> UInt32 { cast(param.rawValue) }
+
 
 
 /// These values can be passed to
@@ -71,18 +81,23 @@ func cast(_ param: InterpType) -> UInt32 { cast(param.rawValue) }
 public typealias PixbufAlphaMode = GdkPixbufAlphaMode
 
 public extension PixbufAlphaMode {
+    /// Cast constructor, converting any binary integer to a
+    /// `PixbufAlphaMode`.
+    /// - Parameter raw: The raw integer value to initialise the enum from
+    @inlinable init!<I: BinaryInteger>(_ raw: I) {
+        func castToPixbufAlphaModeInt<I: BinaryInteger, J: BinaryInteger>(_ param: I) -> J { J(param) }
+        self.init(rawValue: castToPixbufAlphaModeInt(raw))
+    }
     /// A bilevel clipping mask (black and white)
     ///  will be created and used to draw the image.  Pixels below 0.5 opacity
     ///  will be considered fully transparent, and all others will be
     ///  considered fully opaque.
-    static let bilevel = GDK_PIXBUF_ALPHA_BILEVEL /* 0 */
+    static let bilevel = GDK_PIXBUF_ALPHA_BILEVEL // 0
     /// For now falls back to `GDK_PIXBUF_ALPHA_BILEVEL`.
     ///  In the future it will do full alpha compositing.
-    static let full = GDK_PIXBUF_ALPHA_FULL /* 1 */
-
+    static let full = GDK_PIXBUF_ALPHA_FULL // 1
 }
-func cast<I: BinaryInteger>(_ param: I) -> PixbufAlphaMode { PixbufAlphaMode(rawValue: cast(param)) }
-func cast(_ param: PixbufAlphaMode) -> UInt32 { cast(param.rawValue) }
+
 
 
 /// An error code in the `GDK_PIXBUF_ERROR` domain. Many gdk-pixbuf
@@ -91,37 +106,30 @@ func cast(_ param: PixbufAlphaMode) -> UInt32 { cast(param.rawValue) }
 public typealias PixbufError = GdkPixbufError
 
 public extension PixbufError {
+    /// Cast constructor, converting any binary integer to a
+    /// `PixbufError`.
+    /// - Parameter raw: The raw integer value to initialise the enum from
+    @inlinable init!<I: BinaryInteger>(_ raw: I) {
+        func castToPixbufErrorInt<I: BinaryInteger, J: BinaryInteger>(_ param: I) -> J { J(param) }
+        self.init(rawValue: castToPixbufErrorInt(raw))
+    }
     /// An image file was broken somehow.
-    static let corruptImage = GDK_PIXBUF_ERROR_CORRUPT_IMAGE /* 0 */
+    static let corruptImage = GDK_PIXBUF_ERROR_CORRUPT_IMAGE // 0
     /// Not enough memory.
-    static let insufficientMemory = GDK_PIXBUF_ERROR_INSUFFICIENT_MEMORY /* 1 */
+    static let insufficientMemory = GDK_PIXBUF_ERROR_INSUFFICIENT_MEMORY // 1
     /// A bad option was passed to a pixbuf save module.
-    static let badOption = GDK_PIXBUF_ERROR_BAD_OPTION /* 2 */
+    static let badOption = GDK_PIXBUF_ERROR_BAD_OPTION // 2
     /// Unknown image type.
-    static let unknownType = GDK_PIXBUF_ERROR_UNKNOWN_TYPE /* 3 */
+    static let unknownType = GDK_PIXBUF_ERROR_UNKNOWN_TYPE // 3
     /// Don't know how to perform the
     ///  given operation on the type of image at hand.
-    static let unsupportedOperation = GDK_PIXBUF_ERROR_UNSUPPORTED_OPERATION /* 4 */
+    static let unsupportedOperation = GDK_PIXBUF_ERROR_UNSUPPORTED_OPERATION // 4
     /// Generic failure code, something went wrong.
-    static let failed = GDK_PIXBUF_ERROR_FAILED /* 5 */
+    static let failed = GDK_PIXBUF_ERROR_FAILED // 5
     /// Only part of the animation was loaded.
-    static let incompleteAnimation = GDK_PIXBUF_ERROR_INCOMPLETE_ANIMATION /* 6 */
-    /// An image file was broken somehow.
-    @available(*, deprecated) static let corrupt_image = PixbufError.corruptImage /* GDK_PIXBUF_ERROR_CORRUPT_IMAGE */
-    /// Not enough memory.
-    @available(*, deprecated) static let insufficient_memory = PixbufError.insufficientMemory /* GDK_PIXBUF_ERROR_INSUFFICIENT_MEMORY */
-    /// A bad option was passed to a pixbuf save module.
-    @available(*, deprecated) static let bad_option = PixbufError.badOption /* GDK_PIXBUF_ERROR_BAD_OPTION */
-    /// Unknown image type.
-    @available(*, deprecated) static let unknown_type = PixbufError.unknownType /* GDK_PIXBUF_ERROR_UNKNOWN_TYPE */
-    /// Don't know how to perform the
-    ///  given operation on the type of image at hand.
-    @available(*, deprecated) static let unsupported_operation = PixbufError.unsupportedOperation /* GDK_PIXBUF_ERROR_UNSUPPORTED_OPERATION */
-    /// Only part of the animation was loaded.
-    @available(*, deprecated) static let incomplete_animation = PixbufError.incompleteAnimation /* GDK_PIXBUF_ERROR_INCOMPLETE_ANIMATION */
+    static let incompleteAnimation = GDK_PIXBUF_ERROR_INCOMPLETE_ANIMATION // 6
 }
-func cast<I: BinaryInteger>(_ param: I) -> PixbufError { PixbufError(rawValue: cast(param)) }
-func cast(_ param: PixbufError) -> UInt32 { cast(param.rawValue) }
+
 
 
 /// The possible rotations which can be passed to `gdk_pixbuf_rotate_simple()`.
@@ -129,16 +137,20 @@ func cast(_ param: PixbufError) -> UInt32 { cast(param.rawValue) }
 public typealias PixbufRotation = GdkPixbufRotation
 
 public extension PixbufRotation {
+    /// Cast constructor, converting any binary integer to a
+    /// `PixbufRotation`.
+    /// - Parameter raw: The raw integer value to initialise the enum from
+    @inlinable init!<I: BinaryInteger>(_ raw: I) {
+        func castToPixbufRotationInt<I: BinaryInteger, J: BinaryInteger>(_ param: I) -> J { J(param) }
+        self.init(rawValue: castToPixbufRotationInt(raw))
+    }
     /// No rotation.
-    static let `none` = GDK_PIXBUF_ROTATE_NONE /* 0 */
+    static let `none` = GDK_PIXBUF_ROTATE_NONE // 0
     /// Rotate by 90 degrees.
-    static let counterclockwise = GDK_PIXBUF_ROTATE_COUNTERCLOCKWISE /* 90 */
+    static let counterclockwise = GDK_PIXBUF_ROTATE_COUNTERCLOCKWISE // 90
     /// Rotate by 180 degrees.
-    static let upsidedown = GDK_PIXBUF_ROTATE_UPSIDEDOWN /* 180 */
+    static let upsidedown = GDK_PIXBUF_ROTATE_UPSIDEDOWN // 180
     /// Rotate by 270 degrees.
-    static let clockwise = GDK_PIXBUF_ROTATE_CLOCKWISE /* 270 */
-    /// No rotation.
-    @available(*, deprecated) static let none_ = PixbufRotation.`none` /* GDK_PIXBUF_ROTATE_NONE */
+    static let clockwise = GDK_PIXBUF_ROTATE_CLOCKWISE // 270
 }
-func cast<I: BinaryInteger>(_ param: I) -> PixbufRotation { PixbufRotation(rawValue: cast(param)) }
-func cast(_ param: PixbufRotation) -> UInt32 { cast(param.rawValue) }
+

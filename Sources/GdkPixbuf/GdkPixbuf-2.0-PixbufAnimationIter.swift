@@ -16,10 +16,11 @@ import GLibObject
 /// certain position in an animation.
 public protocol PixbufAnimationIterProtocol: ObjectProtocol {
         /// Untyped pointer to the underlying `GdkPixbufAnimationIter` instance.
-    var ptr: UnsafeMutableRawPointer { get }
+    var ptr: UnsafeMutableRawPointer! { get }
 
     /// Typed pointer to the underlying `GdkPixbufAnimationIter` instance.
-    var pixbuf_animation_iter_ptr: UnsafeMutablePointer<GdkPixbufAnimationIter> { get }
+    var pixbuf_animation_iter_ptr: UnsafeMutablePointer<GdkPixbufAnimationIter>! { get }
+
 }
 
 /// The `PixbufAnimationIterRef` type acts as a lightweight Swift reference to an underlying `GdkPixbufAnimationIter` instance.
@@ -31,46 +32,76 @@ public protocol PixbufAnimationIterProtocol: ObjectProtocol {
 public struct PixbufAnimationIterRef: PixbufAnimationIterProtocol {
         /// Untyped pointer to the underlying `GdkPixbufAnimationIter` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_animation_iter_ptr` property instead.
-    public let ptr: UnsafeMutableRawPointer
+    public let ptr: UnsafeMutableRawPointer!
 }
 
 public extension PixbufAnimationIterRef {
     /// Designated initialiser from the underlying `C` data type
-    init(_ p: UnsafeMutablePointer<GdkPixbufAnimationIter>) {
-        ptr = UnsafeMutableRawPointer(p)    }
+    @inlinable init(_ p: UnsafeMutablePointer<GdkPixbufAnimationIter>) {
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Designated initialiser from a constant pointer to the underlying `C` data type
+    @inlinable init(_ p: UnsafePointer<GdkPixbufAnimationIter>) {
+        ptr = UnsafeMutableRawPointer(UnsafeMutablePointer(mutating: p))
+    }
+
+    /// Conditional initialiser from an optional pointer to the underlying `C` data type
+    @inlinable init!(_ maybePointer: UnsafeMutablePointer<GdkPixbufAnimationIter>?) {
+        guard let p = maybePointer else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional, non-mutable pointer to the underlying `C` data type
+    @inlinable init!(_ maybePointer: UnsafePointer<GdkPixbufAnimationIter>?) {
+        guard let p = UnsafeMutablePointer(mutating: maybePointer) else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional `gpointer`
+    @inlinable init!(gpointer g: gpointer?) {
+        guard let p = g else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional, non-mutable `gconstpointer`
+    @inlinable init!(gconstpointer g: gconstpointer?) {
+        guard let p = UnsafeMutableRawPointer(mutating: g) else { return nil }
+        ptr = p
+    }
 
     /// Reference intialiser for a related type that implements `PixbufAnimationIterProtocol`
-    init<T: PixbufAnimationIterProtocol>(_ other: T) {
+    @inlinable init<T: PixbufAnimationIterProtocol>(_ other: T) {
         ptr = other.ptr
     }
 
     /// Unsafe typed initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
-    init<T>(cPointer: UnsafeMutablePointer<T>) {
+    @inlinable init<T>(cPointer: UnsafeMutablePointer<T>) {
         ptr = UnsafeMutableRawPointer(cPointer)
     }
 
     /// Unsafe typed initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
-    init<T>(constPointer: UnsafePointer<T>) {
+    @inlinable init<T>(constPointer: UnsafePointer<T>) {
         ptr = UnsafeMutableRawPointer(mutating: UnsafeRawPointer(constPointer))
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
-    init(raw: UnsafeRawPointer) {
+    @inlinable init(raw: UnsafeRawPointer) {
         ptr = UnsafeMutableRawPointer(mutating: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
-    init(raw: UnsafeMutableRawPointer) {
+    @inlinable init(raw: UnsafeMutableRawPointer) {
         ptr = raw
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
-    init(opaquePointer: OpaquePointer) {
+    @inlinable init(opaquePointer: OpaquePointer) {
         ptr = UnsafeMutableRawPointer(opaquePointer)
     }
 
@@ -87,77 +118,123 @@ open class PixbufAnimationIter: Object, PixbufAnimationIterProtocol {
     /// This creates an instance without performing an unbalanced retain
     /// i.e., ownership is transferred to the `PixbufAnimationIter` instance.
     /// - Parameter op: pointer to the underlying object
-    public init(_ op: UnsafeMutablePointer<GdkPixbufAnimationIter>) {
-        super.init(cast(op))
+    @inlinable public init(_ op: UnsafeMutablePointer<GdkPixbufAnimationIter>) {
+        super.init(cPointer: op)
+    }
+
+    /// Designated initialiser from a constant pointer to the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimationIter` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init(_ op: UnsafePointer<GdkPixbufAnimationIter>) {
+        super.init(raw: UnsafeMutableRawPointer(UnsafeMutablePointer(mutating: op)))
+    }
+
+    /// Optional initialiser from a non-mutating `gpointer` to
+    /// the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimationIter` instance.
+    /// - Parameter op: gpointer to the underlying object
+    @inlinable override public init!(gpointer op: gpointer?) {
+        guard let p = UnsafeMutableRawPointer(op) else { return nil }
+        super.init(raw: p)
+    }
+
+    /// Optional initialiser from a non-mutating `gconstpointer` to
+    /// the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimationIter` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable override public init!(gconstpointer op: gconstpointer?) {
+        guard let p = op else { return nil }
+        super.init(raw: p)
+    }
+
+    /// Optional initialiser from a constant pointer to the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimationIter` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init!(_ op: UnsafePointer<GdkPixbufAnimationIter>?) {
+        guard let p = UnsafeMutablePointer(mutating: op) else { return nil }
+        super.init(cPointer: p)
+    }
+
+    /// Optional initialiser from the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimationIter` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init!(_ op: UnsafeMutablePointer<GdkPixbufAnimationIter>?) {
+        guard let p = op else { return nil }
+        super.init(cPointer: p)
     }
 
     /// Designated initialiser from the underlying `C` data type.
     /// Will retain `GdkPixbufAnimationIter`.
     /// i.e., ownership is transferred to the `PixbufAnimationIter` instance.
     /// - Parameter op: pointer to the underlying object
-    public init(retaining op: UnsafeMutablePointer<GdkPixbufAnimationIter>) {
-        super.init(retaining: cast(op))
+    @inlinable public init(retaining op: UnsafeMutablePointer<GdkPixbufAnimationIter>) {
+        super.init(retainingCPointer: op)
     }
 
     /// Reference intialiser for a related type that implements `PixbufAnimationIterProtocol`
     /// Will retain `GdkPixbufAnimationIter`.
     /// - Parameter other: an instance of a related type that implements `PixbufAnimationIterProtocol`
-    public init<T: PixbufAnimationIterProtocol>(pixbufAnimationIter other: T) {
-        super.init(retaining: cast(other.pixbuf_animation_iter_ptr))
+    @inlinable public init<T: PixbufAnimationIterProtocol>(pixbufAnimationIter other: T) {
+        super.init(retainingRaw: other.ptr)
     }
 
     /// Unsafe typed initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
     /// - Parameter cPointer: pointer to the underlying object
-    override public init<T>(cPointer p: UnsafeMutablePointer<T>) {
+    @inlinable override public init<T>(cPointer p: UnsafeMutablePointer<T>) {
         super.init(cPointer: p)
     }
 
     /// Unsafe typed, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
     /// - Parameter cPointer: pointer to the underlying object
-    override public init<T>(retainingCPointer cPointer: UnsafeMutablePointer<T>) {
+    @inlinable override public init<T>(retainingCPointer cPointer: UnsafeMutablePointer<T>) {
         super.init(retainingCPointer: cPointer)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
     /// - Parameter p: raw pointer to the underlying object
-    override public init(raw p: UnsafeRawPointer) {
+    @inlinable override public init(raw p: UnsafeRawPointer) {
         super.init(raw: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
-    override public init(retainingRaw raw: UnsafeRawPointer) {
+    @inlinable override public init(retainingRaw raw: UnsafeRawPointer) {
         super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
     /// - Parameter p: mutable raw pointer to the underlying object
-    override public init(raw p: UnsafeMutableRawPointer) {
+    @inlinable override public init(raw p: UnsafeMutableRawPointer) {
         super.init(raw: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
     /// - Parameter raw: mutable raw pointer to the underlying object
-    override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+    @inlinable override public init(retainingRaw raw: UnsafeMutableRawPointer) {
         super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
     /// - Parameter p: opaque pointer to the underlying object
-    override public init(opaquePointer p: OpaquePointer) {
+    @inlinable override public init(opaquePointer p: OpaquePointer) {
         super.init(opaquePointer: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
     /// - Parameter p: opaque pointer to the underlying object
-    override public init(retainingOpaquePointer p: OpaquePointer) {
+    @inlinable override public init(retainingOpaquePointer p: OpaquePointer) {
         super.init(retainingOpaquePointer: p)
     }
 
@@ -202,11 +279,11 @@ public extension PixbufAnimationIterProtocol {
     /// - Parameter flags: signal connection flags
     /// - Parameter handler: signal handler to use
     /// - Returns: positive handler ID, or a value less than or equal to `0` in case of an error
-    @discardableResult func connect(signal kind: PixbufAnimationIterSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> Int {
+    @inlinable @discardableResult func connect(signal kind: PixbufAnimationIterSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> Int {
         func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> Int {
             let holder = UnsafeMutableRawPointer(Unmanaged.passRetained(data).toOpaque())
             let callback = unsafeBitCast(handler, to: GLibObject.Callback.self)
-            let rv = GLibObject.ObjectRef(cast(pixbuf_animation_iter_ptr)).signalConnectData(detailedSignal: name, cHandler: callback, data: holder, destroyData: {
+            let rv = GLibObject.ObjectRef(raw: ptr).signalConnectData(detailedSignal: name, cHandler: callback, data: holder, destroyData: {
                 if let swift = UnsafeRawPointer($0) {
                     let holder = Unmanaged<GLibObject.SignalHandlerClosureHolder>.fromOpaque(swift)
                     holder.release()
@@ -227,7 +304,7 @@ public extension PixbufAnimationIterProtocol {
 // MARK: PixbufAnimationIter Class: PixbufAnimationIterProtocol extension (methods and fields)
 public extension PixbufAnimationIterProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufAnimationIter` instance.
-    var pixbuf_animation_iter_ptr: UnsafeMutablePointer<GdkPixbufAnimationIter> { return ptr.assumingMemoryBound(to: GdkPixbufAnimationIter.self) }
+    @inlinable var pixbuf_animation_iter_ptr: UnsafeMutablePointer<GdkPixbufAnimationIter>! { return ptr?.assumingMemoryBound(to: GdkPixbufAnimationIter.self) }
 
     /// Possibly advances an animation to a new frame. Chooses the frame based
     /// on the start time passed to `gdk_pixbuf_animation_get_iter()`.
@@ -248,9 +325,9 @@ public extension PixbufAnimationIterProtocol {
     /// display, assuming the display had been rendered prior to advancing;
     /// if `true`, you need to call `gdk_pixbuf_animation_iter_get_pixbuf()`
     /// and update the display with the new pixbuf.
-    func advance(currentTime current_time: TimeValProtocol) -> Bool {
-        let rv = gdk_pixbuf_animation_iter_advance(cast(pixbuf_animation_iter_ptr), cast(current_time.ptr))
-        return Bool(rv != 0)
+    @inlinable func advance<TimeValT: TimeValProtocol>(currentTime current_time: TimeValT? = nil) -> Bool {
+        let rv = ((gdk_pixbuf_animation_iter_advance(pixbuf_animation_iter_ptr, current_time?._ptr)) != 0)
+        return rv
     }
 
     /// Gets the number of milliseconds the current pixbuf should be displayed,
@@ -261,9 +338,9 @@ public extension PixbufAnimationIterProtocol {
     /// Note that some formats, like GIF, might clamp the timeout values in the
     /// image file to avoid updates that are just too quick. The minimum timeout
     /// for GIF images is currently 20 milliseconds.
-    func getDelayTime() -> Int {
-        let rv: Int = cast(gdk_pixbuf_animation_iter_get_delay_time(cast(pixbuf_animation_iter_ptr)))
-        return cast(rv)
+    @inlinable func getDelayTime() -> Int {
+        let rv = Int(gdk_pixbuf_animation_iter_get_delay_time(pixbuf_animation_iter_ptr))
+        return rv
     }
 
     /// Gets the current pixbuf which should be displayed; the pixbuf might not
@@ -277,9 +354,9 @@ public extension PixbufAnimationIterProtocol {
     /// `gdk_pixbuf_animation_iter_advance()`. Copy the pixbuf to keep it
     /// (don't just add a reference), as it may get recycled as you advance
     /// the iterator.
-    func getPixbuf() -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_animation_iter_get_pixbuf(cast(pixbuf_animation_iter_ptr)))
-        return cast(rv)
+    @inlinable func getPixbuf() -> PixbufRef! {
+        let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_iter_get_pixbuf(pixbuf_animation_iter_ptr)))
+        return rv
     }
 
     /// Used to determine how to respond to the area_updated signal on
@@ -287,9 +364,9 @@ public extension PixbufAnimationIterProtocol {
     /// for an area of the frame currently streaming in to the loader. So if
     /// you're on the currently loading frame, you need to redraw the screen for
     /// the updated area.
-    func onCurrentlyLoadingFrame() -> Bool {
-        let rv = gdk_pixbuf_animation_iter_on_currently_loading_frame(cast(pixbuf_animation_iter_ptr))
-        return Bool(rv != 0)
+    @inlinable func onCurrentlyLoadingFrame() -> Bool {
+        let rv = ((gdk_pixbuf_animation_iter_on_currently_loading_frame(pixbuf_animation_iter_ptr)) != 0)
+        return rv
     }
     /// Gets the number of milliseconds the current pixbuf should be displayed,
     /// or -1 if the current pixbuf should be displayed forever. `g_timeout_add()`
@@ -299,7 +376,7 @@ public extension PixbufAnimationIterProtocol {
     /// Note that some formats, like GIF, might clamp the timeout values in the
     /// image file to avoid updates that are just too quick. The minimum timeout
     /// for GIF images is currently 20 milliseconds.
-    var delayTime: Int {
+    @inlinable var delayTime: Int {
         /// Gets the number of milliseconds the current pixbuf should be displayed,
         /// or -1 if the current pixbuf should be displayed forever. `g_timeout_add()`
         /// conveniently takes a timeout in milliseconds, so you can use a timeout
@@ -309,8 +386,8 @@ public extension PixbufAnimationIterProtocol {
         /// image file to avoid updates that are just too quick. The minimum timeout
         /// for GIF images is currently 20 milliseconds.
         get {
-            let rv: Int = cast(gdk_pixbuf_animation_iter_get_delay_time(cast(pixbuf_animation_iter_ptr)))
-            return cast(rv)
+            let rv = Int(gdk_pixbuf_animation_iter_get_delay_time(pixbuf_animation_iter_ptr))
+            return rv
         }
     }
 
@@ -325,7 +402,7 @@ public extension PixbufAnimationIterProtocol {
     /// `gdk_pixbuf_animation_iter_advance()`. Copy the pixbuf to keep it
     /// (don't just add a reference), as it may get recycled as you advance
     /// the iterator.
-    var pixbuf: UnsafeMutablePointer<GdkPixbuf>! {
+    @inlinable var pixbuf: PixbufRef! {
         /// Gets the current pixbuf which should be displayed; the pixbuf might not
         /// be the same size as the animation itself
         /// (`gdk_pixbuf_animation_get_width()`, `gdk_pixbuf_animation_get_height()`).
@@ -338,8 +415,8 @@ public extension PixbufAnimationIterProtocol {
         /// (don't just add a reference), as it may get recycled as you advance
         /// the iterator.
         get {
-            let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_animation_iter_get_pixbuf(cast(pixbuf_animation_iter_ptr)))
-            return cast(rv)
+            let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_iter_get_pixbuf(pixbuf_animation_iter_ptr)))
+            return rv
         }
     }
 

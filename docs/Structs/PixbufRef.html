@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           GdkPixbuf 2.40.0 Docs
         </a>
-         (93% documented)
+         (94% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -294,9 +294,9 @@ one row and the start of the next).</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV3ptrSvvp"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV3ptrSvSgvp"></a>
                     <a name="//apple_ref/swift/Property/ptr" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV3ptrSvvp">ptr</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV3ptrSvSgvp">ptr</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -314,12 +314,12 @@ one row and the start of the next).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">ptr</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">ptr</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L40">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L41">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -357,12 +357,168 @@ one row and the start of the next).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">p</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbuf</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">p</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbuf</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L45-L46">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L46-L48">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B3RefVyACSPySo01_aB0VGcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefVyACSPySo01_aB0VGcfc">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Designated initialiser from a constant pointer to the underlying <code>C</code> data type</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">p</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbuf</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L51-L53">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B3RefVyACSgSpySo01_aB0VGSgcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefVyACSgSpySo01_aB0VGSgcfc">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Conditional initialiser from an optional pointer to the underlying <code>C</code> data type</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="o">!</span><span class="p">(</span><span class="n">_</span> <span class="nv">maybePointer</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbuf</span><span class="o">&gt;</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L56-L59">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B3RefVyACSgSPySo01_aB0VGSgcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefVyACSgSPySo01_aB0VGSgcfc">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Conditional initialiser from an optional, non-mutable pointer to the underlying <code>C</code> data type</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="o">!</span><span class="p">(</span><span class="n">_</span> <span class="nv">maybePointer</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbuf</span><span class="o">&gt;</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L62-L65">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B3RefV8gpointerACSgSvSg_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(gpointer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV8gpointerACSgSvSg_tcfc">init(gpointer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Conditional initialiser from an optional <code>gpointer</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="o">!</span><span class="p">(</span><span class="n">gpointer</span> <span class="nv">g</span><span class="p">:</span> <span class="n">gpointer</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L68-L71">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B3RefV13gconstpointerACSgSVSg_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(gconstpointer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV13gconstpointerACSgSVSg_tcfc">init(gconstpointer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Conditional initialiser from an optional, non-mutable <code>gconstpointer</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="o">!</span><span class="p">(</span><span class="n">gconstpointer</span> <span class="nv">g</span><span class="p">:</span> <span class="n">gconstpointer</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L74-L77">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -387,12 +543,13 @@ one row and the start of the next).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">other</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PixbufProtocol.html">PixbufProtocol</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">other</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PixbufProtocol.html">PixbufProtocol</a></span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L49-L51">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L80-L82">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -418,12 +575,13 @@ one row and the start of the next).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">cPointer</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">cPointer</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L55-L57">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L86-L88">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -449,12 +607,13 @@ one row and the start of the next).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">constPointer</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">constPointer</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L61-L63">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L92-L94">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -480,12 +639,13 @@ one row and the start of the next).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">raw</span><span class="p">:</span> <span class="kt">UnsafeRawPointer</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="nv">raw</span><span class="p">:</span> <span class="kt">UnsafeRawPointer</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L67-L69">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L98-L100">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -511,12 +671,13 @@ one row and the start of the next).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">raw</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="nv">raw</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L73-L75">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L104-L106">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -542,12 +703,13 @@ one row and the start of the next).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">opaquePointer</span><span class="p">:</span> <span class="kt">OpaquePointer</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="nv">opaquePointer</span><span class="p">:</span> <span class="kt">OpaquePointer</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L79-L81">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L110-L112">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -555,9 +717,9 @@ one row and the start of the next).</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV10colorspace8hasAlpha13bitsPerSample5width6heightACSo0A10Colorspacea_Sbs5Int32VA2Ltcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV10colorspace8hasAlpha13bitsPerSample5width6heightACSo0A10Colorspacea_SbS3itcfc"></a>
                     <a name="//apple_ref/swift/Method/init(colorspace:hasAlpha:bitsPerSample:width:height:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV10colorspace8hasAlpha13bitsPerSample5width6heightACSo0A10Colorspacea_Sbs5Int32VA2Ltcfc">init(colorspace:hasAlpha:bitsPerSample:width:height:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV10colorspace8hasAlpha13bitsPerSample5width6heightACSo0A10Colorspacea_SbS3itcfc">init(colorspace:hasAlpha:bitsPerSample:width:height:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -576,12 +738,13 @@ you will have to fill it completely yourself.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">colorspace</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:9GdkPixbuf10Colorspacea">Colorspace</a></span><span class="p">,</span> <span class="n">hasAlpha</span> <span class="nv">has_alpha</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">bitsPerSample</span> <span class="nv">bits_per_sample</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="nv">colorspace</span><span class="p">:</span> <span class="kt">GdkColorspace</span><span class="p">,</span> <span class="n">hasAlpha</span> <span class="nv">has_alpha</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">bitsPerSample</span> <span class="nv">bits_per_sample</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L86-L89">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L117-L120">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -589,9 +752,9 @@ you will have to fill it completely yourself.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV5bytes10colorspace8hasAlpha13bitsPerSample5width6height9rowstrideAC4GLib13BytesProtocol_p_So0A10ColorspaceaSbs5Int32VA3Ptcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV5bytes10colorspace8hasAlpha13bitsPerSample5width6height9rowstrideACx_So0A10ColorspaceaSbS4itc4GLib13BytesProtocolRzlufc"></a>
                     <a name="//apple_ref/swift/Method/init(bytes:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV5bytes10colorspace8hasAlpha13bitsPerSample5width6height9rowstrideAC4GLib13BytesProtocol_p_So0A10ColorspaceaSbs5Int32VA3Ptcfc">init(bytes:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV5bytes10colorspace8hasAlpha13bitsPerSample5width6height9rowstrideACx_So0A10ColorspaceaSbS4itc4GLib13BytesProtocolRzlufc">init(bytes:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -608,12 +771,13 @@ This is the <code>GBytes</code> variant of <code>gdk_pixbuf_new_from_data()</cod
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">bytes</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">BytesProtocol</span><span class="p">,</span> <span class="nv">colorspace</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:9GdkPixbuf10Colorspacea">Colorspace</a></span><span class="p">,</span> <span class="n">hasAlpha</span> <span class="nv">has_alpha</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">bitsPerSample</span> <span class="nv">bits_per_sample</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">rowstride</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">init</span><span class="o">&lt;</span><span class="kt">BytesT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">bytes</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">BytesT</span><span class="p">,</span> <span class="nv">colorspace</span><span class="p">:</span> <span class="kt">GdkColorspace</span><span class="p">,</span> <span class="n">hasAlpha</span> <span class="nv">has_alpha</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">bitsPerSample</span> <span class="nv">bits_per_sample</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">rowstride</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">where</span> <span class="kt">BytesT</span> <span class="p">:</span> <span class="kt">BytesProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L94-L97">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L125-L128">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -621,9 +785,9 @@ This is the <code>GBytes</code> variant of <code>gdk_pixbuf_new_from_data()</cod
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV4data10colorspace8hasAlpha13bitsPerSample5width6height9rowstride9destroyFn0nO4DataACSPys5UInt8VG_So0A10ColorspaceaSbs5Int32VA3SySpyANGSg_SvSgtXCSvtcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV4data10colorspace8hasAlpha13bitsPerSample5width6height9rowstride9destroyFn0nO4DataACSPys5UInt8VGSg_So0A10ColorspaceaSbS4iySpyANGSg_SvSgtXCSgAUtcfc"></a>
                     <a name="//apple_ref/swift/Method/init(data:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:destroyFn:destroyFnData:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV4data10colorspace8hasAlpha13bitsPerSample5width6height9rowstride9destroyFn0nO4DataACSPys5UInt8VG_So0A10ColorspaceaSbs5Int32VA3SySpyANGSg_SvSgtXCSvtcfc">init(data:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:destroyFn:destroyFnData:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV4data10colorspace8hasAlpha13bitsPerSample5width6height9rowstride9destroyFn0nO4DataACSPys5UInt8VGSg_So0A10ColorspaceaSbS4iySpyANGSg_SvSgtXCSgAUtcfc">init(data:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:destroyFn:destroyFnData:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -647,12 +811,13 @@ it is its responsibility to free the pixel array.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="n">guchar</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">colorspace</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:9GdkPixbuf10Colorspacea">Colorspace</a></span><span class="p">,</span> <span class="n">hasAlpha</span> <span class="nv">has_alpha</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">bitsPerSample</span> <span class="nv">bits_per_sample</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">rowstride</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="n">destroyFn</span> <span class="nv">destroy_fn</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:9GdkPixbuf0B13DestroyNotifya">PixbufDestroyNotify</a></span><span class="p">,</span> <span class="n">destroyFnData</span> <span class="nv">destroy_fn_data</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="n">guchar</span><span class="o">&gt;!</span><span class="p">,</span> <span class="nv">colorspace</span><span class="p">:</span> <span class="kt">GdkColorspace</span><span class="p">,</span> <span class="n">hasAlpha</span> <span class="nv">has_alpha</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">bitsPerSample</span> <span class="nv">bits_per_sample</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">rowstride</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">destroyFn</span> <span class="nv">destroy_fn</span><span class="p">:</span> <span class="kt">GdkPixbufDestroyNotify</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">destroyFnData</span> <span class="nv">destroy_fn_data</span><span class="p">:</span> <span class="n">gpointer</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L109-L112">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L140-L143">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -660,9 +825,9 @@ it is its responsibility to free the pixel array.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV4fileACSPys4Int8VG_tKcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV4fileACSPys4Int8VGSg_tKcfc"></a>
                     <a name="//apple_ref/swift/Method/init(file:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV4fileACSPys4Int8VG_tKcfc">init(file:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV4fileACSPys4Int8VGSg_tKcfc">init(file:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -679,12 +844,13 @@ Possible errors are in the <code>GDK_PIXBUF_ERROR</code> and <code>G_FILE_ERROR<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">file</span> <span class="kt">String_</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="n">file</span> <span class="nv">filename</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L117-L122">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L148-L153">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -692,9 +858,9 @@ Possible errors are in the <code>GDK_PIXBUF_ERROR</code> and <code>G_FILE_ERROR<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV11fileAtScale5width6height19preserveAspectRatioACSPys4Int8VG_s5Int32VALSbtKcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV11fileAtScale5width6height19preserveAspectRatioACSPys4Int8VGSg_S2iSbtKcfc"></a>
                     <a name="//apple_ref/swift/Method/init(fileAtScale:width:height:preserveAspectRatio:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV11fileAtScale5width6height19preserveAspectRatioACSPys4Int8VG_s5Int32VALSbtKcfc">init(fileAtScale:width:height:preserveAspectRatio:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV11fileAtScale5width6height19preserveAspectRatioACSPys4Int8VGSg_S2iSbtKcfc">init(fileAtScale:width:height:preserveAspectRatio:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -720,12 +886,13 @@ allowed since 2.8.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">fileAtScale</span> <span class="kt">String_</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="n">fileAtScale</span> <span class="nv">filename</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L136-L141">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L167-L172">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -733,9 +900,9 @@ allowed since 2.8.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV10fileAtSize5width6heightACSPys4Int8VG_s5Int32VAKtKcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV10fileAtSize5width6heightACSPys4Int8VGSg_S2itKcfc"></a>
                     <a name="//apple_ref/swift/Method/init(fileAtSize:width:height:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV10fileAtSize5width6heightACSPys4Int8VG_s5Int32VAKtKcfc">init(fileAtSize:width:height:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV10fileAtSize5width6heightACSPys4Int8VGSg_S2itKcfc">init(fileAtSize:width:height:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -759,12 +926,13 @@ and image at the requested size, regardless of aspect ratio, use
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">fileAtSize</span> <span class="kt">String_</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="n">fileAtSize</span> <span class="nv">filename</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L153-L158">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L184-L189">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -772,9 +940,9 @@ and image at the requested size, regardless of aspect ratio, use
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV6inline4data10copyPixelsACs5Int32V_SPys5UInt8VGSbtKcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV6inline4data10copyPixelsACSi_SPys5UInt8VGSgSbtKcfc"></a>
                     <a name="//apple_ref/swift/Method/init(inline:data:copyPixels:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV6inline4data10copyPixelsACs5Int32V_SPys5UInt8VGSbtKcfc">init(inline:data:copyPixels:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV6inline4data10copyPixelsACSi_SPys5UInt8VGSgSbtKcfc">init(inline:data:copyPixels:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -819,82 +987,8 @@ Use #GResource instead.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">)</span>
-<span class="nf">init</span><span class="p">(</span><span class="n">inline</span> <span class="nv">data_length</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">UInt8</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">copyPixels</span> <span class="nv">copy_pixels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L193-L198">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:9GdkPixbuf0B3RefV8resourceACSPys4Int8VG_tKcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(resource:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV8resourceACSPys4Int8VG_tKcfc">init(resource:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates a new pixbuf by loading an image from an resource.</p>
-
-<p>The file format is detected automatically. If <code>nil</code> is returned, then
-<code>error</code> will be set.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">resource</span> <span class="nv">resource_path</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L204-L209">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:9GdkPixbuf0B3RefV15resourceAtScale5width6height19preserveAspectRatioACSPys4Int8VG_s5Int32VALSbtKcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(resourceAtScale:width:height:preserveAspectRatio:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV15resourceAtScale5width6height19preserveAspectRatioACSPys4Int8VG_s5Int32VALSbtKcfc">init(resourceAtScale:width:height:preserveAspectRatio:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates a new pixbuf by loading an image from an resource.</p>
-
-<p>The file format is detected automatically. If <code>nil</code> is returned, then
-<code>error</code> will be set.</p>
-
-<p>The image will be scaled to fit in the requested size, optionally
-preserving the image&rsquo;s aspect ratio. When preserving the aspect ratio,
-a <code>width</code> of -1 will cause the image to be scaled to the exact given
-height, and a <code>height</code> of -1 will cause the image to be scaled to the
-exact given width. When not preserving aspect ratio, a <code>width</code> or
-<code>height</code> of -1 means to not scale the image at all in that dimension.</p>
-
-<p>The stream is not closed.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">resourceAtScale</span> <span class="nv">resource_path</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+<span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="n">inline</span> <span class="nv">data_length</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="n">guint8</span><span class="o">&gt;!</span><span class="p">,</span> <span class="n">copyPixels</span> <span class="nv">copy_pixels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -907,9 +1001,86 @@ exact given width. When not preserving aspect ratio, a <code>width</code> or
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV6stream11cancellableAC3GIO19InputStreamProtocol_p_AF011CancellableI0_ptKcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV8resourceACSPys4Int8VGSg_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(resource:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV8resourceACSPys4Int8VGSg_tKcfc">init(resource:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new pixbuf by loading an image from an resource.</p>
+
+<p>The file format is detected automatically. If <code>nil</code> is returned, then
+<code>error</code> will be set.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="n">resource</span> <span class="nv">resource_path</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L235-L240">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B3RefV15resourceAtScale5width6height19preserveAspectRatioACSPys4Int8VGSg_S2iSbtKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(resourceAtScale:width:height:preserveAspectRatio:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV15resourceAtScale5width6height19preserveAspectRatioACSPys4Int8VGSg_S2iSbtKcfc">init(resourceAtScale:width:height:preserveAspectRatio:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new pixbuf by loading an image from an resource.</p>
+
+<p>The file format is detected automatically. If <code>nil</code> is returned, then
+<code>error</code> will be set.</p>
+
+<p>The image will be scaled to fit in the requested size, optionally
+preserving the image&rsquo;s aspect ratio. When preserving the aspect ratio,
+a <code>width</code> of -1 will cause the image to be scaled to the exact given
+height, and a <code>height</code> of -1 will cause the image to be scaled to the
+exact given width. When not preserving aspect ratio, a <code>width</code> or
+<code>height</code> of -1 means to not scale the image at all in that dimension.</p>
+
+<p>The stream is not closed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="n">resourceAtScale</span> <span class="nv">resource_path</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L255-L260">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B3RefV6stream11cancellableACq__xSgtKc3GIO19CancellableProtocolRzAG011InputStreamH0R_r0_lufc"></a>
                     <a name="//apple_ref/swift/Method/init(stream:cancellable:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV6stream11cancellableAC3GIO19InputStreamProtocol_p_AF011CancellableI0_ptKcfc">init(stream:cancellable:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV6stream11cancellableACq__xSgtKc3GIO19CancellableProtocolRzAG011InputStreamH0R_r0_lufc">init(stream:cancellable:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -932,12 +1103,13 @@ the <code>GDK_PIXBUF_ERROR</code> and <code>G_IO_ERROR</code> domains.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamProtocol</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">init</span><span class="o">&lt;</span><span class="kt">CancellableT</span><span class="p">,</span> <span class="kt">InputStreamT</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamT</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableT</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="k">where</span> <span class="kt">CancellableT</span> <span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">,</span> <span class="kt">InputStreamT</span> <span class="p">:</span> <span class="kt">InputStreamProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L240-L245">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L271-L276">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -945,9 +1117,9 @@ the <code>GDK_PIXBUF_ERROR</code> and <code>G_IO_ERROR</code> domains.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV13streamAtScale5width6height19preserveAspectRatio11cancellableAC3GIO19InputStreamProtocol_p_s5Int32VALSbAI011CancellableP0_ptKcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV13streamAtScale5width6height19preserveAspectRatio11cancellableACq__S2iSbxSgtKc3GIO19CancellableProtocolRzAJ011InputStreamO0R_r0_lufc"></a>
                     <a name="//apple_ref/swift/Method/init(streamAtScale:width:height:preserveAspectRatio:cancellable:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV13streamAtScale5width6height19preserveAspectRatio11cancellableAC3GIO19InputStreamProtocol_p_s5Int32VALSbAI011CancellableP0_ptKcfc">init(streamAtScale:width:height:preserveAspectRatio:cancellable:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV13streamAtScale5width6height19preserveAspectRatio11cancellableACq__S2iSbxSgtKc3GIO19CancellableProtocolRzAJ011InputStreamO0R_r0_lufc">init(streamAtScale:width:height:preserveAspectRatio:cancellable:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -982,12 +1154,13 @@ scale the image at all in that dimension.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">streamAtScale</span> <span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamProtocol</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">init</span><span class="o">&lt;</span><span class="kt">CancellableT</span><span class="p">,</span> <span class="kt">InputStreamT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">streamAtScale</span> <span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamT</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableT</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="k">where</span> <span class="kt">CancellableT</span> <span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">,</span> <span class="kt">InputStreamT</span> <span class="p">:</span> <span class="kt">InputStreamProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L268-L273">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L299-L304">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -995,9 +1168,9 @@ scale the image at all in that dimension.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV12streamFinishAC3GIO19AsyncResultProtocol_p_tKcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV12streamFinishACx_tKc3GIO19AsyncResultProtocolRzlufc"></a>
                     <a name="//apple_ref/swift/Method/init(streamFinish:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV12streamFinishAC3GIO19AsyncResultProtocol_p_tKcfc">init(streamFinish:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV12streamFinishACx_tKc3GIO19AsyncResultProtocolRzlufc">init(streamFinish:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1013,12 +1186,13 @@ scale the image at all in that dimension.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">streamFinish</span> <span class="nv">async_result</span><span class="p">:</span> <span class="kt">AsyncResultProtocol</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">init</span><span class="o">&lt;</span><span class="kt">AsyncResultT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">streamFinish</span> <span class="nv">async_result</span><span class="p">:</span> <span class="kt">AsyncResultT</span><span class="p">)</span> <span class="k">throws</span> <span class="k">where</span> <span class="kt">AsyncResultT</span> <span class="p">:</span> <span class="kt">AsyncResultProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L277-L282">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L308-L313">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1026,9 +1200,9 @@ scale the image at all in that dimension.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7xpmDataACSPySPys4Int8VGG_tcfc"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7xpmDataACSpySPys4Int8VGSgGSg_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(xpmData:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7xpmDataACSPySPys4Int8VGG_tcfc">init(xpmData:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7xpmDataACSpySPys4Int8VGSgGSg_tcfc">init(xpmData:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1044,12 +1218,13 @@ the result of including an XPM file into a program&rsquo;s C source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">xpmData</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="nf">init</span><span class="p">(</span><span class="n">xpmData</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">?</span><span class="o">&gt;!</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L286-L289">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L317-L320">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1057,9 +1232,9 @@ the result of including an XPM file into a program&rsquo;s C source.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom5bytes10colorspace8hasAlpha13bitsPerSample5width6height9rowstrideACSg4GLib13BytesProtocol_p_So0A10ColorspaceaSbs5Int32VA3RtFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom5bytes10colorspace8hasAlpha13bitsPerSample5width6height9rowstrideACSgx_So0A10ColorspaceaSbS4it4GLib13BytesProtocolRzlFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(bytes:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom5bytes10colorspace8hasAlpha13bitsPerSample5width6height9rowstrideACSg4GLib13BytesProtocol_p_So0A10ColorspaceaSbs5Int32VA3RtFZ">newFrom(bytes:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom5bytes10colorspace8hasAlpha13bitsPerSample5width6height9rowstrideACSgx_So0A10ColorspaceaSbS4it4GLib13BytesProtocolRzlFZ">newFrom(bytes:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1076,12 +1251,13 @@ This is the <code>GBytes</code> variant of <code>gdk_pixbuf_new_from_data()</cod
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">bytes</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">BytesProtocol</span><span class="p">,</span> <span class="nv">colorspace</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:9GdkPixbuf10Colorspacea">Colorspace</a></span><span class="p">,</span> <span class="n">hasAlpha</span> <span class="nv">has_alpha</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">bitsPerSample</span> <span class="nv">bits_per_sample</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">rowstride</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="n">newFrom</span><span class="o">&lt;</span><span class="kt">BytesT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">bytes</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">BytesT</span><span class="p">,</span> <span class="nv">colorspace</span><span class="p">:</span> <span class="kt">GdkColorspace</span><span class="p">,</span> <span class="n">hasAlpha</span> <span class="nv">has_alpha</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">bitsPerSample</span> <span class="nv">bits_per_sample</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">rowstride</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span> <span class="k">where</span> <span class="kt">BytesT</span> <span class="p">:</span> <span class="kt">BytesProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L293-L296">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L324-L327">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1089,9 +1265,9 @@ This is the <code>GBytes</code> variant of <code>gdk_pixbuf_new_from_data()</cod
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom4data10colorspace8hasAlpha13bitsPerSample5width6height9rowstride9destroyFn0pQ4DataACSgSPys5UInt8VG_So0A10ColorspaceaSbs5Int32VA3UySpyAPGSg_SvSgtXCSvtFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom4data10colorspace8hasAlpha13bitsPerSample5width6height9rowstride9destroyFn0pQ4DataACSgSPys5UInt8VGSg_So0A10ColorspaceaSbS4iySpyAPGSg_SvSgtXCSgAWtFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(data:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:destroyFn:destroyFnData:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom4data10colorspace8hasAlpha13bitsPerSample5width6height9rowstride9destroyFn0pQ4DataACSgSPys5UInt8VG_So0A10ColorspaceaSbs5Int32VA3UySpyAPGSg_SvSgtXCSvtFZ">newFrom(data:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:destroyFn:destroyFnData:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom4data10colorspace8hasAlpha13bitsPerSample5width6height9rowstride9destroyFn0pQ4DataACSgSPys5UInt8VGSg_So0A10ColorspaceaSbS4iySpyAPGSg_SvSgtXCSgAWtFZ">newFrom(data:colorspace:hasAlpha:bitsPerSample:width:height:rowstride:destroyFn:destroyFnData:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1115,12 +1291,13 @@ it is its responsibility to free the pixel array.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="n">guchar</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">colorspace</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:9GdkPixbuf10Colorspacea">Colorspace</a></span><span class="p">,</span> <span class="n">hasAlpha</span> <span class="nv">has_alpha</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">bitsPerSample</span> <span class="nv">bits_per_sample</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">rowstride</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="n">destroyFn</span> <span class="nv">destroy_fn</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:9GdkPixbuf0B13DestroyNotifya">PixbufDestroyNotify</a></span><span class="p">,</span> <span class="n">destroyFnData</span> <span class="nv">destroy_fn_data</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="n">guchar</span><span class="o">&gt;!</span><span class="p">,</span> <span class="nv">colorspace</span><span class="p">:</span> <span class="kt">GdkColorspace</span><span class="p">,</span> <span class="n">hasAlpha</span> <span class="nv">has_alpha</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">bitsPerSample</span> <span class="nv">bits_per_sample</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">rowstride</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">destroyFn</span> <span class="nv">destroy_fn</span><span class="p">:</span> <span class="kt">GdkPixbufDestroyNotify</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">destroyFnData</span> <span class="nv">destroy_fn_data</span><span class="p">:</span> <span class="n">gpointer</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L308-L311">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L339-L342">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1128,9 +1305,9 @@ it is its responsibility to free the pixel array.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom4fileACSgSPys4Int8VG_tKFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom4fileACSgSPys4Int8VGSg_tKFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(file:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom4fileACSgSPys4Int8VG_tKFZ">newFrom(file:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom4fileACSgSPys4Int8VGSg_tKFZ">newFrom(file:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1147,12 +1324,13 @@ Possible errors are in the <code>GDK_PIXBUF_ERROR</code> and <code>G_FILE_ERROR<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">file</span> <span class="kt">String_</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">file</span> <span class="nv">filename</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L316-L321">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L347-L353">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1160,9 +1338,9 @@ Possible errors are in the <code>GDK_PIXBUF_ERROR</code> and <code>G_FILE_ERROR<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom11fileAtScale5width6height19preserveAspectRatioACSgSPys4Int8VG_s5Int32VANSbtKFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom11fileAtScale5width6height19preserveAspectRatioACSgSPys4Int8VGSg_S2iSbtKFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(fileAtScale:width:height:preserveAspectRatio:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom11fileAtScale5width6height19preserveAspectRatioACSgSPys4Int8VG_s5Int32VANSbtKFZ">newFrom(fileAtScale:width:height:preserveAspectRatio:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom11fileAtScale5width6height19preserveAspectRatioACSgSPys4Int8VGSg_S2iSbtKFZ">newFrom(fileAtScale:width:height:preserveAspectRatio:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1188,12 +1366,13 @@ allowed since 2.8.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">fileAtScale</span> <span class="kt">String_</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">fileAtScale</span> <span class="nv">filename</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L335-L340">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L367-L373">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1201,9 +1380,9 @@ allowed since 2.8.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom10fileAtSize5width6heightACSgSPys4Int8VG_s5Int32VAMtKFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom10fileAtSize5width6heightACSgSPys4Int8VGSg_S2itKFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(fileAtSize:width:height:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom10fileAtSize5width6heightACSgSPys4Int8VG_s5Int32VAMtKFZ">newFrom(fileAtSize:width:height:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom10fileAtSize5width6heightACSgSPys4Int8VGSg_S2itKFZ">newFrom(fileAtSize:width:height:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1227,12 +1406,13 @@ and image at the requested size, regardless of aspect ratio, use
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">fileAtSize</span> <span class="kt">String_</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">fileAtSize</span> <span class="nv">filename</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L352-L357">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L385-L391">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1240,9 +1420,9 @@ and image at the requested size, regardless of aspect ratio, use
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom6inline4data10copyPixelsACSgs5Int32V_SPys5UInt8VGSbtKFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom6inline4data10copyPixelsACSgSi_SPys5UInt8VGSgSbtKFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(inline:data:copyPixels:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom6inline4data10copyPixelsACSgs5Int32V_SPys5UInt8VGSbtKFZ">newFrom(inline:data:copyPixels:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom6inline4data10copyPixelsACSgSi_SPys5UInt8VGSgSbtKFZ">newFrom(inline:data:copyPixels:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1287,12 +1467,13 @@ Use #GResource instead.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">)</span>
-<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">inline</span> <span class="nv">data_length</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">UInt8</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">copyPixels</span> <span class="nv">copy_pixels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+<span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">inline</span> <span class="nv">data_length</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="n">guint8</span><span class="o">&gt;!</span><span class="p">,</span> <span class="n">copyPixels</span> <span class="nv">copy_pixels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L392-L397">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L426-L432">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1300,9 +1481,9 @@ Use #GResource instead.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom8resourceACSgSPys4Int8VG_tKFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom8resourceACSgSPys4Int8VGSg_tKFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(resource:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom8resourceACSgSPys4Int8VG_tKFZ">newFrom(resource:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom8resourceACSgSPys4Int8VGSg_tKFZ">newFrom(resource:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1320,12 +1501,13 @@ Use #GResource instead.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">resource</span> <span class="nv">resource_path</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">resource</span> <span class="nv">resource_path</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L403-L408">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L438-L444">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1333,9 +1515,9 @@ Use #GResource instead.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom15resourceAtScale5width6height19preserveAspectRatioACSgSPys4Int8VG_s5Int32VANSbtKFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom15resourceAtScale5width6height19preserveAspectRatioACSgSPys4Int8VGSg_S2iSbtKFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(resourceAtScale:width:height:preserveAspectRatio:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom15resourceAtScale5width6height19preserveAspectRatioACSgSPys4Int8VG_s5Int32VANSbtKFZ">newFrom(resourceAtScale:width:height:preserveAspectRatio:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom15resourceAtScale5width6height19preserveAspectRatioACSgSPys4Int8VGSg_S2iSbtKFZ">newFrom(resourceAtScale:width:height:preserveAspectRatio:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1362,12 +1544,13 @@ exact given width. When not preserving aspect ratio, a <code>width</code> or
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">resourceAtScale</span> <span class="nv">resource_path</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">resourceAtScale</span> <span class="nv">resource_path</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L423-L428">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L459-L465">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1375,9 +1558,9 @@ exact given width. When not preserving aspect ratio, a <code>width</code> or
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom6stream11cancellableACSg3GIO19InputStreamProtocol_p_AH011CancellableK0_ptKFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom6stream11cancellableACSgq__xSgtK3GIO19CancellableProtocolRzAI011InputStreamJ0R_r0_lFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(stream:cancellable:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom6stream11cancellableACSg3GIO19InputStreamProtocol_p_AH011CancellableK0_ptKFZ">newFrom(stream:cancellable:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom6stream11cancellableACSgq__xSgtK3GIO19CancellableProtocolRzAI011InputStreamJ0R_r0_lFZ">newFrom(stream:cancellable:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1400,12 +1583,13 @@ the <code>GDK_PIXBUF_ERROR</code> and <code>G_IO_ERROR</code> domains.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamProtocol</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="n">newFrom</span><span class="o">&lt;</span><span class="kt">CancellableT</span><span class="p">,</span> <span class="kt">InputStreamT</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamT</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableT</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span> <span class="k">where</span> <span class="kt">CancellableT</span> <span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">,</span> <span class="kt">InputStreamT</span> <span class="p">:</span> <span class="kt">InputStreamProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L439-L444">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L476-L482">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1413,9 +1597,9 @@ the <code>GDK_PIXBUF_ERROR</code> and <code>G_IO_ERROR</code> domains.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom13streamAtScale5width6height19preserveAspectRatio11cancellableACSg3GIO19InputStreamProtocol_p_s5Int32VANSbAK011CancellableR0_ptKFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom13streamAtScale5width6height19preserveAspectRatio11cancellableACSgq__S2iSbxSgtK3GIO19CancellableProtocolRzAL011InputStreamQ0R_r0_lFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(streamAtScale:width:height:preserveAspectRatio:cancellable:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom13streamAtScale5width6height19preserveAspectRatio11cancellableACSg3GIO19InputStreamProtocol_p_s5Int32VANSbAK011CancellableR0_ptKFZ">newFrom(streamAtScale:width:height:preserveAspectRatio:cancellable:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom13streamAtScale5width6height19preserveAspectRatio11cancellableACSgq__S2iSbxSgtK3GIO19CancellableProtocolRzAL011InputStreamQ0R_r0_lFZ">newFrom(streamAtScale:width:height:preserveAspectRatio:cancellable:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1450,12 +1634,13 @@ scale the image at all in that dimension.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">streamAtScale</span> <span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamProtocol</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CInt</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="n">newFrom</span><span class="o">&lt;</span><span class="kt">CancellableT</span><span class="p">,</span> <span class="kt">InputStreamT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">streamAtScale</span> <span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamT</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">preserveAspectRatio</span> <span class="nv">preserve_aspect_ratio</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableT</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span> <span class="k">where</span> <span class="kt">CancellableT</span> <span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">,</span> <span class="kt">InputStreamT</span> <span class="p">:</span> <span class="kt">InputStreamProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L467-L472">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L505-L511">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1463,9 +1648,9 @@ scale the image at all in that dimension.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV7newFrom12streamFinishACSg3GIO19AsyncResultProtocol_p_tKFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV7newFrom12streamFinishACSgx_tK3GIO19AsyncResultProtocolRzlFZ"></a>
                     <a name="//apple_ref/swift/Method/newFrom(streamFinish:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom12streamFinishACSg3GIO19AsyncResultProtocol_p_tKFZ">newFrom(streamFinish:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV7newFrom12streamFinishACSgx_tK3GIO19AsyncResultProtocolRzlFZ">newFrom(streamFinish:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1481,12 +1666,13 @@ scale the image at all in that dimension.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">streamFinish</span> <span class="nv">async_result</span><span class="p">:</span> <span class="kt">AsyncResultProtocol</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="n">newFrom</span><span class="o">&lt;</span><span class="kt">AsyncResultT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">streamFinish</span> <span class="nv">async_result</span><span class="p">:</span> <span class="kt">AsyncResultT</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span> <span class="k">where</span> <span class="kt">AsyncResultT</span> <span class="p">:</span> <span class="kt">AsyncResultProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L476-L481">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L515-L521">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1494,9 +1680,9 @@ scale the image at all in that dimension.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B3RefV10newFromXpm7xpmDataACSgSPySPys4Int8VGG_tFZ"></a>
+                    <a name="/s:9GdkPixbuf0B3RefV10newFromXpm7xpmDataACSgSpySPys4Int8VGSgGSg_tFZ"></a>
                     <a name="//apple_ref/swift/Method/newFromXpm(xpmData:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B3RefV10newFromXpm7xpmDataACSgSPySPys4Int8VGG_tFZ">newFromXpm(xpmData:)</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B3RefV10newFromXpm7xpmDataACSgSpySPys4Int8VGSgGSg_tFZ">newFromXpm(xpmData:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1512,12 +1698,13 @@ the result of including an XPM file into a program&rsquo;s C source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFromXpm</span><span class="p">(</span><span class="n">xpmData</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFromXpm</span><span class="p">(</span><span class="n">xpmData</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span><span class="p">?</span><span class="o">&gt;!</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PixbufRef</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L485-L488">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-Pixbuf.swift#L525-L528">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1530,7 +1717,7 @@ the result of including an XPM file into a program&rsquo;s C source.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-06-21)</p>
+      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-06)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

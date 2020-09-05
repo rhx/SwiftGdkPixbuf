@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           GdkPixbuf 2.40.0 Docs
         </a>
-         (93% documented)
+         (94% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -289,9 +289,9 @@ Alternatively, use <code><a href="../Structs/PixbufSimpleAnimIterRef.html">Pixbu
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B22SimpleAnimIterProtocolP3ptrSvvp"></a>
+                    <a name="/s:9GdkPixbuf0B22SimpleAnimIterProtocolP3ptrSvSgvp"></a>
                     <a name="//apple_ref/swift/Property/ptr" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B22SimpleAnimIterProtocolP3ptrSvvp">ptr</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B22SimpleAnimIterProtocolP3ptrSvSgvp">ptr</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -306,7 +306,7 @@ Alternatively, use <code><a href="../Structs/PixbufSimpleAnimIterRef.html">Pixbu
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ptr</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ptr</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -319,9 +319,9 @@ Alternatively, use <code><a href="../Structs/PixbufSimpleAnimIterRef.html">Pixbu
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B22SimpleAnimIterProtocolP27pixbuf_simple_anim_iter_ptrSpySo01_ab9AnimationE0VGvp"></a>
+                    <a name="/s:9GdkPixbuf0B22SimpleAnimIterProtocolP27pixbuf_simple_anim_iter_ptrSpySo01_ab9AnimationE0VGSgvp"></a>
                     <a name="//apple_ref/swift/Property/pixbuf_simple_anim_iter_ptr" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B22SimpleAnimIterProtocolP27pixbuf_simple_anim_iter_ptrSpySo01_ab9AnimationE0VGvp">pixbuf_simple_anim_iter_ptr</a>
+                    <a class="token" href="#/s:9GdkPixbuf0B22SimpleAnimIterProtocolP27pixbuf_simple_anim_iter_ptrSpySo01_ab9AnimationE0VGSgvp">pixbuf_simple_anim_iter_ptr</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -344,7 +344,7 @@ Alternatively, use <code><a href="../Structs/PixbufSimpleAnimIterRef.html">Pixbu
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">pixbuf_simple_anim_iter_ptr</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:9GdkPixbuf0aB14SimpleAnimItera">GdkPixbufSimpleAnimIter</a></span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">pixbuf_simple_anim_iter_ptr</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:9GdkPixbuf0aB14SimpleAnimItera">GdkPixbufSimpleAnimIter</a></span><span class="o">&gt;!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -391,6 +391,7 @@ Alternatively, use <code><a href="../Structs/PixbufSimpleAnimIterRef.html">Pixbu
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">@inlinable</span>
 <span class="kd">func</span> <span class="nf">connect</span><span class="p">(</span><span class="n">signal</span> <span class="nv">kind</span><span class="p">:</span> <span class="kt"><a href="../Enums/PixbufSimpleAnimIterSignalName.html">PixbufSimpleAnimIterSignalName</a></span><span class="p">,</span> <span class="n">flags</span> <span class="nv">f</span><span class="p">:</span> <span class="kt">ConnectFlags</span> <span class="o">=</span> <span class="kt">ConnectFlags</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">to</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">GLibObject</span><span class="o">.</span><span class="kt">SignalHandler</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
@@ -443,7 +444,7 @@ Alternatively, use <code><a href="../Structs/PixbufSimpleAnimIterRef.html">Pixbu
                         <p>positive handler ID, or a value less than or equal to <code>0</code> in case of an error</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufSimpleAnimIter.swift#L202-L221">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufSimpleAnimIter.swift#L279-L298">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -456,7 +457,7 @@ Alternatively, use <code><a href="../Structs/PixbufSimpleAnimIterRef.html">Pixbu
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-06-21)</p>
+      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-06)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

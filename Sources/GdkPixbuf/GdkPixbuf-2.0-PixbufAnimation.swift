@@ -15,10 +15,11 @@ import GLibObject
 /// An opaque struct representing an animation.
 public protocol PixbufAnimationProtocol: ObjectProtocol {
         /// Untyped pointer to the underlying `GdkPixbufAnimation` instance.
-    var ptr: UnsafeMutableRawPointer { get }
+    var ptr: UnsafeMutableRawPointer! { get }
 
     /// Typed pointer to the underlying `GdkPixbufAnimation` instance.
-    var pixbuf_animation_ptr: UnsafeMutablePointer<GdkPixbufAnimation> { get }
+    var pixbuf_animation_ptr: UnsafeMutablePointer<GdkPixbufAnimation>! { get }
+
 }
 
 /// The `PixbufAnimationRef` type acts as a lightweight Swift reference to an underlying `GdkPixbufAnimation` instance.
@@ -29,46 +30,76 @@ public protocol PixbufAnimationProtocol: ObjectProtocol {
 public struct PixbufAnimationRef: PixbufAnimationProtocol {
         /// Untyped pointer to the underlying `GdkPixbufAnimation` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_animation_ptr` property instead.
-    public let ptr: UnsafeMutableRawPointer
+    public let ptr: UnsafeMutableRawPointer!
 }
 
 public extension PixbufAnimationRef {
     /// Designated initialiser from the underlying `C` data type
-    init(_ p: UnsafeMutablePointer<GdkPixbufAnimation>) {
-        ptr = UnsafeMutableRawPointer(p)    }
+    @inlinable init(_ p: UnsafeMutablePointer<GdkPixbufAnimation>) {
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Designated initialiser from a constant pointer to the underlying `C` data type
+    @inlinable init(_ p: UnsafePointer<GdkPixbufAnimation>) {
+        ptr = UnsafeMutableRawPointer(UnsafeMutablePointer(mutating: p))
+    }
+
+    /// Conditional initialiser from an optional pointer to the underlying `C` data type
+    @inlinable init!(_ maybePointer: UnsafeMutablePointer<GdkPixbufAnimation>?) {
+        guard let p = maybePointer else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional, non-mutable pointer to the underlying `C` data type
+    @inlinable init!(_ maybePointer: UnsafePointer<GdkPixbufAnimation>?) {
+        guard let p = UnsafeMutablePointer(mutating: maybePointer) else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional `gpointer`
+    @inlinable init!(gpointer g: gpointer?) {
+        guard let p = g else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional, non-mutable `gconstpointer`
+    @inlinable init!(gconstpointer g: gconstpointer?) {
+        guard let p = UnsafeMutableRawPointer(mutating: g) else { return nil }
+        ptr = p
+    }
 
     /// Reference intialiser for a related type that implements `PixbufAnimationProtocol`
-    init<T: PixbufAnimationProtocol>(_ other: T) {
+    @inlinable init<T: PixbufAnimationProtocol>(_ other: T) {
         ptr = other.ptr
     }
 
     /// Unsafe typed initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    init<T>(cPointer: UnsafeMutablePointer<T>) {
+    @inlinable init<T>(cPointer: UnsafeMutablePointer<T>) {
         ptr = UnsafeMutableRawPointer(cPointer)
     }
 
     /// Unsafe typed initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    init<T>(constPointer: UnsafePointer<T>) {
+    @inlinable init<T>(constPointer: UnsafePointer<T>) {
         ptr = UnsafeMutableRawPointer(mutating: UnsafeRawPointer(constPointer))
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    init(raw: UnsafeRawPointer) {
+    @inlinable init(raw: UnsafeRawPointer) {
         ptr = UnsafeMutableRawPointer(mutating: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    init(raw: UnsafeMutableRawPointer) {
+    @inlinable init(raw: UnsafeMutableRawPointer) {
         ptr = raw
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    init(opaquePointer: OpaquePointer) {
+    @inlinable init(opaquePointer: OpaquePointer) {
         ptr = UnsafeMutableRawPointer(opaquePointer)
     }
 
@@ -76,22 +107,22 @@ public extension PixbufAnimationRef {
     /// detected automatically. If the file's format does not support multi-frame
     /// images, then an animation with a single frame will be created. Possible errors
     /// are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
-    init(file String_: UnsafePointer<CChar>) throws {
+    @inlinable init(file filename: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_file(String_, &error))
-        if let error = error { throw ErrorType(error) }
-        ptr = UnsafeMutableRawPointer(cast(rv))
+        let rv = gdk_pixbuf_animation_new_from_file(filename, &error)
+        if let error = error { throw GLibError(error) }
+        ptr = UnsafeMutableRawPointer(rv)
     }
 
     /// Creates a new pixbuf animation by loading an image from an resource.
     /// 
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
-    init(resource resource_path: UnsafePointer<CChar>) throws {
+    @inlinable init(resource resource_path: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_resource(resource_path, &error))
-        if let error = error { throw ErrorType(error) }
-        ptr = UnsafeMutableRawPointer(cast(rv))
+        let rv = gdk_pixbuf_animation_new_from_resource(resource_path, &error)
+        if let error = error { throw GLibError(error) }
+        ptr = UnsafeMutableRawPointer(rv)
     }
 
     /// Creates a new animation by loading it from an input stream.
@@ -103,41 +134,43 @@ public extension PixbufAnimationRef {
     /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
-    init(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws {
+    @inlinable init<CancellableT: CancellableProtocol, InputStreamT: InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT? = nil) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error))
-        if let error = error { throw ErrorType(error) }
-        ptr = UnsafeMutableRawPointer(cast(rv))
+        let rv = gdk_pixbuf_animation_new_from_stream(stream.input_stream_ptr, cancellable?.cancellable_ptr, &error)
+        if let error = error { throw GLibError(error) }
+        ptr = UnsafeMutableRawPointer(rv)
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
     /// `gdk_pixbuf_animation_new_from_stream_async()`.
-    init(streamFinish async_result: AsyncResultProtocol) throws {
+    @inlinable init<AsyncResultT: AsyncResultProtocol>(streamFinish async_result: AsyncResultT) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_stream_finish(cast(async_result.ptr), &error))
-        if let error = error { throw ErrorType(error) }
-        ptr = UnsafeMutableRawPointer(cast(rv))
+        let rv = gdk_pixbuf_animation_new_from_stream_finish(async_result.async_result_ptr, &error)
+        if let error = error { throw GLibError(error) }
+        ptr = UnsafeMutableRawPointer(rv)
     }
     /// Creates a new animation by loading it from a file. The file format is
     /// detected automatically. If the file's format does not support multi-frame
     /// images, then an animation with a single frame will be created. Possible errors
     /// are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
-    static func newFrom(file String_: UnsafePointer<CChar>) throws -> PixbufAnimationRef! {
+    @inlinable static func newFrom(file filename: UnsafePointer<CChar>!) throws -> PixbufAnimationRef! {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_file(String_, &error))
-        if let error = error { throw ErrorType(error) }
-        return rv.map { PixbufAnimationRef(cast($0)) }
+        let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_file(filename, &error)))
+        if let error = error { throw GLibError(error) }
+        guard let rv = maybeRV else { return nil }
+        return rv
     }
 
     /// Creates a new pixbuf animation by loading an image from an resource.
     /// 
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
-    static func newFrom(resource resource_path: UnsafePointer<CChar>) throws -> PixbufAnimationRef! {
+    @inlinable static func newFrom(resource resource_path: UnsafePointer<CChar>!) throws -> PixbufAnimationRef! {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_resource(resource_path, &error))
-        if let error = error { throw ErrorType(error) }
-        return rv.map { PixbufAnimationRef(cast($0)) }
+        let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_resource(resource_path, &error)))
+        if let error = error { throw GLibError(error) }
+        guard let rv = maybeRV else { return nil }
+        return rv
     }
 
     /// Creates a new animation by loading it from an input stream.
@@ -149,20 +182,22 @@ public extension PixbufAnimationRef {
     /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
-    static func newFrom(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws -> PixbufAnimationRef! {
+    @inlinable static func newFrom<CancellableT: CancellableProtocol, InputStreamT: InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT? = nil) throws -> PixbufAnimationRef! {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error))
-        if let error = error { throw ErrorType(error) }
-        return rv.map { PixbufAnimationRef(cast($0)) }
+        let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream(stream.input_stream_ptr, cancellable?.cancellable_ptr, &error)))
+        if let error = error { throw GLibError(error) }
+        guard let rv = maybeRV else { return nil }
+        return rv
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
     /// `gdk_pixbuf_animation_new_from_stream_async()`.
-    static func newFrom(streamFinish async_result: AsyncResultProtocol) throws -> PixbufAnimationRef! {
+    @inlinable static func newFrom<AsyncResultT: AsyncResultProtocol>(streamFinish async_result: AsyncResultT) throws -> PixbufAnimationRef! {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_stream_finish(cast(async_result.ptr), &error))
-        if let error = error { throw ErrorType(error) }
-        return rv.map { PixbufAnimationRef(cast($0)) }
+        let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream_finish(async_result.async_result_ptr, &error)))
+        if let error = error { throw GLibError(error) }
+        guard let rv = maybeRV else { return nil }
+        return rv
     }
 }
 
@@ -176,77 +211,123 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     /// This creates an instance without performing an unbalanced retain
     /// i.e., ownership is transferred to the `PixbufAnimation` instance.
     /// - Parameter op: pointer to the underlying object
-    public init(_ op: UnsafeMutablePointer<GdkPixbufAnimation>) {
-        super.init(cast(op))
+    @inlinable public init(_ op: UnsafeMutablePointer<GdkPixbufAnimation>) {
+        super.init(cPointer: op)
+    }
+
+    /// Designated initialiser from a constant pointer to the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimation` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init(_ op: UnsafePointer<GdkPixbufAnimation>) {
+        super.init(raw: UnsafeMutableRawPointer(UnsafeMutablePointer(mutating: op)))
+    }
+
+    /// Optional initialiser from a non-mutating `gpointer` to
+    /// the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimation` instance.
+    /// - Parameter op: gpointer to the underlying object
+    @inlinable override public init!(gpointer op: gpointer?) {
+        guard let p = UnsafeMutableRawPointer(op) else { return nil }
+        super.init(raw: p)
+    }
+
+    /// Optional initialiser from a non-mutating `gconstpointer` to
+    /// the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimation` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable override public init!(gconstpointer op: gconstpointer?) {
+        guard let p = op else { return nil }
+        super.init(raw: p)
+    }
+
+    /// Optional initialiser from a constant pointer to the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimation` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init!(_ op: UnsafePointer<GdkPixbufAnimation>?) {
+        guard let p = UnsafeMutablePointer(mutating: op) else { return nil }
+        super.init(cPointer: p)
+    }
+
+    /// Optional initialiser from the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufAnimation` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init!(_ op: UnsafeMutablePointer<GdkPixbufAnimation>?) {
+        guard let p = op else { return nil }
+        super.init(cPointer: p)
     }
 
     /// Designated initialiser from the underlying `C` data type.
     /// Will retain `GdkPixbufAnimation`.
     /// i.e., ownership is transferred to the `PixbufAnimation` instance.
     /// - Parameter op: pointer to the underlying object
-    public init(retaining op: UnsafeMutablePointer<GdkPixbufAnimation>) {
-        super.init(retaining: cast(op))
+    @inlinable public init(retaining op: UnsafeMutablePointer<GdkPixbufAnimation>) {
+        super.init(retainingCPointer: op)
     }
 
     /// Reference intialiser for a related type that implements `PixbufAnimationProtocol`
     /// Will retain `GdkPixbufAnimation`.
     /// - Parameter other: an instance of a related type that implements `PixbufAnimationProtocol`
-    public init<T: PixbufAnimationProtocol>(pixbufAnimation other: T) {
-        super.init(retaining: cast(other.pixbuf_animation_ptr))
+    @inlinable public init<T: PixbufAnimationProtocol>(pixbufAnimation other: T) {
+        super.init(retainingRaw: other.ptr)
     }
 
     /// Unsafe typed initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
     /// - Parameter cPointer: pointer to the underlying object
-    override public init<T>(cPointer p: UnsafeMutablePointer<T>) {
+    @inlinable override public init<T>(cPointer p: UnsafeMutablePointer<T>) {
         super.init(cPointer: p)
     }
 
     /// Unsafe typed, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
     /// - Parameter cPointer: pointer to the underlying object
-    override public init<T>(retainingCPointer cPointer: UnsafeMutablePointer<T>) {
+    @inlinable override public init<T>(retainingCPointer cPointer: UnsafeMutablePointer<T>) {
         super.init(retainingCPointer: cPointer)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
     /// - Parameter p: raw pointer to the underlying object
-    override public init(raw p: UnsafeRawPointer) {
+    @inlinable override public init(raw p: UnsafeRawPointer) {
         super.init(raw: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    override public init(retainingRaw raw: UnsafeRawPointer) {
+    @inlinable override public init(retainingRaw raw: UnsafeRawPointer) {
         super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
     /// - Parameter p: mutable raw pointer to the underlying object
-    override public init(raw p: UnsafeMutableRawPointer) {
+    @inlinable override public init(raw p: UnsafeMutableRawPointer) {
         super.init(raw: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
     /// - Parameter raw: mutable raw pointer to the underlying object
-    override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+    @inlinable override public init(retainingRaw raw: UnsafeMutableRawPointer) {
         super.init(retainingRaw: raw)
     }
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
     /// - Parameter p: opaque pointer to the underlying object
-    override public init(opaquePointer p: OpaquePointer) {
+    @inlinable override public init(opaquePointer p: OpaquePointer) {
         super.init(opaquePointer: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
     /// - Parameter p: opaque pointer to the underlying object
-    override public init(retainingOpaquePointer p: OpaquePointer) {
+    @inlinable override public init(retainingOpaquePointer p: OpaquePointer) {
         super.init(retainingOpaquePointer: p)
     }
 
@@ -254,22 +335,22 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     /// detected automatically. If the file's format does not support multi-frame
     /// images, then an animation with a single frame will be created. Possible errors
     /// are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
-    public init(file String_: UnsafePointer<CChar>) throws {
+    @inlinable public init(file filename: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_file(String_, &error))
-        if let error = error { throw ErrorType(error) }
-        super.init(cast(rv))
+        let rv = gdk_pixbuf_animation_new_from_file(filename, &error)
+        if let error = error { throw GLibError(error) }
+        super.init(gpointer: (rv))
     }
 
     /// Creates a new pixbuf animation by loading an image from an resource.
     /// 
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
-    public init(resource resource_path: UnsafePointer<CChar>) throws {
+    @inlinable public init(resource resource_path: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_resource(resource_path, &error))
-        if let error = error { throw ErrorType(error) }
-        super.init(cast(rv))
+        let rv = gdk_pixbuf_animation_new_from_resource(resource_path, &error)
+        if let error = error { throw GLibError(error) }
+        super.init(gpointer: (rv))
     }
 
     /// Creates a new animation by loading it from an input stream.
@@ -281,42 +362,44 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
-    public init(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws {
+    @inlinable public init<CancellableT: CancellableProtocol, InputStreamT: InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT? = nil) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error))
-        if let error = error { throw ErrorType(error) }
-        super.init(cast(rv))
+        let rv = gdk_pixbuf_animation_new_from_stream(stream.input_stream_ptr, cancellable?.cancellable_ptr, &error)
+        if let error = error { throw GLibError(error) }
+        super.init(gpointer: (rv))
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
     /// `gdk_pixbuf_animation_new_from_stream_async()`.
-    public init(streamFinish async_result: AsyncResultProtocol) throws {
+    @inlinable public init<AsyncResultT: AsyncResultProtocol>(streamFinish async_result: AsyncResultT) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_stream_finish(cast(async_result.ptr), &error))
-        if let error = error { throw ErrorType(error) }
-        super.init(cast(rv))
+        let rv = gdk_pixbuf_animation_new_from_stream_finish(async_result.async_result_ptr, &error)
+        if let error = error { throw GLibError(error) }
+        super.init(gpointer: (rv))
     }
 
     /// Creates a new animation by loading it from a file. The file format is
     /// detected automatically. If the file's format does not support multi-frame
     /// images, then an animation with a single frame will be created. Possible errors
     /// are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
-    public static func newFrom(file String_: UnsafePointer<CChar>) throws -> PixbufAnimation! {
+    @inlinable public static func newFrom(file filename: UnsafePointer<CChar>!) throws -> PixbufAnimation! {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_file(String_, &error))
-        if let error = error { throw ErrorType(error) }
-        return rv.map { PixbufAnimation(cast($0)) }
+        let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_file(filename, &error)))
+        if let error = error { throw GLibError(error) }
+        guard let rv = maybeRV else { return nil }
+        return rv
     }
 
     /// Creates a new pixbuf animation by loading an image from an resource.
     /// 
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
-    public static func newFrom(resource resource_path: UnsafePointer<CChar>) throws -> PixbufAnimation! {
+    @inlinable public static func newFrom(resource resource_path: UnsafePointer<CChar>!) throws -> PixbufAnimation! {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_resource(resource_path, &error))
-        if let error = error { throw ErrorType(error) }
-        return rv.map { PixbufAnimation(cast($0)) }
+        let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_resource(resource_path, &error)))
+        if let error = error { throw GLibError(error) }
+        guard let rv = maybeRV else { return nil }
+        return rv
     }
 
     /// Creates a new animation by loading it from an input stream.
@@ -328,20 +411,22 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
-    public static func newFrom(stream: InputStreamProtocol, cancellable: CancellableProtocol) throws -> PixbufAnimation! {
+    @inlinable public static func newFrom<CancellableT: CancellableProtocol, InputStreamT: InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT? = nil) throws -> PixbufAnimation! {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_stream(cast(stream.ptr), cast(cancellable.ptr), &error))
-        if let error = error { throw ErrorType(error) }
-        return rv.map { PixbufAnimation(cast($0)) }
+        let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream(stream.input_stream_ptr, cancellable?.cancellable_ptr, &error)))
+        if let error = error { throw GLibError(error) }
+        guard let rv = maybeRV else { return nil }
+        return rv
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
     /// `gdk_pixbuf_animation_new_from_stream_async()`.
-    public static func newFrom(streamFinish async_result: AsyncResultProtocol) throws -> PixbufAnimation! {
+    @inlinable public static func newFrom<AsyncResultT: AsyncResultProtocol>(streamFinish async_result: AsyncResultT) throws -> PixbufAnimation! {
         var error: UnsafeMutablePointer<GError>?
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(gdk_pixbuf_animation_new_from_stream_finish(cast(async_result.ptr), &error))
-        if let error = error { throw ErrorType(error) }
-        return rv.map { PixbufAnimation(cast($0)) }
+        let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream_finish(async_result.async_result_ptr, &error)))
+        if let error = error { throw GLibError(error) }
+        guard let rv = maybeRV else { return nil }
+        return rv
     }
 
 }
@@ -383,11 +468,11 @@ public extension PixbufAnimationProtocol {
     /// - Parameter flags: signal connection flags
     /// - Parameter handler: signal handler to use
     /// - Returns: positive handler ID, or a value less than or equal to `0` in case of an error
-    @discardableResult func connect(signal kind: PixbufAnimationSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> Int {
+    @inlinable @discardableResult func connect(signal kind: PixbufAnimationSignalName, flags f: ConnectFlags = ConnectFlags(0), to handler: @escaping GLibObject.SignalHandler) -> Int {
         func _connect(signal name: UnsafePointer<gchar>, flags: ConnectFlags, data: GLibObject.SignalHandlerClosureHolder, handler: @convention(c) @escaping (gpointer, gpointer) -> Void) -> Int {
             let holder = UnsafeMutableRawPointer(Unmanaged.passRetained(data).toOpaque())
             let callback = unsafeBitCast(handler, to: GLibObject.Callback.self)
-            let rv = GLibObject.ObjectRef(cast(pixbuf_animation_ptr)).signalConnectData(detailedSignal: name, cHandler: callback, data: holder, destroyData: {
+            let rv = GLibObject.ObjectRef(raw: ptr).signalConnectData(detailedSignal: name, cHandler: callback, data: holder, destroyData: {
                 if let swift = UnsafeRawPointer($0) {
                     let holder = Unmanaged<GLibObject.SignalHandlerClosureHolder>.fromOpaque(swift)
                     holder.release()
@@ -408,12 +493,12 @@ public extension PixbufAnimationProtocol {
 // MARK: PixbufAnimation Class: PixbufAnimationProtocol extension (methods and fields)
 public extension PixbufAnimationProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufAnimation` instance.
-    var pixbuf_animation_ptr: UnsafeMutablePointer<GdkPixbufAnimation> { return ptr.assumingMemoryBound(to: GdkPixbufAnimation.self) }
+    @inlinable var pixbuf_animation_ptr: UnsafeMutablePointer<GdkPixbufAnimation>! { return ptr?.assumingMemoryBound(to: GdkPixbufAnimation.self) }
 
     /// Queries the height of the bounding box of a pixbuf animation.
-    func getHeight() -> Int {
-        let rv: Int = cast(gdk_pixbuf_animation_get_height(cast(pixbuf_animation_ptr)))
-        return cast(rv)
+    @inlinable func getHeight() -> Int {
+        let rv = Int(gdk_pixbuf_animation_get_height(pixbuf_animation_ptr))
+        return rv
     }
 
     /// Get an iterator for displaying an animation. The iterator provides
@@ -449,9 +534,9 @@ public extension PixbufAnimationProtocol {
     /// area_updated signal.
     /// 
     /// A delay time of -1 is possible, indicating "infinite."
-    func getIter(startTime start_time: TimeValProtocol) -> UnsafeMutablePointer<GdkPixbufAnimationIter>! {
-        let rv: UnsafeMutablePointer<GdkPixbufAnimationIter>! = cast(gdk_pixbuf_animation_get_iter(cast(pixbuf_animation_ptr), cast(start_time.ptr)))
-        return cast(rv)
+    @inlinable func getIter<TimeValT: TimeValProtocol>(startTime start_time: TimeValT? = nil) -> PixbufAnimationIterRef! {
+        let rv = PixbufAnimationIterRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_get_iter(pixbuf_animation_ptr, start_time?._ptr)))
+        return rv
     }
 
     /// If an animation is really just a plain image (has only one frame),
@@ -460,40 +545,40 @@ public extension PixbufAnimationProtocol {
     /// unanimated image, which might be the first frame, or something more
     /// sophisticated. If an animation hasn't loaded any frames yet, this
     /// function will return `nil`.
-    func getStaticImage() -> UnsafeMutablePointer<GdkPixbuf>! {
-        let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_animation_get_static_image(cast(pixbuf_animation_ptr)))
-        return cast(rv)
+    @inlinable func getStaticImage() -> PixbufRef! {
+        let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_get_static_image(pixbuf_animation_ptr)))
+        return rv
     }
 
     /// Queries the width of the bounding box of a pixbuf animation.
-    func getWidth() -> Int {
-        let rv: Int = cast(gdk_pixbuf_animation_get_width(cast(pixbuf_animation_ptr)))
-        return cast(rv)
+    @inlinable func getWidth() -> Int {
+        let rv = Int(gdk_pixbuf_animation_get_width(pixbuf_animation_ptr))
+        return rv
     }
 
     /// Adds a reference to an animation.
     ///
     /// **ref is deprecated:**
     /// Use g_object_ref().
-    @available(*, deprecated) func ref() -> UnsafeMutablePointer<GdkPixbufAnimation>! {
-        let rv: UnsafeMutablePointer<GdkPixbufAnimation>! = cast(g_object_ref(cast(pixbuf_animation_ptr)))
-        return cast(rv)
+    @available(*, deprecated) @discardableResult @inlinable func ref() -> PixbufAnimationRef! {
+        guard let rv = PixbufAnimationRef(gconstpointer: gconstpointer(g_object_ref(pixbuf_animation_ptr))) else { return nil }
+        return rv
     }
 
     /// Removes a reference from an animation.
     ///
     /// **unref is deprecated:**
     /// Use g_object_unref().
-    @available(*, deprecated) func unref() {
-        g_object_unref(cast(pixbuf_animation_ptr))
+    @available(*, deprecated) @inlinable func unref() {
+        g_object_unref(pixbuf_animation_ptr)
     
     }
     /// Queries the height of the bounding box of a pixbuf animation.
-    var height: Int {
+    @inlinable var height: Int {
         /// Queries the height of the bounding box of a pixbuf animation.
         get {
-            let rv: Int = cast(gdk_pixbuf_animation_get_height(cast(pixbuf_animation_ptr)))
-            return cast(rv)
+            let rv = Int(gdk_pixbuf_animation_get_height(pixbuf_animation_ptr))
+            return rv
         }
     }
 
@@ -501,14 +586,14 @@ public extension PixbufAnimationProtocol {
     /// turns out to be a plain, unanimated image, then this function will
     /// return `true`. Use `gdk_pixbuf_animation_get_static_image()` to retrieve
     /// the image.
-    var isStaticImage: Bool {
+    @inlinable var isStaticImage: Bool {
         /// If you load a file with `gdk_pixbuf_animation_new_from_file()` and it
         /// turns out to be a plain, unanimated image, then this function will
         /// return `true`. Use `gdk_pixbuf_animation_get_static_image()` to retrieve
         /// the image.
         get {
-            let rv = gdk_pixbuf_animation_is_static_image(cast(pixbuf_animation_ptr))
-            return Bool(rv != 0)
+            let rv = ((gdk_pixbuf_animation_is_static_image(pixbuf_animation_ptr)) != 0)
+            return rv
         }
     }
 
@@ -518,7 +603,7 @@ public extension PixbufAnimationProtocol {
     /// unanimated image, which might be the first frame, or something more
     /// sophisticated. If an animation hasn't loaded any frames yet, this
     /// function will return `nil`.
-    var staticImage: UnsafeMutablePointer<GdkPixbuf>! {
+    @inlinable var staticImage: PixbufRef! {
         /// If an animation is really just a plain image (has only one frame),
         /// this function returns that image. If the animation is an animation,
         /// this function returns a reasonable thing to display as a static
@@ -526,17 +611,17 @@ public extension PixbufAnimationProtocol {
         /// sophisticated. If an animation hasn't loaded any frames yet, this
         /// function will return `nil`.
         get {
-            let rv: UnsafeMutablePointer<GdkPixbuf>! = cast(gdk_pixbuf_animation_get_static_image(cast(pixbuf_animation_ptr)))
-            return cast(rv)
+            let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_get_static_image(pixbuf_animation_ptr)))
+            return rv
         }
     }
 
     /// Queries the width of the bounding box of a pixbuf animation.
-    var width: Int {
+    @inlinable var width: Int {
         /// Queries the width of the bounding box of a pixbuf animation.
         get {
-            let rv: Int = cast(gdk_pixbuf_animation_get_width(cast(pixbuf_animation_ptr)))
-            return cast(rv)
+            let rv = Int(gdk_pixbuf_animation_get_width(pixbuf_animation_ptr))
+            return rv
         }
     }
 

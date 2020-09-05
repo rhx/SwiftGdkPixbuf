@@ -5,9 +5,9 @@ import GIO
 import GModule
 import GLibObject
 
-public func pixbufErrorQuark() -> GQuark {
+@inlinable public func pixbufErrorQuark() -> GQuark {
     let rv = gdk_pixbuf_error_quark()
-    return cast(rv)
+    return rv
 }
 
 
