@@ -618,9 +618,9 @@ fields.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9GdkPixbuf0B9LoaderRefV3rawACSV_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(raw:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9GdkPixbuf0B9LoaderRefV3rawACSV_tcfc">init(raw:)</a>
+                    <a name="/s:9GdkPixbuf0B9LoaderRefV8mutatingACSV_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(mutating:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B9LoaderRefV8mutatingACSV_tcfc">init(mutating:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -637,7 +637,7 @@ fields.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="nf">init</span><span class="p">(</span><span class="nv">raw</span><span class="p">:</span> <span class="kt">UnsafeRawPointer</span><span class="p">)</span></code></pre>
+<span class="nf">init</span><span class="p">(</span><span class="k">mutating</span> <span class="nv">raw</span><span class="p">:</span> <span class="kt">UnsafeRawPointer</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -775,7 +775,7 @@ structs returned by <code>gdk_pixbuf_get_formats()</code>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="nf">init</span><span class="p">(</span><span class="n">mimeType</span> <span class="nv">mime_type</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+<span class="nf">init</span><span class="p">(</span><span class="nv">mimeType</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -817,7 +817,7 @@ of the <code>GdkPixbufFormat</code> structs returned by <code>gdk_pixbuf_get_for
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="nf">init</span><span class="p">(</span><span class="n">type</span> <span class="nv">image_type</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+<span class="nf">init</span><span class="p">(</span><span class="n">type</span> <span class="nv">imageType</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -860,7 +860,7 @@ structs returned by <code>gdk_pixbuf_get_formats()</code>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newWith</span><span class="p">(</span><span class="n">mimeType</span> <span class="nv">mime_type</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufLoaderRef</span><span class="o">!</span></code></pre>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newWith</span><span class="p">(</span><span class="nv">mimeType</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufLoaderRef</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -902,7 +902,7 @@ of the <code>GdkPixbufFormat</code> structs returned by <code>gdk_pixbuf_get_for
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newWith</span><span class="p">(</span><span class="n">type</span> <span class="nv">image_type</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufLoaderRef</span><span class="o">!</span></code></pre>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">newWith</span><span class="p">(</span><span class="n">type</span> <span class="nv">imageType</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufLoaderRef</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -920,7 +920,7 @@ of the <code>GdkPixbufFormat</code> structs returned by <code>gdk_pixbuf_get_for
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-06)</p>
+      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-13)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

@@ -270,7 +270,7 @@
             <h1>PixbufAnimation</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">PixbufAnimation</span> <span class="p">:</span> <span class="kt">Object</span><span class="p">,</span> <span class="kt"><a href="../Protocols/PixbufAnimationProtocol.html">PixbufAnimationProtocol</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">PixbufAnimation</span> <span class="p">:</span> <span class="kt">GLibObject</span><span class="o">.</span><span class="kt">Object</span><span class="p">,</span> <span class="kt"><a href="../Protocols/PixbufAnimationProtocol.html">PixbufAnimationProtocol</a></span></code></pre>
 
                 </div>
               </div>
@@ -1153,7 +1153,7 @@ are in the <code>GDK_PIXBUF_ERROR</code> and <code>G_FILE_ERROR</code> domains.<
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">resource</span> <span class="nv">resource_path</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+<span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">resource</span> <span class="nv">resourcePath</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -1192,7 +1192,7 @@ the <code>GDK_PIXBUF_ERROR</code> and <code>G_IO_ERROR</code> domains.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">CancellableT</span><span class="p">,</span> <span class="kt">InputStreamT</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamT</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableT</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="k">where</span> <span class="kt">CancellableT</span> <span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">,</span> <span class="kt">InputStreamT</span> <span class="p">:</span> <span class="kt">InputStreamProtocol</span></code></pre>
+<span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">CancellableT</span><span class="p">,</span> <span class="kt">InputStreamT</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamT</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableT</span><span class="p">?)</span> <span class="k">throws</span> <span class="k">where</span> <span class="kt">CancellableT</span> <span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">,</span> <span class="kt">InputStreamT</span> <span class="p">:</span> <span class="kt">InputStreamProtocol</span></code></pre>
 
                         </div>
                       </div>
@@ -1224,7 +1224,7 @@ the <code>GDK_PIXBUF_ERROR</code> and <code>G_IO_ERROR</code> domains.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">AsyncResultT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">streamFinish</span> <span class="nv">async_result</span><span class="p">:</span> <span class="kt">AsyncResultT</span><span class="p">)</span> <span class="k">throws</span> <span class="k">where</span> <span class="kt">AsyncResultT</span> <span class="p">:</span> <span class="kt">AsyncResultProtocol</span></code></pre>
+<span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">AsyncResultT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">streamFinish</span> <span class="nv">asyncResult</span><span class="p">:</span> <span class="kt">AsyncResultT</span><span class="p">)</span> <span class="k">throws</span> <span class="k">where</span> <span class="kt">AsyncResultT</span> <span class="p">:</span> <span class="kt">AsyncResultProtocol</span></code></pre>
 
                         </div>
                       </div>
@@ -1292,7 +1292,7 @@ are in the <code>GDK_PIXBUF_ERROR</code> and <code>G_FILE_ERROR</code> domains.<
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">resource</span> <span class="nv">resource_path</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufAnimation</span><span class="o">!</span></code></pre>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">newFrom</span><span class="p">(</span><span class="n">resource</span> <span class="nv">resourcePath</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufAnimation</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -1331,7 +1331,7 @@ the <code>GDK_PIXBUF_ERROR</code> and <code>G_IO_ERROR</code> domains.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">newFrom</span><span class="o">&lt;</span><span class="kt">CancellableT</span><span class="p">,</span> <span class="kt">InputStreamT</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamT</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableT</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufAnimation</span><span class="o">!</span> <span class="k">where</span> <span class="kt">CancellableT</span> <span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">,</span> <span class="kt">InputStreamT</span> <span class="p">:</span> <span class="kt">InputStreamProtocol</span></code></pre>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">newFrom</span><span class="o">&lt;</span><span class="kt">CancellableT</span><span class="p">,</span> <span class="kt">InputStreamT</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStreamT</span><span class="p">,</span> <span class="nv">cancellable</span><span class="p">:</span> <span class="kt">CancellableT</span><span class="p">?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufAnimation</span><span class="o">!</span> <span class="k">where</span> <span class="kt">CancellableT</span> <span class="p">:</span> <span class="kt">CancellableProtocol</span><span class="p">,</span> <span class="kt">InputStreamT</span> <span class="p">:</span> <span class="kt">InputStreamProtocol</span></code></pre>
 
                         </div>
                       </div>
@@ -1363,7 +1363,7 @@ the <code>GDK_PIXBUF_ERROR</code> and <code>G_IO_ERROR</code> domains.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">newFrom</span><span class="o">&lt;</span><span class="kt">AsyncResultT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">streamFinish</span> <span class="nv">async_result</span><span class="p">:</span> <span class="kt">AsyncResultT</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufAnimation</span><span class="o">!</span> <span class="k">where</span> <span class="kt">AsyncResultT</span> <span class="p">:</span> <span class="kt">AsyncResultProtocol</span></code></pre>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">newFrom</span><span class="o">&lt;</span><span class="kt">AsyncResultT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">streamFinish</span> <span class="nv">asyncResult</span><span class="p">:</span> <span class="kt">AsyncResultT</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufAnimation</span><span class="o">!</span> <span class="k">where</span> <span class="kt">AsyncResultT</span> <span class="p">:</span> <span class="kt">AsyncResultProtocol</span></code></pre>
 
                         </div>
                       </div>
@@ -1381,7 +1381,7 @@ the <code>GDK_PIXBUF_ERROR</code> and <code>G_IO_ERROR</code> domains.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-06)</p>
+      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-13)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

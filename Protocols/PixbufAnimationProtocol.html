@@ -501,6 +501,72 @@ Alternatively, use <code><a href="../Structs/PixbufAnimationRef.html">PixbufAnim
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:9GdkPixbuf0B17AnimationProtocolPAAE7getIter9startTimeAA0bcF3RefVSg4GLib0h3ValI0VSg_tF"></a>
+                    <a name="//apple_ref/swift/Method/getIter(startTime:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolPAAE7getIter9startTimeAA0bcF3RefVSg4GLib0h3ValI0VSg_tF">getIter(startTime:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get an iterator for displaying an animation. The iterator provides
+the frames that should be displayed at a given time. It should be
+freed after use with <code>g_object_unref()</code>.</p>
+
+<p><code>start_time</code> would normally come from <code>g_get_current_time()</code>, and marks
+the beginning of animation playback. After creating an iterator, you
+should immediately display the pixbuf returned by
+<code>gdk_pixbuf_animation_iter_get_pixbuf()</code>. Then, you should install
+a timeout (with <code>g_timeout_add()</code>) or by some other mechanism ensure
+that you&rsquo;ll update the image after
+<code>gdk_pixbuf_animation_iter_get_delay_time()</code> milliseconds. Each time
+the image is updated, you should reinstall the timeout with the new,
+possibly-changed delay time.</p>
+
+<p>As a shortcut, if <code>start_time</code> is <code>nil</code>, the result of
+<code>g_get_current_time()</code> will be used automatically.</p>
+
+<p>To update the image (i.e. possibly change the result of
+<code>gdk_pixbuf_animation_iter_get_pixbuf()</code> to a new frame of the animation),
+call <code>gdk_pixbuf_animation_iter_advance()</code>.</p>
+
+<p>If you&rsquo;re using <code>GdkPixbufLoader</code>, in addition to updating the image
+after the delay time, you should also update it whenever you
+receive the area_updated signal and
+<code>gdk_pixbuf_animation_iter_on_currently_loading_frame()</code> returns
+<code>true</code>. In this case, the frame currently being fed into the loader
+has received new data, so needs to be refreshed. The delay time for
+a frame may also be modified after an area_updated signal, for
+example if the delay time for a frame is encoded in the data after
+the frame itself. So your timeout should be reinstalled after any
+area_updated signal.</p>
+
+<p>A delay time of -1 is possible, indicating &ldquo;infinite.&rdquo;</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">func</span> <span class="nf">getIter</span><span class="p">(</span><span class="nv">startTime</span><span class="p">:</span> <span class="kt">GLib</span><span class="o">.</span><span class="kt">TimeValRef</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PixbufAnimationIterRef.html">PixbufAnimationIterRef</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L537-L540">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:9GdkPixbuf0B17AnimationProtocolPAAE7getIter9startTimeAA0bcF3RefVSgqd__Sg_t4GLib0h3ValD0Rd__lF"></a>
                     <a name="//apple_ref/swift/Method/getIter(startTime:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:9GdkPixbuf0B17AnimationProtocolPAAE7getIter9startTimeAA0bcF3RefVSgqd__Sg_t4GLib0h3ValD0Rd__lF">getIter(startTime:)</a>
@@ -554,12 +620,12 @@ area_updated signal.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">func</span> <span class="n">getIter</span><span class="o">&lt;</span><span class="kt">TimeValT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">startTime</span> <span class="nv">start_time</span><span class="p">:</span> <span class="kt">TimeValT</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PixbufAnimationIterRef.html">PixbufAnimationIterRef</a></span><span class="o">!</span> <span class="k">where</span> <span class="kt">TimeValT</span> <span class="p">:</span> <span class="kt">TimeValProtocol</span></code></pre>
+<span class="kd">func</span> <span class="n">getIter</span><span class="o">&lt;</span><span class="kt">TimeValT</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">startTime</span><span class="p">:</span> <span class="kt">TimeValT</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PixbufAnimationIterRef.html">PixbufAnimationIterRef</a></span><span class="o">!</span> <span class="k">where</span> <span class="kt">TimeValT</span> <span class="p">:</span> <span class="kt">TimeValProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L537-L540">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L574-L577">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -598,7 +664,7 @@ function will return <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L548-L551">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L585-L588">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -632,7 +698,7 @@ function will return <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L554-L557">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L591-L594">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -671,7 +737,7 @@ Use g_object_ref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L563-L566">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L600-L603">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -709,7 +775,7 @@ Use g_object_unref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L572-L575">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L609-L612">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -743,7 +809,7 @@ Use g_object_unref().</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L577-L583">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L614-L620">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -780,7 +846,7 @@ the image.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L589-L598">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L626-L635">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -819,7 +885,7 @@ function will return <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L606-L617">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L643-L654">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -853,7 +919,7 @@ function will return <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L620-L626">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimation.swift#L657-L663">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -866,7 +932,7 @@ function will return <code>nil</code>.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-06)</p>
+      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-13)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
