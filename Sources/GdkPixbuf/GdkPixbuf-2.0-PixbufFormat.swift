@@ -87,7 +87,7 @@ public extension PixbufFormatRef {
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufFormatProtocol`.**
-    @inlinable init(raw: UnsafeRawPointer) {
+    @inlinable init(mutating raw: UnsafeRawPointer) {
         ptr = UnsafeMutableRawPointer(mutating: raw)
     }
 
@@ -314,8 +314,8 @@ public extension PixbufFormatProtocol {
     /// Returns `true` if the save option specified by `option_key` is supported when
     /// saving a pixbuf using the module implementing `format`.
     /// See `gdk_pixbuf_save()` for more information about option keys.
-    @inlinable func isSaveOptionSupported(optionKey option_key: UnsafePointer<gchar>!) -> Bool {
-        let rv = ((gdk_pixbuf_format_is_save_option_supported(pixbuf_format_ptr, option_key)) != 0)
+    @inlinable func isSaveOptionSupported(optionKey: UnsafePointer<gchar>!) -> Bool {
+        let rv = ((gdk_pixbuf_format_is_save_option_supported(pixbuf_format_ptr, optionKey)) != 0)
         return rv
     }
 

@@ -14,7 +14,7 @@ import GLibObject
 ///
 /// The GdkPixbufLoader struct contains only private
 /// fields.
-public protocol PixbufLoaderProtocol: ObjectProtocol {
+public protocol PixbufLoaderProtocol: GLibObject.ObjectProtocol {
         /// Untyped pointer to the underlying `GdkPixbufLoader` instance.
     var ptr: UnsafeMutableRawPointer! { get }
 
@@ -89,7 +89,7 @@ public extension PixbufLoaderRef {
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
-    @inlinable init(raw: UnsafeRawPointer) {
+    @inlinable init(mutating raw: UnsafeRawPointer) {
         ptr = UnsafeMutableRawPointer(mutating: raw)
     }
 
@@ -124,9 +124,9 @@ public extension PixbufLoaderRef {
     /// To obtain the full list of supported mime types, call
     /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
     /// structs returned by `gdk_pixbuf_get_formats()`.
-    @inlinable init(mimeType mime_type: UnsafePointer<CChar>!) throws {
+    @inlinable init(mimeType mimeType: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
+        let rv = gdk_pixbuf_loader_new_with_mime_type(mimeType, &error)
         if let error = error { throw GLibError(error) }
         ptr = UnsafeMutableRawPointer(rv)
     }
@@ -143,9 +143,9 @@ public extension PixbufLoaderRef {
     /// "xpm" are among the supported formats. To obtain the full list of
     /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
     /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
-    @inlinable init(type image_type: UnsafePointer<CChar>!) throws {
+    @inlinable init(type imageType: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
+        let rv = gdk_pixbuf_loader_new_with_type(imageType, &error)
         if let error = error { throw GLibError(error) }
         ptr = UnsafeMutableRawPointer(rv)
     }
@@ -162,9 +162,9 @@ public extension PixbufLoaderRef {
     /// To obtain the full list of supported mime types, call
     /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
     /// structs returned by `gdk_pixbuf_get_formats()`.
-    @inlinable static func newWith(mimeType mime_type: UnsafePointer<CChar>!) throws -> PixbufLoaderRef! {
+    @inlinable static func newWith(mimeType mimeType: UnsafePointer<CChar>!) throws -> PixbufLoaderRef! {
         var error: UnsafeMutablePointer<GError>?
-        let maybeRV = PixbufLoaderRef(gconstpointer: gconstpointer(gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)))
+        let maybeRV = PixbufLoaderRef(gconstpointer: gconstpointer(gdk_pixbuf_loader_new_with_mime_type(mimeType, &error)))
         if let error = error { throw GLibError(error) }
         guard let rv = maybeRV else { return nil }
         return rv
@@ -182,9 +182,9 @@ public extension PixbufLoaderRef {
     /// "xpm" are among the supported formats. To obtain the full list of
     /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
     /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
-    @inlinable static func newWith(type image_type: UnsafePointer<CChar>!) throws -> PixbufLoaderRef! {
+    @inlinable static func newWith(type imageType: UnsafePointer<CChar>!) throws -> PixbufLoaderRef! {
         var error: UnsafeMutablePointer<GError>?
-        let maybeRV = PixbufLoaderRef(gconstpointer: gconstpointer(gdk_pixbuf_loader_new_with_type(image_type, &error)))
+        let maybeRV = PixbufLoaderRef(gconstpointer: gconstpointer(gdk_pixbuf_loader_new_with_type(imageType, &error)))
         if let error = error { throw GLibError(error) }
         guard let rv = maybeRV else { return nil }
         return rv
@@ -197,7 +197,7 @@ public extension PixbufLoaderRef {
 ///
 /// The GdkPixbufLoader struct contains only private
 /// fields.
-open class PixbufLoader: Object, PixbufLoaderProtocol {
+open class PixbufLoader: GLibObject.Object, PixbufLoaderProtocol {
         /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
     /// i.e., ownership is transferred to the `PixbufLoader` instance.
@@ -341,9 +341,9 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// To obtain the full list of supported mime types, call
     /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
     /// structs returned by `gdk_pixbuf_get_formats()`.
-    @inlinable public init(mimeType mime_type: UnsafePointer<CChar>!) throws {
+    @inlinable public init(mimeType mimeType: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv = gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)
+        let rv = gdk_pixbuf_loader_new_with_mime_type(mimeType, &error)
         if let error = error { throw GLibError(error) }
         super.init(gpointer: (rv))
     }
@@ -360,9 +360,9 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// "xpm" are among the supported formats. To obtain the full list of
     /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
     /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
-    @inlinable public init(type image_type: UnsafePointer<CChar>!) throws {
+    @inlinable public init(type imageType: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv = gdk_pixbuf_loader_new_with_type(image_type, &error)
+        let rv = gdk_pixbuf_loader_new_with_type(imageType, &error)
         if let error = error { throw GLibError(error) }
         super.init(gpointer: (rv))
     }
@@ -380,9 +380,9 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// To obtain the full list of supported mime types, call
     /// `gdk_pixbuf_format_get_mime_types()` on each of the `GdkPixbufFormat`
     /// structs returned by `gdk_pixbuf_get_formats()`.
-    @inlinable public static func newWith(mimeType mime_type: UnsafePointer<CChar>!) throws -> PixbufLoader! {
+    @inlinable public static func newWith(mimeType mimeType: UnsafePointer<CChar>!) throws -> PixbufLoader! {
         var error: UnsafeMutablePointer<GError>?
-        let maybeRV = PixbufLoader(gconstpointer: gconstpointer(gdk_pixbuf_loader_new_with_mime_type(mime_type, &error)))
+        let maybeRV = PixbufLoader(gconstpointer: gconstpointer(gdk_pixbuf_loader_new_with_mime_type(mimeType, &error)))
         if let error = error { throw GLibError(error) }
         guard let rv = maybeRV else { return nil }
         return rv
@@ -400,9 +400,9 @@ open class PixbufLoader: Object, PixbufLoaderProtocol {
     /// "xpm" are among the supported formats. To obtain the full list of
     /// supported image formats, call `gdk_pixbuf_format_get_name()` on each
     /// of the `GdkPixbufFormat` structs returned by `gdk_pixbuf_get_formats()`.
-    @inlinable public static func newWith(type image_type: UnsafePointer<CChar>!) throws -> PixbufLoader! {
+    @inlinable public static func newWith(type imageType: UnsafePointer<CChar>!) throws -> PixbufLoader! {
         var error: UnsafeMutablePointer<GError>?
-        let maybeRV = PixbufLoader(gconstpointer: gconstpointer(gdk_pixbuf_loader_new_with_type(image_type, &error)))
+        let maybeRV = PixbufLoader(gconstpointer: gconstpointer(gdk_pixbuf_loader_new_with_type(imageType, &error)))
         if let error = error { throw GLibError(error) }
         guard let rv = maybeRV else { return nil }
         return rv
@@ -581,7 +581,7 @@ public extension PixbufLoaderProtocol {
     /// or `G_FILE_ERROR` domains.
     /// 
     /// See also: `gdk_pixbuf_loader_write()`
-    @inlinable func writeBytes<BytesT: BytesProtocol>(buffer: BytesT) throws -> Bool {
+    @inlinable func writeBytes<BytesT: GLib.BytesProtocol>(buffer: BytesT) throws -> Bool {
         var error: UnsafeMutablePointer<GError>?
         let rv = ((gdk_pixbuf_loader_write_bytes(pixbuf_loader_ptr, buffer.bytes_ptr, &error)) != 0)
         if let error = error { throw GLibError(error) }

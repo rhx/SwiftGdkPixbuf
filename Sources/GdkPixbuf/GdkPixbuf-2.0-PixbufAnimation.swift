@@ -13,7 +13,7 @@ import GLibObject
 /// Alternatively, use `PixbufAnimationRef` as a lighweight, `unowned` reference if you already have an instance you just want to use.
 ///
 /// An opaque struct representing an animation.
-public protocol PixbufAnimationProtocol: ObjectProtocol {
+public protocol PixbufAnimationProtocol: GLibObject.ObjectProtocol {
         /// Untyped pointer to the underlying `GdkPixbufAnimation` instance.
     var ptr: UnsafeMutableRawPointer! { get }
 
@@ -87,7 +87,7 @@ public extension PixbufAnimationRef {
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
-    @inlinable init(raw: UnsafeRawPointer) {
+    @inlinable init(mutating raw: UnsafeRawPointer) {
         ptr = UnsafeMutableRawPointer(mutating: raw)
     }
 
@@ -118,9 +118,9 @@ public extension PixbufAnimationRef {
     /// 
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
-    @inlinable init(resource resource_path: UnsafePointer<CChar>!) throws {
+    @inlinable init(resource resourcePath: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv = gdk_pixbuf_animation_new_from_resource(resource_path, &error)
+        let rv = gdk_pixbuf_animation_new_from_resource(resourcePath, &error)
         if let error = error { throw GLibError(error) }
         ptr = UnsafeMutableRawPointer(rv)
     }
@@ -134,7 +134,7 @@ public extension PixbufAnimationRef {
     /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
-    @inlinable init<CancellableT: CancellableProtocol, InputStreamT: InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT? = nil) throws {
+    @inlinable init<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_animation_new_from_stream(stream.input_stream_ptr, cancellable?.cancellable_ptr, &error)
         if let error = error { throw GLibError(error) }
@@ -143,9 +143,9 @@ public extension PixbufAnimationRef {
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
     /// `gdk_pixbuf_animation_new_from_stream_async()`.
-    @inlinable init<AsyncResultT: AsyncResultProtocol>(streamFinish async_result: AsyncResultT) throws {
+    @inlinable init<AsyncResultT: GIO.AsyncResultProtocol>(streamFinish asyncResult: AsyncResultT) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv = gdk_pixbuf_animation_new_from_stream_finish(async_result.async_result_ptr, &error)
+        let rv = gdk_pixbuf_animation_new_from_stream_finish(asyncResult.async_result_ptr, &error)
         if let error = error { throw GLibError(error) }
         ptr = UnsafeMutableRawPointer(rv)
     }
@@ -165,9 +165,9 @@ public extension PixbufAnimationRef {
     /// 
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
-    @inlinable static func newFrom(resource resource_path: UnsafePointer<CChar>!) throws -> PixbufAnimationRef! {
+    @inlinable static func newFrom(resource resourcePath: UnsafePointer<CChar>!) throws -> PixbufAnimationRef! {
         var error: UnsafeMutablePointer<GError>?
-        let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_resource(resource_path, &error)))
+        let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_resource(resourcePath, &error)))
         if let error = error { throw GLibError(error) }
         guard let rv = maybeRV else { return nil }
         return rv
@@ -182,7 +182,7 @@ public extension PixbufAnimationRef {
     /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
-    @inlinable static func newFrom<CancellableT: CancellableProtocol, InputStreamT: InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT? = nil) throws -> PixbufAnimationRef! {
+    @inlinable static func newFrom<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws -> PixbufAnimationRef! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream(stream.input_stream_ptr, cancellable?.cancellable_ptr, &error)))
         if let error = error { throw GLibError(error) }
@@ -192,9 +192,9 @@ public extension PixbufAnimationRef {
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
     /// `gdk_pixbuf_animation_new_from_stream_async()`.
-    @inlinable static func newFrom<AsyncResultT: AsyncResultProtocol>(streamFinish async_result: AsyncResultT) throws -> PixbufAnimationRef! {
+    @inlinable static func newFrom<AsyncResultT: GIO.AsyncResultProtocol>(streamFinish asyncResult: AsyncResultT) throws -> PixbufAnimationRef! {
         var error: UnsafeMutablePointer<GError>?
-        let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream_finish(async_result.async_result_ptr, &error)))
+        let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream_finish(asyncResult.async_result_ptr, &error)))
         if let error = error { throw GLibError(error) }
         guard let rv = maybeRV else { return nil }
         return rv
@@ -206,7 +206,7 @@ public extension PixbufAnimationRef {
 /// Use `PixbufAnimation` as a strong reference or owner of a `GdkPixbufAnimation` instance.
 ///
 /// An opaque struct representing an animation.
-open class PixbufAnimation: Object, PixbufAnimationProtocol {
+open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
         /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
     /// i.e., ownership is transferred to the `PixbufAnimation` instance.
@@ -346,9 +346,9 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     /// 
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
-    @inlinable public init(resource resource_path: UnsafePointer<CChar>!) throws {
+    @inlinable public init(resource resourcePath: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv = gdk_pixbuf_animation_new_from_resource(resource_path, &error)
+        let rv = gdk_pixbuf_animation_new_from_resource(resourcePath, &error)
         if let error = error { throw GLibError(error) }
         super.init(gpointer: (rv))
     }
@@ -362,7 +362,7 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
-    @inlinable public init<CancellableT: CancellableProtocol, InputStreamT: InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT? = nil) throws {
+    @inlinable public init<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_animation_new_from_stream(stream.input_stream_ptr, cancellable?.cancellable_ptr, &error)
         if let error = error { throw GLibError(error) }
@@ -371,9 +371,9 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
     /// `gdk_pixbuf_animation_new_from_stream_async()`.
-    @inlinable public init<AsyncResultT: AsyncResultProtocol>(streamFinish async_result: AsyncResultT) throws {
+    @inlinable public init<AsyncResultT: GIO.AsyncResultProtocol>(streamFinish asyncResult: AsyncResultT) throws {
         var error: UnsafeMutablePointer<GError>?
-        let rv = gdk_pixbuf_animation_new_from_stream_finish(async_result.async_result_ptr, &error)
+        let rv = gdk_pixbuf_animation_new_from_stream_finish(asyncResult.async_result_ptr, &error)
         if let error = error { throw GLibError(error) }
         super.init(gpointer: (rv))
     }
@@ -394,9 +394,9 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     /// 
     /// The file format is detected automatically. If `nil` is returned, then
     /// `error` will be set.
-    @inlinable public static func newFrom(resource resource_path: UnsafePointer<CChar>!) throws -> PixbufAnimation! {
+    @inlinable public static func newFrom(resource resourcePath: UnsafePointer<CChar>!) throws -> PixbufAnimation! {
         var error: UnsafeMutablePointer<GError>?
-        let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_resource(resource_path, &error)))
+        let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_resource(resourcePath, &error)))
         if let error = error { throw GLibError(error) }
         guard let rv = maybeRV else { return nil }
         return rv
@@ -411,7 +411,7 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
     /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
-    @inlinable public static func newFrom<CancellableT: CancellableProtocol, InputStreamT: InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT? = nil) throws -> PixbufAnimation! {
+    @inlinable public static func newFrom<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws -> PixbufAnimation! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream(stream.input_stream_ptr, cancellable?.cancellable_ptr, &error)))
         if let error = error { throw GLibError(error) }
@@ -421,9 +421,9 @@ open class PixbufAnimation: Object, PixbufAnimationProtocol {
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
     /// `gdk_pixbuf_animation_new_from_stream_async()`.
-    @inlinable public static func newFrom<AsyncResultT: AsyncResultProtocol>(streamFinish async_result: AsyncResultT) throws -> PixbufAnimation! {
+    @inlinable public static func newFrom<AsyncResultT: GIO.AsyncResultProtocol>(streamFinish asyncResult: AsyncResultT) throws -> PixbufAnimation! {
         var error: UnsafeMutablePointer<GError>?
-        let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream_finish(async_result.async_result_ptr, &error)))
+        let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream_finish(asyncResult.async_result_ptr, &error)))
         if let error = error { throw GLibError(error) }
         guard let rv = maybeRV else { return nil }
         return rv
@@ -534,8 +534,45 @@ public extension PixbufAnimationProtocol {
     /// area_updated signal.
     /// 
     /// A delay time of -1 is possible, indicating "infinite."
-    @inlinable func getIter<TimeValT: TimeValProtocol>(startTime start_time: TimeValT? = nil) -> PixbufAnimationIterRef! {
-        let rv = PixbufAnimationIterRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_get_iter(pixbuf_animation_ptr, start_time?._ptr)))
+    @inlinable func getIter(startTime: GLib.TimeValRef? = nil) -> PixbufAnimationIterRef! {
+        let rv = PixbufAnimationIterRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_get_iter(pixbuf_animation_ptr, startTime?._ptr)))
+        return rv
+    }
+    /// Get an iterator for displaying an animation. The iterator provides
+    /// the frames that should be displayed at a given time. It should be
+    /// freed after use with `g_object_unref()`.
+    /// 
+    /// `start_time` would normally come from `g_get_current_time()`, and marks
+    /// the beginning of animation playback. After creating an iterator, you
+    /// should immediately display the pixbuf returned by
+    /// `gdk_pixbuf_animation_iter_get_pixbuf()`. Then, you should install
+    /// a timeout (with `g_timeout_add()`) or by some other mechanism ensure
+    /// that you'll update the image after
+    /// `gdk_pixbuf_animation_iter_get_delay_time()` milliseconds. Each time
+    /// the image is updated, you should reinstall the timeout with the new,
+    /// possibly-changed delay time.
+    /// 
+    /// As a shortcut, if `start_time` is `nil`, the result of
+    /// `g_get_current_time()` will be used automatically.
+    /// 
+    /// To update the image (i.e. possibly change the result of
+    /// `gdk_pixbuf_animation_iter_get_pixbuf()` to a new frame of the animation),
+    /// call `gdk_pixbuf_animation_iter_advance()`.
+    /// 
+    /// If you're using `GdkPixbufLoader`, in addition to updating the image
+    /// after the delay time, you should also update it whenever you
+    /// receive the area_updated signal and
+    /// `gdk_pixbuf_animation_iter_on_currently_loading_frame()` returns
+    /// `true`. In this case, the frame currently being fed into the loader
+    /// has received new data, so needs to be refreshed. The delay time for
+    /// a frame may also be modified after an area_updated signal, for
+    /// example if the delay time for a frame is encoded in the data after
+    /// the frame itself. So your timeout should be reinstalled after any
+    /// area_updated signal.
+    /// 
+    /// A delay time of -1 is possible, indicating "infinite."
+    @inlinable func getIter<TimeValT: GLib.TimeValProtocol>(startTime: TimeValT?) -> PixbufAnimationIterRef! {
+        let rv = PixbufAnimationIterRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_get_iter(pixbuf_animation_ptr, startTime?._ptr)))
         return rv
     }
 

@@ -468,6 +468,58 @@ certain position in an animation.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:9GdkPixbuf0B21AnimationIterProtocolPAAE7advance11currentTimeSb4GLib0H6ValRefVSg_tF"></a>
+                    <a name="//apple_ref/swift/Method/advance(currentTime:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B21AnimationIterProtocolPAAE7advance11currentTimeSb4GLib0H6ValRefVSg_tF">advance(currentTime:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Possibly advances an animation to a new frame. Chooses the frame based
+on the start time passed to <code>gdk_pixbuf_animation_get_iter()</code>.</p>
+
+<p><code>current_time</code> would normally come from <code>g_get_current_time()</code>, and
+must be greater than or equal to the time passed to
+<code>gdk_pixbuf_animation_get_iter()</code>, and must increase or remain
+unchanged each time <code>gdk_pixbuf_animation_iter_get_pixbuf()</code> is
+called. That is, you can&rsquo;t go backward in time; animations only
+play forward.</p>
+
+<p>As a shortcut, pass <code>nil</code> for the current time and <code>g_get_current_time()</code>
+will be invoked on your behalf. So you only need to explicitly pass
+<code>current_time</code> if you&rsquo;re doing something odd like playing the animation
+at double speed.</p>
+
+<p>If this function returns <code>false</code>, there&rsquo;s no need to update the animation
+display, assuming the display had been rendered prior to advancing;
+if <code>true</code>, you need to call <code>gdk_pixbuf_animation_iter_get_pixbuf()</code>
+and update the display with the new pixbuf.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">func</span> <span class="nf">advance</span><span class="p">(</span><span class="nv">currentTime</span><span class="p">:</span> <span class="kt">GLib</span><span class="o">.</span><span class="kt">TimeValRef</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L328-L331">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:9GdkPixbuf0B21AnimationIterProtocolPAAE7advance11currentTimeSbqd__Sg_t4GLib0h3ValE0Rd__lF"></a>
                     <a name="//apple_ref/swift/Method/advance(currentTime:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:9GdkPixbuf0B21AnimationIterProtocolPAAE7advance11currentTimeSbqd__Sg_t4GLib0h3ValE0Rd__lF">advance(currentTime:)</a>
@@ -507,12 +559,12 @@ and update the display with the new pixbuf.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">func</span> <span class="n">advance</span><span class="o">&lt;</span><span class="kt">TimeValT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">currentTime</span> <span class="nv">current_time</span><span class="p">:</span> <span class="kt">TimeValT</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">TimeValT</span> <span class="p">:</span> <span class="kt">TimeValProtocol</span></code></pre>
+<span class="kd">func</span> <span class="n">advance</span><span class="o">&lt;</span><span class="kt">TimeValT</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">currentTime</span><span class="p">:</span> <span class="kt">TimeValT</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">TimeValT</span> <span class="p">:</span> <span class="kt">TimeValProtocol</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L328-L331">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L351-L354">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -553,7 +605,7 @@ for GIF images is currently 20 milliseconds.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L341-L344">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L364-L367">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -597,7 +649,7 @@ the iterator.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L357-L360">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L380-L383">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -635,7 +687,7 @@ the updated area.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L367-L370">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L390-L393">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -676,7 +728,7 @@ for GIF images is currently 20 milliseconds.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L379-L392">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L402-L415">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -720,7 +772,7 @@ the iterator.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L405-L421">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationIter.swift#L428-L444">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -733,7 +785,7 @@ the iterator.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-06)</p>
+      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-13)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

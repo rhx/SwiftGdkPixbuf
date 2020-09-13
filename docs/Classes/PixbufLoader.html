@@ -270,7 +270,7 @@
             <h1>PixbufLoader</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">PixbufLoader</span> <span class="p">:</span> <span class="kt">Object</span><span class="p">,</span> <span class="kt"><a href="../Protocols/PixbufLoaderProtocol.html">PixbufLoaderProtocol</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">PixbufLoader</span> <span class="p">:</span> <span class="kt">GLibObject</span><span class="o">.</span><span class="kt">Object</span><span class="p">,</span> <span class="kt"><a href="../Protocols/PixbufLoaderProtocol.html">PixbufLoaderProtocol</a></span></code></pre>
 
                 </div>
               </div>
@@ -1160,7 +1160,7 @@ structs returned by <code>gdk_pixbuf_get_formats()</code>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">mimeType</span> <span class="nv">mime_type</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+<span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">mimeType</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -1202,7 +1202,7 @@ of the <code>GdkPixbufFormat</code> structs returned by <code>gdk_pixbuf_get_for
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">type</span> <span class="nv">image_type</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+<span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">type</span> <span class="nv">imageType</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -1245,7 +1245,7 @@ structs returned by <code>gdk_pixbuf_get_formats()</code>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">newWith</span><span class="p">(</span><span class="n">mimeType</span> <span class="nv">mime_type</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufLoader</span><span class="o">!</span></code></pre>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">newWith</span><span class="p">(</span><span class="nv">mimeType</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufLoader</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -1287,7 +1287,7 @@ of the <code>GdkPixbufFormat</code> structs returned by <code>gdk_pixbuf_get_for
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@inlinable</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">newWith</span><span class="p">(</span><span class="n">type</span> <span class="nv">image_type</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufLoader</span><span class="o">!</span></code></pre>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">newWith</span><span class="p">(</span><span class="n">type</span> <span class="nv">imageType</span><span class="p">:</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">PixbufLoader</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -1305,7 +1305,7 @@ of the <code>GdkPixbufFormat</code> structs returned by <code>gdk_pixbuf_get_for
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-06)</p>
+      <p>&copy; 2020 <a class="link" href="https://www.ict.griffith.edu.au/~rhexel/" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2020-09-13)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

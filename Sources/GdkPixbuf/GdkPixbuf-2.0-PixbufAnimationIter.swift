@@ -14,7 +14,7 @@ import GLibObject
 ///
 /// An opaque struct representing an iterator which points to a
 /// certain position in an animation.
-public protocol PixbufAnimationIterProtocol: ObjectProtocol {
+public protocol PixbufAnimationIterProtocol: GLibObject.ObjectProtocol {
         /// Untyped pointer to the underlying `GdkPixbufAnimationIter` instance.
     var ptr: UnsafeMutableRawPointer! { get }
 
@@ -89,7 +89,7 @@ public extension PixbufAnimationIterRef {
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
-    @inlinable init(raw: UnsafeRawPointer) {
+    @inlinable init(mutating raw: UnsafeRawPointer) {
         ptr = UnsafeMutableRawPointer(mutating: raw)
     }
 
@@ -113,7 +113,7 @@ public extension PixbufAnimationIterRef {
 ///
 /// An opaque struct representing an iterator which points to a
 /// certain position in an animation.
-open class PixbufAnimationIter: Object, PixbufAnimationIterProtocol {
+open class PixbufAnimationIter: GLibObject.Object, PixbufAnimationIterProtocol {
         /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
     /// i.e., ownership is transferred to the `PixbufAnimationIter` instance.
@@ -325,8 +325,31 @@ public extension PixbufAnimationIterProtocol {
     /// display, assuming the display had been rendered prior to advancing;
     /// if `true`, you need to call `gdk_pixbuf_animation_iter_get_pixbuf()`
     /// and update the display with the new pixbuf.
-    @inlinable func advance<TimeValT: TimeValProtocol>(currentTime current_time: TimeValT? = nil) -> Bool {
-        let rv = ((gdk_pixbuf_animation_iter_advance(pixbuf_animation_iter_ptr, current_time?._ptr)) != 0)
+    @inlinable func advance(currentTime: GLib.TimeValRef? = nil) -> Bool {
+        let rv = ((gdk_pixbuf_animation_iter_advance(pixbuf_animation_iter_ptr, currentTime?._ptr)) != 0)
+        return rv
+    }
+    /// Possibly advances an animation to a new frame. Chooses the frame based
+    /// on the start time passed to `gdk_pixbuf_animation_get_iter()`.
+    /// 
+    /// `current_time` would normally come from `g_get_current_time()`, and
+    /// must be greater than or equal to the time passed to
+    /// `gdk_pixbuf_animation_get_iter()`, and must increase or remain
+    /// unchanged each time `gdk_pixbuf_animation_iter_get_pixbuf()` is
+    /// called. That is, you can't go backward in time; animations only
+    /// play forward.
+    /// 
+    /// As a shortcut, pass `nil` for the current time and `g_get_current_time()`
+    /// will be invoked on your behalf. So you only need to explicitly pass
+    /// `current_time` if you're doing something odd like playing the animation
+    /// at double speed.
+    /// 
+    /// If this function returns `false`, there's no need to update the animation
+    /// display, assuming the display had been rendered prior to advancing;
+    /// if `true`, you need to call `gdk_pixbuf_animation_iter_get_pixbuf()`
+    /// and update the display with the new pixbuf.
+    @inlinable func advance<TimeValT: GLib.TimeValProtocol>(currentTime: TimeValT?) -> Bool {
+        let rv = ((gdk_pixbuf_animation_iter_advance(pixbuf_animation_iter_ptr, currentTime?._ptr)) != 0)
         return rv
     }
 
