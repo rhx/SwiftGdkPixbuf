@@ -6,11 +6,11 @@ let package = Package(
     name: "GdkPixbuf",
     products: [ .library(name: "GdkPixbuf", targets: ["GdkPixbuf"]) ],
     dependencies: [
-        .package(name: "GIO", url: "https://github.com/rhx/SwiftGIO.git", .branch("master")),
-        .package(name: "GModule", url: "https://github.com/rhx/SwiftGModule.git", .branch("master")),
+        .package(name: "GIO", url: "https://github.com/mikolasstuchlik/SwiftGIO.git", .branch("master")),
+        .package(name: "GModule", url: "https://github.com/mikolasstuchlik/SwiftGModule.git", .branch("master")),
     ],
     targets: [
-	.systemLibrary(name: "CGdkPixbuf", pkgConfig: "cairo glib-2.0 gio-unix-2.0",
+	.systemLibrary(name: "CGdkPixbuf", pkgConfig: "gdk-pixbuf-2.0",
 	    providers: [
 		.brew(["gdk-pixbuf", "glib", "glib-networking", "gobject-introspection"]),
 		.apt(["libgdk-pixbuf2.0-dev", "libglib2.0-dev", "glib-networking", "gobject-introspection", "libgirepository1.0-dev"])
