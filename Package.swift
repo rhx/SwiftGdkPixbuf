@@ -6,6 +6,7 @@ let package = Package(
     name: "GdkPixbuf",
     products: [ .library(name: "GdkPixbuf", targets: ["GdkPixbuf"]) ],
     dependencies: [
+        .package(name: "gir2swift", url: "https://github.com/mikolasstuchlik/gir2swift.git", .branch("master")),
         .package(name: "GIO", url: "https://github.com/mikolasstuchlik/SwiftGIO.git", .branch("master")),
         .package(name: "GModule", url: "https://github.com/mikolasstuchlik/SwiftGModule.git", .branch("master")),
     ],
