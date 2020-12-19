@@ -16,7 +16,11 @@ let package = Package(
 		.brew(["gdk-pixbuf", "glib", "glib-networking", "gobject-introspection"]),
 		.apt(["libgdk-pixbuf2.0-dev", "libglib2.0-dev", "glib-networking", "gobject-introspection", "libgirepository1.0-dev"])
 	    ]),
-        .target(name: "GdkPixbuf", dependencies: ["CGdkPixbuf", "GIO", "GModule"]),
+        .target(
+            name: "GdkPixbuf", 
+            dependencies: ["CGdkPixbuf", "GIO", "GModule"],
+            swiftSettings: [.unsafeFlags(["-Xfrontend", "-serialize-debugging-options"], .when(configuration: .debug))]
+        ),
         .testTarget(name: "GdkPixbufTests", dependencies: ["GdkPixbuf"]),
     ]
 )
