@@ -6,8 +6,8 @@ let package = Package(
     name: "GdkPixbuf",
     products: [ .library(name: "GdkPixbuf", targets: ["GdkPixbuf"]) ],
     dependencies: [
-        .package(name: "GIO", url: "https://github.com/rhx/SwiftGIO.git", .branch("master")),
-        .package(name: "GModule", url: "https://github.com/rhx/SwiftGModule.git", .branch("master")),
+        .package(name: "GIO", url: "https://github.com/rhx/SwiftGIO.git", .branch("main")),
+        .package(name: "GModule", url: "https://github.com/rhx/SwiftGModule.git", .branch("main")),
     ],
     targets: [
 	.systemLibrary(name: "CGdkPixbuf", pkgConfig: "cairo glib-2.0 gio-unix-2.0",
