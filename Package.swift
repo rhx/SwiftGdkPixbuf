@@ -6,16 +6,21 @@ let package = Package(
     name: "GdkPixbuf",
     products: [ .library(name: "GdkPixbuf", targets: ["GdkPixbuf"]) ],
     dependencies: [
-        .package(name: "GIO", url: "https://github.com/rhx/SwiftGIO.git", .branch("main")),
-        .package(name: "GModule", url: "https://github.com/rhx/SwiftGModule.git", .branch("main")),
+        .package(name: "gir2swift", url: "https://github.com/rhx/gir2swift.git", .branch("development")),
+        .package(name: "GIO", url: "https://github.com/rhx/SwiftGIO.git", .branch("development")),
+        .package(name: "GModule", url: "https://github.com/rhx/SwiftGModule.git", .branch("development")),
     ],
     targets: [
-	.systemLibrary(name: "CGdkPixbuf", pkgConfig: "cairo glib-2.0 gio-unix-2.0",
+	.systemLibrary(name: "CGdkPixbuf", pkgConfig: "gdk-pixbuf-2.0",
 	    providers: [
 		.brew(["gdk-pixbuf", "glib", "glib-networking", "gobject-introspection"]),
 		.apt(["libgdk-pixbuf2.0-dev", "libglib2.0-dev", "glib-networking", "gobject-introspection", "libgirepository1.0-dev"])
 	    ]),
-        .target(name: "GdkPixbuf", dependencies: ["CGdkPixbuf", "GIO", "GModule"]),
+        .target(
+            name: "GdkPixbuf", 
+            dependencies: ["CGdkPixbuf", "GIO", "GModule"],
+            swiftSettings: [.unsafeFlags(["-Xfrontend", "-serialize-debugging-options"], .when(configuration: .debug))]
+        ),
         .testTarget(name: "GdkPixbufTests", dependencies: ["GdkPixbuf"]),
     ]
 )
