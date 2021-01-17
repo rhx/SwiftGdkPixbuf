@@ -258,7 +258,7 @@ open class PixbufFormat: PixbufFormatProtocol {
 
 // MARK: no PixbufFormat signals
 
-
+// MARK: PixbufFormat has no signals
 // MARK: PixbufFormat Record: PixbufFormatProtocol extension (methods and fields)
 public extension PixbufFormatProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufFormat` instance.
@@ -414,6 +414,272 @@ public extension PixbufFormatProtocol {
             return rv
         }
     }
+
+
+}
+
+
+
+/// Metatype/GType declaration for PixbufLoader
+public extension PixbufLoaderClassRef {
+    
+    /// This getter returns the GLib type identifier registered for `PixbufLoader`
+    static var metatypeReference: GType { gdk_pixbuf_loader_get_type() }
+    
+    private static var metatypePointer: UnsafeMutablePointer<GdkPixbufLoaderClass>? { g_type_class_peek_static(metatypeReference)?.assumingMemoryBound(to: GdkPixbufLoaderClass.self) }
+    
+    static var metatype: GdkPixbufLoaderClass? { metatypePointer?.pointee } 
+    
+    static var wrapper: PixbufLoaderClassRef? { PixbufLoaderClassRef(metatypePointer) }
+    
+    
+}
+
+// MARK: - PixbufLoaderClass Record
+
+/// The `PixbufLoaderClassProtocol` protocol exposes the methods and properties of an underlying `GdkPixbufLoaderClass` instance.
+/// The default implementation of these can be found in the protocol extension below.
+/// For a concrete class that implements these methods and properties, see `PixbufLoaderClass`.
+/// Alternatively, use `PixbufLoaderClassRef` as a lighweight, `unowned` reference if you already have an instance you just want to use.
+///
+
+public protocol PixbufLoaderClassProtocol {
+        /// Untyped pointer to the underlying `GdkPixbufLoaderClass` instance.
+    var ptr: UnsafeMutableRawPointer! { get }
+
+    /// Typed pointer to the underlying `GdkPixbufLoaderClass` instance.
+    var _ptr: UnsafeMutablePointer<GdkPixbufLoaderClass>! { get }
+
+}
+
+/// The `PixbufLoaderClassRef` type acts as a lightweight Swift reference to an underlying `GdkPixbufLoaderClass` instance.
+/// It exposes methods that can operate on this data type through `PixbufLoaderClassProtocol` conformance.
+/// Use `PixbufLoaderClassRef` only as an `unowned` reference to an existing `GdkPixbufLoaderClass` instance.
+///
+
+public struct PixbufLoaderClassRef: PixbufLoaderClassProtocol {
+        /// Untyped pointer to the underlying `GdkPixbufLoaderClass` instance.
+    /// For type-safe access, use the generated, typed pointer `_ptr` property instead.
+    public let ptr: UnsafeMutableRawPointer!
+}
+
+public extension PixbufLoaderClassRef {
+    /// Designated initialiser from the underlying `C` data type
+    @inlinable init(_ p: UnsafeMutablePointer<GdkPixbufLoaderClass>) {
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Designated initialiser from a constant pointer to the underlying `C` data type
+    @inlinable init(_ p: UnsafePointer<GdkPixbufLoaderClass>) {
+        ptr = UnsafeMutableRawPointer(UnsafeMutablePointer(mutating: p))
+    }
+
+    /// Conditional initialiser from an optional pointer to the underlying `C` data type
+    @inlinable init!(_ maybePointer: UnsafeMutablePointer<GdkPixbufLoaderClass>?) {
+        guard let p = maybePointer else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional, non-mutable pointer to the underlying `C` data type
+    @inlinable init!(_ maybePointer: UnsafePointer<GdkPixbufLoaderClass>?) {
+        guard let p = UnsafeMutablePointer(mutating: maybePointer) else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional `gpointer`
+    @inlinable init!(gpointer g: gpointer?) {
+        guard let p = g else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional, non-mutable `gconstpointer`
+    @inlinable init!(gconstpointer g: gconstpointer?) {
+        guard let p = UnsafeMutableRawPointer(mutating: g) else { return nil }
+        ptr = p
+    }
+
+    /// Reference intialiser for a related type that implements `PixbufLoaderClassProtocol`
+    @inlinable init<T: PixbufLoaderClassProtocol>(_ other: T) {
+        ptr = other.ptr
+    }
+
+    /// Unsafe typed initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderClassProtocol`.**
+    @inlinable init<T>(cPointer: UnsafeMutablePointer<T>) {
+        ptr = UnsafeMutableRawPointer(cPointer)
+    }
+
+    /// Unsafe typed initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderClassProtocol`.**
+    @inlinable init<T>(constPointer: UnsafePointer<T>) {
+        ptr = UnsafeMutableRawPointer(mutating: UnsafeRawPointer(constPointer))
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderClassProtocol`.**
+    @inlinable init(mutating raw: UnsafeRawPointer) {
+        ptr = UnsafeMutableRawPointer(mutating: raw)
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderClassProtocol`.**
+    @inlinable init(raw: UnsafeMutableRawPointer) {
+        ptr = raw
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderClassProtocol`.**
+    @inlinable init(opaquePointer: OpaquePointer) {
+        ptr = UnsafeMutableRawPointer(opaquePointer)
+    }
+
+    }
+
+// MARK: PixbufLoaderClass Record: PixbufLoaderClassProtocol extension (methods and fields)
+public extension PixbufLoaderClassProtocol {
+    /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufLoaderClass` instance.
+    @inlinable var _ptr: UnsafeMutablePointer<GdkPixbufLoaderClass>! { return ptr?.assumingMemoryBound(to: GdkPixbufLoaderClass.self) }
+
+
+    @inlinable var parentClass: GObjectClass {
+        get {
+            let rv = _ptr.pointee.parent_class
+            return rv
+        }
+    }
+
+    // var sizePrepared is unavailable because size_prepared is void
+
+    // var areaPrepared is unavailable because area_prepared is void
+
+    // var areaUpdated is unavailable because area_updated is void
+
+    // var closed is unavailable because closed is void
+
+}
+
+
+
+/// Metatype/GType declaration for PixbufSimpleAnim
+public extension PixbufSimpleAnimClassRef {
+    
+    /// This getter returns the GLib type identifier registered for `PixbufSimpleAnim`
+    static var metatypeReference: GType { gdk_pixbuf_simple_anim_get_type() }
+    
+    private static var metatypePointer: UnsafeMutablePointer<GdkPixbufSimpleAnimClass>? { g_type_class_peek_static(metatypeReference)?.assumingMemoryBound(to: GdkPixbufSimpleAnimClass.self) }
+    
+    static var metatype: GdkPixbufSimpleAnimClass? { metatypePointer?.pointee } 
+    
+    static var wrapper: PixbufSimpleAnimClassRef? { PixbufSimpleAnimClassRef(metatypePointer) }
+    
+    
+}
+
+// MARK: - PixbufSimpleAnimClass Record
+
+/// The `PixbufSimpleAnimClassProtocol` protocol exposes the methods and properties of an underlying `GdkPixbufSimpleAnimClass` instance.
+/// The default implementation of these can be found in the protocol extension below.
+/// For a concrete class that implements these methods and properties, see `PixbufSimpleAnimClass`.
+/// Alternatively, use `PixbufSimpleAnimClassRef` as a lighweight, `unowned` reference if you already have an instance you just want to use.
+///
+
+public protocol PixbufSimpleAnimClassProtocol {
+        /// Untyped pointer to the underlying `GdkPixbufSimpleAnimClass` instance.
+    var ptr: UnsafeMutableRawPointer! { get }
+
+    /// Typed pointer to the underlying `GdkPixbufSimpleAnimClass` instance.
+    var _ptr: UnsafeMutablePointer<GdkPixbufSimpleAnimClass>! { get }
+
+}
+
+/// The `PixbufSimpleAnimClassRef` type acts as a lightweight Swift reference to an underlying `GdkPixbufSimpleAnimClass` instance.
+/// It exposes methods that can operate on this data type through `PixbufSimpleAnimClassProtocol` conformance.
+/// Use `PixbufSimpleAnimClassRef` only as an `unowned` reference to an existing `GdkPixbufSimpleAnimClass` instance.
+///
+
+public struct PixbufSimpleAnimClassRef: PixbufSimpleAnimClassProtocol {
+        /// Untyped pointer to the underlying `GdkPixbufSimpleAnimClass` instance.
+    /// For type-safe access, use the generated, typed pointer `_ptr` property instead.
+    public let ptr: UnsafeMutableRawPointer!
+}
+
+public extension PixbufSimpleAnimClassRef {
+    /// Designated initialiser from the underlying `C` data type
+    @inlinable init(_ p: UnsafeMutablePointer<GdkPixbufSimpleAnimClass>) {
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Designated initialiser from a constant pointer to the underlying `C` data type
+    @inlinable init(_ p: UnsafePointer<GdkPixbufSimpleAnimClass>) {
+        ptr = UnsafeMutableRawPointer(UnsafeMutablePointer(mutating: p))
+    }
+
+    /// Conditional initialiser from an optional pointer to the underlying `C` data type
+    @inlinable init!(_ maybePointer: UnsafeMutablePointer<GdkPixbufSimpleAnimClass>?) {
+        guard let p = maybePointer else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional, non-mutable pointer to the underlying `C` data type
+    @inlinable init!(_ maybePointer: UnsafePointer<GdkPixbufSimpleAnimClass>?) {
+        guard let p = UnsafeMutablePointer(mutating: maybePointer) else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional `gpointer`
+    @inlinable init!(gpointer g: gpointer?) {
+        guard let p = g else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional, non-mutable `gconstpointer`
+    @inlinable init!(gconstpointer g: gconstpointer?) {
+        guard let p = UnsafeMutableRawPointer(mutating: g) else { return nil }
+        ptr = p
+    }
+
+    /// Reference intialiser for a related type that implements `PixbufSimpleAnimClassProtocol`
+    @inlinable init<T: PixbufSimpleAnimClassProtocol>(_ other: T) {
+        ptr = other.ptr
+    }
+
+    /// Unsafe typed initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimClassProtocol`.**
+    @inlinable init<T>(cPointer: UnsafeMutablePointer<T>) {
+        ptr = UnsafeMutableRawPointer(cPointer)
+    }
+
+    /// Unsafe typed initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimClassProtocol`.**
+    @inlinable init<T>(constPointer: UnsafePointer<T>) {
+        ptr = UnsafeMutableRawPointer(mutating: UnsafeRawPointer(constPointer))
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimClassProtocol`.**
+    @inlinable init(mutating raw: UnsafeRawPointer) {
+        ptr = UnsafeMutableRawPointer(mutating: raw)
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimClassProtocol`.**
+    @inlinable init(raw: UnsafeMutableRawPointer) {
+        ptr = raw
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimClassProtocol`.**
+    @inlinable init(opaquePointer: OpaquePointer) {
+        ptr = UnsafeMutableRawPointer(opaquePointer)
+    }
+
+    }
+
+// MARK: PixbufSimpleAnimClass Record: PixbufSimpleAnimClassProtocol extension (methods and fields)
+public extension PixbufSimpleAnimClassProtocol {
+    /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufSimpleAnimClass` instance.
+    @inlinable var _ptr: UnsafeMutablePointer<GdkPixbufSimpleAnimClass>! { return ptr?.assumingMemoryBound(to: GdkPixbufSimpleAnimClass.self) }
+
 
 
 }
