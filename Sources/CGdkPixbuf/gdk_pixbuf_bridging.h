@@ -13,3 +13,20 @@ struct _GdkPixbufSimpleAnimClass {};
 #include <gdk-pixbuf/gdk-pixbuf-transform.h>
 #include <gdk-pixbuf/gdk-pixdata.h>
 #include <gdk-pixbuf/gdk-pixbuf-io.h>
+
+/// Private part of the GdkPixbufNonAnim structure
+struct _GdkPixbufNonAnim {
+    GdkPixbufAnimation parent_instance;
+    GdkPixbuf *pixbuf;
+};
+
+/// Private class structure for `GdkPixbufNonAnim`
+struct _GdkPixbufNonAnimClass {
+    GdkPixbufAnimationClass parent_class;
+};
+
+/// Private part of the GdkPixbufNonAnim structure
+typedef struct _GdkPixbufNonAnim GdkPixbufNonAnim;
+
+/// Private class structure for `GdkPixbufNonAnim`
+typedef struct _GdkPixbufNonAnimClass GdkPixbufNonAnimClass;
