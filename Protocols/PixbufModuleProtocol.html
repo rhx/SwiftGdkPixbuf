@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PixbufModuleProtocol Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Protocol/PixbufModuleProtocol" class="dashAnchor"></a>
+
+    <a title="PixbufModuleProtocol Protocol Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          GdkPixbuf 2.42.6 Docs
+        </a>
+         (95% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/rhx/SwiftGdkPixbuf">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="dash-feed://http%3A%2F%2Frhx.github.io%2FSwiftGdkPixbuf%2Fdocsets%2FGdkPixbuf.xml">
+            <img class="header-icon" src="../img/dash.png"/>
+            Install in Dash
+          </a>
+        </p>
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">GdkPixbuf Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      PixbufModuleProtocol Protocol Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Pixbuf.html">Pixbuf</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PixbufAnimation.html">PixbufAnimation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PixbufAnimationIter.html">PixbufAnimationIter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PixbufFormat.html">PixbufFormat</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PixbufLoader.html">PixbufLoader</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PixbufModule.html">PixbufModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PixbufModulePattern.html">PixbufModulePattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PixbufNonAnim.html">PixbufNonAnim</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PixbufSimpleAnim.html">PixbufSimpleAnim</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PixbufSimpleAnimIter.html">PixbufSimpleAnimIter</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Global%20Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global%20Variables.html#/s:9GdkPixbuf12PIXBUF_MAJORs5Int32Vvp">PIXBUF_MAJOR</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global%20Variables.html#/s:9GdkPixbuf12PIXBUF_MICROs5Int32Vvp">PIXBUF_MICRO</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global%20Variables.html#/s:9GdkPixbuf12PIXBUF_MINORs5Int32Vvp">PIXBUF_MINOR</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global%20Variables.html#/s:9GdkPixbuf14PIXBUF_VERSIONSSvp">PIXBUF_VERSION</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PixbufAnimationIterSignalName.html">PixbufAnimationIterSignalName</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PixbufAnimationSignalName.html">PixbufAnimationSignalName</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PixbufLoaderSignalName.html">PixbufLoaderSignalName</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PixbufNonAnimSignalName.html">PixbufNonAnimSignalName</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PixbufPropertyName.html">PixbufPropertyName</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PixbufSignalName.html">PixbufSignalName</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PixbufSimpleAnimIterSignalName.html">PixbufSimpleAnimIterSignalName</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PixbufSimpleAnimPropertyName.html">PixbufSimpleAnimPropertyName</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PixbufSimpleAnimSignalName.html">PixbufSimpleAnimSignalName</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Colorspace.html">Colorspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/GdkPixbuf.html">GdkPixbuf</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/InterpType.html">InterpType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/PixbufAlphaMode.html">PixbufAlphaMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/PixbufError.html">PixbufError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/PixbufRotation.html">PixbufRotation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Functions.html#/s:9GdkPixbuf16pixbufErrorQuarks6UInt32VyF">pixbufErrorQuark()</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufAnimationClassProtocol.html">PixbufAnimationClassProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufAnimationIterClassProtocol.html">PixbufAnimationIterClassProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufAnimationIterProtocol.html">PixbufAnimationIterProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufAnimationProtocol.html">PixbufAnimationProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufFormatProtocol.html">PixbufFormatProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufLoaderClassProtocol.html">PixbufLoaderClassProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufLoaderProtocol.html">PixbufLoaderProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufModulePatternProtocol.html">PixbufModulePatternProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufModuleProtocol.html">PixbufModuleProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufNonAnimProtocol.html">PixbufNonAnimProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufProtocol.html">PixbufProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufSimpleAnimClassProtocol.html">PixbufSimpleAnimClassProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufSimpleAnimIterProtocol.html">PixbufSimpleAnimIterProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PixbufSimpleAnimProtocol.html">PixbufSimpleAnimProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufAnimationClassRef.html">PixbufAnimationClassRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufAnimationIterClassRef.html">PixbufAnimationIterClassRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufAnimationIterRef.html">PixbufAnimationIterRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufAnimationRef.html">PixbufAnimationRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufFormatFlags.html">PixbufFormatFlags</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufFormatRef.html">PixbufFormatRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufLoaderClassRef.html">PixbufLoaderClassRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufLoaderRef.html">PixbufLoaderRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufModulePatternRef.html">PixbufModulePatternRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufModuleRef.html">PixbufModuleRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufNonAnimRef.html">PixbufNonAnimRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufRef.html">PixbufRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufSimpleAnimClassRef.html">PixbufSimpleAnimClassRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufSimpleAnimIterRef.html">PixbufSimpleAnimIterRef</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PixbufSimpleAnimRef.html">PixbufSimpleAnimRef</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf10Colorspacea">Colorspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0aB14SimpleAnimItera">GdkPixbufSimpleAnimIter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf10InterpTypea">InterpType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0B9AlphaModea">PixbufAlphaMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0B13DestroyNotifya">PixbufDestroyNotify</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0B5Errora">PixbufError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0B18ModuleFillInfoFunca">PixbufModuleFillInfoFunc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0B20ModuleFillVtableFunca">PixbufModuleFillVtableFunc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0B18ModulePreparedFunca">PixbufModulePreparedFunc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0B14ModuleSizeFunca">PixbufModuleSizeFunc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0B17ModuleUpdatedFunca">PixbufModuleUpdatedFunc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0B8Rotationa">PixbufRotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:9GdkPixbuf0B8SaveFunca">PixbufSaveFunc</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>PixbufModuleProtocol</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PixbufModuleProtocol</span></code></pre>
+
+                </div>
+              </div>
+            <p>The <code>PixbufModuleProtocol</code> protocol exposes the methods and properties of an underlying <code>GdkPixbufModule</code> instance.
+The default implementation of these can be found in the protocol extension below.
+For a concrete class that implements these methods and properties, see <code><a href="../Classes/PixbufModule.html">PixbufModule</a></code>.
+Alternatively, use <code><a href="../Structs/PixbufModuleRef.html">PixbufModuleRef</a></code> as a lighweight, <code>unowned</code> reference if you already have an instance you just want to use.</p>
+
+<p>A <code>GdkPixbufModule</code> contains the necessary functions to load and save
+images in a certain file format.</p>
+
+<p>If <code>GdkPixbuf</code> has been compiled with <code>GModule</code> support, it can be extended
+by modules which can load (and perhaps also save) new image and animation
+formats.</p>
+<h2 id='implementing-modules' class='heading'>Implementing modules</h2>
+
+<p>The <code>GdkPixbuf</code> interfaces needed for implementing modules are contained in
+<code>gdk-pixbuf-io.h</code> (and <code>gdk-pixbuf-animation.h</code> if the module supports
+animations). They are not covered by the same stability guarantees as the
+regular GdkPixbuf API. To underline this fact, they are protected by the
+<code>GDK_PIXBUF_ENABLE_BACKEND</code> pre-processor symbol.</p>
+
+<p>Each loadable module must contain a <code>GdkPixbufModuleFillVtableFunc</code> function
+named <code>fill_vtable</code>, which will get called when the module
+is loaded and must set the function pointers of the <code>GdkPixbufModule</code>.</p>
+
+<p>In order to make format-checking work before actually loading the modules
+(which may require calling <code>dlopen</code> to load image libraries), modules export
+their signatures (and other information) via the <code>fill_info</code> function. An
+external utility, <code>gdk-pixbuf-query-loaders</code>, uses this to create a text
+file containing a list of all available loaders and  their signatures.
+This file is then read at runtime by <code>GdkPixbuf</code> to obtain the list of
+available loaders and their signatures.</p>
+
+<p>Modules may only implement a subset of the functionality available via
+<code>GdkPixbufModule</code>. If a particular functionality is not implemented, the
+<code>fill_vtable</code> function will simply not set the corresponding
+function pointers of the <code>GdkPixbufModule</code> structure. If a module supports
+incremental loading (i.e. provides <code>begin_load</code>, <code>stop_load</code> and
+<code>load_increment</code>), it doesn&rsquo;t have to implement <code>load</code>, since <code>GdkPixbuf</code>
+can supply a generic <code>load</code> implementation wrapping the incremental loading.</p>
+<h2 id='installing-modules' class='heading'>Installing modules</h2>
+
+<p>Installing a module is a two-step process:</p>
+
+<ul>
+<li>copy the module <code>file(s)</code> to the loader directory (normally
+<code>$libdir/gdk-pixbuf-2.0/$version/loaders</code>, unless overridden by the
+environment variable <code>GDK_PIXBUF_MODULEDIR</code>)</li>
+<li>call <code>gdk-pixbuf-query-loaders</code> to update the module file (normally
+<code>$libdir/gdk-pixbuf-2.0/$version/loaders.cache</code>, unless overridden
+by the environment variable <code>GDK_PIXBUF_MODULE_FILE</code>)</li>
+</ul>
+
+              <div class="slightly-smaller">
+                <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationClass-PixbufSimpleAnimClass.swift#L1057-L1066">Show on GitHub</a>
+              </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B14ModuleProtocolP3ptrSvSgvp"></a>
+                    <a name="//apple_ref/swift/Property/ptr" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B14ModuleProtocolP3ptrSvSgvp">ptr</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Untyped pointer to the underlying <code>GdkPixbufModule</code> instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ptr</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationClass-PixbufSimpleAnimClass.swift#L1059">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B14ModuleProtocolP4_ptrSpySo01_abC0VGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_ptr" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B14ModuleProtocolP4_ptrSpySo01_abC0VGSgvp">_ptr</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Typed pointer to the underlying <code>GdkPixbufModule</code> instance.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Return the stored, untyped pointer as a typed pointer to the <code>GdkPixbufModule</code> instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">_ptr</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">GdkPixbufModule</span><span class="o">&gt;!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationClass-PixbufSimpleAnimClass.swift#L1062">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B14ModuleProtocolP3rawxSv_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(raw:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B14ModuleProtocolP3rawxSv_tcfc">init(raw:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Required Initialiser for types conforming to <code>PixbufModuleProtocol</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">raw</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationClass-PixbufSimpleAnimClass.swift#L1065">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/PixbufModule%20Record%3A%20PixbufModuleProtocol%20extension%20%28methods%20and%20fields%29"></a>
+                <a name="//apple_ref/swift/Section/PixbufModule Record: PixbufModuleProtocol extension (methods and fields)" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/PixbufModule%20Record%3A%20PixbufModuleProtocol%20extension%20%28methods%20and%20fields%29"></a>
+                  <h3 class="section-name"><p>PixbufModule Record: PixbufModuleProtocol extension (methods and fields)</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B14ModuleProtocolPAAE10moduleNameSpys4Int8VGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/moduleName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B14ModuleProtocolPAAE10moduleNameSpys4Int8VGSgvp">moduleName</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>the name of the module, usually the same as the
+ usual file extension for images of this type, eg. &ldquo;xpm&rdquo;, &ldquo;jpeg&rdquo; or &ldquo;png&rdquo;.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="k">var</span> <span class="nv">moduleName</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationClass-PixbufSimpleAnimClass.swift#L1401-L1413">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B14ModuleProtocolPAAE10modulePathSpys4Int8VGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/modulePath" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B14ModuleProtocolPAAE10modulePathSpys4Int8VGSgvp">modulePath</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>the path from which the module is loaded.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="k">var</span> <span class="nv">modulePath</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;!</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationClass-PixbufSimpleAnimClass.swift#L1416-L1426">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B14ModuleProtocolPAAE6module7GModule0C3RefVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/module" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B14ModuleProtocolPAAE6module7GModule0C3RefVSgvp">module</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>the loaded <code>GModule</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="k">var</span> <span class="nv">module</span><span class="p">:</span> <span class="kt">ModuleRef</span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationClass-PixbufSimpleAnimClass.swift#L1429-L1439">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9GdkPixbuf0B14ModuleProtocolPAAE4infoAA0B9FormatRefVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/info" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9GdkPixbuf0B14ModuleProtocolPAAE4infoAA0B9FormatRefVSgvp">info</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>a <code>GdkPixbufFormat</code> holding information about the module.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="k">var</span> <span class="nv">info</span><span class="p">:</span> <span class="kt"><a href="../Structs/PixbufFormatRef.html">PixbufFormatRef</a></span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rhx/SwiftGdkPixbuf/tree/generated/Sources/GdkPixbuf/GdkPixbuf-2.0-PixbufAnimationClass-PixbufSimpleAnimClass.swift#L1442-L1452">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2021 <a class="link" href="https://experts.griffith.edu.au/9237-rene-hexel" target="_blank" rel="external">Ren&eacute;&nbsp;Hexel</a>. All rights reserved. (Last updated: 2021-05-09)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
