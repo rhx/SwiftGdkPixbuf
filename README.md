@@ -63,7 +63,7 @@ on macOS, or on Linux you should get something like:
 
 ### Gdk-Pixbuf 2.36 and GLib 2.56 or higher
 
-These Swift wrappers have been tested with gdk-pixbuf-2.36, 2.38, and 2.40 as well as glib-2.56, 2.58, 2.60, 2.62, 2.64, 2.66, and 2.68.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+These Swift wrappers have been tested with gdk-pixbuf-2.36, 2.38, 2.40, and 2.42 as well as glib-2.56, 2.58, 2.60, 2.62, 2.64, 2.66, and 2.68.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
