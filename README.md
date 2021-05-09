@@ -63,22 +63,15 @@ on macOS, or on Linux you should get something like:
 
 ### Gdk-Pixbuf 2.36 and GLib 2.56 or higher
 
-These Swift wrappers have been tested with gdk-pixbuf-2.36, 2.38, and 2.40 as well as glib-2.56, 2.58, 2.60, 2.62, 2.64, and 2.66.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+These Swift wrappers have been tested with gdk-pixbuf-2.36, 2.38, and 2.40 as well as glib-2.56, 2.58, 2.60, 2.62, 2.64, 2.66, and 2.68.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
 ##### Ubuntu
 
-On Ubuntu 18.04 and 16.04 you can use the gdkpixbuf that comes with the distribution.  Just install with the `apt` package manager:
+On Ubuntu 18.04 and 20.04 you can use the gdkpixbuf that comes with the distribution.  Just install with the `apt` package manager:
 
 	sudo apt update
-	sudo apt install libgdk-pixbuf2.0-dev gir1.2-gdkpixbuf-2.0 gobject-introspection libgirepository1.0-dev libxml2-dev
-
-If you prefer a newer version of gtk, you can also install it from the GNOME 3 Staging PPA (see https://launchpad.net/~gnome3-team/+archive/ubuntu/gnome3-staging), but be aware that this can be a bit dangerous (as this removes packages that can be vital, particularly if you use a GNOME-based desktop), so only do this if you know what you are doing:
-
-	sudo add-apt-repository ppa:gnome3-team/gnome3-staging
-	sudo apt update
-	sudo apt dist-upgrade
 	sudo apt install libgdk-pixbuf2.0-dev gir1.2-gdkpixbuf-2.0 gobject-introspection libgirepository1.0-dev libxml2-dev
 
 ##### Fedora
@@ -141,12 +134,17 @@ After that, use the (usual) Build and Test buttons to build/test this package.
 
 
 ## Documentation
-You can find reference documentation inside the [docs](https://rhx.github.io/SwiftGdkPixbuf/) folder.
+
+You can find reference documentation inside the [docs](https://rhx.github.io/SwiftGLib/) folder.
 This was generated using the [jazzy](https://github.com/realm/jazzy) tool.
 If you want to generate your own documentation, matching your local installation,
 you can use the `generate-documentation.sh` script in the repository.
-Unfortunately, at this stage [jazzy](https://github.com/realm/jazzy) only works on macOS (and crashes under Linux), so this will currently only work on a Mac.
+Make sure you have [sourcekitten](https://github.com/jpsim/SourceKitten) and [jazzy](https://github.com/realm/jazzy) installed, e.g. on macOS:
 
+	brew install sourcekitten
+	sudo gem install jazzy
+	./run-gir2swift.sh
+	./generate-documentation.sh
 
 
 ## Troubleshooting
