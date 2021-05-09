@@ -12,11 +12,141 @@ import GLibObject
 /// For a concrete class that implements these methods and properties, see `Pixbuf`.
 /// Alternatively, use `PixbufRef` as a lighweight, `unowned` reference if you already have an instance you just want to use.
 ///
-/// This is the main structure in the gdk-pixbuf library.  It is
-/// used to represent images.  It contains information about the
-/// image's pixel data, its color space, bits per sample, width and
-/// height, and the rowstride (the number of bytes between the start of
-/// one row and the start of the next).
+/// A pixel buffer.
+/// 
+/// `GdkPixbuf` contains information about an image's pixel data,
+/// its color space, bits per sample, width and height, and the
+/// rowstride (the number of bytes between the start of one row
+/// and the start of the next).
+/// 
+/// ## Creating new `GdkPixbuf`
+/// 
+/// The most basic way to create a pixbuf is to wrap an existing pixel
+/// buffer with a [class`GdkPixbuf.Pixbuf`] instance. You can use the
+/// [`ctor`GdkPixbuf.Pixbuf.new_from_data``] function to do this.
+/// 
+/// Every time you create a new `GdkPixbuf` instance for some data, you
+/// will need to specify the destroy notification function that will be
+/// called when the data buffer needs to be freed; this will happen when
+/// a `GdkPixbuf` is finalized by the reference counting functions. If
+/// you have a chunk of static data compiled into your application, you
+/// can pass in `NULL` as the destroy notification function so that the
+/// data will not be freed.
+/// 
+/// The [`ctor`GdkPixbuf.Pixbuf.new``] constructor function can be used
+/// as a convenience to create a pixbuf with an empty buffer; this is
+/// equivalent to allocating a data buffer using ``malloc()`` and then
+/// wrapping it with ``gdk_pixbuf_new_from_data()``. The ``gdk_pixbuf_new()``
+/// function will compute an optimal rowstride so that rendering can be
+/// performed with an efficient algorithm.
+/// 
+/// As a special case, you can use the [`ctor`GdkPixbuf.Pixbuf.new_from_xpm_data``]
+/// function to create a pixbuf from inline XPM image data.
+/// 
+/// You can also copy an existing pixbuf with the [method`Pixbuf.copy`]
+/// function. This is not the same as just acquiring a reference to
+/// the old pixbuf instance: the copy function will actually duplicate
+/// the pixel data in memory and create a new [class`Pixbuf`] instance
+/// for it.
+/// 
+/// ## Reference counting
+/// 
+/// `GdkPixbuf` structures are reference counted. This means that an
+/// application can share a single pixbuf among many parts of the
+/// code. When a piece of the program needs to use a pixbuf, it should
+/// acquire a reference to it by calling ``g_object_ref()``; when it no
+/// longer needs the pixbuf, it should release the reference it acquired
+/// by calling ``g_object_unref()``. The resources associated with a
+/// `GdkPixbuf` will be freed when its reference count drops to zero.
+/// Newly-created `GdkPixbuf` instances start with a reference count
+/// of one.
+/// 
+/// ## Image Data
+/// 
+/// Image data in a pixbuf is stored in memory in an uncompressed,
+/// packed format. Rows in the image are stored top to bottom, and
+/// in each row pixels are stored from left to right.
+/// 
+/// There may be padding at the end of a row.
+/// 
+/// The "rowstride" value of a pixbuf, as returned by [`method`GdkPixbuf.Pixbuf.get_rowstride``],
+/// indicates the number of bytes between rows.
+/// 
+/// **NOTE**: If you are copying raw pixbuf data with ``memcpy()`` note that the
+/// last row in the pixbuf may not be as wide as the full rowstride, but rather
+/// just as wide as the pixel data needs to be; that is: it is unsafe to do
+/// `memcpy (dest, pixels, rowstride * height)` to copy a whole pixbuf. Use
+/// [method`GdkPixbuf.Pixbuf.copy`] instead, or compute the width in bytes of the
+/// last row as:
+/// 
+/// ```c
+/// last_row = width * ((n_channels * bits_per_sample + 7) / 8);
+/// ```
+/// 
+/// The same rule applies when iterating over each row of a `GdkPixbuf` pixels
+/// array.
+/// 
+/// The following code illustrates a simple ``put_pixel()``
+/// function for RGB pixbufs with 8 bits per channel with an alpha
+/// channel.
+/// 
+/// ```c
+/// static void
+/// put_pixel (GdkPixbuf *pixbuf,
+///            int x,
+/// 	   int y,
+/// 	   guchar red,
+/// 	   guchar green,
+/// 	   guchar blue,
+/// 	   guchar alpha)
+/// {
+///   int n_channels = gdk_pixbuf_get_n_channels (pixbuf);
+/// 
+///   // Ensure that the pixbuf is valid
+///   g_assert (gdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB);
+///   g_assert (gdk_pixbuf_get_bits_per_sample (pixbuf) == 8);
+///   g_assert (gdk_pixbuf_get_has_alpha (pixbuf));
+///   g_assert (n_channels == 4);
+/// 
+///   int width = gdk_pixbuf_get_width (pixbuf);
+///   int height = gdk_pixbuf_get_height (pixbuf);
+/// 
+///   // Ensure that the coordinates are in a valid range
+///   g_assert (x &gt;= 0 && x &lt; width);
+///   g_assert (y &gt;= 0 && y &lt; height);
+/// 
+///   int rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+/// 
+///   // The pixel buffer in the GdkPixbuf instance
+///   guchar *pixels = gdk_pixbuf_get_pixels (pixbuf);
+/// 
+///   // The pixel we wish to modify
+///   guchar *p = pixels + y * rowstride + x * n_channels;
+///   p[0] = red;
+///   p[1] = green;
+///   p[2] = blue;
+///   p[3] = alpha;
+/// }
+/// ```
+/// 
+/// ## Loading images
+/// 
+/// The `GdkPixBuf` class provides a simple mechanism for loading
+/// an image from a file in synchronous and asynchronous fashion.
+/// 
+/// For GUI applications, it is recommended to use the asynchronous
+/// stream API to avoid blocking the control flow of the application.
+/// 
+/// Additionally, `GdkPixbuf` provides the [class`GdkPixbuf.PixbufLoader``]
+/// API for progressive image loading.
+/// 
+/// ## Saving images
+/// 
+/// The `GdkPixbuf` class provides methods for saving image data in
+/// a number of file formats. The formatted data can be written to a
+/// file or to a memory buffer. `GdkPixbuf` can also call a user-defined
+/// callback on the data, which allows to e.g. write the image
+/// to a socket or store it in a database.
 public protocol PixbufProtocol: GLibObject.ObjectProtocol, GIO.IconProtocol, GIO.LoadableIconProtocol {
         /// Untyped pointer to the underlying `GdkPixbuf` instance.
     var ptr: UnsafeMutableRawPointer! { get }
@@ -24,17 +154,149 @@ public protocol PixbufProtocol: GLibObject.ObjectProtocol, GIO.IconProtocol, GIO
     /// Typed pointer to the underlying `GdkPixbuf` instance.
     var pixbuf_ptr: UnsafeMutablePointer<GdkPixbuf>! { get }
 
+    /// Required Initialiser for types conforming to `PixbufProtocol`
+    init(raw: UnsafeMutableRawPointer)
 }
 
 /// The `PixbufRef` type acts as a lightweight Swift reference to an underlying `GdkPixbuf` instance.
 /// It exposes methods that can operate on this data type through `PixbufProtocol` conformance.
 /// Use `PixbufRef` only as an `unowned` reference to an existing `GdkPixbuf` instance.
 ///
-/// This is the main structure in the gdk-pixbuf library.  It is
-/// used to represent images.  It contains information about the
-/// image's pixel data, its color space, bits per sample, width and
-/// height, and the rowstride (the number of bytes between the start of
-/// one row and the start of the next).
+/// A pixel buffer.
+/// 
+/// `GdkPixbuf` contains information about an image's pixel data,
+/// its color space, bits per sample, width and height, and the
+/// rowstride (the number of bytes between the start of one row
+/// and the start of the next).
+/// 
+/// ## Creating new `GdkPixbuf`
+/// 
+/// The most basic way to create a pixbuf is to wrap an existing pixel
+/// buffer with a [class`GdkPixbuf.Pixbuf`] instance. You can use the
+/// [`ctor`GdkPixbuf.Pixbuf.new_from_data``] function to do this.
+/// 
+/// Every time you create a new `GdkPixbuf` instance for some data, you
+/// will need to specify the destroy notification function that will be
+/// called when the data buffer needs to be freed; this will happen when
+/// a `GdkPixbuf` is finalized by the reference counting functions. If
+/// you have a chunk of static data compiled into your application, you
+/// can pass in `NULL` as the destroy notification function so that the
+/// data will not be freed.
+/// 
+/// The [`ctor`GdkPixbuf.Pixbuf.new``] constructor function can be used
+/// as a convenience to create a pixbuf with an empty buffer; this is
+/// equivalent to allocating a data buffer using ``malloc()`` and then
+/// wrapping it with ``gdk_pixbuf_new_from_data()``. The ``gdk_pixbuf_new()``
+/// function will compute an optimal rowstride so that rendering can be
+/// performed with an efficient algorithm.
+/// 
+/// As a special case, you can use the [`ctor`GdkPixbuf.Pixbuf.new_from_xpm_data``]
+/// function to create a pixbuf from inline XPM image data.
+/// 
+/// You can also copy an existing pixbuf with the [method`Pixbuf.copy`]
+/// function. This is not the same as just acquiring a reference to
+/// the old pixbuf instance: the copy function will actually duplicate
+/// the pixel data in memory and create a new [class`Pixbuf`] instance
+/// for it.
+/// 
+/// ## Reference counting
+/// 
+/// `GdkPixbuf` structures are reference counted. This means that an
+/// application can share a single pixbuf among many parts of the
+/// code. When a piece of the program needs to use a pixbuf, it should
+/// acquire a reference to it by calling ``g_object_ref()``; when it no
+/// longer needs the pixbuf, it should release the reference it acquired
+/// by calling ``g_object_unref()``. The resources associated with a
+/// `GdkPixbuf` will be freed when its reference count drops to zero.
+/// Newly-created `GdkPixbuf` instances start with a reference count
+/// of one.
+/// 
+/// ## Image Data
+/// 
+/// Image data in a pixbuf is stored in memory in an uncompressed,
+/// packed format. Rows in the image are stored top to bottom, and
+/// in each row pixels are stored from left to right.
+/// 
+/// There may be padding at the end of a row.
+/// 
+/// The "rowstride" value of a pixbuf, as returned by [`method`GdkPixbuf.Pixbuf.get_rowstride``],
+/// indicates the number of bytes between rows.
+/// 
+/// **NOTE**: If you are copying raw pixbuf data with ``memcpy()`` note that the
+/// last row in the pixbuf may not be as wide as the full rowstride, but rather
+/// just as wide as the pixel data needs to be; that is: it is unsafe to do
+/// `memcpy (dest, pixels, rowstride * height)` to copy a whole pixbuf. Use
+/// [method`GdkPixbuf.Pixbuf.copy`] instead, or compute the width in bytes of the
+/// last row as:
+/// 
+/// ```c
+/// last_row = width * ((n_channels * bits_per_sample + 7) / 8);
+/// ```
+/// 
+/// The same rule applies when iterating over each row of a `GdkPixbuf` pixels
+/// array.
+/// 
+/// The following code illustrates a simple ``put_pixel()``
+/// function for RGB pixbufs with 8 bits per channel with an alpha
+/// channel.
+/// 
+/// ```c
+/// static void
+/// put_pixel (GdkPixbuf *pixbuf,
+///            int x,
+/// 	   int y,
+/// 	   guchar red,
+/// 	   guchar green,
+/// 	   guchar blue,
+/// 	   guchar alpha)
+/// {
+///   int n_channels = gdk_pixbuf_get_n_channels (pixbuf);
+/// 
+///   // Ensure that the pixbuf is valid
+///   g_assert (gdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB);
+///   g_assert (gdk_pixbuf_get_bits_per_sample (pixbuf) == 8);
+///   g_assert (gdk_pixbuf_get_has_alpha (pixbuf));
+///   g_assert (n_channels == 4);
+/// 
+///   int width = gdk_pixbuf_get_width (pixbuf);
+///   int height = gdk_pixbuf_get_height (pixbuf);
+/// 
+///   // Ensure that the coordinates are in a valid range
+///   g_assert (x &gt;= 0 && x &lt; width);
+///   g_assert (y &gt;= 0 && y &lt; height);
+/// 
+///   int rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+/// 
+///   // The pixel buffer in the GdkPixbuf instance
+///   guchar *pixels = gdk_pixbuf_get_pixels (pixbuf);
+/// 
+///   // The pixel we wish to modify
+///   guchar *p = pixels + y * rowstride + x * n_channels;
+///   p[0] = red;
+///   p[1] = green;
+///   p[2] = blue;
+///   p[3] = alpha;
+/// }
+/// ```
+/// 
+/// ## Loading images
+/// 
+/// The `GdkPixBuf` class provides a simple mechanism for loading
+/// an image from a file in synchronous and asynchronous fashion.
+/// 
+/// For GUI applications, it is recommended to use the asynchronous
+/// stream API to avoid blocking the control flow of the application.
+/// 
+/// Additionally, `GdkPixbuf` provides the [class`GdkPixbuf.PixbufLoader``]
+/// API for progressive image loading.
+/// 
+/// ## Saving images
+/// 
+/// The `GdkPixbuf` class provides methods for saving image data in
+/// a number of file formats. The formatted data can be written to a
+/// file or to a memory buffer. `GdkPixbuf` can also call a user-defined
+/// callback on the data, which allows to e.g. write the image
+/// to a socket or store it in a database.
 public struct PixbufRef: PixbufProtocol, GWeakCapturing {
         /// Untyped pointer to the underlying `GdkPixbuf` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_ptr` property instead.
@@ -114,8 +376,11 @@ public extension PixbufRef {
         ptr = UnsafeMutableRawPointer(opaquePointer)
     }
 
-        /// Creates a new `GdkPixbuf` structure and allocates a buffer for it.  The
-    /// buffer has an optimal rowstride.  Note that the buffer is not cleared;
+        /// Creates a new `GdkPixbuf` structure and allocates a buffer for it.
+    /// 
+    /// If the allocation of the buffer failed, this function will return `NULL`.
+    /// 
+    /// The buffer has an optimal rowstride. Note that the buffer is not cleared;
     /// you will have to fill it completely yourself.
     @inlinable init( colorspace: GdkColorspace, hasAlpha: Bool, bitsPerSample: Int, width: Int, height: Int) {
         let rv = gdk_pixbuf_new(colorspace, gboolean((hasAlpha) ? 1 : 0), gint(bitsPerSample), gint(width), gint(height))
@@ -123,15 +388,19 @@ public extension PixbufRef {
     }
 
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
+    /// 
     /// Currently only RGB images with 8 bits per sample are supported.
-    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
+    /// 
+    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`, useful
+    /// for language bindings.
     @inlinable init<BytesT: GLib.BytesProtocol>(bytes data: BytesT, colorspace: GdkColorspace, hasAlpha: Bool, bitsPerSample: Int, width: Int, height: Int, rowstride: Int) {
         let rv = gdk_pixbuf_new_from_bytes(data.bytes_ptr, colorspace, gboolean((hasAlpha) ? 1 : 0), gint(bitsPerSample), gint(width), gint(height), gint(rowstride))
         ptr = UnsafeMutableRawPointer(rv)
     }
 
-    /// Creates a new `GdkPixbuf` out of in-memory image data.  Currently only RGB
-    /// images with 8 bits per sample are supported.
+    /// Creates a new `GdkPixbuf` out of in-memory image data.
+    /// 
+    /// Currently only RGB images with 8 bits per sample are supported.
     /// 
     /// Since you are providing a pre-allocated pixel buffer, you must also
     /// specify a way to free that data.  This is done with a function of
@@ -139,15 +408,24 @@ public extension PixbufRef {
     /// finalized, your destroy notification function will be called, and
     /// it is its responsibility to free the pixel array.
     /// 
-    /// See also `gdk_pixbuf_new_from_bytes()`.
+    /// See also: [ctor`GdkPixbuf.Pixbuf.new_from_bytes`]
     @inlinable init(data: UnsafePointer<guchar>!, colorspace: GdkColorspace, hasAlpha: Bool, bitsPerSample: Int, width: Int, height: Int, rowstride: Int, destroyFn: GdkPixbufDestroyNotify? = nil, destroyFnData: gpointer! = nil) {
         let rv = gdk_pixbuf_new_from_data(data, colorspace, gboolean((hasAlpha) ? 1 : 0), gint(bitsPerSample), gint(width), gint(height), gint(rowstride), destroyFn, destroyFnData)
         ptr = UnsafeMutableRawPointer(rv)
     }
 
-    /// Creates a new pixbuf by loading an image from a file.  The file format is
-    /// detected automatically. If `nil` is returned, then `error` will be set.
-    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new pixbuf by loading an image from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
     @inlinable init(file filename: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_new_from_file(filename, &error)
@@ -155,9 +433,19 @@ public extension PixbufRef {
         ptr = UnsafeMutableRawPointer(rv)
     }
 
-    /// Creates a new pixbuf by loading an image from a file.  The file format is
-    /// detected automatically. If `nil` is returned, then `error` will be set.
-    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new pixbuf by loading an image from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
+    /// 
     /// The image will be scaled to fit in the requested size, optionally preserving
     /// the image's aspect ratio.
     /// 
@@ -175,15 +463,23 @@ public extension PixbufRef {
     }
 
     /// Creates a new pixbuf by loading an image from a file.
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. Possible errors are in the `GDK_PIXBUF_ERROR` and
-    /// `G_FILE_ERROR` domains.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
     /// 
     /// The image will be scaled to fit in the requested size, preserving
     /// the image's aspect ratio. Note that the returned pixbuf may be smaller
     /// than `width` x `height`, if the aspect ratio requires it. To load
     /// and image at the requested size, regardless of aspect ratio, use
-    /// `gdk_pixbuf_new_from_file_at_scale()`.
+    /// [ctor`GdkPixbuf.Pixbuf.new_from_file_at_scale`].
     @inlinable init(fileAtSize filename: UnsafePointer<CChar>!, width: Int, height: Int) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_new_from_file_at_size(filename, gint(width), gint(height), &error)
@@ -191,30 +487,33 @@ public extension PixbufRef {
         ptr = UnsafeMutableRawPointer(rv)
     }
 
-    /// Create a `GdkPixbuf` from a flat representation that is suitable for
-    /// storing as inline data in a program. This is useful if you want to
-    /// ship a program with images, but don't want to depend on any
-    /// external files.
+    /// Creates a `GdkPixbuf` from a flat representation that is suitable for
+    /// storing as inline data in a program.
     /// 
-    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource](#gdk-pixbuf-csource),
-    /// which allows for conversion of `GdkPixbufs` into such a inline representation.
+    /// This is useful if you want to ship a program with images, but don't want
+    /// to depend on any external files.
+    /// 
+    /// GdkPixbuf ships with a program called `gdk-pixbuf-csource`, which allows
+    /// for conversion of `GdkPixbuf`s into such a inline representation.
+    /// 
     /// In almost all cases, you should pass the `--raw` option to
     /// `gdk-pixbuf-csource`. A sample invocation would be:
     /// 
     /// ```
-    ///  gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
+    /// gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
     /// ```
     /// 
     /// For the typical case where the inline pixbuf is read-only static data,
     /// you don't need to copy the pixel data unless you intend to write to
-    /// it, so you can pass `false` for `copy_pixels`.  (If you pass `--rle` to
-    /// `gdk-pixbuf-csource`, a copy will be made even if `copy_pixels` is `false`,
-    /// so using this option is generally a bad idea.)
+    /// it, so you can pass `FALSE` for `copy_pixels`. If you pass `--rle` to
+    /// `gdk-pixbuf-csource`, a copy will be made even if `copy_pixels` is `FALSE`,
+    /// so using this option is generally a bad idea.
     /// 
     /// If you create a pixbuf from const inline data compiled into your
     /// program, it's probably safe to ignore errors and disable length checks,
     /// since things will always succeed:
-    /// ```
+    /// 
+    /// ```c
     /// pixbuf = gdk_pixbuf_new_from_inline (-1, myimage_inline, FALSE, NULL);
     /// ```
     /// 
@@ -223,7 +522,7 @@ public extension PixbufRef {
     /// addition.
     ///
     /// **new_from_inline is deprecated:**
-    /// Use #GResource instead.
+    /// Use `GResource` instead.
     @available(*, deprecated) @inlinable init(inline dataLength: Int, data: UnsafePointer<guint8>!, copyPixels: Bool) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_new_from_inline(gint(dataLength), data, gboolean((copyPixels) ? 1 : 0), &error)
@@ -233,7 +532,7 @@ public extension PixbufRef {
 
     /// Creates a new pixbuf by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     @inlinable init(resource resourcePath: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
@@ -244,7 +543,7 @@ public extension PixbufRef {
 
     /// Creates a new pixbuf by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     /// 
     /// The image will be scaled to fit in the requested size, optionally
@@ -264,11 +563,14 @@ public extension PixbufRef {
 
     /// Creates a new pixbuf by loading an image from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. The `cancellable` can be used to abort the operation
-    /// from another thread. If the operation was cancelled, the error
-    /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
-    /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set.
+    /// 
+    /// The `cancellable` can be used to abort the operation from another thread.
+    /// If the operation was cancelled, the error `G_IO_ERROR_CANCELLED` will be
+    /// returned. Other possible errors are in the `GDK_PIXBUF_ERROR` and
+    /// `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
     @inlinable init<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws {
@@ -280,7 +582,7 @@ public extension PixbufRef {
 
     /// Creates a new pixbuf by loading an image from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set. The `cancellable` can be used to abort the operation
     /// from another thread. If the operation was cancelled, the error
     /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
@@ -315,22 +617,28 @@ public extension PixbufRef {
         ptr = UnsafeMutableRawPointer(rv)
     }
 
-    /// Creates a new pixbuf by parsing XPM data in memory.  This data is commonly
-    /// the result of including an XPM file into a program's C source.
+    /// Creates a new pixbuf by parsing XPM data in memory.
+    /// 
+    /// This data is commonly the result of including an XPM file into a
+    /// program's C source.
     @inlinable init(xpmData data: UnsafeMutablePointer<UnsafePointer<CChar>?>!) {
         let rv = gdk_pixbuf_new_from_xpm_data(data)
         ptr = UnsafeMutableRawPointer(rv)
     }
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
+    /// 
     /// Currently only RGB images with 8 bits per sample are supported.
-    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
+    /// 
+    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`, useful
+    /// for language bindings.
     @inlinable static func newFrom<BytesT: GLib.BytesProtocol>(bytes data: BytesT, colorspace: GdkColorspace, hasAlpha: Bool, bitsPerSample: Int, width: Int, height: Int, rowstride: Int) -> PixbufRef! {
         guard let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_new_from_bytes(data.bytes_ptr, colorspace, gboolean((hasAlpha) ? 1 : 0), gint(bitsPerSample), gint(width), gint(height), gint(rowstride)))) else { return nil }
         return rv
     }
 
-    /// Creates a new `GdkPixbuf` out of in-memory image data.  Currently only RGB
-    /// images with 8 bits per sample are supported.
+    /// Creates a new `GdkPixbuf` out of in-memory image data.
+    /// 
+    /// Currently only RGB images with 8 bits per sample are supported.
     /// 
     /// Since you are providing a pre-allocated pixel buffer, you must also
     /// specify a way to free that data.  This is done with a function of
@@ -338,15 +646,24 @@ public extension PixbufRef {
     /// finalized, your destroy notification function will be called, and
     /// it is its responsibility to free the pixel array.
     /// 
-    /// See also `gdk_pixbuf_new_from_bytes()`.
+    /// See also: [ctor`GdkPixbuf.Pixbuf.new_from_bytes`]
     @inlinable static func newFrom(data: UnsafePointer<guchar>!, colorspace: GdkColorspace, hasAlpha: Bool, bitsPerSample: Int, width: Int, height: Int, rowstride: Int, destroyFn: GdkPixbufDestroyNotify? = nil, destroyFnData: gpointer! = nil) -> PixbufRef! {
         guard let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_new_from_data(data, colorspace, gboolean((hasAlpha) ? 1 : 0), gint(bitsPerSample), gint(width), gint(height), gint(rowstride), destroyFn, destroyFnData))) else { return nil }
         return rv
     }
 
-    /// Creates a new pixbuf by loading an image from a file.  The file format is
-    /// detected automatically. If `nil` is returned, then `error` will be set.
-    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new pixbuf by loading an image from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
     @inlinable static func newFrom(file filename: UnsafePointer<CChar>!) throws -> PixbufRef! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_new_from_file(filename, &error)))
@@ -355,9 +672,19 @@ public extension PixbufRef {
         return rv
     }
 
-    /// Creates a new pixbuf by loading an image from a file.  The file format is
-    /// detected automatically. If `nil` is returned, then `error` will be set.
-    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new pixbuf by loading an image from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
+    /// 
     /// The image will be scaled to fit in the requested size, optionally preserving
     /// the image's aspect ratio.
     /// 
@@ -376,15 +703,23 @@ public extension PixbufRef {
     }
 
     /// Creates a new pixbuf by loading an image from a file.
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. Possible errors are in the `GDK_PIXBUF_ERROR` and
-    /// `G_FILE_ERROR` domains.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
     /// 
     /// The image will be scaled to fit in the requested size, preserving
     /// the image's aspect ratio. Note that the returned pixbuf may be smaller
     /// than `width` x `height`, if the aspect ratio requires it. To load
     /// and image at the requested size, regardless of aspect ratio, use
-    /// `gdk_pixbuf_new_from_file_at_scale()`.
+    /// [ctor`GdkPixbuf.Pixbuf.new_from_file_at_scale`].
     @inlinable static func newFrom(fileAtSize filename: UnsafePointer<CChar>!, width: Int, height: Int) throws -> PixbufRef! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_new_from_file_at_size(filename, gint(width), gint(height), &error)))
@@ -393,30 +728,33 @@ public extension PixbufRef {
         return rv
     }
 
-    /// Create a `GdkPixbuf` from a flat representation that is suitable for
-    /// storing as inline data in a program. This is useful if you want to
-    /// ship a program with images, but don't want to depend on any
-    /// external files.
+    /// Creates a `GdkPixbuf` from a flat representation that is suitable for
+    /// storing as inline data in a program.
     /// 
-    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource](#gdk-pixbuf-csource),
-    /// which allows for conversion of `GdkPixbufs` into such a inline representation.
+    /// This is useful if you want to ship a program with images, but don't want
+    /// to depend on any external files.
+    /// 
+    /// GdkPixbuf ships with a program called `gdk-pixbuf-csource`, which allows
+    /// for conversion of `GdkPixbuf`s into such a inline representation.
+    /// 
     /// In almost all cases, you should pass the `--raw` option to
     /// `gdk-pixbuf-csource`. A sample invocation would be:
     /// 
     /// ```
-    ///  gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
+    /// gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
     /// ```
     /// 
     /// For the typical case where the inline pixbuf is read-only static data,
     /// you don't need to copy the pixel data unless you intend to write to
-    /// it, so you can pass `false` for `copy_pixels`.  (If you pass `--rle` to
-    /// `gdk-pixbuf-csource`, a copy will be made even if `copy_pixels` is `false`,
-    /// so using this option is generally a bad idea.)
+    /// it, so you can pass `FALSE` for `copy_pixels`. If you pass `--rle` to
+    /// `gdk-pixbuf-csource`, a copy will be made even if `copy_pixels` is `FALSE`,
+    /// so using this option is generally a bad idea.
     /// 
     /// If you create a pixbuf from const inline data compiled into your
     /// program, it's probably safe to ignore errors and disable length checks,
     /// since things will always succeed:
-    /// ```
+    /// 
+    /// ```c
     /// pixbuf = gdk_pixbuf_new_from_inline (-1, myimage_inline, FALSE, NULL);
     /// ```
     /// 
@@ -425,7 +763,7 @@ public extension PixbufRef {
     /// addition.
     ///
     /// **new_from_inline is deprecated:**
-    /// Use #GResource instead.
+    /// Use `GResource` instead.
     @available(*, deprecated) @inlinable static func newFrom(inline dataLength: Int, data: UnsafePointer<guint8>!, copyPixels: Bool) throws -> PixbufRef! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_new_from_inline(gint(dataLength), data, gboolean((copyPixels) ? 1 : 0), &error)))
@@ -436,7 +774,7 @@ public extension PixbufRef {
 
     /// Creates a new pixbuf by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     @inlinable static func newFrom(resource resourcePath: UnsafePointer<CChar>!) throws -> PixbufRef! {
         var error: UnsafeMutablePointer<GError>?
@@ -448,7 +786,7 @@ public extension PixbufRef {
 
     /// Creates a new pixbuf by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     /// 
     /// The image will be scaled to fit in the requested size, optionally
@@ -469,11 +807,14 @@ public extension PixbufRef {
 
     /// Creates a new pixbuf by loading an image from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. The `cancellable` can be used to abort the operation
-    /// from another thread. If the operation was cancelled, the error
-    /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
-    /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set.
+    /// 
+    /// The `cancellable` can be used to abort the operation from another thread.
+    /// If the operation was cancelled, the error `G_IO_ERROR_CANCELLED` will be
+    /// returned. Other possible errors are in the `GDK_PIXBUF_ERROR` and
+    /// `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
     @inlinable static func newFrom<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws -> PixbufRef! {
@@ -486,7 +827,7 @@ public extension PixbufRef {
 
     /// Creates a new pixbuf by loading an image from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set. The `cancellable` can be used to abort the operation
     /// from another thread. If the operation was cancelled, the error
     /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
@@ -523,8 +864,10 @@ public extension PixbufRef {
         return rv
     }
 
-    /// Creates a new pixbuf by parsing XPM data in memory.  This data is commonly
-    /// the result of including an XPM file into a program's C source.
+    /// Creates a new pixbuf by parsing XPM data in memory.
+    /// 
+    /// This data is commonly the result of including an XPM file into a
+    /// program's C source.
     @inlinable static func newFromXpm(xpmData data: UnsafeMutablePointer<UnsafePointer<CChar>?>!) -> PixbufRef! {
         guard let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_new_from_xpm_data(data))) else { return nil }
         return rv
@@ -535,11 +878,141 @@ public extension PixbufRef {
 /// It provides the methods that can operate on this data type through `PixbufProtocol` conformance.
 /// Use `Pixbuf` as a strong reference or owner of a `GdkPixbuf` instance.
 ///
-/// This is the main structure in the gdk-pixbuf library.  It is
-/// used to represent images.  It contains information about the
-/// image's pixel data, its color space, bits per sample, width and
-/// height, and the rowstride (the number of bytes between the start of
-/// one row and the start of the next).
+/// A pixel buffer.
+/// 
+/// `GdkPixbuf` contains information about an image's pixel data,
+/// its color space, bits per sample, width and height, and the
+/// rowstride (the number of bytes between the start of one row
+/// and the start of the next).
+/// 
+/// ## Creating new `GdkPixbuf`
+/// 
+/// The most basic way to create a pixbuf is to wrap an existing pixel
+/// buffer with a [class`GdkPixbuf.Pixbuf`] instance. You can use the
+/// [`ctor`GdkPixbuf.Pixbuf.new_from_data``] function to do this.
+/// 
+/// Every time you create a new `GdkPixbuf` instance for some data, you
+/// will need to specify the destroy notification function that will be
+/// called when the data buffer needs to be freed; this will happen when
+/// a `GdkPixbuf` is finalized by the reference counting functions. If
+/// you have a chunk of static data compiled into your application, you
+/// can pass in `NULL` as the destroy notification function so that the
+/// data will not be freed.
+/// 
+/// The [`ctor`GdkPixbuf.Pixbuf.new``] constructor function can be used
+/// as a convenience to create a pixbuf with an empty buffer; this is
+/// equivalent to allocating a data buffer using ``malloc()`` and then
+/// wrapping it with ``gdk_pixbuf_new_from_data()``. The ``gdk_pixbuf_new()``
+/// function will compute an optimal rowstride so that rendering can be
+/// performed with an efficient algorithm.
+/// 
+/// As a special case, you can use the [`ctor`GdkPixbuf.Pixbuf.new_from_xpm_data``]
+/// function to create a pixbuf from inline XPM image data.
+/// 
+/// You can also copy an existing pixbuf with the [method`Pixbuf.copy`]
+/// function. This is not the same as just acquiring a reference to
+/// the old pixbuf instance: the copy function will actually duplicate
+/// the pixel data in memory and create a new [class`Pixbuf`] instance
+/// for it.
+/// 
+/// ## Reference counting
+/// 
+/// `GdkPixbuf` structures are reference counted. This means that an
+/// application can share a single pixbuf among many parts of the
+/// code. When a piece of the program needs to use a pixbuf, it should
+/// acquire a reference to it by calling ``g_object_ref()``; when it no
+/// longer needs the pixbuf, it should release the reference it acquired
+/// by calling ``g_object_unref()``. The resources associated with a
+/// `GdkPixbuf` will be freed when its reference count drops to zero.
+/// Newly-created `GdkPixbuf` instances start with a reference count
+/// of one.
+/// 
+/// ## Image Data
+/// 
+/// Image data in a pixbuf is stored in memory in an uncompressed,
+/// packed format. Rows in the image are stored top to bottom, and
+/// in each row pixels are stored from left to right.
+/// 
+/// There may be padding at the end of a row.
+/// 
+/// The "rowstride" value of a pixbuf, as returned by [`method`GdkPixbuf.Pixbuf.get_rowstride``],
+/// indicates the number of bytes between rows.
+/// 
+/// **NOTE**: If you are copying raw pixbuf data with ``memcpy()`` note that the
+/// last row in the pixbuf may not be as wide as the full rowstride, but rather
+/// just as wide as the pixel data needs to be; that is: it is unsafe to do
+/// `memcpy (dest, pixels, rowstride * height)` to copy a whole pixbuf. Use
+/// [method`GdkPixbuf.Pixbuf.copy`] instead, or compute the width in bytes of the
+/// last row as:
+/// 
+/// ```c
+/// last_row = width * ((n_channels * bits_per_sample + 7) / 8);
+/// ```
+/// 
+/// The same rule applies when iterating over each row of a `GdkPixbuf` pixels
+/// array.
+/// 
+/// The following code illustrates a simple ``put_pixel()``
+/// function for RGB pixbufs with 8 bits per channel with an alpha
+/// channel.
+/// 
+/// ```c
+/// static void
+/// put_pixel (GdkPixbuf *pixbuf,
+///            int x,
+/// 	   int y,
+/// 	   guchar red,
+/// 	   guchar green,
+/// 	   guchar blue,
+/// 	   guchar alpha)
+/// {
+///   int n_channels = gdk_pixbuf_get_n_channels (pixbuf);
+/// 
+///   // Ensure that the pixbuf is valid
+///   g_assert (gdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB);
+///   g_assert (gdk_pixbuf_get_bits_per_sample (pixbuf) == 8);
+///   g_assert (gdk_pixbuf_get_has_alpha (pixbuf));
+///   g_assert (n_channels == 4);
+/// 
+///   int width = gdk_pixbuf_get_width (pixbuf);
+///   int height = gdk_pixbuf_get_height (pixbuf);
+/// 
+///   // Ensure that the coordinates are in a valid range
+///   g_assert (x &gt;= 0 && x &lt; width);
+///   g_assert (y &gt;= 0 && y &lt; height);
+/// 
+///   int rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+/// 
+///   // The pixel buffer in the GdkPixbuf instance
+///   guchar *pixels = gdk_pixbuf_get_pixels (pixbuf);
+/// 
+///   // The pixel we wish to modify
+///   guchar *p = pixels + y * rowstride + x * n_channels;
+///   p[0] = red;
+///   p[1] = green;
+///   p[2] = blue;
+///   p[3] = alpha;
+/// }
+/// ```
+/// 
+/// ## Loading images
+/// 
+/// The `GdkPixBuf` class provides a simple mechanism for loading
+/// an image from a file in synchronous and asynchronous fashion.
+/// 
+/// For GUI applications, it is recommended to use the asynchronous
+/// stream API to avoid blocking the control flow of the application.
+/// 
+/// Additionally, `GdkPixbuf` provides the [class`GdkPixbuf.PixbufLoader``]
+/// API for progressive image loading.
+/// 
+/// ## Saving images
+/// 
+/// The `GdkPixbuf` class provides methods for saving image data in
+/// a number of file formats. The formatted data can be written to a
+/// file or to a memory buffer. `GdkPixbuf` can also call a user-defined
+/// callback on the data, which allows to e.g. write the image
+/// to a socket or store it in a database.
 open class Pixbuf: GLibObject.Object, PixbufProtocol {
         /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
@@ -640,14 +1113,14 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufProtocol`.**
     /// - Parameter p: mutable raw pointer to the underlying object
-    @inlinable override public init(raw p: UnsafeMutableRawPointer) {
+    @inlinable public required init(raw p: UnsafeMutableRawPointer) {
         super.init(raw: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufProtocol`.**
     /// - Parameter raw: mutable raw pointer to the underlying object
-    @inlinable override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+    @inlinable required public init(retainingRaw raw: UnsafeMutableRawPointer) {
         super.init(retainingRaw: raw)
     }
 
@@ -665,8 +1138,11 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
         super.init(retainingOpaquePointer: p)
     }
 
-    /// Creates a new `GdkPixbuf` structure and allocates a buffer for it.  The
-    /// buffer has an optimal rowstride.  Note that the buffer is not cleared;
+    /// Creates a new `GdkPixbuf` structure and allocates a buffer for it.
+    /// 
+    /// If the allocation of the buffer failed, this function will return `NULL`.
+    /// 
+    /// The buffer has an optimal rowstride. Note that the buffer is not cleared;
     /// you will have to fill it completely yourself.
     @inlinable public init( colorspace: GdkColorspace, hasAlpha: Bool, bitsPerSample: Int, width: Int, height: Int) {
         let rv = gdk_pixbuf_new(colorspace, gboolean((hasAlpha) ? 1 : 0), gint(bitsPerSample), gint(width), gint(height))
@@ -675,16 +1151,20 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
     }
 
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
+    /// 
     /// Currently only RGB images with 8 bits per sample are supported.
-    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
+    /// 
+    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`, useful
+    /// for language bindings.
     @inlinable public init<BytesT: GLib.BytesProtocol>(bytes data: BytesT, colorspace: GdkColorspace, hasAlpha: Bool, bitsPerSample: Int, width: Int, height: Int, rowstride: Int) {
         let rv = gdk_pixbuf_new_from_bytes(data.bytes_ptr, colorspace, gboolean((hasAlpha) ? 1 : 0), gint(bitsPerSample), gint(width), gint(height), gint(rowstride))
         super.init(gpointer: (rv))
         if typeIsA(type: self.type, isAType: InitiallyUnownedClassRef.metatypeReference) { _ = self.refSink() } 
     }
 
-    /// Creates a new `GdkPixbuf` out of in-memory image data.  Currently only RGB
-    /// images with 8 bits per sample are supported.
+    /// Creates a new `GdkPixbuf` out of in-memory image data.
+    /// 
+    /// Currently only RGB images with 8 bits per sample are supported.
     /// 
     /// Since you are providing a pre-allocated pixel buffer, you must also
     /// specify a way to free that data.  This is done with a function of
@@ -692,16 +1172,25 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
     /// finalized, your destroy notification function will be called, and
     /// it is its responsibility to free the pixel array.
     /// 
-    /// See also `gdk_pixbuf_new_from_bytes()`.
+    /// See also: [ctor`GdkPixbuf.Pixbuf.new_from_bytes`]
     @inlinable public init(data: UnsafePointer<guchar>!, colorspace: GdkColorspace, hasAlpha: Bool, bitsPerSample: Int, width: Int, height: Int, rowstride: Int, destroyFn: GdkPixbufDestroyNotify? = nil, destroyFnData: gpointer! = nil) {
         let rv = gdk_pixbuf_new_from_data(data, colorspace, gboolean((hasAlpha) ? 1 : 0), gint(bitsPerSample), gint(width), gint(height), gint(rowstride), destroyFn, destroyFnData)
         super.init(gpointer: (rv))
         if typeIsA(type: self.type, isAType: InitiallyUnownedClassRef.metatypeReference) { _ = self.refSink() } 
     }
 
-    /// Creates a new pixbuf by loading an image from a file.  The file format is
-    /// detected automatically. If `nil` is returned, then `error` will be set.
-    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new pixbuf by loading an image from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
     @inlinable public init(file filename: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_new_from_file(filename, &error)
@@ -710,9 +1199,19 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
         if typeIsA(type: self.type, isAType: InitiallyUnownedClassRef.metatypeReference) { _ = self.refSink() } 
     }
 
-    /// Creates a new pixbuf by loading an image from a file.  The file format is
-    /// detected automatically. If `nil` is returned, then `error` will be set.
-    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new pixbuf by loading an image from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
+    /// 
     /// The image will be scaled to fit in the requested size, optionally preserving
     /// the image's aspect ratio.
     /// 
@@ -731,15 +1230,23 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
     }
 
     /// Creates a new pixbuf by loading an image from a file.
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. Possible errors are in the `GDK_PIXBUF_ERROR` and
-    /// `G_FILE_ERROR` domains.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
     /// 
     /// The image will be scaled to fit in the requested size, preserving
     /// the image's aspect ratio. Note that the returned pixbuf may be smaller
     /// than `width` x `height`, if the aspect ratio requires it. To load
     /// and image at the requested size, regardless of aspect ratio, use
-    /// `gdk_pixbuf_new_from_file_at_scale()`.
+    /// [ctor`GdkPixbuf.Pixbuf.new_from_file_at_scale`].
     @inlinable public init(fileAtSize filename: UnsafePointer<CChar>!, width: Int, height: Int) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_new_from_file_at_size(filename, gint(width), gint(height), &error)
@@ -748,30 +1255,33 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
         if typeIsA(type: self.type, isAType: InitiallyUnownedClassRef.metatypeReference) { _ = self.refSink() } 
     }
 
-    /// Create a `GdkPixbuf` from a flat representation that is suitable for
-    /// storing as inline data in a program. This is useful if you want to
-    /// ship a program with images, but don't want to depend on any
-    /// external files.
+    /// Creates a `GdkPixbuf` from a flat representation that is suitable for
+    /// storing as inline data in a program.
     /// 
-    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource](#gdk-pixbuf-csource),
-    /// which allows for conversion of `GdkPixbufs` into such a inline representation.
+    /// This is useful if you want to ship a program with images, but don't want
+    /// to depend on any external files.
+    /// 
+    /// GdkPixbuf ships with a program called `gdk-pixbuf-csource`, which allows
+    /// for conversion of `GdkPixbuf`s into such a inline representation.
+    /// 
     /// In almost all cases, you should pass the `--raw` option to
     /// `gdk-pixbuf-csource`. A sample invocation would be:
     /// 
     /// ```
-    ///  gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
+    /// gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
     /// ```
     /// 
     /// For the typical case where the inline pixbuf is read-only static data,
     /// you don't need to copy the pixel data unless you intend to write to
-    /// it, so you can pass `false` for `copy_pixels`.  (If you pass `--rle` to
-    /// `gdk-pixbuf-csource`, a copy will be made even if `copy_pixels` is `false`,
-    /// so using this option is generally a bad idea.)
+    /// it, so you can pass `FALSE` for `copy_pixels`. If you pass `--rle` to
+    /// `gdk-pixbuf-csource`, a copy will be made even if `copy_pixels` is `FALSE`,
+    /// so using this option is generally a bad idea.
     /// 
     /// If you create a pixbuf from const inline data compiled into your
     /// program, it's probably safe to ignore errors and disable length checks,
     /// since things will always succeed:
-    /// ```
+    /// 
+    /// ```c
     /// pixbuf = gdk_pixbuf_new_from_inline (-1, myimage_inline, FALSE, NULL);
     /// ```
     /// 
@@ -780,7 +1290,7 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
     /// addition.
     ///
     /// **new_from_inline is deprecated:**
-    /// Use #GResource instead.
+    /// Use `GResource` instead.
     @available(*, deprecated) @inlinable public init(inline dataLength: Int, data: UnsafePointer<guint8>!, copyPixels: Bool) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_new_from_inline(gint(dataLength), data, gboolean((copyPixels) ? 1 : 0), &error)
@@ -791,7 +1301,7 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
 
     /// Creates a new pixbuf by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     @inlinable public init(resource resourcePath: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
@@ -803,7 +1313,7 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
 
     /// Creates a new pixbuf by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     /// 
     /// The image will be scaled to fit in the requested size, optionally
@@ -824,11 +1334,14 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
 
     /// Creates a new pixbuf by loading an image from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. The `cancellable` can be used to abort the operation
-    /// from another thread. If the operation was cancelled, the error
-    /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
-    /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set.
+    /// 
+    /// The `cancellable` can be used to abort the operation from another thread.
+    /// If the operation was cancelled, the error `G_IO_ERROR_CANCELLED` will be
+    /// returned. Other possible errors are in the `GDK_PIXBUF_ERROR` and
+    /// `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
     @inlinable public init<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws {
@@ -841,7 +1354,7 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
 
     /// Creates a new pixbuf by loading an image from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set. The `cancellable` can be used to abort the operation
     /// from another thread. If the operation was cancelled, the error
     /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
@@ -878,8 +1391,10 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
         if typeIsA(type: self.type, isAType: InitiallyUnownedClassRef.metatypeReference) { _ = self.refSink() } 
     }
 
-    /// Creates a new pixbuf by parsing XPM data in memory.  This data is commonly
-    /// the result of including an XPM file into a program's C source.
+    /// Creates a new pixbuf by parsing XPM data in memory.
+    /// 
+    /// This data is commonly the result of including an XPM file into a
+    /// program's C source.
     @inlinable public init(xpmData data: UnsafeMutablePointer<UnsafePointer<CChar>?>!) {
         let rv = gdk_pixbuf_new_from_xpm_data(data)
         super.init(gpointer: (rv))
@@ -887,16 +1402,20 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
     }
 
     /// Creates a new `GdkPixbuf` out of in-memory readonly image data.
+    /// 
     /// Currently only RGB images with 8 bits per sample are supported.
-    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`.
+    /// 
+    /// This is the `GBytes` variant of `gdk_pixbuf_new_from_data()`, useful
+    /// for language bindings.
     @inlinable public static func newFrom<BytesT: GLib.BytesProtocol>(bytes data: BytesT, colorspace: GdkColorspace, hasAlpha: Bool, bitsPerSample: Int, width: Int, height: Int, rowstride: Int) -> Pixbuf! {
         guard let rv = Pixbuf(gconstpointer: gconstpointer(gdk_pixbuf_new_from_bytes(data.bytes_ptr, colorspace, gboolean((hasAlpha) ? 1 : 0), gint(bitsPerSample), gint(width), gint(height), gint(rowstride)))) else { return nil }
         if typeIsA(type: rv.type, isAType: InitiallyUnownedClassRef.metatypeReference) { _ = rv.refSink() } 
         return rv
     }
 
-    /// Creates a new `GdkPixbuf` out of in-memory image data.  Currently only RGB
-    /// images with 8 bits per sample are supported.
+    /// Creates a new `GdkPixbuf` out of in-memory image data.
+    /// 
+    /// Currently only RGB images with 8 bits per sample are supported.
     /// 
     /// Since you are providing a pre-allocated pixel buffer, you must also
     /// specify a way to free that data.  This is done with a function of
@@ -904,16 +1423,25 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
     /// finalized, your destroy notification function will be called, and
     /// it is its responsibility to free the pixel array.
     /// 
-    /// See also `gdk_pixbuf_new_from_bytes()`.
+    /// See also: [ctor`GdkPixbuf.Pixbuf.new_from_bytes`]
     @inlinable public static func newFrom(data: UnsafePointer<guchar>!, colorspace: GdkColorspace, hasAlpha: Bool, bitsPerSample: Int, width: Int, height: Int, rowstride: Int, destroyFn: GdkPixbufDestroyNotify? = nil, destroyFnData: gpointer! = nil) -> Pixbuf! {
         guard let rv = Pixbuf(gconstpointer: gconstpointer(gdk_pixbuf_new_from_data(data, colorspace, gboolean((hasAlpha) ? 1 : 0), gint(bitsPerSample), gint(width), gint(height), gint(rowstride), destroyFn, destroyFnData))) else { return nil }
         if typeIsA(type: rv.type, isAType: InitiallyUnownedClassRef.metatypeReference) { _ = rv.refSink() } 
         return rv
     }
 
-    /// Creates a new pixbuf by loading an image from a file.  The file format is
-    /// detected automatically. If `nil` is returned, then `error` will be set.
-    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new pixbuf by loading an image from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
     @inlinable public static func newFrom(file filename: UnsafePointer<CChar>!) throws -> Pixbuf! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = Pixbuf(gconstpointer: gconstpointer(gdk_pixbuf_new_from_file(filename, &error)))
@@ -923,9 +1451,19 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
         return rv
     }
 
-    /// Creates a new pixbuf by loading an image from a file.  The file format is
-    /// detected automatically. If `nil` is returned, then `error` will be set.
-    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new pixbuf by loading an image from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
+    /// 
     /// The image will be scaled to fit in the requested size, optionally preserving
     /// the image's aspect ratio.
     /// 
@@ -945,15 +1483,23 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
     }
 
     /// Creates a new pixbuf by loading an image from a file.
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. Possible errors are in the `GDK_PIXBUF_ERROR` and
-    /// `G_FILE_ERROR` domains.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set. Possible errors are:
+    /// 
+    ///  - the file could not be opened
+    ///  - there is no loader for the file's format
+    ///  - there is not enough memory to allocate the image buffer
+    ///  - the image buffer contains invalid data
+    /// 
+    /// The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
     /// 
     /// The image will be scaled to fit in the requested size, preserving
     /// the image's aspect ratio. Note that the returned pixbuf may be smaller
     /// than `width` x `height`, if the aspect ratio requires it. To load
     /// and image at the requested size, regardless of aspect ratio, use
-    /// `gdk_pixbuf_new_from_file_at_scale()`.
+    /// [ctor`GdkPixbuf.Pixbuf.new_from_file_at_scale`].
     @inlinable public static func newFrom(fileAtSize filename: UnsafePointer<CChar>!, width: Int, height: Int) throws -> Pixbuf! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = Pixbuf(gconstpointer: gconstpointer(gdk_pixbuf_new_from_file_at_size(filename, gint(width), gint(height), &error)))
@@ -963,30 +1509,33 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
         return rv
     }
 
-    /// Create a `GdkPixbuf` from a flat representation that is suitable for
-    /// storing as inline data in a program. This is useful if you want to
-    /// ship a program with images, but don't want to depend on any
-    /// external files.
+    /// Creates a `GdkPixbuf` from a flat representation that is suitable for
+    /// storing as inline data in a program.
     /// 
-    /// gdk-pixbuf ships with a program called [gdk-pixbuf-csource](#gdk-pixbuf-csource),
-    /// which allows for conversion of `GdkPixbufs` into such a inline representation.
+    /// This is useful if you want to ship a program with images, but don't want
+    /// to depend on any external files.
+    /// 
+    /// GdkPixbuf ships with a program called `gdk-pixbuf-csource`, which allows
+    /// for conversion of `GdkPixbuf`s into such a inline representation.
+    /// 
     /// In almost all cases, you should pass the `--raw` option to
     /// `gdk-pixbuf-csource`. A sample invocation would be:
     /// 
     /// ```
-    ///  gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
+    /// gdk-pixbuf-csource --raw --name=myimage_inline myimage.png
     /// ```
     /// 
     /// For the typical case where the inline pixbuf is read-only static data,
     /// you don't need to copy the pixel data unless you intend to write to
-    /// it, so you can pass `false` for `copy_pixels`.  (If you pass `--rle` to
-    /// `gdk-pixbuf-csource`, a copy will be made even if `copy_pixels` is `false`,
-    /// so using this option is generally a bad idea.)
+    /// it, so you can pass `FALSE` for `copy_pixels`. If you pass `--rle` to
+    /// `gdk-pixbuf-csource`, a copy will be made even if `copy_pixels` is `FALSE`,
+    /// so using this option is generally a bad idea.
     /// 
     /// If you create a pixbuf from const inline data compiled into your
     /// program, it's probably safe to ignore errors and disable length checks,
     /// since things will always succeed:
-    /// ```
+    /// 
+    /// ```c
     /// pixbuf = gdk_pixbuf_new_from_inline (-1, myimage_inline, FALSE, NULL);
     /// ```
     /// 
@@ -995,7 +1544,7 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
     /// addition.
     ///
     /// **new_from_inline is deprecated:**
-    /// Use #GResource instead.
+    /// Use `GResource` instead.
     @available(*, deprecated) @inlinable public static func newFrom(inline dataLength: Int, data: UnsafePointer<guint8>!, copyPixels: Bool) throws -> Pixbuf! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = Pixbuf(gconstpointer: gconstpointer(gdk_pixbuf_new_from_inline(gint(dataLength), data, gboolean((copyPixels) ? 1 : 0), &error)))
@@ -1007,7 +1556,7 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
 
     /// Creates a new pixbuf by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     @inlinable public static func newFrom(resource resourcePath: UnsafePointer<CChar>!) throws -> Pixbuf! {
         var error: UnsafeMutablePointer<GError>?
@@ -1020,7 +1569,7 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
 
     /// Creates a new pixbuf by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     /// 
     /// The image will be scaled to fit in the requested size, optionally
@@ -1042,11 +1591,14 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
 
     /// Creates a new pixbuf by loading an image from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. The `cancellable` can be used to abort the operation
-    /// from another thread. If the operation was cancelled, the error
-    /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
-    /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set.
+    /// 
+    /// The `cancellable` can be used to abort the operation from another thread.
+    /// If the operation was cancelled, the error `G_IO_ERROR_CANCELLED` will be
+    /// returned. Other possible errors are in the `GDK_PIXBUF_ERROR` and
+    /// `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
     @inlinable public static func newFrom<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws -> Pixbuf! {
@@ -1060,7 +1612,7 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
 
     /// Creates a new pixbuf by loading an image from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set. The `cancellable` can be used to abort the operation
     /// from another thread. If the operation was cancelled, the error
     /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
@@ -1099,8 +1651,10 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
         return rv
     }
 
-    /// Creates a new pixbuf by parsing XPM data in memory.  This data is commonly
-    /// the result of including an XPM file into a program's C source.
+    /// Creates a new pixbuf by parsing XPM data in memory.
+    /// 
+    /// This data is commonly the result of including an XPM file into a
+    /// program's C source.
     @inlinable public static func newFromXpm(xpmData data: UnsafeMutablePointer<UnsafePointer<CChar>?>!) -> Pixbuf! {
         guard let rv = Pixbuf(gconstpointer: gconstpointer(gdk_pixbuf_new_from_xpm_data(data))) else { return nil }
         if typeIsA(type: rv.type, isAType: InitiallyUnownedClassRef.metatypeReference) { _ = rv.refSink() } 
@@ -1111,20 +1665,31 @@ open class Pixbuf: GLibObject.Object, PixbufProtocol {
 
 public enum PixbufPropertyName: String, PropertyNameProtocol {
     /// The number of bits per sample.
+    /// 
     /// Currently only 8 bit per sample are supported.
     case bitsPerSample = "bits-per-sample"
+    /// The color space of the pixbuf.
+    /// 
+    /// Currently, only `GDK_COLORSPACE_RGB` is supported.
     case colorspace = "colorspace"
+    /// Whether the pixbuf has an alpha channel.
     case hasAlpha = "has-alpha"
+    /// The number of rows of the pixbuf.
     case height = "height"
     /// The number of samples per pixel.
+    /// 
     /// Currently, only 3 or 4 samples per pixel are supported.
     case nChannels = "n-channels"
     case pixelBytes = "pixel-bytes"
+    /// A pointer to the pixel data of the pixbuf.
     case pixels = "pixels"
     /// The number of bytes between the start of a row and
-    /// the start of the next row. This number must (obviously)
-    /// be at least as large as the width of the pixbuf.
+    /// the start of the next row.
+    /// 
+    /// This number must (obviously) be at least as large as the
+    /// width of the pixbuf.
     case rowstride = "rowstride"
+    /// The number of columns of the pixbuf.
     case width = "width"
 }
 
@@ -1208,20 +1773,31 @@ public enum PixbufSignalName: String, SignalNameProtocol {
     /// detail strings for the notify signal.
     case notify = "notify"
     /// The number of bits per sample.
+    /// 
     /// Currently only 8 bit per sample are supported.
     case notifyBitsPerSample = "notify::bits-per-sample"
+    /// The color space of the pixbuf.
+    /// 
+    /// Currently, only `GDK_COLORSPACE_RGB` is supported.
     case notifyColorspace = "notify::colorspace"
+    /// Whether the pixbuf has an alpha channel.
     case notifyHasAlpha = "notify::has-alpha"
+    /// The number of rows of the pixbuf.
     case notifyHeight = "notify::height"
     /// The number of samples per pixel.
+    /// 
     /// Currently, only 3 or 4 samples per pixel are supported.
     case notifyNChannels = "notify::n-channels"
     case notifyPixelBytes = "notify::pixel-bytes"
+    /// A pointer to the pixel data of the pixbuf.
     case notifyPixels = "notify::pixels"
     /// The number of bytes between the start of a row and
-    /// the start of the next row. This number must (obviously)
-    /// be at least as large as the width of the pixbuf.
+    /// the start of the next row.
+    /// 
+    /// This number must (obviously) be at least as large as the
+    /// width of the pixbuf.
     case notifyRowstride = "notify::rowstride"
+    /// The number of columns of the pixbuf.
     case notifyWidth = "notify::width"
 }
 
@@ -1232,26 +1808,33 @@ public extension PixbufProtocol {
     @inlinable var pixbuf_ptr: UnsafeMutablePointer<GdkPixbuf>! { return ptr?.assumingMemoryBound(to: GdkPixbuf.self) }
 
     /// Takes an existing pixbuf and adds an alpha channel to it.
+    /// 
     /// If the existing pixbuf already had an alpha channel, the channel
     /// values are copied from the original; otherwise, the alpha channel
     /// is initialized to 255 (full opacity).
     /// 
-    /// If `substitute_color` is `true`, then the color specified by (`r`, `g`, `b`) will be
-    /// assigned zero opacity. That is, if you pass (255, 255, 255) for the
-    /// substitute color, all white pixels will become fully transparent.
+    /// If `substitute_color` is `TRUE`, then the color specified by the
+    /// (`r`, `g`, `b`) arguments will be assigned zero opacity. That is,
+    /// if you pass `(255, 255, 255)` for the substitute color, all white
+    /// pixels will become fully transparent.
+    /// 
+    /// If `substitute_color` is `FALSE`, then the (`r`, `g`, `b`) arguments
+    /// will be ignored.
     @inlinable func addAlpha(substituteColor: Bool, r: guchar, g: guchar, b: guchar) -> PixbufRef! {
         guard let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_add_alpha(pixbuf_ptr, gboolean((substituteColor) ? 1 : 0), r, g, b))) else { return nil }
         return rv
     }
 
     /// Takes an existing pixbuf and checks for the presence of an
-    /// associated "orientation" option, which may be provided by the
-    /// jpeg loader (which reads the exif orientation tag) or the
-    /// tiff loader (which reads the tiff orientation tag, and
-    /// compensates it for the partial transforms performed by
-    /// libtiff). If an orientation option/tag is present, the
-    /// appropriate transform will be performed so that the pixbuf
-    /// is oriented correctly.
+    /// associated "orientation" option.
+    /// 
+    /// The orientation option may be provided by the JPEG loader (which
+    /// reads the exif orientation tag) or the TIFF loader (which reads
+    /// the TIFF orientation tag, and compensates it for the partial
+    /// transforms performed by libtiff).
+    /// 
+    /// If an orientation option/tag is present, the appropriate transform
+    /// will be performed so that the pixbuf is oriented correctly.
     @inlinable func applyEmbeddedOrientation() -> PixbufRef! {
         guard let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_apply_embedded_orientation(pixbuf_ptr))) else { return nil }
         return rv
@@ -1259,6 +1842,7 @@ public extension PixbufProtocol {
 
     /// Creates a transformation of the source image `src` by scaling by
     /// `scale_x` and `scale_y` then translating by `offset_x` and `offset_y`.
+    /// 
     /// This gives an image in the coordinates of the destination pixbuf.
     /// The rectangle (`dest_x`, `dest_y`, `dest_width`, `dest_height`)
     /// is then alpha blended onto the corresponding rectangle of the
@@ -1291,24 +1875,27 @@ public extension PixbufProtocol {
     
     }
 
-    /// Creates a new `GdkPixbuf` by scaling `src` to `dest_width` x
-    /// `dest_height` and alpha blending the result with a checkboard of colors
-    /// `color1` and `color2`.
+    /// Creates a new pixbuf by scaling `src` to `dest_width` x `dest_height`
+    /// and alpha blending the result with a checkboard of colors `color1`
+    /// and `color2`.
     @inlinable func compositeColorSimple(destWidth: Int, destHeight: Int, interpType: GdkInterpType, overallAlpha: Int, checkSize: Int, color1: guint32, color2: guint32) -> PixbufRef! {
         guard let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_composite_color_simple(pixbuf_ptr, gint(destWidth), gint(destHeight), interpType, gint(overallAlpha), gint(checkSize), color1, color2))) else { return nil }
         return rv
     }
 
     /// Creates a new `GdkPixbuf` with a copy of the information in the specified
-    /// `pixbuf`. Note that this does not copy the options set on the original `GdkPixbuf`,
+    /// `pixbuf`.
+    /// 
+    /// Note that this does not copy the options set on the original `GdkPixbuf`,
     /// use `gdk_pixbuf_copy_options()` for this.
     @inlinable func copy() -> PixbufRef! {
         guard let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_copy(pixbuf_ptr))) else { return nil }
         return rv
     }
 
-    /// Copies a rectangular area from `src_pixbuf` to `dest_pixbuf`.  Conversion of
-    /// pixbuf formats is done automatically.
+    /// Copies a rectangular area from `src_pixbuf` to `dest_pixbuf`.
+    /// 
+    /// Conversion of pixbuf formats is done automatically.
     /// 
     /// If the source rectangle overlaps the destination rectangle on the
     /// same pixbuf, it will be overwritten during the copy operation.
@@ -1318,7 +1905,9 @@ public extension PixbufProtocol {
     
     }
 
-    /// Copy the key/value pair options attached to a `GdkPixbuf` to another.
+    /// Copies the key/value pair options attached to a `GdkPixbuf` to another
+    /// `GdkPixbuf`.
+    /// 
     /// This is useful to keep original metadata after having manipulated
     /// a file. However be careful to remove metadata which you've already
     /// applied, such as the "orientation" option after rotating the image.
@@ -1328,8 +1917,10 @@ public extension PixbufProtocol {
     }
 
     /// Clears a pixbuf to the given RGBA value, converting the RGBA value into
-    /// the pixbuf's pixel format. The alpha will be ignored if the pixbuf
-    /// doesn't have an alpha channel.
+    /// the pixbuf's pixel format.
+    /// 
+    /// The alpha component will be ignored if the pixbuf doesn't have an alpha
+    /// channel.
     @inlinable func fill(pixel: guint32) {
         gdk_pixbuf_fill(pixbuf_ptr, pixel)
     
@@ -1400,21 +1991,31 @@ public extension PixbufProtocol {
 
     /// Returns a `GHashTable` with a list of all the options that may have been
     /// attached to the `pixbuf` when it was loaded, or that may have been
-    /// attached by another function using `gdk_pixbuf_set_option()`.
-    /// 
-    /// See `gdk_pixbuf_get_option()` for more details.
+    /// attached by another function using [method`GdkPixbuf.Pixbuf.set_option`].
     @inlinable func getOptions() -> GLib.HashTableRef! {
         let rv = GLib.HashTableRef(gdk_pixbuf_get_options(pixbuf_ptr))
         return rv
     }
 
     /// Queries a pointer to the pixel data of a pixbuf.
+    /// 
+    /// This function will cause an implicit copy of the pixbuf data if the
+    /// pixbuf was created from read-only data.
+    /// 
+    /// Please see the section on [image data](`image-data`) for information
+    /// about how the pixel data is stored in memory.
     @inlinable func getPixels() -> String! {
         let rv = gdk_pixbuf_get_pixels(pixbuf_ptr).map({ String(cString: $0) })
         return rv
     }
 
     /// Queries a pointer to the pixel data of a pixbuf.
+    /// 
+    /// This function will cause an implicit copy of the pixbuf data if the
+    /// pixbuf was created from read-only data.
+    /// 
+    /// Please see the section on [image data](`image-data`) for information
+    /// about how the pixel data is stored in memory.
     @inlinable func getPixelsWith(length: UnsafeMutablePointer<guint>!) -> String! {
         let rv = gdk_pixbuf_get_pixels_with_length(pixbuf_ptr, length).map({ String(cString: $0) })
         return rv
@@ -1434,6 +2035,7 @@ public extension PixbufProtocol {
     }
 
     /// Creates a new pixbuf which represents a sub-region of `src_pixbuf`.
+    /// 
     /// The new pixbuf shares its pixels with the original pixbuf, so
     /// writing to one affects both.  The new pixbuf holds a reference to
     /// `src_pixbuf`, so `src_pixbuf` will not be finalized until the new
@@ -1447,18 +2049,19 @@ public extension PixbufProtocol {
     }
 
     /// Provides a `GBytes` buffer containing the raw pixel data; the data
-    /// must not be modified.  This function allows skipping the implicit
-    /// copy that must be made if `gdk_pixbuf_get_pixels()` is called on a
-    /// read-only pixbuf.
+    /// must not be modified.
+    /// 
+    /// This function allows skipping the implicit copy that must be made
+    /// if `gdk_pixbuf_get_pixels()` is called on a read-only pixbuf.
     @inlinable func readPixelBytes() -> GLib.BytesRef! {
         let rv = GLib.BytesRef(gdk_pixbuf_read_pixel_bytes(pixbuf_ptr))
         return rv
     }
 
-    /// Provides a read-only pointer to the raw pixel data; must not be
-    /// modified.  This function allows skipping the implicit copy that
-    /// must be made if `gdk_pixbuf_get_pixels()` is called on a read-only
-    /// pixbuf.
+    /// Provides a read-only pointer to the raw pixel data.
+    /// 
+    /// This function allows skipping the implicit copy that must be made
+    /// if `gdk_pixbuf_get_pixels()` is called on a read-only pixbuf.
     @inlinable func readPixels() -> UnsafePointer<guint8>! {
         let rv = gdk_pixbuf_read_pixels(pixbuf_ptr)
         return rv
@@ -1473,7 +2076,7 @@ public extension PixbufProtocol {
         return rv
     }
 
-    /// Remove the key/value pair option attached to a `GdkPixbuf`.
+    /// Removes the key/value pair option attached to a `GdkPixbuf`.
     @inlinable func removeOption(key: UnsafePointer<gchar>!) -> Bool {
         let rv = ((gdk_pixbuf_remove_option(pixbuf_ptr, key)) != 0)
         return rv
@@ -1482,20 +2085,26 @@ public extension PixbufProtocol {
     /// Rotates a pixbuf by a multiple of 90 degrees, and returns the
     /// result in a new pixbuf.
     /// 
-    /// If `angle` is 0, a copy of `src` is returned, avoiding any rotation.
+    /// If `angle` is 0, this function will return a copy of `src`.
     @inlinable func rotateSimple(angle: GdkPixbufRotation) -> PixbufRef! {
         guard let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_rotate_simple(pixbuf_ptr, angle))) else { return nil }
         return rv
     }
 
     /// Modifies saturation and optionally pixelates `src`, placing the result in
-    /// `dest`. `src` and `dest` may be the same pixbuf with no ill effects.  If
-    /// `saturation` is 1.0 then saturation is not changed. If it's less than 1.0,
-    /// saturation is reduced (the image turns toward grayscale); if greater than
-    /// 1.0, saturation is increased (the image gets more vivid colors). If `pixelate`
-    /// is `true`, then pixels are faded in a checkerboard pattern to create a
-    /// pixelated image. `src` and `dest` must have the same image format, size, and
+    /// `dest`.
+    /// 
+    /// The `src` and `dest` pixbufs must have the same image format, size, and
     /// rowstride.
+    /// 
+    /// The `src` and `dest` arguments may be the same pixbuf with no ill effects.
+    /// 
+    /// If `saturation` is 1.0 then saturation is not changed. If it's less than 1.0,
+    /// saturation is reduced (the image turns toward grayscale); if greater than
+    /// 1.0, saturation is increased (the image gets more vivid colors).
+    /// 
+    /// If `pixelate` is `TRUE`, then pixels are faded in a checkerboard pattern to
+    /// create a pixelated image.
     @inlinable func saturateAndPixelate<PixbufT: PixbufProtocol>(dest: PixbufT, saturation: Double, pixelate: Bool) {
         gdk_pixbuf_saturate_and_pixelate(pixbuf_ptr, dest.pixbuf_ptr, gfloat(saturation), gboolean((pixelate) ? 1 : 0))
     
@@ -1509,10 +2118,13 @@ public extension PixbufProtocol {
     // *** saveToBuffer() is not available because it has a varargs (...) parameter!
 
 
+    /// Vector version of ``gdk_pixbuf_save_to_buffer()``.
+    /// 
     /// Saves pixbuf to a new buffer in format `type`, which is currently "jpeg",
-    /// "tiff", "png", "ico" or "bmp".  See `gdk_pixbuf_save_to_buffer()`
-    /// for more details.
-    @inlinable func saveToBufferv(buffer: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, bufferSize: UnsafeMutablePointer<gsize>!, type: UnsafePointer<CChar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>!, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>!) throws -> Bool {
+    /// "tiff", "png", "ico" or "bmp".
+    /// 
+    /// See [method`GdkPixbuf.Pixbuf.save_to_buffer`] for more details.
+    @inlinable func saveToBufferv(buffer: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, bufferSize: UnsafeMutablePointer<gsize>!, type: UnsafePointer<CChar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>! = nil, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>! = nil) throws -> Bool {
         var error: UnsafeMutablePointer<GError>?
         let rv = ((gdk_pixbuf_save_to_bufferv(pixbuf_ptr, buffer, bufferSize, type, optionKeys, optionValues, &error)) != 0)
         if let error = error { throw GLibError(error) }
@@ -1523,10 +2135,15 @@ public extension PixbufProtocol {
     // *** saveToCallback() is not available because it has a varargs (...) parameter!
 
 
+    /// Vector version of ``gdk_pixbuf_save_to_callback()``.
+    /// 
     /// Saves pixbuf to a callback in format `type`, which is currently "jpeg",
-    /// "png", "tiff", "ico" or "bmp".  If `error` is set, `false` will be returned. See
-    /// gdk_pixbuf_save_to_callback () for more details.
-    @inlinable func saveToCallbackv(saveFunc: GdkPixbufSaveFunc?, userData: gpointer! = nil, type: UnsafePointer<CChar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>!, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>!) throws -> Bool {
+    /// "png", "tiff", "ico" or "bmp".
+    /// 
+    /// If `error` is set, `FALSE` will be returned.
+    /// 
+    /// See [method`GdkPixbuf.Pixbuf.save_to_callback`] for more details.
+    @inlinable func saveToCallbackv(saveFunc: GdkPixbufSaveFunc?, userData: gpointer! = nil, type: UnsafePointer<CChar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>! = nil, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>! = nil) throws -> Bool {
         var error: UnsafeMutablePointer<GError>?
         let rv = ((gdk_pixbuf_save_to_callbackv(pixbuf_ptr, saveFunc, userData, type, optionKeys, optionValues, &error)) != 0)
         if let error = error { throw GLibError(error) }
@@ -1544,8 +2161,10 @@ public extension PixbufProtocol {
     /// Saves `pixbuf` to an output stream.
     /// 
     /// Supported file formats are currently "jpeg", "tiff", "png", "ico" or
-    /// "bmp". See `gdk_pixbuf_save_to_stream()` for more details.
-    @inlinable func saveToStreamv<OutputStreamT: GIO.OutputStreamProtocol>(stream: OutputStreamT, type: UnsafePointer<CChar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>!, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>!, cancellable: GIO.CancellableRef? = nil) throws -> Bool {
+    /// "bmp".
+    /// 
+    /// See [method`GdkPixbuf.Pixbuf.save_to_stream`] for more details.
+    @inlinable func saveToStreamv<OutputStreamT: GIO.OutputStreamProtocol>(stream: OutputStreamT, type: UnsafePointer<CChar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>! = nil, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>! = nil, cancellable: GIO.CancellableRef? = nil) throws -> Bool {
         var error: UnsafeMutablePointer<GError>?
         let rv = ((gdk_pixbuf_save_to_streamv(pixbuf_ptr, stream.output_stream_ptr, type, optionKeys, optionValues, cancellable?.cancellable_ptr, &error)) != 0)
         if let error = error { throw GLibError(error) }
@@ -1554,8 +2173,10 @@ public extension PixbufProtocol {
     /// Saves `pixbuf` to an output stream.
     /// 
     /// Supported file formats are currently "jpeg", "tiff", "png", "ico" or
-    /// "bmp". See `gdk_pixbuf_save_to_stream()` for more details.
-    @inlinable func saveToStreamv<CancellableT: GIO.CancellableProtocol, OutputStreamT: GIO.OutputStreamProtocol>(stream: OutputStreamT, type: UnsafePointer<CChar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>!, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>!, cancellable: CancellableT?) throws -> Bool {
+    /// "bmp".
+    /// 
+    /// See [method`GdkPixbuf.Pixbuf.save_to_stream`] for more details.
+    @inlinable func saveToStreamv<CancellableT: GIO.CancellableProtocol, OutputStreamT: GIO.OutputStreamProtocol>(stream: OutputStreamT, type: UnsafePointer<CChar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>! = nil, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>! = nil, cancellable: CancellableT?) throws -> Bool {
         var error: UnsafeMutablePointer<GError>?
         let rv = ((gdk_pixbuf_save_to_streamv(pixbuf_ptr, stream.output_stream_ptr, type, optionKeys, optionValues, cancellable?.cancellable_ptr, &error)) != 0)
         if let error = error { throw GLibError(error) }
@@ -1568,8 +2189,10 @@ public extension PixbufProtocol {
     /// version of this function.
     /// 
     /// When the operation is finished, `callback` will be called in the main thread.
-    /// You can then call `gdk_pixbuf_save_to_stream_finish()` to get the result of the operation.
-    @inlinable func saveToStreamvAsync<OutputStreamT: GIO.OutputStreamProtocol>(stream: OutputStreamT, type: UnsafePointer<gchar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, cancellable: GIO.CancellableRef? = nil, callback: GAsyncReadyCallback? = nil, userData: gpointer! = nil) {
+    /// 
+    /// You can then call `gdk_pixbuf_save_to_stream_finish()` to get the result of
+    /// the operation.
+    @inlinable func saveToStreamvAsync<OutputStreamT: GIO.OutputStreamProtocol>(stream: OutputStreamT, type: UnsafePointer<gchar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! = nil, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! = nil, cancellable: GIO.CancellableRef? = nil, callback: GAsyncReadyCallback? = nil, userData: gpointer! = nil) {
         gdk_pixbuf_save_to_streamv_async(pixbuf_ptr, stream.output_stream_ptr, type, optionKeys, optionValues, cancellable?.cancellable_ptr, callback, userData)
     
     }
@@ -1579,16 +2202,22 @@ public extension PixbufProtocol {
     /// version of this function.
     /// 
     /// When the operation is finished, `callback` will be called in the main thread.
-    /// You can then call `gdk_pixbuf_save_to_stream_finish()` to get the result of the operation.
-    @inlinable func saveToStreamvAsync<CancellableT: GIO.CancellableProtocol, OutputStreamT: GIO.OutputStreamProtocol>(stream: OutputStreamT, type: UnsafePointer<gchar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, cancellable: CancellableT?, callback: GAsyncReadyCallback? = nil, userData: gpointer! = nil) {
+    /// 
+    /// You can then call `gdk_pixbuf_save_to_stream_finish()` to get the result of
+    /// the operation.
+    @inlinable func saveToStreamvAsync<CancellableT: GIO.CancellableProtocol, OutputStreamT: GIO.OutputStreamProtocol>(stream: OutputStreamT, type: UnsafePointer<gchar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! = nil, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! = nil, cancellable: CancellableT?, callback: GAsyncReadyCallback? = nil, userData: gpointer! = nil) {
         gdk_pixbuf_save_to_streamv_async(pixbuf_ptr, stream.output_stream_ptr, type, optionKeys, optionValues, cancellable?.cancellable_ptr, callback, userData)
     
     }
 
+    /// Vector version of ``gdk_pixbuf_save()``.
+    /// 
     /// Saves pixbuf to a file in `type`, which is currently "jpeg", "png", "tiff", "ico" or "bmp".
-    /// If `error` is set, `false` will be returned.
-    /// See gdk_pixbuf_save () for more details.
-    @inlinable func savev(filename: UnsafePointer<CChar>!, type: UnsafePointer<CChar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>!, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>!) throws -> Bool {
+    /// 
+    /// If `error` is set, `FALSE` will be returned.
+    /// 
+    /// See [method`GdkPixbuf.Pixbuf.save`] for more details.
+    @inlinable func savev(filename: UnsafePointer<CChar>!, type: UnsafePointer<CChar>!, optionKeys: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>! = nil, optionValues: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>! = nil) throws -> Bool {
         var error: UnsafeMutablePointer<GError>?
         let rv = ((gdk_pixbuf_savev(pixbuf_ptr, filename, type, optionKeys, optionValues, &error)) != 0)
         if let error = error { throw GLibError(error) }
@@ -1601,8 +2230,8 @@ public extension PixbufProtocol {
     /// `dest_height`) of the resulting image onto the destination image
     /// replacing the previous contents.
     /// 
-    /// Try to use `gdk_pixbuf_scale_simple()` first, this function is
-    /// the industrial-strength power tool you can fall back to if
+    /// Try to use `gdk_pixbuf_scale_simple()` first; this function is
+    /// the industrial-strength power tool you can fall back to, if
     /// `gdk_pixbuf_scale_simple()` isn't powerful enough.
     /// 
     /// If the source rectangle overlaps the destination rectangle on the
@@ -1613,29 +2242,33 @@ public extension PixbufProtocol {
     
     }
 
-    /// Create a new `GdkPixbuf` containing a copy of `src` scaled to
-    /// `dest_width` x `dest_height`. Leaves `src` unaffected.  `interp_type`
-    /// should be `GDK_INTERP_NEAREST` if you want maximum speed (but when
-    /// scaling down `GDK_INTERP_NEAREST` is usually unusably ugly).  The
-    /// default `interp_type` should be `GDK_INTERP_BILINEAR` which offers
-    /// reasonable quality and speed.
+    /// Create a new pixbuf containing a copy of `src` scaled to
+    /// `dest_width` x `dest_height`.
+    /// 
+    /// This function leaves `src` unaffected.
+    /// 
+    /// The `interp_type` should be `GDK_INTERP_NEAREST` if you want maximum
+    /// speed (but when scaling down `GDK_INTERP_NEAREST` is usually unusably
+    /// ugly). The default `interp_type` should be `GDK_INTERP_BILINEAR` which
+    /// offers reasonable quality and speed.
     /// 
     /// You can scale a sub-portion of `src` by creating a sub-pixbuf
-    /// pointing into `src`; see `gdk_pixbuf_new_subpixbuf()`.
+    /// pointing into `src`; see [method`GdkPixbuf.Pixbuf.new_subpixbuf`].
     /// 
-    /// If `dest_width` and `dest_height` are equal to the `src` width and height, a
-    /// copy of `src` is returned, avoiding any scaling.
+    /// If `dest_width` and `dest_height` are equal to the width and height of
+    /// `src`, this function will return an unscaled copy of `src`.
     /// 
-    /// For more complicated scaling/alpha blending see `gdk_pixbuf_scale()`
-    /// and `gdk_pixbuf_composite()`.
+    /// For more complicated scaling/alpha blending see [method`GdkPixbuf.Pixbuf.scale`]
+    /// and [method`GdkPixbuf.Pixbuf.composite`].
     @inlinable func scaleSimple(destWidth: Int, destHeight: Int, interpType: GdkInterpType) -> PixbufRef! {
         guard let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_scale_simple(pixbuf_ptr, gint(destWidth), gint(destHeight), interpType))) else { return nil }
         return rv
     }
 
-    /// Attaches a key/value pair as an option to a `GdkPixbuf`. If `key` already
-    /// exists in the list of options attached to `pixbuf`, the new value is
-    /// ignored and `false` is returned.
+    /// Attaches a key/value pair as an option to a `GdkPixbuf`.
+    /// 
+    /// If `key` already exists in the list of options attached to the `pixbuf`,
+    /// the new value is ignored and `FALSE` is returned.
     @inlinable func setOption(key: UnsafePointer<gchar>!, value: UnsafePointer<gchar>!) -> Bool {
         let rv = ((gdk_pixbuf_set_option(pixbuf_ptr, key, value)) != 0)
         return rv
@@ -1667,6 +2300,9 @@ public extension PixbufProtocol {
         }
     }
 
+    /// The color space of the pixbuf.
+    /// 
+    /// Currently, only `GDK_COLORSPACE_RGB` is supported.
     @inlinable var colorspace: GdkColorspace {
         /// Queries the color space of a pixbuf.
         get {
@@ -1684,6 +2320,7 @@ public extension PixbufProtocol {
         }
     }
 
+    /// The number of rows of the pixbuf.
     @inlinable var height: Int {
         /// Queries the height of a pixbuf.
         get {
@@ -1703,23 +2340,26 @@ public extension PixbufProtocol {
 
     /// Returns a `GHashTable` with a list of all the options that may have been
     /// attached to the `pixbuf` when it was loaded, or that may have been
-    /// attached by another function using `gdk_pixbuf_set_option()`.
-    /// 
-    /// See `gdk_pixbuf_get_option()` for more details.
+    /// attached by another function using [method`GdkPixbuf.Pixbuf.set_option`].
     @inlinable var options: GLib.HashTableRef! {
         /// Returns a `GHashTable` with a list of all the options that may have been
         /// attached to the `pixbuf` when it was loaded, or that may have been
-        /// attached by another function using `gdk_pixbuf_set_option()`.
-        /// 
-        /// See `gdk_pixbuf_get_option()` for more details.
+        /// attached by another function using [method`GdkPixbuf.Pixbuf.set_option`].
         get {
             let rv = GLib.HashTableRef(gdk_pixbuf_get_options(pixbuf_ptr))
             return rv
         }
     }
 
+    /// A pointer to the pixel data of the pixbuf.
     @inlinable var pixels: String! {
         /// Queries a pointer to the pixel data of a pixbuf.
+        /// 
+        /// This function will cause an implicit copy of the pixbuf data if the
+        /// pixbuf was created from read-only data.
+        /// 
+        /// Please see the section on [image data](`image-data`) for information
+        /// about how the pixel data is stored in memory.
         get {
             let rv = gdk_pixbuf_get_pixels(pixbuf_ptr).map({ String(cString: $0) })
             return rv
@@ -1727,8 +2367,10 @@ public extension PixbufProtocol {
     }
 
     /// The number of bytes between the start of a row and
-    /// the start of the next row. This number must (obviously)
-    /// be at least as large as the width of the pixbuf.
+    /// the start of the next row.
+    /// 
+    /// This number must (obviously) be at least as large as the
+    /// width of the pixbuf.
     @inlinable var rowstride: Int {
         /// Queries the rowstride of a pixbuf, which is the number of bytes between
         /// the start of a row and the start of the next row.
@@ -1738,6 +2380,7 @@ public extension PixbufProtocol {
         }
     }
 
+    /// The number of columns of the pixbuf.
     @inlinable var width: Int {
         /// Queries the width of a pixbuf.
         get {
@@ -1758,7 +2401,19 @@ public extension PixbufProtocol {
 /// For a concrete class that implements these methods and properties, see `PixbufAnimation`.
 /// Alternatively, use `PixbufAnimationRef` as a lighweight, `unowned` reference if you already have an instance you just want to use.
 ///
-/// An opaque struct representing an animation.
+/// An opaque object representing an animation.
+/// 
+/// The GdkPixBuf library provides a simple mechanism to load and
+/// represent animations. An animation is conceptually a series of
+/// frames to be displayed over time.
+/// 
+/// The animation may not be represented as a series of frames
+/// internally; for example, it may be stored as a sprite and
+/// instructions for moving the sprite around a background.
+/// 
+/// To display an animation you don't need to understand its
+/// representation, however; you just ask `GdkPixbuf` what should
+/// be displayed at a given point in time.
 public protocol PixbufAnimationProtocol: GLibObject.ObjectProtocol {
         /// Untyped pointer to the underlying `GdkPixbufAnimation` instance.
     var ptr: UnsafeMutableRawPointer! { get }
@@ -1766,13 +2421,27 @@ public protocol PixbufAnimationProtocol: GLibObject.ObjectProtocol {
     /// Typed pointer to the underlying `GdkPixbufAnimation` instance.
     var pixbuf_animation_ptr: UnsafeMutablePointer<GdkPixbufAnimation>! { get }
 
+    /// Required Initialiser for types conforming to `PixbufAnimationProtocol`
+    init(raw: UnsafeMutableRawPointer)
 }
 
 /// The `PixbufAnimationRef` type acts as a lightweight Swift reference to an underlying `GdkPixbufAnimation` instance.
 /// It exposes methods that can operate on this data type through `PixbufAnimationProtocol` conformance.
 /// Use `PixbufAnimationRef` only as an `unowned` reference to an existing `GdkPixbufAnimation` instance.
 ///
-/// An opaque struct representing an animation.
+/// An opaque object representing an animation.
+/// 
+/// The GdkPixBuf library provides a simple mechanism to load and
+/// represent animations. An animation is conceptually a series of
+/// frames to be displayed over time.
+/// 
+/// The animation may not be represented as a series of frames
+/// internally; for example, it may be stored as a sprite and
+/// instructions for moving the sprite around a background.
+/// 
+/// To display an animation you don't need to understand its
+/// representation, however; you just ask `GdkPixbuf` what should
+/// be displayed at a given point in time.
 public struct PixbufAnimationRef: PixbufAnimationProtocol, GWeakCapturing {
         /// Untyped pointer to the underlying `GdkPixbufAnimation` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_animation_ptr` property instead.
@@ -1852,10 +2521,14 @@ public extension PixbufAnimationRef {
         ptr = UnsafeMutableRawPointer(opaquePointer)
     }
 
-        /// Creates a new animation by loading it from a file. The file format is
-    /// detected automatically. If the file's format does not support multi-frame
-    /// images, then an animation with a single frame will be created. Possible errors
-    /// are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+        /// Creates a new animation by loading it from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If the file's format does not support multi-frame images, then an animation
+    /// with a single frame will be created.
+    /// 
+    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
     @inlinable init(file filename: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_animation_new_from_file(filename, &error)
@@ -1865,7 +2538,7 @@ public extension PixbufAnimationRef {
 
     /// Creates a new pixbuf animation by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     @inlinable init(resource resourcePath: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
@@ -1876,11 +2549,14 @@ public extension PixbufAnimationRef {
 
     /// Creates a new animation by loading it from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. The `cancellable` can be used to abort the operation
-    /// from another thread. If the operation was cancelled, the error
-    /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
-    /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set.
+    /// 
+    /// The `cancellable` can be used to abort the operation from another thread.
+    /// If the operation was cancelled, the error `G_IO_ERROR_CANCELLED` will be
+    /// returned. Other possible errors are in the `GDK_PIXBUF_ERROR` and
+    /// `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
     @inlinable init<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws {
@@ -1891,17 +2567,21 @@ public extension PixbufAnimationRef {
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
-    /// `gdk_pixbuf_animation_new_from_stream_async()`.
+    /// [func`GdkPixbuf.PixbufAnimation.new_from_stream_async`].
     @inlinable init<AsyncResultT: GIO.AsyncResultProtocol>(streamFinish asyncResult: AsyncResultT) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_animation_new_from_stream_finish(asyncResult.async_result_ptr, &error)
         if let error = error { throw GLibError(error) }
         ptr = UnsafeMutableRawPointer(rv)
     }
-    /// Creates a new animation by loading it from a file. The file format is
-    /// detected automatically. If the file's format does not support multi-frame
-    /// images, then an animation with a single frame will be created. Possible errors
-    /// are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new animation by loading it from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If the file's format does not support multi-frame images, then an animation
+    /// with a single frame will be created.
+    /// 
+    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
     @inlinable static func newFrom(file filename: UnsafePointer<CChar>!) throws -> PixbufAnimationRef! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_file(filename, &error)))
@@ -1912,7 +2592,7 @@ public extension PixbufAnimationRef {
 
     /// Creates a new pixbuf animation by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     @inlinable static func newFrom(resource resourcePath: UnsafePointer<CChar>!) throws -> PixbufAnimationRef! {
         var error: UnsafeMutablePointer<GError>?
@@ -1924,11 +2604,14 @@ public extension PixbufAnimationRef {
 
     /// Creates a new animation by loading it from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. The `cancellable` can be used to abort the operation
-    /// from another thread. If the operation was cancelled, the error
-    /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
-    /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set.
+    /// 
+    /// The `cancellable` can be used to abort the operation from another thread.
+    /// If the operation was cancelled, the error `G_IO_ERROR_CANCELLED` will be
+    /// returned. Other possible errors are in the `GDK_PIXBUF_ERROR` and
+    /// `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
     @inlinable static func newFrom<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws -> PixbufAnimationRef! {
@@ -1940,7 +2623,7 @@ public extension PixbufAnimationRef {
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
-    /// `gdk_pixbuf_animation_new_from_stream_async()`.
+    /// [func`GdkPixbuf.PixbufAnimation.new_from_stream_async`].
     @inlinable static func newFrom<AsyncResultT: GIO.AsyncResultProtocol>(streamFinish asyncResult: AsyncResultT) throws -> PixbufAnimationRef! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream_finish(asyncResult.async_result_ptr, &error)))
@@ -1954,7 +2637,19 @@ public extension PixbufAnimationRef {
 /// It provides the methods that can operate on this data type through `PixbufAnimationProtocol` conformance.
 /// Use `PixbufAnimation` as a strong reference or owner of a `GdkPixbufAnimation` instance.
 ///
-/// An opaque struct representing an animation.
+/// An opaque object representing an animation.
+/// 
+/// The GdkPixBuf library provides a simple mechanism to load and
+/// represent animations. An animation is conceptually a series of
+/// frames to be displayed over time.
+/// 
+/// The animation may not be represented as a series of frames
+/// internally; for example, it may be stored as a sprite and
+/// instructions for moving the sprite around a background.
+/// 
+/// To display an animation you don't need to understand its
+/// representation, however; you just ask `GdkPixbuf` what should
+/// be displayed at a given point in time.
 open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
         /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
@@ -2055,14 +2750,14 @@ open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
     /// - Parameter p: mutable raw pointer to the underlying object
-    @inlinable override public init(raw p: UnsafeMutableRawPointer) {
+    @inlinable public required init(raw p: UnsafeMutableRawPointer) {
         super.init(raw: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationProtocol`.**
     /// - Parameter raw: mutable raw pointer to the underlying object
-    @inlinable override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+    @inlinable required public init(retainingRaw raw: UnsafeMutableRawPointer) {
         super.init(retainingRaw: raw)
     }
 
@@ -2080,10 +2775,14 @@ open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
         super.init(retainingOpaquePointer: p)
     }
 
-    /// Creates a new animation by loading it from a file. The file format is
-    /// detected automatically. If the file's format does not support multi-frame
-    /// images, then an animation with a single frame will be created. Possible errors
-    /// are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new animation by loading it from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If the file's format does not support multi-frame images, then an animation
+    /// with a single frame will be created.
+    /// 
+    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
     @inlinable public init(file filename: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_animation_new_from_file(filename, &error)
@@ -2094,7 +2793,7 @@ open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
 
     /// Creates a new pixbuf animation by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     @inlinable public init(resource resourcePath: UnsafePointer<CChar>!) throws {
         var error: UnsafeMutablePointer<GError>?
@@ -2106,11 +2805,14 @@ open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
 
     /// Creates a new animation by loading it from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. The `cancellable` can be used to abort the operation
-    /// from another thread. If the operation was cancelled, the error
-    /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
-    /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set.
+    /// 
+    /// The `cancellable` can be used to abort the operation from another thread.
+    /// If the operation was cancelled, the error `G_IO_ERROR_CANCELLED` will be
+    /// returned. Other possible errors are in the `GDK_PIXBUF_ERROR` and
+    /// `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
     @inlinable public init<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws {
@@ -2122,7 +2824,7 @@ open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
-    /// `gdk_pixbuf_animation_new_from_stream_async()`.
+    /// [func`GdkPixbuf.PixbufAnimation.new_from_stream_async`].
     @inlinable public init<AsyncResultT: GIO.AsyncResultProtocol>(streamFinish asyncResult: AsyncResultT) throws {
         var error: UnsafeMutablePointer<GError>?
         let rv = gdk_pixbuf_animation_new_from_stream_finish(asyncResult.async_result_ptr, &error)
@@ -2131,10 +2833,14 @@ open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
         if typeIsA(type: self.type, isAType: InitiallyUnownedClassRef.metatypeReference) { _ = self.refSink() } 
     }
 
-    /// Creates a new animation by loading it from a file. The file format is
-    /// detected automatically. If the file's format does not support multi-frame
-    /// images, then an animation with a single frame will be created. Possible errors
-    /// are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
+    /// Creates a new animation by loading it from a file.
+    /// 
+    /// The file format is detected automatically.
+    /// 
+    /// If the file's format does not support multi-frame images, then an animation
+    /// with a single frame will be created.
+    /// 
+    /// Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
     @inlinable public static func newFrom(file filename: UnsafePointer<CChar>!) throws -> PixbufAnimation! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_file(filename, &error)))
@@ -2146,7 +2852,7 @@ open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
 
     /// Creates a new pixbuf animation by loading an image from an resource.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
+    /// The file format is detected automatically. If `NULL` is returned, then
     /// `error` will be set.
     @inlinable public static func newFrom(resource resourcePath: UnsafePointer<CChar>!) throws -> PixbufAnimation! {
         var error: UnsafeMutablePointer<GError>?
@@ -2159,11 +2865,14 @@ open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
 
     /// Creates a new animation by loading it from an input stream.
     /// 
-    /// The file format is detected automatically. If `nil` is returned, then
-    /// `error` will be set. The `cancellable` can be used to abort the operation
-    /// from another thread. If the operation was cancelled, the error
-    /// `G_IO_ERROR_CANCELLED` will be returned. Other possible errors are in
-    /// the `GDK_PIXBUF_ERROR` and `G_IO_ERROR` domains.
+    /// The file format is detected automatically.
+    /// 
+    /// If `NULL` is returned, then `error` will be set.
+    /// 
+    /// The `cancellable` can be used to abort the operation from another thread.
+    /// If the operation was cancelled, the error `G_IO_ERROR_CANCELLED` will be
+    /// returned. Other possible errors are in the `GDK_PIXBUF_ERROR` and
+    /// `G_IO_ERROR` domains.
     /// 
     /// The stream is not closed.
     @inlinable public static func newFrom<CancellableT: GIO.CancellableProtocol, InputStreamT: GIO.InputStreamProtocol>(stream: InputStreamT, cancellable: CancellableT?) throws -> PixbufAnimation! {
@@ -2176,7 +2885,7 @@ open class PixbufAnimation: GLibObject.Object, PixbufAnimationProtocol {
     }
 
     /// Finishes an asynchronous pixbuf animation creation operation started with
-    /// `gdk_pixbuf_animation_new_from_stream_async()`.
+    /// [func`GdkPixbuf.PixbufAnimation.new_from_stream_async`].
     @inlinable public static func newFrom<AsyncResultT: GIO.AsyncResultProtocol>(streamFinish asyncResult: AsyncResultT) throws -> PixbufAnimation! {
         var error: UnsafeMutablePointer<GError>?
         let maybeRV = PixbufAnimation(gconstpointer: gconstpointer(gdk_pixbuf_animation_new_from_stream_finish(asyncResult.async_result_ptr, &error)))
@@ -2231,9 +2940,10 @@ public extension PixbufAnimationProtocol {
         return rv
     }
 
-    /// Get an iterator for displaying an animation. The iterator provides
-    /// the frames that should be displayed at a given time. It should be
-    /// freed after use with `g_object_unref()`.
+    /// Get an iterator for displaying an animation.
+    /// 
+    /// The iterator provides the frames that should be displayed at a
+    /// given time.
     /// 
     /// `start_time` would normally come from `g_get_current_time()`, and marks
     /// the beginning of animation playback. After creating an iterator, you
@@ -2245,7 +2955,7 @@ public extension PixbufAnimationProtocol {
     /// the image is updated, you should reinstall the timeout with the new,
     /// possibly-changed delay time.
     /// 
-    /// As a shortcut, if `start_time` is `nil`, the result of
+    /// As a shortcut, if `start_time` is `NULL`, the result of
     /// `g_get_current_time()` will be used automatically.
     /// 
     /// To update the image (i.e. possibly change the result of
@@ -2256,21 +2966,22 @@ public extension PixbufAnimationProtocol {
     /// after the delay time, you should also update it whenever you
     /// receive the area_updated signal and
     /// `gdk_pixbuf_animation_iter_on_currently_loading_frame()` returns
-    /// `true`. In this case, the frame currently being fed into the loader
+    /// `TRUE`. In this case, the frame currently being fed into the loader
     /// has received new data, so needs to be refreshed. The delay time for
     /// a frame may also be modified after an area_updated signal, for
     /// example if the delay time for a frame is encoded in the data after
     /// the frame itself. So your timeout should be reinstalled after any
     /// area_updated signal.
     /// 
-    /// A delay time of -1 is possible, indicating "infinite."
+    /// A delay time of -1 is possible, indicating "infinite".
     @inlinable func getIter(startTime: GLib.TimeValRef? = nil) -> PixbufAnimationIterRef! {
         let rv = PixbufAnimationIterRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_get_iter(pixbuf_animation_ptr, startTime?._ptr)))
         return rv
     }
-    /// Get an iterator for displaying an animation. The iterator provides
-    /// the frames that should be displayed at a given time. It should be
-    /// freed after use with `g_object_unref()`.
+    /// Get an iterator for displaying an animation.
+    /// 
+    /// The iterator provides the frames that should be displayed at a
+    /// given time.
     /// 
     /// `start_time` would normally come from `g_get_current_time()`, and marks
     /// the beginning of animation playback. After creating an iterator, you
@@ -2282,7 +2993,7 @@ public extension PixbufAnimationProtocol {
     /// the image is updated, you should reinstall the timeout with the new,
     /// possibly-changed delay time.
     /// 
-    /// As a shortcut, if `start_time` is `nil`, the result of
+    /// As a shortcut, if `start_time` is `NULL`, the result of
     /// `g_get_current_time()` will be used automatically.
     /// 
     /// To update the image (i.e. possibly change the result of
@@ -2293,25 +3004,30 @@ public extension PixbufAnimationProtocol {
     /// after the delay time, you should also update it whenever you
     /// receive the area_updated signal and
     /// `gdk_pixbuf_animation_iter_on_currently_loading_frame()` returns
-    /// `true`. In this case, the frame currently being fed into the loader
+    /// `TRUE`. In this case, the frame currently being fed into the loader
     /// has received new data, so needs to be refreshed. The delay time for
     /// a frame may also be modified after an area_updated signal, for
     /// example if the delay time for a frame is encoded in the data after
     /// the frame itself. So your timeout should be reinstalled after any
     /// area_updated signal.
     /// 
-    /// A delay time of -1 is possible, indicating "infinite."
+    /// A delay time of -1 is possible, indicating "infinite".
     @inlinable func getIter<TimeValT: GLib.TimeValProtocol>(startTime: TimeValT?) -> PixbufAnimationIterRef! {
         let rv = PixbufAnimationIterRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_get_iter(pixbuf_animation_ptr, startTime?._ptr)))
         return rv
     }
 
+    /// Retrieves a static image for the animation.
+    /// 
     /// If an animation is really just a plain image (has only one frame),
-    /// this function returns that image. If the animation is an animation,
-    /// this function returns a reasonable thing to display as a static
-    /// unanimated image, which might be the first frame, or something more
-    /// sophisticated. If an animation hasn't loaded any frames yet, this
-    /// function will return `nil`.
+    /// this function returns that image.
+    /// 
+    /// If the animation is an animation, this function returns a reasonable
+    /// image to use as a static unanimated image, which might be the first
+    /// frame, or something more sophisticated depending on the file format.
+    /// 
+    /// If an animation hasn't loaded any frames yet, this function will
+    /// return `NULL`.
     @inlinable func getStaticImage() -> PixbufRef! {
         let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_get_static_image(pixbuf_animation_ptr)))
         return rv
@@ -2349,14 +3065,18 @@ public extension PixbufAnimationProtocol {
         }
     }
 
+    /// Checks whether the animation is a static image.
+    /// 
     /// If you load a file with `gdk_pixbuf_animation_new_from_file()` and it
     /// turns out to be a plain, unanimated image, then this function will
-    /// return `true`. Use `gdk_pixbuf_animation_get_static_image()` to retrieve
+    /// return `TRUE`. Use `gdk_pixbuf_animation_get_static_image()` to retrieve
     /// the image.
     @inlinable var isStaticImage: Bool {
+        /// Checks whether the animation is a static image.
+        /// 
         /// If you load a file with `gdk_pixbuf_animation_new_from_file()` and it
         /// turns out to be a plain, unanimated image, then this function will
-        /// return `true`. Use `gdk_pixbuf_animation_get_static_image()` to retrieve
+        /// return `TRUE`. Use `gdk_pixbuf_animation_get_static_image()` to retrieve
         /// the image.
         get {
             let rv = ((gdk_pixbuf_animation_is_static_image(pixbuf_animation_ptr)) != 0)
@@ -2364,19 +3084,29 @@ public extension PixbufAnimationProtocol {
         }
     }
 
+    /// Retrieves a static image for the animation.
+    /// 
     /// If an animation is really just a plain image (has only one frame),
-    /// this function returns that image. If the animation is an animation,
-    /// this function returns a reasonable thing to display as a static
-    /// unanimated image, which might be the first frame, or something more
-    /// sophisticated. If an animation hasn't loaded any frames yet, this
-    /// function will return `nil`.
+    /// this function returns that image.
+    /// 
+    /// If the animation is an animation, this function returns a reasonable
+    /// image to use as a static unanimated image, which might be the first
+    /// frame, or something more sophisticated depending on the file format.
+    /// 
+    /// If an animation hasn't loaded any frames yet, this function will
+    /// return `NULL`.
     @inlinable var staticImage: PixbufRef! {
+        /// Retrieves a static image for the animation.
+        /// 
         /// If an animation is really just a plain image (has only one frame),
-        /// this function returns that image. If the animation is an animation,
-        /// this function returns a reasonable thing to display as a static
-        /// unanimated image, which might be the first frame, or something more
-        /// sophisticated. If an animation hasn't loaded any frames yet, this
-        /// function will return `nil`.
+        /// this function returns that image.
+        /// 
+        /// If the animation is an animation, this function returns a reasonable
+        /// image to use as a static unanimated image, which might be the first
+        /// frame, or something more sophisticated depending on the file format.
+        /// 
+        /// If an animation hasn't loaded any frames yet, this function will
+        /// return `NULL`.
         get {
             let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_get_static_image(pixbuf_animation_ptr)))
             return rv
@@ -2392,6 +3122,12 @@ public extension PixbufAnimationProtocol {
         }
     }
 
+    @inlinable var parentInstance: GObject {
+        get {
+            let rv = pixbuf_animation_ptr.pointee.parent_instance
+            return rv
+        }
+    }
 
 }
 
@@ -2404,7 +3140,7 @@ public extension PixbufAnimationProtocol {
 /// For a concrete class that implements these methods and properties, see `PixbufAnimationIter`.
 /// Alternatively, use `PixbufAnimationIterRef` as a lighweight, `unowned` reference if you already have an instance you just want to use.
 ///
-/// An opaque struct representing an iterator which points to a
+/// An opaque object representing an iterator which points to a
 /// certain position in an animation.
 public protocol PixbufAnimationIterProtocol: GLibObject.ObjectProtocol {
         /// Untyped pointer to the underlying `GdkPixbufAnimationIter` instance.
@@ -2413,13 +3149,15 @@ public protocol PixbufAnimationIterProtocol: GLibObject.ObjectProtocol {
     /// Typed pointer to the underlying `GdkPixbufAnimationIter` instance.
     var pixbuf_animation_iter_ptr: UnsafeMutablePointer<GdkPixbufAnimationIter>! { get }
 
+    /// Required Initialiser for types conforming to `PixbufAnimationIterProtocol`
+    init(raw: UnsafeMutableRawPointer)
 }
 
 /// The `PixbufAnimationIterRef` type acts as a lightweight Swift reference to an underlying `GdkPixbufAnimationIter` instance.
 /// It exposes methods that can operate on this data type through `PixbufAnimationIterProtocol` conformance.
 /// Use `PixbufAnimationIterRef` only as an `unowned` reference to an existing `GdkPixbufAnimationIter` instance.
 ///
-/// An opaque struct representing an iterator which points to a
+/// An opaque object representing an iterator which points to a
 /// certain position in an animation.
 public struct PixbufAnimationIterRef: PixbufAnimationIterProtocol, GWeakCapturing {
         /// Untyped pointer to the underlying `GdkPixbufAnimationIter` instance.
@@ -2506,7 +3244,7 @@ public extension PixbufAnimationIterRef {
 /// It provides the methods that can operate on this data type through `PixbufAnimationIterProtocol` conformance.
 /// Use `PixbufAnimationIter` as a strong reference or owner of a `GdkPixbufAnimationIter` instance.
 ///
-/// An opaque struct representing an iterator which points to a
+/// An opaque object representing an iterator which points to a
 /// certain position in an animation.
 open class PixbufAnimationIter: GLibObject.Object, PixbufAnimationIterProtocol {
         /// Designated initialiser from the underlying `C` data type.
@@ -2608,14 +3346,14 @@ open class PixbufAnimationIter: GLibObject.Object, PixbufAnimationIterProtocol {
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
     /// - Parameter p: mutable raw pointer to the underlying object
-    @inlinable override public init(raw p: UnsafeMutableRawPointer) {
+    @inlinable public required init(raw p: UnsafeMutableRawPointer) {
         super.init(raw: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufAnimationIterProtocol`.**
     /// - Parameter raw: mutable raw pointer to the underlying object
-    @inlinable override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+    @inlinable required public init(retainingRaw raw: UnsafeMutableRawPointer) {
         super.init(retainingRaw: raw)
     }
 
@@ -2674,8 +3412,10 @@ public extension PixbufAnimationIterProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufAnimationIter` instance.
     @inlinable var pixbuf_animation_iter_ptr: UnsafeMutablePointer<GdkPixbufAnimationIter>! { return ptr?.assumingMemoryBound(to: GdkPixbufAnimationIter.self) }
 
-    /// Possibly advances an animation to a new frame. Chooses the frame based
-    /// on the start time passed to `gdk_pixbuf_animation_get_iter()`.
+    /// Possibly advances an animation to a new frame.
+    /// 
+    /// Chooses the frame based on the start time passed to
+    /// `gdk_pixbuf_animation_get_iter()`.
     /// 
     /// `current_time` would normally come from `g_get_current_time()`, and
     /// must be greater than or equal to the time passed to
@@ -2684,21 +3424,23 @@ public extension PixbufAnimationIterProtocol {
     /// called. That is, you can't go backward in time; animations only
     /// play forward.
     /// 
-    /// As a shortcut, pass `nil` for the current time and `g_get_current_time()`
+    /// As a shortcut, pass `NULL` for the current time and `g_get_current_time()`
     /// will be invoked on your behalf. So you only need to explicitly pass
     /// `current_time` if you're doing something odd like playing the animation
     /// at double speed.
     /// 
-    /// If this function returns `false`, there's no need to update the animation
+    /// If this function returns `FALSE`, there's no need to update the animation
     /// display, assuming the display had been rendered prior to advancing;
-    /// if `true`, you need to call `gdk_pixbuf_animation_iter_get_pixbuf()`
+    /// if `TRUE`, you need to call `gdk_pixbuf_animation_iter_get_pixbuf()`
     /// and update the display with the new pixbuf.
     @inlinable func advance(currentTime: GLib.TimeValRef? = nil) -> Bool {
         let rv = ((gdk_pixbuf_animation_iter_advance(pixbuf_animation_iter_ptr, currentTime?._ptr)) != 0)
         return rv
     }
-    /// Possibly advances an animation to a new frame. Chooses the frame based
-    /// on the start time passed to `gdk_pixbuf_animation_get_iter()`.
+    /// Possibly advances an animation to a new frame.
+    /// 
+    /// Chooses the frame based on the start time passed to
+    /// `gdk_pixbuf_animation_get_iter()`.
     /// 
     /// `current_time` would normally come from `g_get_current_time()`, and
     /// must be greater than or equal to the time passed to
@@ -2707,14 +3449,14 @@ public extension PixbufAnimationIterProtocol {
     /// called. That is, you can't go backward in time; animations only
     /// play forward.
     /// 
-    /// As a shortcut, pass `nil` for the current time and `g_get_current_time()`
+    /// As a shortcut, pass `NULL` for the current time and `g_get_current_time()`
     /// will be invoked on your behalf. So you only need to explicitly pass
     /// `current_time` if you're doing something odd like playing the animation
     /// at double speed.
     /// 
-    /// If this function returns `false`, there's no need to update the animation
+    /// If this function returns `FALSE`, there's no need to update the animation
     /// display, assuming the display had been rendered prior to advancing;
-    /// if `true`, you need to call `gdk_pixbuf_animation_iter_get_pixbuf()`
+    /// if `TRUE`, you need to call `gdk_pixbuf_animation_iter_get_pixbuf()`
     /// and update the display with the new pixbuf.
     @inlinable func advance<TimeValT: GLib.TimeValProtocol>(currentTime: TimeValT?) -> Bool {
         let rv = ((gdk_pixbuf_animation_iter_advance(pixbuf_animation_iter_ptr, currentTime?._ptr)) != 0)
@@ -2722,9 +3464,10 @@ public extension PixbufAnimationIterProtocol {
     }
 
     /// Gets the number of milliseconds the current pixbuf should be displayed,
-    /// or -1 if the current pixbuf should be displayed forever. `g_timeout_add()`
-    /// conveniently takes a timeout in milliseconds, so you can use a timeout
-    /// to schedule the next update.
+    /// or -1 if the current pixbuf should be displayed forever.
+    /// 
+    /// The ``g_timeout_add()`` function conveniently takes a timeout in milliseconds,
+    /// so you can use a timeout to schedule the next update.
     /// 
     /// Note that some formats, like GIF, might clamp the timeout values in the
     /// image file to avoid updates that are just too quick. The minimum timeout
@@ -2734,44 +3477,51 @@ public extension PixbufAnimationIterProtocol {
         return rv
     }
 
-    /// Gets the current pixbuf which should be displayed; the pixbuf might not
-    /// be the same size as the animation itself
+    /// Gets the current pixbuf which should be displayed.
+    /// 
+    /// The pixbuf might not be the same size as the animation itself
     /// (`gdk_pixbuf_animation_get_width()`, `gdk_pixbuf_animation_get_height()`).
-    /// This pixbuf should be displayed for
-    /// `gdk_pixbuf_animation_iter_get_delay_time()` milliseconds. The caller
-    /// of this function does not own a reference to the returned pixbuf;
-    /// the returned pixbuf will become invalid when the iterator advances
-    /// to the next frame, which may happen anytime you call
-    /// `gdk_pixbuf_animation_iter_advance()`. Copy the pixbuf to keep it
-    /// (don't just add a reference), as it may get recycled as you advance
-    /// the iterator.
+    /// 
+    /// This pixbuf should be displayed for `gdk_pixbuf_animation_iter_get_delay_time()`
+    /// milliseconds.
+    /// 
+    /// The caller of this function does not own a reference to the returned
+    /// pixbuf; the returned pixbuf will become invalid when the iterator
+    /// advances to the next frame, which may happen anytime you call
+    /// `gdk_pixbuf_animation_iter_advance()`.
+    /// 
+    /// Copy the pixbuf to keep it (don't just add a reference), as it may get
+    /// recycled as you advance the iterator.
     @inlinable func getPixbuf() -> PixbufRef! {
         let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_iter_get_pixbuf(pixbuf_animation_iter_ptr)))
         return rv
     }
 
     /// Used to determine how to respond to the area_updated signal on
-    /// `GdkPixbufLoader` when loading an animation. area_updated is emitted
-    /// for an area of the frame currently streaming in to the loader. So if
-    /// you're on the currently loading frame, you need to redraw the screen for
-    /// the updated area.
+    /// `GdkPixbufLoader` when loading an animation.
+    /// 
+    /// The ``area_updated`` signal is emitted for an area of the frame currently
+    /// streaming in to the loader. So if you're on the currently loading frame,
+    /// you will need to redraw the screen for the updated area.
     @inlinable func onCurrentlyLoadingFrame() -> Bool {
         let rv = ((gdk_pixbuf_animation_iter_on_currently_loading_frame(pixbuf_animation_iter_ptr)) != 0)
         return rv
     }
     /// Gets the number of milliseconds the current pixbuf should be displayed,
-    /// or -1 if the current pixbuf should be displayed forever. `g_timeout_add()`
-    /// conveniently takes a timeout in milliseconds, so you can use a timeout
-    /// to schedule the next update.
+    /// or -1 if the current pixbuf should be displayed forever.
+    /// 
+    /// The ``g_timeout_add()`` function conveniently takes a timeout in milliseconds,
+    /// so you can use a timeout to schedule the next update.
     /// 
     /// Note that some formats, like GIF, might clamp the timeout values in the
     /// image file to avoid updates that are just too quick. The minimum timeout
     /// for GIF images is currently 20 milliseconds.
     @inlinable var delayTime: Int {
         /// Gets the number of milliseconds the current pixbuf should be displayed,
-        /// or -1 if the current pixbuf should be displayed forever. `g_timeout_add()`
-        /// conveniently takes a timeout in milliseconds, so you can use a timeout
-        /// to schedule the next update.
+        /// or -1 if the current pixbuf should be displayed forever.
+        /// 
+        /// The ``g_timeout_add()`` function conveniently takes a timeout in milliseconds,
+        /// so you can use a timeout to schedule the next update.
         /// 
         /// Note that some formats, like GIF, might clamp the timeout values in the
         /// image file to avoid updates that are just too quick. The minimum timeout
@@ -2782,35 +3532,49 @@ public extension PixbufAnimationIterProtocol {
         }
     }
 
-    /// Gets the current pixbuf which should be displayed; the pixbuf might not
-    /// be the same size as the animation itself
+    /// Gets the current pixbuf which should be displayed.
+    /// 
+    /// The pixbuf might not be the same size as the animation itself
     /// (`gdk_pixbuf_animation_get_width()`, `gdk_pixbuf_animation_get_height()`).
-    /// This pixbuf should be displayed for
-    /// `gdk_pixbuf_animation_iter_get_delay_time()` milliseconds. The caller
-    /// of this function does not own a reference to the returned pixbuf;
-    /// the returned pixbuf will become invalid when the iterator advances
-    /// to the next frame, which may happen anytime you call
-    /// `gdk_pixbuf_animation_iter_advance()`. Copy the pixbuf to keep it
-    /// (don't just add a reference), as it may get recycled as you advance
-    /// the iterator.
+    /// 
+    /// This pixbuf should be displayed for `gdk_pixbuf_animation_iter_get_delay_time()`
+    /// milliseconds.
+    /// 
+    /// The caller of this function does not own a reference to the returned
+    /// pixbuf; the returned pixbuf will become invalid when the iterator
+    /// advances to the next frame, which may happen anytime you call
+    /// `gdk_pixbuf_animation_iter_advance()`.
+    /// 
+    /// Copy the pixbuf to keep it (don't just add a reference), as it may get
+    /// recycled as you advance the iterator.
     @inlinable var pixbuf: PixbufRef! {
-        /// Gets the current pixbuf which should be displayed; the pixbuf might not
-        /// be the same size as the animation itself
+        /// Gets the current pixbuf which should be displayed.
+        /// 
+        /// The pixbuf might not be the same size as the animation itself
         /// (`gdk_pixbuf_animation_get_width()`, `gdk_pixbuf_animation_get_height()`).
-        /// This pixbuf should be displayed for
-        /// `gdk_pixbuf_animation_iter_get_delay_time()` milliseconds. The caller
-        /// of this function does not own a reference to the returned pixbuf;
-        /// the returned pixbuf will become invalid when the iterator advances
-        /// to the next frame, which may happen anytime you call
-        /// `gdk_pixbuf_animation_iter_advance()`. Copy the pixbuf to keep it
-        /// (don't just add a reference), as it may get recycled as you advance
-        /// the iterator.
+        /// 
+        /// This pixbuf should be displayed for `gdk_pixbuf_animation_iter_get_delay_time()`
+        /// milliseconds.
+        /// 
+        /// The caller of this function does not own a reference to the returned
+        /// pixbuf; the returned pixbuf will become invalid when the iterator
+        /// advances to the next frame, which may happen anytime you call
+        /// `gdk_pixbuf_animation_iter_advance()`.
+        /// 
+        /// Copy the pixbuf to keep it (don't just add a reference), as it may get
+        /// recycled as you advance the iterator.
         get {
             let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_animation_iter_get_pixbuf(pixbuf_animation_iter_ptr)))
             return rv
         }
     }
 
+    @inlinable var parentInstance: GObject {
+        get {
+            let rv = pixbuf_animation_iter_ptr.pointee.parent_instance
+            return rv
+        }
+    }
 
 }
 
@@ -2823,8 +3587,51 @@ public extension PixbufAnimationIterProtocol {
 /// For a concrete class that implements these methods and properties, see `PixbufLoader`.
 /// Alternatively, use `PixbufLoaderRef` as a lighweight, `unowned` reference if you already have an instance you just want to use.
 ///
-/// The GdkPixbufLoader struct contains only private
-/// fields.
+/// Incremental image loader.
+/// 
+/// `GdkPixbufLoader` provides a way for applications to drive the
+/// process of loading an image, by letting them send the image data
+/// directly to the loader instead of having the loader read the data
+/// from a file. Applications can use this functionality instead of
+/// ``gdk_pixbuf_new_from_file()`` or ``gdk_pixbuf_animation_new_from_file()``
+/// when they need to parse image data in small chunks. For example,
+/// it should be used when reading an image from a (potentially) slow
+/// network connection, or when loading an extremely large file.
+/// 
+/// To use `GdkPixbufLoader` to load an image, create a new instance,
+/// and call [method`GdkPixbuf.PixbufLoader.write`] to send the data
+/// to it. When done, [method`GdkPixbuf.PixbufLoader.close`] should be
+/// called to end the stream and finalize everything.
+/// 
+/// The loader will emit three important signals throughout the process:
+/// 
+///  - [signal`GdkPixbuf.PixbufLoader::size-prepared`] will be emitted as
+///    soon as the image has enough information to determine the size of
+///    the image to be used. If you want to scale the image while loading
+///    it, you can call [method`GdkPixbuf.PixbufLoader.set_size`] in
+///    response to this signal.
+///  - [signal`GdkPixbuf.PixbufLoader::area-prepared`] will be emitted as
+///    soon as the pixbuf of the desired has been allocated. You can obtain
+///    the `GdkPixbuf` instance by calling [method`GdkPixbuf.PixbufLoader.get_pixbuf`].
+///    If you want to use it, simply acquire a reference to it. You can
+///    also call ``gdk_pixbuf_loader_get_pixbuf()`` later to get the same
+///    pixbuf.
+///  - [signal`GdkPixbuf.PixbufLoader::area-updated`] will be emitted every
+///    time a region is updated. This way you can update a partially
+///    completed image. Note that you do not know anything about the
+///    completeness of an image from the updated area. For example, in an
+///    interlaced image you will need to make several passes before the
+///    image is done loading.
+/// 
+/// ## Loading an animation
+/// 
+/// Loading an animation is almost as easy as loading an image. Once the
+/// first [signal`GdkPixbuf.PixbufLoader::area-prepared`] signal has been
+/// emitted, you can call [method`GdkPixbuf.PixbufLoader.get_animation`] to
+/// get the [class`GdkPixbuf.PixbufAnimation`] instance, and then call
+/// and [method`GdkPixbuf.PixbufAnimation.get_iter`] to get a
+/// [class`GdkPixbuf.PixbufAnimationIter`] to retrieve the pixbuf for the
+/// desired time stamp.
 public protocol PixbufLoaderProtocol: GLibObject.ObjectProtocol {
         /// Untyped pointer to the underlying `GdkPixbufLoader` instance.
     var ptr: UnsafeMutableRawPointer! { get }
@@ -2832,14 +3639,59 @@ public protocol PixbufLoaderProtocol: GLibObject.ObjectProtocol {
     /// Typed pointer to the underlying `GdkPixbufLoader` instance.
     var pixbuf_loader_ptr: UnsafeMutablePointer<GdkPixbufLoader>! { get }
 
+    /// Required Initialiser for types conforming to `PixbufLoaderProtocol`
+    init(raw: UnsafeMutableRawPointer)
 }
 
 /// The `PixbufLoaderRef` type acts as a lightweight Swift reference to an underlying `GdkPixbufLoader` instance.
 /// It exposes methods that can operate on this data type through `PixbufLoaderProtocol` conformance.
 /// Use `PixbufLoaderRef` only as an `unowned` reference to an existing `GdkPixbufLoader` instance.
 ///
-/// The GdkPixbufLoader struct contains only private
-/// fields.
+/// Incremental image loader.
+/// 
+/// `GdkPixbufLoader` provides a way for applications to drive the
+/// process of loading an image, by letting them send the image data
+/// directly to the loader instead of having the loader read the data
+/// from a file. Applications can use this functionality instead of
+/// ``gdk_pixbuf_new_from_file()`` or ``gdk_pixbuf_animation_new_from_file()``
+/// when they need to parse image data in small chunks. For example,
+/// it should be used when reading an image from a (potentially) slow
+/// network connection, or when loading an extremely large file.
+/// 
+/// To use `GdkPixbufLoader` to load an image, create a new instance,
+/// and call [method`GdkPixbuf.PixbufLoader.write`] to send the data
+/// to it. When done, [method`GdkPixbuf.PixbufLoader.close`] should be
+/// called to end the stream and finalize everything.
+/// 
+/// The loader will emit three important signals throughout the process:
+/// 
+///  - [signal`GdkPixbuf.PixbufLoader::size-prepared`] will be emitted as
+///    soon as the image has enough information to determine the size of
+///    the image to be used. If you want to scale the image while loading
+///    it, you can call [method`GdkPixbuf.PixbufLoader.set_size`] in
+///    response to this signal.
+///  - [signal`GdkPixbuf.PixbufLoader::area-prepared`] will be emitted as
+///    soon as the pixbuf of the desired has been allocated. You can obtain
+///    the `GdkPixbuf` instance by calling [method`GdkPixbuf.PixbufLoader.get_pixbuf`].
+///    If you want to use it, simply acquire a reference to it. You can
+///    also call ``gdk_pixbuf_loader_get_pixbuf()`` later to get the same
+///    pixbuf.
+///  - [signal`GdkPixbuf.PixbufLoader::area-updated`] will be emitted every
+///    time a region is updated. This way you can update a partially
+///    completed image. Note that you do not know anything about the
+///    completeness of an image from the updated area. For example, in an
+///    interlaced image you will need to make several passes before the
+///    image is done loading.
+/// 
+/// ## Loading an animation
+/// 
+/// Loading an animation is almost as easy as loading an image. Once the
+/// first [signal`GdkPixbuf.PixbufLoader::area-prepared`] signal has been
+/// emitted, you can call [method`GdkPixbuf.PixbufLoader.get_animation`] to
+/// get the [class`GdkPixbuf.PixbufAnimation`] instance, and then call
+/// and [method`GdkPixbuf.PixbufAnimation.get_iter`] to get a
+/// [class`GdkPixbuf.PixbufAnimationIter`] to retrieve the pixbuf for the
+/// desired time stamp.
 public struct PixbufLoaderRef: PixbufLoaderProtocol, GWeakCapturing {
         /// Untyped pointer to the underlying `GdkPixbufLoader` instance.
     /// For type-safe access, use the generated, typed pointer `pixbuf_loader_ptr` property instead.
@@ -2926,11 +3778,13 @@ public extension PixbufLoaderRef {
     }
 
     /// Creates a new pixbuf loader object that always attempts to parse
-    /// image data as if it were an image of mime type `mime_type`, instead of
-    /// identifying the type automatically. Useful if you want an error if
-    /// the image isn't the expected mime type, for loading image formats
-    /// that can't be reliably identified by looking at the data, or if
-    /// the user manually forces a specific mime type.
+    /// image data as if it were an image of MIME type `mime_type`, instead of
+    /// identifying the type automatically.
+    /// 
+    /// This function is useful if you want an error if the image isn't the
+    /// expected MIME type; for loading image formats that can't be reliably
+    /// identified by looking at the data; or if the user manually forces a
+    /// specific MIME type.
     /// 
     /// The list of supported mime types depends on what image loaders
     /// are installed, but typically "image/png", "image/jpeg", "image/gif",
@@ -2947,10 +3801,12 @@ public extension PixbufLoaderRef {
 
     /// Creates a new pixbuf loader object that always attempts to parse
     /// image data as if it were an image of type `image_type`, instead of
-    /// identifying the type automatically. Useful if you want an error if
-    /// the image isn't the expected type, for loading image formats
-    /// that can't be reliably identified by looking at the data, or if
-    /// the user manually forces a specific type.
+    /// identifying the type automatically.
+    /// 
+    /// This function is useful if you want an error if the image isn't the
+    /// expected type; for loading image formats that can't be reliably
+    /// identified by looking at the data; or if the user manually forces
+    /// a specific type.
     /// 
     /// The list of supported image formats depends on what image loaders
     /// are installed, but typically "png", "jpeg", "gif", "tiff" and
@@ -2964,11 +3820,13 @@ public extension PixbufLoaderRef {
         ptr = UnsafeMutableRawPointer(rv)
     }
     /// Creates a new pixbuf loader object that always attempts to parse
-    /// image data as if it were an image of mime type `mime_type`, instead of
-    /// identifying the type automatically. Useful if you want an error if
-    /// the image isn't the expected mime type, for loading image formats
-    /// that can't be reliably identified by looking at the data, or if
-    /// the user manually forces a specific mime type.
+    /// image data as if it were an image of MIME type `mime_type`, instead of
+    /// identifying the type automatically.
+    /// 
+    /// This function is useful if you want an error if the image isn't the
+    /// expected MIME type; for loading image formats that can't be reliably
+    /// identified by looking at the data; or if the user manually forces a
+    /// specific MIME type.
     /// 
     /// The list of supported mime types depends on what image loaders
     /// are installed, but typically "image/png", "image/jpeg", "image/gif",
@@ -2986,10 +3844,12 @@ public extension PixbufLoaderRef {
 
     /// Creates a new pixbuf loader object that always attempts to parse
     /// image data as if it were an image of type `image_type`, instead of
-    /// identifying the type automatically. Useful if you want an error if
-    /// the image isn't the expected type, for loading image formats
-    /// that can't be reliably identified by looking at the data, or if
-    /// the user manually forces a specific type.
+    /// identifying the type automatically.
+    /// 
+    /// This function is useful if you want an error if the image isn't the
+    /// expected type; for loading image formats that can't be reliably
+    /// identified by looking at the data; or if the user manually forces
+    /// a specific type.
     /// 
     /// The list of supported image formats depends on what image loaders
     /// are installed, but typically "png", "jpeg", "gif", "tiff" and
@@ -3009,8 +3869,51 @@ public extension PixbufLoaderRef {
 /// It provides the methods that can operate on this data type through `PixbufLoaderProtocol` conformance.
 /// Use `PixbufLoader` as a strong reference or owner of a `GdkPixbufLoader` instance.
 ///
-/// The GdkPixbufLoader struct contains only private
-/// fields.
+/// Incremental image loader.
+/// 
+/// `GdkPixbufLoader` provides a way for applications to drive the
+/// process of loading an image, by letting them send the image data
+/// directly to the loader instead of having the loader read the data
+/// from a file. Applications can use this functionality instead of
+/// ``gdk_pixbuf_new_from_file()`` or ``gdk_pixbuf_animation_new_from_file()``
+/// when they need to parse image data in small chunks. For example,
+/// it should be used when reading an image from a (potentially) slow
+/// network connection, or when loading an extremely large file.
+/// 
+/// To use `GdkPixbufLoader` to load an image, create a new instance,
+/// and call [method`GdkPixbuf.PixbufLoader.write`] to send the data
+/// to it. When done, [method`GdkPixbuf.PixbufLoader.close`] should be
+/// called to end the stream and finalize everything.
+/// 
+/// The loader will emit three important signals throughout the process:
+/// 
+///  - [signal`GdkPixbuf.PixbufLoader::size-prepared`] will be emitted as
+///    soon as the image has enough information to determine the size of
+///    the image to be used. If you want to scale the image while loading
+///    it, you can call [method`GdkPixbuf.PixbufLoader.set_size`] in
+///    response to this signal.
+///  - [signal`GdkPixbuf.PixbufLoader::area-prepared`] will be emitted as
+///    soon as the pixbuf of the desired has been allocated. You can obtain
+///    the `GdkPixbuf` instance by calling [method`GdkPixbuf.PixbufLoader.get_pixbuf`].
+///    If you want to use it, simply acquire a reference to it. You can
+///    also call ``gdk_pixbuf_loader_get_pixbuf()`` later to get the same
+///    pixbuf.
+///  - [signal`GdkPixbuf.PixbufLoader::area-updated`] will be emitted every
+///    time a region is updated. This way you can update a partially
+///    completed image. Note that you do not know anything about the
+///    completeness of an image from the updated area. For example, in an
+///    interlaced image you will need to make several passes before the
+///    image is done loading.
+/// 
+/// ## Loading an animation
+/// 
+/// Loading an animation is almost as easy as loading an image. Once the
+/// first [signal`GdkPixbuf.PixbufLoader::area-prepared`] signal has been
+/// emitted, you can call [method`GdkPixbuf.PixbufLoader.get_animation`] to
+/// get the [class`GdkPixbuf.PixbufAnimation`] instance, and then call
+/// and [method`GdkPixbuf.PixbufAnimation.get_iter`] to get a
+/// [class`GdkPixbuf.PixbufAnimationIter`] to retrieve the pixbuf for the
+/// desired time stamp.
 open class PixbufLoader: GLibObject.Object, PixbufLoaderProtocol {
         /// Designated initialiser from the underlying `C` data type.
     /// This creates an instance without performing an unbalanced retain
@@ -3111,14 +4014,14 @@ open class PixbufLoader: GLibObject.Object, PixbufLoaderProtocol {
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
     /// - Parameter p: mutable raw pointer to the underlying object
-    @inlinable override public init(raw p: UnsafeMutableRawPointer) {
+    @inlinable public required init(raw p: UnsafeMutableRawPointer) {
         super.init(raw: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufLoaderProtocol`.**
     /// - Parameter raw: mutable raw pointer to the underlying object
-    @inlinable override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+    @inlinable required public init(retainingRaw raw: UnsafeMutableRawPointer) {
         super.init(retainingRaw: raw)
     }
 
@@ -3144,11 +4047,13 @@ open class PixbufLoader: GLibObject.Object, PixbufLoaderProtocol {
     }
 
     /// Creates a new pixbuf loader object that always attempts to parse
-    /// image data as if it were an image of mime type `mime_type`, instead of
-    /// identifying the type automatically. Useful if you want an error if
-    /// the image isn't the expected mime type, for loading image formats
-    /// that can't be reliably identified by looking at the data, or if
-    /// the user manually forces a specific mime type.
+    /// image data as if it were an image of MIME type `mime_type`, instead of
+    /// identifying the type automatically.
+    /// 
+    /// This function is useful if you want an error if the image isn't the
+    /// expected MIME type; for loading image formats that can't be reliably
+    /// identified by looking at the data; or if the user manually forces a
+    /// specific MIME type.
     /// 
     /// The list of supported mime types depends on what image loaders
     /// are installed, but typically "image/png", "image/jpeg", "image/gif",
@@ -3166,10 +4071,12 @@ open class PixbufLoader: GLibObject.Object, PixbufLoaderProtocol {
 
     /// Creates a new pixbuf loader object that always attempts to parse
     /// image data as if it were an image of type `image_type`, instead of
-    /// identifying the type automatically. Useful if you want an error if
-    /// the image isn't the expected type, for loading image formats
-    /// that can't be reliably identified by looking at the data, or if
-    /// the user manually forces a specific type.
+    /// identifying the type automatically.
+    /// 
+    /// This function is useful if you want an error if the image isn't the
+    /// expected type; for loading image formats that can't be reliably
+    /// identified by looking at the data; or if the user manually forces
+    /// a specific type.
     /// 
     /// The list of supported image formats depends on what image loaders
     /// are installed, but typically "png", "jpeg", "gif", "tiff" and
@@ -3185,11 +4092,13 @@ open class PixbufLoader: GLibObject.Object, PixbufLoaderProtocol {
     }
 
     /// Creates a new pixbuf loader object that always attempts to parse
-    /// image data as if it were an image of mime type `mime_type`, instead of
-    /// identifying the type automatically. Useful if you want an error if
-    /// the image isn't the expected mime type, for loading image formats
-    /// that can't be reliably identified by looking at the data, or if
-    /// the user manually forces a specific mime type.
+    /// image data as if it were an image of MIME type `mime_type`, instead of
+    /// identifying the type automatically.
+    /// 
+    /// This function is useful if you want an error if the image isn't the
+    /// expected MIME type; for loading image formats that can't be reliably
+    /// identified by looking at the data; or if the user manually forces a
+    /// specific MIME type.
     /// 
     /// The list of supported mime types depends on what image loaders
     /// are installed, but typically "image/png", "image/jpeg", "image/gif",
@@ -3208,10 +4117,12 @@ open class PixbufLoader: GLibObject.Object, PixbufLoaderProtocol {
 
     /// Creates a new pixbuf loader object that always attempts to parse
     /// image data as if it were an image of type `image_type`, instead of
-    /// identifying the type automatically. Useful if you want an error if
-    /// the image isn't the expected type, for loading image formats
-    /// that can't be reliably identified by looking at the data, or if
-    /// the user manually forces a specific type.
+    /// identifying the type automatically.
+    /// 
+    /// This function is useful if you want an error if the image isn't the
+    /// expected type; for loading image formats that can't be reliably
+    /// identified by looking at the data; or if the user manually forces
+    /// a specific type.
     /// 
     /// The list of supported image formats depends on what image loaders
     /// are installed, but typically "png", "jpeg", "gif", "tiff" and
@@ -3233,17 +4144,23 @@ open class PixbufLoader: GLibObject.Object, PixbufLoaderProtocol {
 
 public enum PixbufLoaderSignalName: String, SignalNameProtocol {
     /// This signal is emitted when the pixbuf loader has allocated the
-    /// pixbuf in the desired size.  After this signal is emitted,
-    /// applications can call `gdk_pixbuf_loader_get_pixbuf()` to fetch
-    /// the partially-loaded pixbuf.
+    /// pixbuf in the desired size.
+    /// 
+    /// After this signal is emitted, applications can call
+    /// `gdk_pixbuf_loader_get_pixbuf()` to fetch the partially-loaded
+    /// pixbuf.
     case areaPrepared = "area-prepared"
     /// This signal is emitted when a significant area of the image being
-    /// loaded has been updated.  Normally it means that a complete
-    /// scanline has been read in, but it could be a different area as
-    /// well.  Applications can use this signal to know when to repaint
+    /// loaded has been updated.
+    /// 
+    /// Normally it means that a complete scanline has been read in, but
+    /// it could be a different area as well.
+    /// 
+    /// Applications can use this signal to know when to repaint
     /// areas of an image that is being loaded.
     case areaUpdated = "area-updated"
     /// This signal is emitted when `gdk_pixbuf_loader_close()` is called.
+    /// 
     /// It can be used by different parts of an application to receive
     /// notification when an image loader is closed by the code that
     /// drives it.
@@ -3275,9 +4192,11 @@ public enum PixbufLoaderSignalName: String, SignalNameProtocol {
     case notify = "notify"
     /// This signal is emitted when the pixbuf loader has been fed the
     /// initial amount of data that is required to figure out the size
-    /// of the image that it will create.  Applications can call
-    /// `gdk_pixbuf_loader_set_size()` in response to this signal to set
-    /// the desired size to which the image should be scaled.
+    /// of the image that it will create.
+    /// 
+    /// Applications can call `gdk_pixbuf_loader_set_size()` in response
+    /// to this signal to set the desired size to which the image
+    /// should be scaled.
     case sizePrepared = "size-prepared"
 
 }
@@ -3311,9 +4230,11 @@ public extension PixbufLoaderProtocol {
     
     
     /// This signal is emitted when the pixbuf loader has allocated the
-    /// pixbuf in the desired size.  After this signal is emitted,
-    /// applications can call `gdk_pixbuf_loader_get_pixbuf()` to fetch
-    /// the partially-loaded pixbuf.
+    /// pixbuf in the desired size.
+    /// 
+    /// After this signal is emitted, applications can call
+    /// `gdk_pixbuf_loader_get_pixbuf()` to fetch the partially-loaded
+    /// pixbuf.
     /// - Note: This represents the underlying `area-prepared` signal
     /// - Parameter flags: Flags
     /// - Parameter unownedSelf: Reference to instance of self
@@ -3339,9 +4260,12 @@ public extension PixbufLoaderProtocol {
     static var areaPreparedSignal: PixbufLoaderSignalName { .areaPrepared }
     
     /// This signal is emitted when a significant area of the image being
-    /// loaded has been updated.  Normally it means that a complete
-    /// scanline has been read in, but it could be a different area as
-    /// well.  Applications can use this signal to know when to repaint
+    /// loaded has been updated.
+    /// 
+    /// Normally it means that a complete scanline has been read in, but
+    /// it could be a different area as well.
+    /// 
+    /// Applications can use this signal to know when to repaint
     /// areas of an image that is being loaded.
     /// - Note: This represents the underlying `area-updated` signal
     /// - Parameter flags: Flags
@@ -3372,6 +4296,7 @@ public extension PixbufLoaderProtocol {
     static var areaUpdatedSignal: PixbufLoaderSignalName { .areaUpdated }
     
     /// This signal is emitted when `gdk_pixbuf_loader_close()` is called.
+    /// 
     /// It can be used by different parts of an application to receive
     /// notification when an image loader is closed by the code that
     /// drives it.
@@ -3401,9 +4326,11 @@ public extension PixbufLoaderProtocol {
     
     /// This signal is emitted when the pixbuf loader has been fed the
     /// initial amount of data that is required to figure out the size
-    /// of the image that it will create.  Applications can call
-    /// `gdk_pixbuf_loader_set_size()` in response to this signal to set
-    /// the desired size to which the image should be scaled.
+    /// of the image that it will create.
+    /// 
+    /// Applications can call `gdk_pixbuf_loader_set_size()` in response
+    /// to this signal to set the desired size to which the image
+    /// should be scaled.
     /// - Note: This represents the underlying `size-prepared` signal
     /// - Parameter flags: Flags
     /// - Parameter unownedSelf: Reference to instance of self
@@ -3440,16 +4367,19 @@ public extension PixbufLoaderProtocol {
 
     /// Informs a pixbuf loader that no further writes with
     /// `gdk_pixbuf_loader_write()` will occur, so that it can free its
-    /// internal loading structures. Also, tries to parse any data that
-    /// hasn't yet been parsed; if the remaining data is partial or
-    /// corrupt, an error will be returned.  If `false` is returned, `error`
-    /// will be set to an error from the `GDK_PIXBUF_ERROR` or `G_FILE_ERROR`
-    /// domains. If you're just cancelling a load rather than expecting it
-    /// to be finished, passing `nil` for `error` to ignore it is
-    /// reasonable.
+    /// internal loading structures.
     /// 
-    /// Remember that this does not unref the loader, so if you plan not to
-    /// use it anymore, please `g_object_unref()` it.
+    /// This function also tries to parse any data that hasn't yet been parsed;
+    /// if the remaining data is partial or corrupt, an error will be returned.
+    /// 
+    /// If `FALSE` is returned, `error` will be set to an error from the
+    /// `GDK_PIXBUF_ERROR` or `G_FILE_ERROR` domains.
+    /// 
+    /// If you're just cancelling a load rather than expecting it to be finished,
+    /// passing `NULL` for `error` to ignore it is reasonable.
+    /// 
+    /// Remember that this function does not release a reference on the loader, so
+    /// you will need to explicitly release any reference you hold.
     @inlinable func close() throws -> Bool {
         var error: UnsafeMutablePointer<GError>?
         let rv = ((gdk_pixbuf_loader_close(pixbuf_loader_ptr, &error)) != 0)
@@ -3458,10 +4388,13 @@ public extension PixbufLoaderProtocol {
     }
 
     /// Queries the `GdkPixbufAnimation` that a pixbuf loader is currently creating.
-    /// In general it only makes sense to call this function after the "area-prepared"
-    /// signal has been emitted by the loader. If the loader doesn't have enough
-    /// bytes yet (hasn't emitted the "area-prepared" signal) this function will
-    /// return `nil`.
+    /// 
+    /// In general it only makes sense to call this function after the
+    /// [signal`GdkPixbuf.PixbufLoader::area-prepared`] signal has been emitted by
+    /// the loader.
+    /// 
+    /// If the loader doesn't have enough bytes yet, and hasn't emitted the `area-prepared`
+    /// signal, this function will return `NULL`.
     @inlinable func getAnimation() -> PixbufAnimationRef! {
         let rv = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_loader_get_animation(pixbuf_loader_ptr)))
         return rv
@@ -3475,39 +4408,39 @@ public extension PixbufLoaderProtocol {
     }
 
     /// Queries the `GdkPixbuf` that a pixbuf loader is currently creating.
+    /// 
     /// In general it only makes sense to call this function after the
-    /// "area-prepared" signal has been emitted by the loader; this means
-    /// that enough data has been read to know the size of the image that
-    /// will be allocated.  If the loader has not received enough data via
-    /// `gdk_pixbuf_loader_write()`, then this function returns `nil`.  The
-    /// returned pixbuf will be the same in all future calls to the loader,
-    /// so simply calling `g_object_ref()` should be sufficient to continue
-    /// using it.  Additionally, if the loader is an animation, it will
-    /// return the "static image" of the animation
-    /// (see `gdk_pixbuf_animation_get_static_image()`).
+    /// [signal`GdkPixbuf.PixbufLoader::area-prepared`] signal has been
+    /// emitted by the loader; this means that enough data has been read
+    /// to know the size of the image that will be allocated.
+    /// 
+    /// If the loader has not received enough data via `gdk_pixbuf_loader_write()`,
+    /// then this function returns `NULL`.
+    /// 
+    /// The returned pixbuf will be the same in all future calls to the loader,
+    /// so if you want to keep using it, you should acquire a reference to it.
+    /// 
+    /// Additionally, if the loader is an animation, it will return the "static
+    /// image" of the animation (see `gdk_pixbuf_animation_get_static_image()`).
     @inlinable func getPixbuf() -> PixbufRef! {
         let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_loader_get_pixbuf(pixbuf_loader_ptr)))
         return rv
     }
 
-    /// Causes the image to be scaled while it is loaded. The desired
-    /// image size can be determined relative to the original size of
-    /// the image by calling `gdk_pixbuf_loader_set_size()` from a
-    /// signal handler for the `size`-prepared signal.
+    /// Causes the image to be scaled while it is loaded.
+    /// 
+    /// The desired image size can be determined relative to the original
+    /// size of the image by calling `gdk_pixbuf_loader_set_size()` from a
+    /// signal handler for the `size-prepared` signal.
     /// 
     /// Attempts to set the desired image size  are ignored after the
-    /// emission of the `size`-prepared signal.
+    /// emission of the `size-prepared` signal.
     @inlinable func setSize(width: Int, height: Int) {
         gdk_pixbuf_loader_set_size(pixbuf_loader_ptr, gint(width), gint(height))
     
     }
 
-    /// This will cause a pixbuf loader to parse the next `count` bytes of
-    /// an image.  It will return `true` if the data was loaded successfully,
-    /// and `false` if an error occurred.  In the latter case, the loader
-    /// will be closed, and will not accept further writes. If `false` is
-    /// returned, `error` will be set to an error from the `GDK_PIXBUF_ERROR`
-    /// or `G_FILE_ERROR` domains.
+    /// Parses the next `count` bytes in the given image buffer.
     @inlinable func write(buf: UnsafePointer<guchar>!, count: Int) throws -> Bool {
         var error: UnsafeMutablePointer<GError>?
         let rv = ((gdk_pixbuf_loader_write(pixbuf_loader_ptr, buf, gsize(count), &error)) != 0)
@@ -3515,14 +4448,7 @@ public extension PixbufLoaderProtocol {
         return rv
     }
 
-    /// This will cause a pixbuf loader to parse a buffer inside a `GBytes`
-    /// for an image.  It will return `true` if the data was loaded successfully,
-    /// and `false` if an error occurred.  In the latter case, the loader
-    /// will be closed, and will not accept further writes. If `false` is
-    /// returned, `error` will be set to an error from the `GDK_PIXBUF_ERROR`
-    /// or `G_FILE_ERROR` domains.
-    /// 
-    /// See also: `gdk_pixbuf_loader_write()`
+    /// Parses the next contents of the given image buffer.
     @inlinable func writeBytes<BytesT: GLib.BytesProtocol>(buffer: BytesT) throws -> Bool {
         var error: UnsafeMutablePointer<GError>?
         let rv = ((gdk_pixbuf_loader_write_bytes(pixbuf_loader_ptr, buffer.bytes_ptr, &error)) != 0)
@@ -3530,16 +4456,22 @@ public extension PixbufLoaderProtocol {
         return rv
     }
     /// Queries the `GdkPixbufAnimation` that a pixbuf loader is currently creating.
-    /// In general it only makes sense to call this function after the "area-prepared"
-    /// signal has been emitted by the loader. If the loader doesn't have enough
-    /// bytes yet (hasn't emitted the "area-prepared" signal) this function will
-    /// return `nil`.
+    /// 
+    /// In general it only makes sense to call this function after the
+    /// [signal`GdkPixbuf.PixbufLoader::area-prepared`] signal has been emitted by
+    /// the loader.
+    /// 
+    /// If the loader doesn't have enough bytes yet, and hasn't emitted the `area-prepared`
+    /// signal, this function will return `NULL`.
     @inlinable var animation: PixbufAnimationRef! {
         /// Queries the `GdkPixbufAnimation` that a pixbuf loader is currently creating.
-        /// In general it only makes sense to call this function after the "area-prepared"
-        /// signal has been emitted by the loader. If the loader doesn't have enough
-        /// bytes yet (hasn't emitted the "area-prepared" signal) this function will
-        /// return `nil`.
+        /// 
+        /// In general it only makes sense to call this function after the
+        /// [signal`GdkPixbuf.PixbufLoader::area-prepared`] signal has been emitted by
+        /// the loader.
+        /// 
+        /// If the loader doesn't have enough bytes yet, and hasn't emitted the `area-prepared`
+        /// signal, this function will return `NULL`.
         get {
             let rv = PixbufAnimationRef(gconstpointer: gconstpointer(gdk_pixbuf_loader_get_animation(pixbuf_loader_ptr)))
             return rv
@@ -3558,42 +4490,336 @@ public extension PixbufLoaderProtocol {
     }
 
     /// Queries the `GdkPixbuf` that a pixbuf loader is currently creating.
+    /// 
     /// In general it only makes sense to call this function after the
-    /// "area-prepared" signal has been emitted by the loader; this means
-    /// that enough data has been read to know the size of the image that
-    /// will be allocated.  If the loader has not received enough data via
-    /// `gdk_pixbuf_loader_write()`, then this function returns `nil`.  The
-    /// returned pixbuf will be the same in all future calls to the loader,
-    /// so simply calling `g_object_ref()` should be sufficient to continue
-    /// using it.  Additionally, if the loader is an animation, it will
-    /// return the "static image" of the animation
-    /// (see `gdk_pixbuf_animation_get_static_image()`).
+    /// [signal`GdkPixbuf.PixbufLoader::area-prepared`] signal has been
+    /// emitted by the loader; this means that enough data has been read
+    /// to know the size of the image that will be allocated.
+    /// 
+    /// If the loader has not received enough data via `gdk_pixbuf_loader_write()`,
+    /// then this function returns `NULL`.
+    /// 
+    /// The returned pixbuf will be the same in all future calls to the loader,
+    /// so if you want to keep using it, you should acquire a reference to it.
+    /// 
+    /// Additionally, if the loader is an animation, it will return the "static
+    /// image" of the animation (see `gdk_pixbuf_animation_get_static_image()`).
     @inlinable var pixbuf: PixbufRef! {
         /// Queries the `GdkPixbuf` that a pixbuf loader is currently creating.
+        /// 
         /// In general it only makes sense to call this function after the
-        /// "area-prepared" signal has been emitted by the loader; this means
-        /// that enough data has been read to know the size of the image that
-        /// will be allocated.  If the loader has not received enough data via
-        /// `gdk_pixbuf_loader_write()`, then this function returns `nil`.  The
-        /// returned pixbuf will be the same in all future calls to the loader,
-        /// so simply calling `g_object_ref()` should be sufficient to continue
-        /// using it.  Additionally, if the loader is an animation, it will
-        /// return the "static image" of the animation
-        /// (see `gdk_pixbuf_animation_get_static_image()`).
+        /// [signal`GdkPixbuf.PixbufLoader::area-prepared`] signal has been
+        /// emitted by the loader; this means that enough data has been read
+        /// to know the size of the image that will be allocated.
+        /// 
+        /// If the loader has not received enough data via `gdk_pixbuf_loader_write()`,
+        /// then this function returns `NULL`.
+        /// 
+        /// The returned pixbuf will be the same in all future calls to the loader,
+        /// so if you want to keep using it, you should acquire a reference to it.
+        /// 
+        /// Additionally, if the loader is an animation, it will return the "static
+        /// image" of the animation (see `gdk_pixbuf_animation_get_static_image()`).
         get {
             let rv = PixbufRef(gconstpointer: gconstpointer(gdk_pixbuf_loader_get_pixbuf(pixbuf_loader_ptr)))
             return rv
         }
     }
 
-    @inlinable var parentInstance: GObject {
-        get {
-            let rv = pixbuf_loader_ptr.pointee.parent_instance
-            return rv
-        }
-    }
+    // var parentInstance is unavailable because parent_instance is private
 
     // var priv is unavailable because priv is private
+
+}
+
+
+
+// MARK: - PixbufNonAnim Class
+
+/// The `PixbufNonAnimProtocol` protocol exposes the methods and properties of an underlying `GdkPixbufNonAnim` instance.
+/// The default implementation of these can be found in the protocol extension below.
+/// For a concrete class that implements these methods and properties, see `PixbufNonAnim`.
+/// Alternatively, use `PixbufNonAnimRef` as a lighweight, `unowned` reference if you already have an instance you just want to use.
+///
+
+public protocol PixbufNonAnimProtocol: PixbufAnimationProtocol {
+        /// Untyped pointer to the underlying `GdkPixbufNonAnim` instance.
+    var ptr: UnsafeMutableRawPointer! { get }
+
+    /// Typed pointer to the underlying `GdkPixbufNonAnim` instance.
+    var pixbuf_non_anim_ptr: UnsafeMutablePointer<GdkPixbufNonAnim>! { get }
+
+    /// Required Initialiser for types conforming to `PixbufNonAnimProtocol`
+    init(raw: UnsafeMutableRawPointer)
+}
+
+/// The `PixbufNonAnimRef` type acts as a lightweight Swift reference to an underlying `GdkPixbufNonAnim` instance.
+/// It exposes methods that can operate on this data type through `PixbufNonAnimProtocol` conformance.
+/// Use `PixbufNonAnimRef` only as an `unowned` reference to an existing `GdkPixbufNonAnim` instance.
+///
+
+public struct PixbufNonAnimRef: PixbufNonAnimProtocol, GWeakCapturing {
+        /// Untyped pointer to the underlying `GdkPixbufNonAnim` instance.
+    /// For type-safe access, use the generated, typed pointer `pixbuf_non_anim_ptr` property instead.
+    public let ptr: UnsafeMutableRawPointer!
+}
+
+public extension PixbufNonAnimRef {
+    /// Designated initialiser from the underlying `C` data type
+    @inlinable init(_ p: UnsafeMutablePointer<GdkPixbufNonAnim>) {
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Designated initialiser from a constant pointer to the underlying `C` data type
+    @inlinable init(_ p: UnsafePointer<GdkPixbufNonAnim>) {
+        ptr = UnsafeMutableRawPointer(UnsafeMutablePointer(mutating: p))
+    }
+
+    /// Conditional initialiser from an optional pointer to the underlying `C` data type
+    @inlinable init!(_ maybePointer: UnsafeMutablePointer<GdkPixbufNonAnim>?) {
+        guard let p = maybePointer else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional, non-mutable pointer to the underlying `C` data type
+    @inlinable init!(_ maybePointer: UnsafePointer<GdkPixbufNonAnim>?) {
+        guard let p = UnsafeMutablePointer(mutating: maybePointer) else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional `gpointer`
+    @inlinable init!(gpointer g: gpointer?) {
+        guard let p = g else { return nil }
+        ptr = UnsafeMutableRawPointer(p)
+    }
+
+    /// Conditional initialiser from an optional, non-mutable `gconstpointer`
+    @inlinable init!(gconstpointer g: gconstpointer?) {
+        guard let p = UnsafeMutableRawPointer(mutating: g) else { return nil }
+        ptr = p
+    }
+
+    /// Reference intialiser for a related type that implements `PixbufNonAnimProtocol`
+    @inlinable init<T: PixbufNonAnimProtocol>(_ other: T) {
+        ptr = other.ptr
+    }
+
+    /// This factory is syntactic sugar for setting weak pointers wrapped in `GWeak<T>`
+    @inlinable static func unowned<T: PixbufNonAnimProtocol>(_ other: T) -> PixbufNonAnimRef { PixbufNonAnimRef(other) }
+
+    /// Unsafe typed initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    @inlinable init<T>(cPointer: UnsafeMutablePointer<T>) {
+        ptr = UnsafeMutableRawPointer(cPointer)
+    }
+
+    /// Unsafe typed initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    @inlinable init<T>(constPointer: UnsafePointer<T>) {
+        ptr = UnsafeMutableRawPointer(mutating: UnsafeRawPointer(constPointer))
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    @inlinable init(mutating raw: UnsafeRawPointer) {
+        ptr = UnsafeMutableRawPointer(mutating: raw)
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    @inlinable init(raw: UnsafeMutableRawPointer) {
+        ptr = raw
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    @inlinable init(opaquePointer: OpaquePointer) {
+        ptr = UnsafeMutableRawPointer(opaquePointer)
+    }
+
+        @inlinable init<PixbufT: PixbufProtocol>( pixbuf: PixbufT) {
+        let rv = gdk_pixbuf_non_anim_new(pixbuf.pixbuf_ptr)
+        ptr = UnsafeMutableRawPointer(rv)
+    }
+}
+
+/// The `PixbufNonAnim` type acts as a reference-counted owner of an underlying `GdkPixbufNonAnim` instance.
+/// It provides the methods that can operate on this data type through `PixbufNonAnimProtocol` conformance.
+/// Use `PixbufNonAnim` as a strong reference or owner of a `GdkPixbufNonAnim` instance.
+///
+
+open class PixbufNonAnim: PixbufAnimation, PixbufNonAnimProtocol {
+        /// Designated initialiser from the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufNonAnim` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init(_ op: UnsafeMutablePointer<GdkPixbufNonAnim>) {
+        super.init(cPointer: op)
+    }
+
+    /// Designated initialiser from a constant pointer to the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufNonAnim` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init(_ op: UnsafePointer<GdkPixbufNonAnim>) {
+        super.init(raw: UnsafeMutableRawPointer(UnsafeMutablePointer(mutating: op)))
+    }
+
+    /// Optional initialiser from a non-mutating `gpointer` to
+    /// the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufNonAnim` instance.
+    /// - Parameter op: gpointer to the underlying object
+    @inlinable override public init!(gpointer op: gpointer?) {
+        guard let p = UnsafeMutableRawPointer(op) else { return nil }
+        super.init(raw: p)
+    }
+
+    /// Optional initialiser from a non-mutating `gconstpointer` to
+    /// the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufNonAnim` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable override public init!(gconstpointer op: gconstpointer?) {
+        guard let p = op else { return nil }
+        super.init(raw: p)
+    }
+
+    /// Optional initialiser from a constant pointer to the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufNonAnim` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init!(_ op: UnsafePointer<GdkPixbufNonAnim>?) {
+        guard let p = UnsafeMutablePointer(mutating: op) else { return nil }
+        super.init(cPointer: p)
+    }
+
+    /// Optional initialiser from the underlying `C` data type.
+    /// This creates an instance without performing an unbalanced retain
+    /// i.e., ownership is transferred to the `PixbufNonAnim` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init!(_ op: UnsafeMutablePointer<GdkPixbufNonAnim>?) {
+        guard let p = op else { return nil }
+        super.init(cPointer: p)
+    }
+
+    /// Designated initialiser from the underlying `C` data type.
+    /// Will retain `GdkPixbufNonAnim`.
+    /// i.e., ownership is transferred to the `PixbufNonAnim` instance.
+    /// - Parameter op: pointer to the underlying object
+    @inlinable public init(retaining op: UnsafeMutablePointer<GdkPixbufNonAnim>) {
+        super.init(retainingCPointer: op)
+    }
+
+    /// Reference intialiser for a related type that implements `PixbufNonAnimProtocol`
+    /// Will retain `GdkPixbufNonAnim`.
+    /// - Parameter other: an instance of a related type that implements `PixbufNonAnimProtocol`
+    @inlinable public init<T: PixbufNonAnimProtocol>(pixbufNonAnim other: T) {
+        super.init(retainingRaw: other.ptr)
+    }
+
+    /// Unsafe typed initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    /// - Parameter cPointer: pointer to the underlying object
+    @inlinable override public init<T>(cPointer p: UnsafeMutablePointer<T>) {
+        super.init(cPointer: p)
+    }
+
+    /// Unsafe typed, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    /// - Parameter cPointer: pointer to the underlying object
+    @inlinable override public init<T>(retainingCPointer cPointer: UnsafeMutablePointer<T>) {
+        super.init(retainingCPointer: cPointer)
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    /// - Parameter p: raw pointer to the underlying object
+    @inlinable override public init(raw p: UnsafeRawPointer) {
+        super.init(raw: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    @inlinable override public init(retainingRaw raw: UnsafeRawPointer) {
+        super.init(retainingRaw: raw)
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    /// - Parameter p: mutable raw pointer to the underlying object
+    @inlinable public required init(raw p: UnsafeMutableRawPointer) {
+        super.init(raw: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    /// - Parameter raw: mutable raw pointer to the underlying object
+    @inlinable required public init(retainingRaw raw: UnsafeMutableRawPointer) {
+        super.init(retainingRaw: raw)
+    }
+
+    /// Unsafe untyped initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    /// - Parameter p: opaque pointer to the underlying object
+    @inlinable override public init(opaquePointer p: OpaquePointer) {
+        super.init(opaquePointer: p)
+    }
+
+    /// Unsafe untyped, retaining initialiser.
+    /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufNonAnimProtocol`.**
+    /// - Parameter p: opaque pointer to the underlying object
+    @inlinable override public init(retainingOpaquePointer p: OpaquePointer) {
+        super.init(retainingOpaquePointer: p)
+    }
+
+    @inlinable public init<PixbufT: PixbufProtocol>( pixbuf: PixbufT) {
+        let rv = gdk_pixbuf_non_anim_new(pixbuf.pixbuf_ptr)
+        super.init(gpointer: (rv))
+        if typeIsA(type: self.type, isAType: InitiallyUnownedClassRef.metatypeReference) { _ = self.refSink() } 
+    }
+
+
+}
+
+// MARK: no PixbufNonAnim properties
+
+public enum PixbufNonAnimSignalName: String, SignalNameProtocol {
+    /// The notify signal is emitted on an object when one of its properties has
+    /// its value set through `g_object_set_property()`, `g_object_set()`, et al.
+    /// 
+    /// Note that getting this signal doesn’t itself guarantee that the value of
+    /// the property has actually changed. When it is emitted is determined by the
+    /// derived GObject class. If the implementor did not create the property with
+    /// `G_PARAM_EXPLICIT_NOTIFY`, then any call to `g_object_set_property()` results
+    /// in `notify` being emitted, even if the new value is the same as the old.
+    /// If they did pass `G_PARAM_EXPLICIT_NOTIFY`, then this signal is emitted only
+    /// when they explicitly call `g_object_notify()` or `g_object_notify_by_pspec()`,
+    /// and common practice is to do that only when the value has actually changed.
+    /// 
+    /// This signal is typically used to obtain change notification for a
+    /// single property, by specifying the property name as a detail in the
+    /// `g_signal_connect()` call, like this:
+    /// (C Language Example):
+    /// ```C
+    /// g_signal_connect (text_view->buffer, "notify::paste-target-list",
+    ///                   G_CALLBACK (gtk_text_view_target_list_notify),
+    ///                   text_view)
+    /// ```
+    /// It is important to note that you must use
+    /// [canonical parameter names](#canonical-parameter-names) as
+    /// detail strings for the notify signal.
+    case notify = "notify"
+
+}
+
+// MARK: PixbufNonAnim has no signals
+// MARK: PixbufNonAnim Class: PixbufNonAnimProtocol extension (methods and fields)
+public extension PixbufNonAnimProtocol {
+    /// Return the stored, untyped pointer as a typed pointer to the `GdkPixbufNonAnim` instance.
+    @inlinable var pixbuf_non_anim_ptr: UnsafeMutablePointer<GdkPixbufNonAnim>! { return ptr?.assumingMemoryBound(to: GdkPixbufNonAnim.self) }
+
+
 
 }
 
@@ -3614,6 +4840,8 @@ public protocol PixbufSimpleAnimProtocol: PixbufAnimationProtocol {
     /// Typed pointer to the underlying `GdkPixbufSimpleAnim` instance.
     var pixbuf_simple_anim_ptr: UnsafeMutablePointer<GdkPixbufSimpleAnim>! { get }
 
+    /// Required Initialiser for types conforming to `PixbufSimpleAnimProtocol`
+    init(raw: UnsafeMutableRawPointer)
 }
 
 /// The `PixbufSimpleAnimRef` type acts as a lightweight Swift reference to an underlying `GdkPixbufSimpleAnim` instance.
@@ -3812,14 +5040,14 @@ open class PixbufSimpleAnim: PixbufAnimation, PixbufSimpleAnimProtocol {
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimProtocol`.**
     /// - Parameter p: mutable raw pointer to the underlying object
-    @inlinable override public init(raw p: UnsafeMutableRawPointer) {
+    @inlinable public required init(raw p: UnsafeMutableRawPointer) {
         super.init(raw: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimProtocol`.**
     /// - Parameter raw: mutable raw pointer to the underlying object
-    @inlinable override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+    @inlinable required public init(retainingRaw raw: UnsafeMutableRawPointer) {
         super.init(retainingRaw: raw)
     }
 
@@ -3993,6 +5221,8 @@ public protocol PixbufSimpleAnimIterProtocol: PixbufAnimationIterProtocol {
     /// Typed pointer to the underlying `GdkPixbufSimpleAnimIter` instance.
     var pixbuf_simple_anim_iter_ptr: UnsafeMutablePointer<GdkPixbufSimpleAnimIter>! { get }
 
+    /// Required Initialiser for types conforming to `PixbufSimpleAnimIterProtocol`
+    init(raw: UnsafeMutableRawPointer)
 }
 
 /// The `PixbufSimpleAnimIterRef` type acts as a lightweight Swift reference to an underlying `GdkPixbufSimpleAnimIter` instance.
@@ -4186,14 +5416,14 @@ open class PixbufSimpleAnimIter: PixbufAnimationIter, PixbufSimpleAnimIterProtoc
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimIterProtocol`.**
     /// - Parameter p: mutable raw pointer to the underlying object
-    @inlinable override public init(raw p: UnsafeMutableRawPointer) {
+    @inlinable public required init(raw p: UnsafeMutableRawPointer) {
         super.init(raw: p)
     }
 
     /// Unsafe untyped, retaining initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `PixbufSimpleAnimIterProtocol`.**
     /// - Parameter raw: mutable raw pointer to the underlying object
-    @inlinable override public init(retainingRaw raw: UnsafeMutableRawPointer) {
+    @inlinable required public init(retainingRaw raw: UnsafeMutableRawPointer) {
         super.init(retainingRaw: raw)
     }
 
