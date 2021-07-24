@@ -21,11 +21,7 @@ if [ ! -e "${GIR}" ] ; then
 	echo "and can be found in /usr /usr/local or by pkg-config!"
 	exit 1
 fi
-gir2swift -o Sources/${Mod} -s -m ${Module}.module -p ${GIR_DIR}/GLib-2.0.gir -p ${GIR_DIR}/GObject-2.0.gir -p ${GIR_DIR}/GModule-2.0.gir -p ${GIR_DIR}/Gio-2.0.gir "${GIR}"
-for src in Sources/${Mod}/*-*.swift ; do
-	sed -f ${Module}.sed < ${src} > ${src}.out
-	mv ${src}.out ${src}
-done
+gir2swift -o Sources/${Mod} -s -p ${GIR_DIR}/GLib-2.0.gir -p ${GIR_DIR}/GObject-2.0.gir -p ${GIR_DIR}/GModule-2.0.gir -p ${GIR_DIR}/Gio-2.0.gir "${GIR}"
 touch Sources/${Mod}/${Module}.swift
 echo  > Sources/${Mod}/Swift${Mod}.swift "import CGLib"
 echo  > Sources/${Mod}/Swift${Mod}.swift "import CGdkPixbuf"
