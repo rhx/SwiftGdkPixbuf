@@ -21,13 +21,4 @@ if [ ! -e "${GIR}" ] ; then
 	echo "and can be found in /usr /usr/local or by pkg-config!"
 	exit 1
 fi
-gir2swift -o Sources/${Mod} -s -p ${GIR_DIR}/GLib-2.0.gir -p ${GIR_DIR}/GObject-2.0.gir -p ${GIR_DIR}/GModule-2.0.gir -p ${GIR_DIR}/Gio-2.0.gir "${GIR}"
-touch Sources/${Mod}/${Module}.swift
-echo  > Sources/${Mod}/Swift${Mod}.swift "import CGLib"
-echo  > Sources/${Mod}/Swift${Mod}.swift "import CGdkPixbuf"
-echo >> Sources/${Mod}/Swift${Mod}.swift "import GLib"
-echo >> Sources/${Mod}/Swift${Mod}.swift "import GIO"
-echo >> Sources/${Mod}/Swift${Mod}.swift ""
-echo >> Sources/${Mod}/Swift${Mod}.swift "public extension GdkPixbuf {"
-grep -h '^public typealias' Sources/${Mod}/*-*.swift | sed 's/^public/   /' >> Sources/${Mod}/Swift${Mod}.swift
-echo >> Sources/${Mod}/Swift${Mod}.swift "}"
+gir2swift -e ${Mod} -o Sources/${Mod} -s -p ${GIR_DIR}/GLib-2.0.gir -p ${GIR_DIR}/GObject-2.0.gir -p ${GIR_DIR}/GModule-2.0.gir -p ${GIR_DIR}/Gio-2.0.gir "${GIR}"
