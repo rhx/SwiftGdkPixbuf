@@ -15,17 +15,7 @@ function generate_arg-path_arg-g2s-exec_arg-gir-pre_arg-gir-path {
     local NAME=$(package_name)
     local GIR_PRE_ARGS=`for FILE in ${GIR_PRE}; do echo -n "-p ${GIR_PATH}/${FILE}.gir "; done`
     
-    bash -c "${G2S_EXEC} -o Sources/${NAME} -s -m ${GIR_NAME}.module ${GIR_PRE_ARGS} ${GIR_PATH}/${GIR_NAME}.gir"
-
-    touch Sources/${NAME}/${GIR_NAME}.swift
-    echo  > Sources/${NAME}/Swift${NAME}.swift "import CGLib"
-    echo  > Sources/${NAME}/Swift${NAME}.swift "import CGdkPixbuf"
-    echo >> Sources/${NAME}/Swift${NAME}.swift "import GLib"
-    echo >> Sources/${NAME}/Swift${NAME}.swift "import GIO"
-    echo >> Sources/${NAME}/Swift${NAME}.swift ""
-    echo >> Sources/${NAME}/Swift${NAME}.swift "public extension GdkPixbuf {"
-    grep -h '^public typealias' Sources/${NAME}/*-*.swift | sed 's/^public/   /' >> Sources/${NAME}/Swift${NAME}.swift
-    echo >> Sources/${NAME}/Swift${NAME}.swift "}"
+    bash -c "${G2S_EXEC} -e ${NAME} -o Sources/${NAME} -s -m ${GIR_NAME}.module ${GIR_PRE_ARGS} ${GIR_PATH}/${GIR_NAME}.gir"
 
     cd $CALLER
 }
