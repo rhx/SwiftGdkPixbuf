@@ -9,56 +9,22 @@ For up to date (auto-generated) reference documentation, see https://rhx.github.
 
 ## What is new?
 
-Version 12 of gir2swift pulls in [PR#10](https://github.com/rhx/gir2swift/pull/10), addressing several issues:
-
-- Improvements to the Build experience and LSP [rhx/SwiftGtk#34](https://github.com/rhx/SwiftGtk/issues/34)
-- Fix issues with LLDB [rhx/SwiftGtk#39](https://github.com/rhx/SwiftGtk/issues/39)
-- **Controversial:** Implicitly marks all declarations named "priv" as if they had attribute `private=1`
-- Prevents all "Private" records from generating unless generated in their instance record
-  - `-a` option generates all records
-- Introduces CI
-- For Class metadata types no longer generates class wrappers. Ref structs now contain static method which returnes the GType of the class and instance of the Class metatype wrapped in the Ref struct.
-- Adds final class GWeak<T> where T could be any Ref struct of a type which supports ARC. This class is a property wrapper which contains weak reference to any instance of T. This is especially beneficial for capture lists.
-- Adds support for weak observation.
-- Constructors and factories of GObjectInitiallyUnowned classes now consume floating reference upon initialisation as advised by [the GObject documentation](https://developer.gnome.org/gobject/stable/gobject-The-Base-Object-Type.html)
-
-Partially implemented:
-- Typed signal generation. Issues shown in [rhx/SwiftGtk#35](https://github.com/rhx/SwiftGtk/issues/35) hat remain to be addressed are listed here: [mikolasstuchlik/gir2swift#2](https://github.com/mikolasstuchlik/gir2swift/pull/2).
-
-### Other notable changes
-
-Version 11 introduces a new type system into `gir2swift`,
-to ensure it has a representation of the underlying types.
-This is necessary for Swift 5.3 onwards, which requires more stringent casts.
-As a consequence, accessors can accept and return idiomatic Swift rather than
-underlying types or pointers.
-This means that a lot of the changes will be source-breaking for code that
-was compiled against libraries built with earlier versions of `gir2swift`.
-
-### Notable changes
-
- * Requires Swift 5.2 or later
- * Wrapper code is now `@inlinable` to enable the compiler to optimise away most of the wrappers
- * Parameters and return types use more idiomatic Swift (e.g. `Ref` wrappers instead of pointers, `Int` instead of `gint`, etc.)
- * Functions that take or return records now are templated instead of using the type-erased Protocol
- * `ErrorType` has been renamed `GLibError` to ensure it neither clashes with `Swift.Error` nor the `GLib.ErrorType`  scanner enum
- * Parameters or return types for records/classes now use the corresponding, lightweight Swift `Ref` wrapper instead of the underlying pointer
-
+Version 15 of gir2swift provides a Package Manager Plugin.  This requires Swift 5.6 or higher.
 
 ## Prerequisites
 
-### Swift
+### Swift 5.6 or higher
 
-To build, you need at least Swift 5.2 (Swift 5.3 is required for `gtk4`; also some Linux distributions have issues and seem to **require at least Swift 5.5**), download from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well).  Test that your compiler works using `swift --version`, which should give you something like
+To build, download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-	Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
-    Target: x86_64-apple-darwin20.5.0
+	swift-driver version: 1.45.2 Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+    Target: x86_64-apple-darwin20.3.0
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 5.4 (swift-5.4-RELEASE)
+	Swift version 5.6.0 (swift-5.6.0-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### Gdk-Pixbuf 2.36 and GLib 2.56 or higher

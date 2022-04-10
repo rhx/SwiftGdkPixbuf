@@ -19,10 +19,3 @@ class GdkPixbufTests: XCTestCase {
     }
 
 }
-extension GdkPixbufTests {
-    static var allTests : [(String, (GdkPixbufTests) -> () throws -> Void)] {
-        return [
-            ("testPixbuf", testPixbuf),
-        ]
-    }
-}
