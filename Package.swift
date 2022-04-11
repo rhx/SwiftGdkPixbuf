@@ -6,9 +6,9 @@ let package = Package(
     name: "GdkPixbuf",
     products: [ .library(name: "GdkPixbuf", targets: ["GdkPixbuf"]) ],
     dependencies: [
-        .package(name: "gir2swift", url: "https://github.com/rhx/gir2swift.git", .branch("main")),
-        .package(name: "GIO", url: "https://github.com/rhx/SwiftGIO.git", .branch("main")),
-        .package(name: "GModule", url: "https://github.com/rhx/SwiftGModule.git", .branch("main")),
+        .package(name: "gir2swift", url: "https://github.com/rhx/gir2swift.git",  .branch("swift52")),
+        .package(name: "GIO", url: "https://github.com/rhx/SwiftGIO.git",         .branch("swift52")),
+        .package(name: "GModule", url: "https://github.com/rhx/SwiftGModule.git", .branch("swift52")),
     ],
     targets: [
 	.systemLibrary(name: "CGdkPixbuf", pkgConfig: "gdk-pixbuf-2.0",
