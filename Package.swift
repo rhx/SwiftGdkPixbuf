@@ -3,8 +3,8 @@
 import PackageDescription
 
 let package = Package(
-    name: "GdkPixbuf",
-    products: [ .library(name: "GdkPixbuf", targets: ["GdkPixbuf"]) ],
+    name: "GdkPixBuf",
+    products: [ .library(name: "GdkPixBuf", targets: ["GdkPixBuf"]) ],
     dependencies: [
         .package(url: "https://github.com/rhx/gir2swift.git",     branch: "development"),
         .package(url: "https://github.com/rhx/SwiftGIO.git",      branch: "development"),
@@ -17,7 +17,7 @@ let package = Package(
 		.apt(["libgdk-pixbuf2.0-dev", "libglib2.0-dev", "glib-networking", "gobject-introspection", "libgirepository1.0-dev"])
 	    ]),
         .target(
-            name: "GdkPixbuf", 
+            name: "GdkPixBuf", 
             dependencies: [
                 "CGdkPixbuf",
                 .product(name: "gir2swift", package: "gir2swift"),
@@ -32,6 +32,6 @@ let package = Package(
                 .plugin(name: "gir2swift-plugin", package: "gir2swift")
             ]
         ),
-        .testTarget(name: "GdkPixbufTests", dependencies: ["GdkPixbuf"]),
+        .testTarget(name: "GdkPixBufTests", dependencies: ["GdkPixBuf"]),
     ]
 )

@@ -1,5 +1,5 @@
 import XCTest
-@testable import GdkPixbuf
+@testable import GdkPixBuf
 
 class GdkPixbufTests: XCTestCase {
 

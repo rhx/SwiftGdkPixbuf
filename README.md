@@ -9,6 +9,9 @@ For up to date (auto-generated) reference documentation, see https://rhx.github.
 
 ## What is new?
 
+The target for this module has now been renamed to `GdkPixBuf` (with an upper-case letter 'B')
+to avoid a name clash with the underlying C type.
+
 Version 15 of gir2swift provides a Package Manager Plugin.  This requires Swift 5.6 or higher.
 
 ## Prerequisites
@@ -24,12 +27,12 @@ To build, download Swift from https://swift.org/download/ -- if you are using ma
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 5.6.0 (swift-5.6.0-RELEASE)
+	Swift version 5.6.1 (swift-5.6.1-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### Gdk-Pixbuf 2.36 and GLib 2.56 or higher
 
-These Swift wrappers have been tested with gdk-pixbuf-2.36, 2.38, 2.40, and 2.42 as well as glib-2.56, 2.58, 2.60, 2.62, 2.64, 2.66, and 2.68.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+These Swift wrappers have been tested with gdk-pixbuf-2.36, 2.38, 2.40, and 2.42 as well as glib-2.56, 2.58, 2.60, 2.62, 2.64, 2.66, 2.68, 2.70, and 2.72.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
@@ -58,16 +61,22 @@ On macOS, you can install gdk-pixbuf using HomeBrew (for setup instructions, see
 Normally, you don't build this package directly (but for testing you can - see 'Building' below). Instead you need to embed SwiftGdkPixbuf into your own project using the [Swift Package Manager](https://swift.org/package-manager/).  After installing the prerequisites (see 'Prerequisites' below), add `SwiftGdkPixbuf` as a dependency to your `Package.swift` file, e.g.:
 
 ```Swift
-// swift-tools-version:5.3
+// swift-tools-version:5.6
 
 import PackageDescription
 
 let package = Package(name: "MyPackage",
     dependencies: [
-        .package(name: "gir2swift", url: "https://github.com/rhx/gir2swift.git", .branch("main")),
-        .package(name: "GdkPixbuf", url: "https://github.com/rhx/SwiftGdkPixbuf.git", .branch("main")),
+        .package(url: "https://github.com/rhx/gir2swift.git",   branch: "main"),
+        .package(url: "https://github.com/rhx/SwiftGdkPixbuf",  branch: "main"),
     ],
-    targets: [.target(name: "MyPackage", dependencies: ["GdkPixbuf"])]
+    targets: [
+        .target(name: "MyPackage",
+                dependencies: [
+                    .product(name: "GdkPixBuf", package: "SwiftGdkPixbuf")
+                ]
+        )
+    ]
 )
 ```
 
@@ -77,27 +86,8 @@ Normally, you don't build this package directly, but you embed it into your own 
 
 	git clone https://github.com/rhx/SwiftGdkPixbuf.git
 	cd SwiftGdkPixbuf
-    ./run-gir2swift.sh
     swift build
     swift test
-
-Please note that on macOS, due to a bug in the Swift Package Manager prior to Swift 5.4,
-if you have Xcode-12.4 or older, you need to pass in the build flags manually,
-i.e. instead of `swift build` and `swift test` you can run
-
-    swift build `./run-gir2swift.sh flags -noUpdate`
-    swift test  `./run-gir2swift.sh flags -noUpdate`
-
-### Xcode
-
-On macOS, you can build the project using Xcode instead.  To do this, you need to create an Xcode project first, then open the project in the Xcode IDE:
-
-	./xcodegen.sh
-	open GdkPixbuf.xcodeproj
-
-After that, use the (usual) Build and Test buttons to build/test this package.
-
-
 
 ## Documentation
 
@@ -109,7 +99,6 @@ Make sure you have [sourcekitten](https://github.com/jpsim/SourceKitten) and [ja
 
 	brew install sourcekitten
 	sudo gem install jazzy
-	./run-gir2swift.sh
 	./generate-documentation.sh
 
 
@@ -129,7 +118,7 @@ If, when you run `swift build`, you get a `Segmentation fault (core dumped)` or 
 
 	warning: circular dependency detected while parsing pangocairo: harfbuzz -> freetype2 -> harfbuzz
 	
-this probably means that your Swift toolchain is too old, particularly on Linux (at the time of this writing, some Linux distributions require at least Swift 5.5).  Make sure the latest toolchain is the one that is found when you run the Swift compiler (see above).
+this probably means that your Swift toolchain is too old, particularly on Linux (at the time of this writing, at least Swift 5.6 is required).  Make sure the latest toolchain is the one that is found when you run the Swift compiler (see above).
 
   If you get an older version, make sure that the right version of the swift compiler is found first in your `PATH`.  On macOS, use xcode-select to select and install the latest version, e.g.:
 
@@ -138,8 +127,6 @@ this probably means that your Swift toolchain is too old, particularly on Linux 
 
 ### Known Issues
 
- * When building, a lot of warnings appear.  This is largely an issue with automatic `RawRepresentable` conformance in the Swift Standard library.  As a workaround, you can turn this off by passing the `-Xswiftc -suppress-warnings` parameter when building.
- 
  * The current build system does not support directory paths with spaces (e.g. the `My Drive` directory used by Google Drive File Stream).
  * BUILD_DIR is not supported in the current build system.
  
