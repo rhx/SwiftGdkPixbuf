@@ -9,6 +9,7 @@ let package = Package(
         .package(url: "https://github.com/rhx/gir2swift.git",     branch: "development"),
         .package(url: "https://github.com/rhx/SwiftGIO.git",      branch: "development"),
         .package(url: "https://github.com/rhx/SwiftGModule.git",  branch: "development"),
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
     ],
     targets: [
 	.systemLibrary(name: "CGdkPixbuf", pkgConfig: "gdk-pixbuf-2.0",
