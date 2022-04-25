@@ -22,3 +22,4 @@ s/\(public static func newFrom.inline data_length:\)/@available(*, deprecated) \
 s/\(    \)\(init.inline data_length:\)/\1@available(*, deprecated) \2/
 s/\(    \)\(static func newFrom.inline data_length:\)/\1@available(*, deprecated) \2/
 s/data: UnsafeMutablePointer<UnsafeMutablePointer<CChar>/data: UnsafeMutablePointer<UnsafePointer<CChar>/
+s/GModule.Module/Module/g

@@ -1,5 +1,5 @@
 import XCTest
-@testable import GdkPixbuf
+@testable import GdkPixBuf
 
 class GdkPixbufTests: XCTestCase {
 
@@ -18,11 +18,4 @@ class GdkPixbufTests: XCTestCase {
         XCTAssertEqual(pixbuf.rowstride, w*3)
     }
 
-}
-extension GdkPixbufTests {
-    static var allTests : [(String, (GdkPixbufTests) -> () throws -> Void)] {
-        return [
-            ("testPixbuf", testPixbuf),
-        ]
-    }
 }

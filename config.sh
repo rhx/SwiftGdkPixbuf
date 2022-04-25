@@ -4,8 +4,10 @@
 # the compiler and linker flags to use.
 #
 VER=2.0
-JAZZY_VER=2.42.6
+JAZZY_VER=2.42.8
+MOD=GdkPixBuf
 Mod=GdkPixbuf
+MODULE=${MOD}-$VER
 Module=${Mod}-$VER
 module=gdk-pixbuf-$VER
 if [ -z "$BUILD_DIR" ]; then
