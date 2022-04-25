@@ -53,14 +53,3 @@ jobs:
           swift package clean
           rm -rf .build/repositories
           cd ..
-<<<<<<< HEAD
-
-      - name: 'Upload Artefact'
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-artefact-20.04-5.3
-          path: |
-            SwiftGdkPixbuf/Sources/
-          retention-days: 1
-=======
->>>>>>> development
