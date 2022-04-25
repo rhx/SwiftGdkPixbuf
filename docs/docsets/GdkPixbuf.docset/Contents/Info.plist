@@ -5,7 +5,7 @@
     <key>CFBundleIdentifier</key>
       <string>com.jazzy.gdkpixbuf</string>
     <key>CFBundleName</key>
-      <string>GdkPixbuf</string>
+      <string>GdkPixBuf</string>
     <key>DocSetPlatformFamily</key>
       <string>gdkpixbuf</string>
     <key>isDashDocset</key>
