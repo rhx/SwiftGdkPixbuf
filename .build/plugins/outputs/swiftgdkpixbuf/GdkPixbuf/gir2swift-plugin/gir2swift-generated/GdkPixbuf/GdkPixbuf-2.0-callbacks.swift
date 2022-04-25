@@ -14,13 +14,48 @@ import GLibObject
 /// the pixel data can be freed when the pixbuf is finalized.
 public typealias PixbufDestroyNotify = GdkPixbufDestroyNotify
 
+
+/// Sets up the image loading state.
+/// 
+/// The image loader is responsible for storing the given function pointers
+/// and user data, and call them when needed.
+/// 
+/// The image loader should set up an internal state object, and return it
+/// from this function; the state object will then be updated from the
+/// [callback`GdkPixbuf.PixbufModuleIncrementLoadFunc`] callback, and will be freed
+/// by [callback`GdkPixbuf.PixbufModuleStopLoadFunc`] callback.
+public typealias PixbufModuleBeginLoadFunc = GdkPixbufModuleBeginLoadFunc
+
+
 /// Defines the type of the function used to fill a
 /// `GdkPixbufFormat` structure with information about a module.
 public typealias PixbufModuleFillInfoFunc = GdkPixbufModuleFillInfoFunc
 
+
 /// Defines the type of the function used to set the vtable of a
 /// `GdkPixbufModule` when it is loaded.
 public typealias PixbufModuleFillVtableFunc = GdkPixbufModuleFillVtableFunc
+
+
+/// Incrementally loads a buffer into the image data.
+public typealias PixbufModuleIncrementLoadFunc = GdkPixbufModuleIncrementLoadFunc
+
+
+/// Loads a file from a standard C file stream into a new `GdkPixbufAnimation`.
+/// 
+/// In case of error, this function should return `NULL` and set the `error` argument.
+public typealias PixbufModuleLoadAnimationFunc = GdkPixbufModuleLoadAnimationFunc
+
+
+/// Loads a file from a standard C file stream into a new `GdkPixbuf`.
+/// 
+/// In case of error, this function should return `NULL` and set the `error` argument.
+public typealias PixbufModuleLoadFunc = GdkPixbufModuleLoadFunc
+
+
+/// Loads XPM data into a new `GdkPixbuf`.
+public typealias PixbufModuleLoadXpmDataFunc = GdkPixbufModuleLoadXpmDataFunc
+
 
 /// Defines the type of the function that gets called once the initial
 /// setup of `pixbuf` is done.
@@ -29,6 +64,27 @@ public typealias PixbufModuleFillVtableFunc = GdkPixbufModuleFillVtableFunc
 /// "&lt;link linkend="GdkPixbufLoader-area-prepared"&gt;area_prepared&lt;/link&gt;"
 /// signal.
 public typealias PixbufModulePreparedFunc = GdkPixbufModulePreparedFunc
+
+
+/// Saves a `GdkPixbuf` by calling the provided function.
+/// 
+/// The optional `option_keys` and `option_values` arrays contain the keys and
+/// values (in the same order) for attributes to be saved alongside the image
+/// data.
+public typealias PixbufModuleSaveCallbackFunc = GdkPixbufModuleSaveCallbackFunc
+
+
+/// Saves a `GdkPixbuf` into a standard C file stream.
+/// 
+/// The optional `param_keys` and `param_values` arrays contain the keys and
+/// values (in the same order) for attributes to be saved alongside the image
+/// data.
+public typealias PixbufModuleSaveFunc = GdkPixbufModuleSaveFunc
+
+
+/// Checks whether the given `option_key` is supported when saving.
+public typealias PixbufModuleSaveOptionSupportedFunc = GdkPixbufModuleSaveOptionSupportedFunc
+
 
 /// Defines the type of the function that gets called once the size
 /// of the loaded image is known.
@@ -45,6 +101,13 @@ public typealias PixbufModulePreparedFunc = GdkPixbufModulePreparedFunc
 /// efficiently.
 public typealias PixbufModuleSizeFunc = GdkPixbufModuleSizeFunc
 
+
+/// Finalizes the image loading state.
+/// 
+/// This function is called on success and error states.
+public typealias PixbufModuleStopLoadFunc = GdkPixbufModuleStopLoadFunc
+
+
 /// Defines the type of the function that gets called every time a region
 /// of `pixbuf` is updated.
 /// 
@@ -52,6 +115,7 @@ public typealias PixbufModuleSizeFunc = GdkPixbufModuleSizeFunc
 /// "&lt;link linkend="GdkPixbufLoader-area-updated"&gt;area_updated&lt;/link&gt;"
 /// signal.
 public typealias PixbufModuleUpdatedFunc = GdkPixbufModuleUpdatedFunc
+
 
 /// Save functions used by [method`GdkPixbuf.Pixbuf.save_to_callback`].
 /// 

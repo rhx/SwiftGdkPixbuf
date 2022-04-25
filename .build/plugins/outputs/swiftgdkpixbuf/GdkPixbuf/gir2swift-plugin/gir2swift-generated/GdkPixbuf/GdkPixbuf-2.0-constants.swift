@@ -9,13 +9,16 @@ import GLibObject
 /// "0.8.2" for example.
 public let PIXBUF_MAJOR = GDK_PIXBUF_MAJOR // 2
 
+
 /// Micro version of gdk-pixbuf library, that is the "2" in
 /// "0.8.2" for example.
-public let PIXBUF_MICRO = GDK_PIXBUF_MICRO // 6
+public let PIXBUF_MICRO = GDK_PIXBUF_MICRO // 8
+
 
 /// Minor version of gdk-pixbuf library, that is the "8" in
 /// "0.8.2" for example.
 public let PIXBUF_MINOR = GDK_PIXBUF_MINOR // 42
+
 
 /// Contains the full version of GdkPixbuf as a string.
 /// 

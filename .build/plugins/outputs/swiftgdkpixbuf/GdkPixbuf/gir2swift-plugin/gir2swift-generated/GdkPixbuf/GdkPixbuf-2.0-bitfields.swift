@@ -32,10 +32,13 @@ public struct PixbufFormatFlags: OptionSet {
 
     /// the module can write out images in the format.
     public static let writable = PixbufFormatFlags(1) // GDK_PIXBUF_FORMAT_WRITABLE
+
     /// the image format is scalable
     public static let scalable = PixbufFormatFlags(2) // GDK_PIXBUF_FORMAT_SCALABLE
+
     /// the module is threadsafe. gdk-pixbuf
     ///     ignores modules that are not marked as threadsafe. (Since 2.28).
     public static let threadsafe = PixbufFormatFlags(4) // GDK_PIXBUF_FORMAT_THREADSAFE
+
 }
 
