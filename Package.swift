@@ -21,7 +21,6 @@ let package = Package(
             name: "GdkPixBuf", 
             dependencies: [
                 "CGdkPixbuf",
-                .product(name: "gir2swift", package: "gir2swift"),
                 .product(name: "GIO",       package: "SwiftGIO"),
                 .product(name: "GModule",   package: "SwiftGModule")
             ],
