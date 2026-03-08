@@ -2,8 +2,6 @@
 A Swift wrapper around GdkPixbuf-2.x that is largely auto-generated from gobject-introspection,
 For up to date (auto-generated) reference documentation, see https://rhx.github.io/SwiftGdkPixbuf/
 
-![macOS](https://github.com/rhx/SwiftGdkPixbuf/actions/workflows/macOS.yml/badge.svg?branch=development)
-![Linux](https://github.com/rhx/SwiftGdkPixbuf/actions/workflows/Linux.yml/badge.svg?branch=development)
 ![macOS](https://github.com/rhx/SwiftGdkPixbuf/actions/workflows/macOS.yml/badge.svg?branch=main)
 ![Linux](https://github.com/rhx/SwiftGdkPixbuf/actions/workflows/Linux.yml/badge.svg?branch=main)
 
